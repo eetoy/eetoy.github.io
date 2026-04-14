@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS Bland Scale — 신경전도검사 분류</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f8f7f4;
+    --surface: #ffffff;
+    --surface2: #f2f1ee;
+    --border: rgba(0,0,0,0.10);
+    --border2: rgba(0,0,0,0.18);
+    --text: #1a1a18;
+    --text2: #6b6a65;
+    --text3: #9b9a95;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'Noto Sans KR', sans-serif;
+    --radius: 8px;
+    --radius-lg: 14px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #131311;
+      --surface: #1e1d1b;
+      --surface2: #272622;
+      --border: rgba(255,255,255,0.09);
+      --border2: rgba(255,255,255,0.16);
+      --text: #e8e6e0;
+      --text2: #9b9a95;
+      --text3: #6b6a65;
+    }
+  }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 48px 24px 80px;
+  }
+
+  .page { max-width: 780px; margin: 0 auto; }
+
+  header { margin-bottom: 40px; }
+  .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .08em;
+    color: var(--text3);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 1.25;
+    margin-bottom: 8px;
+    letter-spacing: -.01em;
+  }
+  .source {
+    font-size: 12px;
+    color: var(--text3);
+    font-family: var(--mono);
+  }
+
+  .grade-row {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0,1fr));
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .gc {
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 10px;
+    cursor: pointer;
+    transition: border-color .15s, background .15s, transform .1s;
+    background: var(--surface);
+  }
+  .gc:hover { background: var(--surface2); transform: translateY(-1px); }
+  .gc.active { border-width: 1.5px; background: var(--surface2); }
+
+  .gnum { font-size: 22px; font-weight: 500; line-height: 1; margin-bottom: 4px; font-family: var(--mono); }
+  .glabel { font-size: 10px; color: var(--text3); margin-bottom: 8px; }
+  .gbar-bg { height: 3px; background: var(--surface2); border-radius: 2px; margin-bottom: 8px; overflow: hidden; }
+  .gbar { height: 3px; border-radius: 2px; transition: width .3s; }
+  .gmini { font-size: 10px; color: var(--text2); line-height: 1.45; }
+
+  .panel {
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    padding: 22px 24px;
+    margin-bottom: 24px;
+    min-height: 180px;
+  }
+
+  .empty-msg { text-align: center; padding: 50px 0; font-size: 13px; color: var(--text3); }
+
+  .ptitle { font-size: 16px; font-weight: 500; margin-bottom: 3px; }
+  .psub { font-size: 12px; color: var(--text2); margin-bottom: 18px; }
+
+  .pgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+  .pbox { background: var(--surface2); border-radius: var(--radius); padding: 12px 14px; }
+  .pbox-lbl { font-size: 10px; color: var(--text3); margin-bottom: 3px; font-family: var(--mono); text-transform: uppercase; letter-spacing: .04em; }
+  .pbox-val { font-size: 13px; font-weight: 500; line-height: 1.55; font-family: var(--mono); white-space: pre-line; }
+  .pbox-val.absent { color: #c0392b; }
+  .pbox-val.normal { color: #1a7a55; }
+  .pbox-val.warn { color: #b45309; }
+
+  .ptx {
+    font-size: 12px; font-family: var(--mono);
+    display: inline-block; padding: 4px 12px;
+    border-radius: var(--radius);
+    border: 0.5px solid var(--border2);
+    color: var(--text2);
+    margin-bottom: 12px;
+  }
+
+  .badge-row { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+  .badge {
+    font-size: 11px; padding: 3px 9px;
+    border-radius: 20px; font-family: var(--mono);
+  }
+
+  .pnote { font-size: 12px; color: var(--text2); line-height: 1.65; border-left: 2px solid var(--border2); padding-left: 12px; }
+
+  .sec {
+    font-family: var(--mono);
+    font-size: 10px; font-weight: 500;
+    color: var(--text3); text-transform: uppercase;
+    letter-spacing: .08em; margin: 24px 0 10px;
+  }
+
+  .cbox {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    margin-bottom: 7px;
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.65;
+  }
+  .cbox strong { color: var(--text); font-weight: 500; }
+
+  .flow-table { width: 100%; border-collapse: collapse; margin-top: 4px; }
+  .flow-table th {
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    color: var(--text3); text-align: left;
+    padding: 6px 10px; border-bottom: 0.5px solid var(--border2);
+    text-transform: uppercase; letter-spacing: .04em;
+  }
+  .flow-table td {
+    padding: 9px 10px; border-bottom: 0.5px solid var(--border);
+    font-size: 12px; font-family: var(--mono); vertical-align: middle;
+  }
+  .flow-table tr:last-child td { border-bottom: none; }
+  .flow-table tr:hover td { background: var(--surface2); }
+  .gpill {
+    display: inline-block; width: 22px; height: 22px;
+    border-radius: 50%; text-align: center; line-height: 22px;
+    font-size: 12px; font-weight: 500;
+  }
+  .absent-cell { color: #c0392b; font-weight: 500; }
+  .normal-cell { color: #1a7a55; }
+
+  footer {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 0.5px solid var(--border);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 540px) {
+    .grade-row { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .pgrid { grid-template-columns: 1fr; }
+    h1 { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="tag">Neurophysiology · Carpal Tunnel Syndrome</div>
+    <h1>CTS Bland Scale</h1>
+    <div class="source">Bland JD. Muscle Nerve 2000;23(8):1280–3 — 원문 기준</div>
+  </header>
+
+  <div class="grade-row" id="gg"></div>
+  <div class="panel" id="dp"><div class="empty-msg">위 단계 중 하나를 클릭해 NCS 기준을 확인하세요</div></div>
+
+  <div class="sec">수치 요약표</div>
+  <div style="background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:24px">
+    <table class="flow-table">
+      <thead>
+        <tr>
+          <th>Grade</th>
+          <th>단계</th>
+          <th>SNAP</th>
+          <th>DSL</th>
+          <th>SCV</th>
+          <th>DML</th>
+          <th>CMAP</th>
+        </tr>
+      </thead>
+      <tbody id="tbl"></tbody>
+    </table>
+  </div>
+
+  <div class="sec">판독 흐름</div>
+  <div class="cbox"><strong>Step 1 — SNAP 존재 여부:</strong> 소실이면 Grade 4 이상. 존재하면 Grade 1–3.</div>
+  <div class="cbox"><strong>Step 2 — DSL / SCV (SNAP 존재 시):</strong> 절대치 정상이면 비교검사 확인 → 차이 &gt; 0.4 ms이면 Grade 2. 절대치 이상(DSL &gt; 3.5 ms)이면 Grade 3.</div>
+  <div class="cbox"><strong>Step 3 — DML (SNAP 소실 시):</strong> ≤ 6.5 ms → Grade 4 / &gt; 6.5 ms → Grade 5 / CMAP도 소실 → Grade 6.</div>
+
+  <div class="sec">용어 해설</div>
+  <div class="cbox"><strong>DSL</strong> (Distal Sensory Latency) — 손목→손가락 감각신경 잠복기. 정상 ≤ 3.5 ms (14 cm 기준)</div>
+  <div class="cbox"><strong>SCV</strong> (Sensory Conduction Velocity) — 감각신경 전도속도. 정상 ≥ 40 m/s</div>
+  <div class="cbox"><strong>SNAP</strong> (Sensory Nerve Action Potential) — 감각신경 활동전위 진폭. 정상 ≥ 20 µV</div>
+  <div class="cbox"><strong>DML</strong> (Distal Motor Latency) — 손목→엄지두덩(APB) 운동신경 잠복기. 정상 ≤ 4.2 ms (8 cm 기준)</div>
+  <div class="cbox"><strong>비교검사</strong> — 정중-척골 감각 잠복기 차이 &gt; 0.4 ms, 또는 정중-요골 차이 &gt; 0.5 ms이면 Grade 2 (절대치 정상이어도)</div>
+
+  <footer>
+    출처: Bland JD. A neurophysiological grading scale for carpal tunnel syndrome. <em>Muscle Nerve</em> 2000;23(8):1280–3.<br>
+    수치 기준은 검사 거리·피부온도·장비에 따라 달라질 수 있으므로 해당 검사실 정상치와 함께 해석하세요.
+  </footer>
+
+</div>
+
+<script>
+const grades = [
+  {
+    num:1, label:"정상/경계", color:"#1a7a55", bar:"#5DCAA5",
+    summary:"정상 또는 경계 소견",
+    snap_lat:"정상 (≤ 3.5 ms)", snap_amp:"정상 (≥ 20 µV)", snap_scv:"정상 (≥ 40 m/s)",
+    dml:"정상 (≤ 4.2 ms)", cmap:"정상",
+    compare:"정중-척골 차이 ≤ 0.4 ms\n정중-요골 차이 ≤ 0.5 ms",
+    sc:"normal", dc:"normal", cc:"normal",
+    tx:"경과 관찰 / 보존적 치료",
+    badges:[["야간 저림","#e6f5f0","#1a7a55"]],
+    note:"NCS가 정상이어도 임상 증상이 있으면 CTS를 배제할 수 없습니다. 비교검사 기준도 모두 정상인 경우.",
+    tbl_snap:"정상", tbl_dsl:"≤ 3.5", tbl_scv:"≥ 40", tbl_dml:"≤ 4.2", tbl_cmap:"정상",
+    sc_t:"normal-cell", dc_t:"normal-cell", cc_t:"normal-cell",
+    pillbg:"#e6f5f0", pilltx:"#1a7a55"
+  },
+  {
+    num:2, label:"경도", color:"#3b6d11", bar:"#97C459",
+    summary:"비교검사만 이상, 절대치 정상",
+    snap_lat:"정상 (≤ 3.5 ms)", snap_amp:"정상 (≥ 20 µV)", snap_scv:"정상 (≥ 40 m/s)",
+    dml:"정상 (≤ 4.2 ms)", cmap:"정상",
+    compare:"정중-척골 차이 > 0.4 ms\n또는 정중-요골 차이 > 0.5 ms",
+    sc:"normal", dc:"normal", cc:"normal",
+    tx:"보존적 치료 (야간 부목, 스테로이드 주사)",
+    badges:[["간헐적 증상","#eaf3de","#3b6d11"],["야간 저림","#eaf3de","#3b6d11"]],
+    note:"절대치 잠복기는 정상 — 비교검사에서만 이상 소견. 가장 조기에 발견 가능한 단계.",
+    tbl_snap:"정상", tbl_dsl:"≤ 3.5", tbl_scv:"≥ 40", tbl_dml:"≤ 4.2", tbl_cmap:"정상",
+    sc_t:"normal-cell", dc_t:"normal-cell", cc_t:"normal-cell",
+    pillbg:"#eaf3de", pilltx:"#3b6d11"
+  },
+  {
+    num:3, label:"중등도", color:"#b45309", bar:"#EF9F27",
+    summary:"감각신경 절대치 이상, 운동신경 정상",
+    snap_lat:"연장 (> 3.5 ms)", snap_amp:"감소, 존재", snap_scv:"저하 (< 40 m/s)",
+    dml:"정상 (≤ 4.2 ms)", cmap:"정상",
+    compare:"–",
+    sc:"warn", dc:"normal", cc:"normal",
+    tx:"보존적 치료 또는 수술 고려",
+    badges:[["지속적 감각이상","#faeeda","#854F0B"],["운동신경 보존","#eaf3de","#3b6d11"]],
+    note:"SNAP은 존재하지만 잠복기·속도 이상. 운동신경(DML)은 아직 정상 범위.",
+    tbl_snap:"감소·존재", tbl_dsl:"> 3.5", tbl_scv:"< 40", tbl_dml:"≤ 4.2", tbl_cmap:"정상",
+    sc_t:"", dc_t:"normal-cell", cc_t:"normal-cell",
+    pillbg:"#faeeda", pilltx:"#854F0B"
+  },
+  {
+    num:4, label:"중도", color:"#b73e1d", bar:"#F09595",
+    summary:"SNAP 소실 + DML ≤ 6.5 ms",
+    snap_lat:"소실", snap_amp:"소실", snap_scv:"소실",
+    dml:"> 4.2 ms, ≤ 6.5 ms", cmap:"감소 또는 정상",
+    compare:"–",
+    sc:"absent", dc:"warn", cc:"",
+    tx:"수술적 감압 권장",
+    badges:[["SNAP 소실","#faece7","#712B13"],["DML > 4.2 ms","#faeeda","#854F0B"]],
+    note:"SNAP 소실이 핵심 분기점. DML은 연장되어 있지만 6.5 ms 이하. Grade 5와 구분 기준은 DML 6.5 ms.",
+    tbl_snap:"소실", tbl_dsl:"소실", tbl_scv:"소실", tbl_dml:"≤ 6.5", tbl_cmap:"감소",
+    sc_t:"absent-cell", dc_t:"", cc_t:"",
+    pillbg:"#faece7", pilltx:"#712B13"
+  },
+  {
+    num:5, label:"고도", color:"#991f1f", bar:"#E24B4A",
+    summary:"SNAP 소실 + DML > 6.5 ms",
+    snap_lat:"소실", snap_amp:"소실", snap_scv:"소실",
+    dml:"> 6.5 ms", cmap:"현저히 감소",
+    compare:"–",
+    sc:"absent", dc:"absent", cc:"",
+    tx:"수술적 감압 강력 권장",
+    badges:[["SNAP 소실","#fcebeb","#791F1F"],["DML > 6.5 ms","#fcebeb","#791F1F"],["엄지두덩 위축","#faeeda","#854F0B"]],
+    note:"운동신경도 심각하게 손상. EMG에서 denervation 소견 동반 가능. Grade 4와의 결정적 차이는 DML > 6.5 ms.",
+    tbl_snap:"소실", tbl_dsl:"소실", tbl_scv:"소실", tbl_dml:"> 6.5", tbl_cmap:"현저 감소",
+    sc_t:"absent-cell", dc_t:"absent-cell", cc_t:"",
+    pillbg:"#fcebeb", pilltx:"#791F1F"
+  },
+  {
+    num:6, label:"최고도", color:"#4a1a1a", bar:"#A32D2D",
+    summary:"SNAP 소실 + CMAP 소실",
+    snap_lat:"소실", snap_amp:"소실", snap_scv:"소실",
+    dml:"소실 (무반응)", cmap:"소실 (무반응)",
+    compare:"–",
+    sc:"absent", dc:"absent", cc:"absent",
+    tx:"수술 (회복 예후 제한적)",
+    badges:[["SNAP 소실","#fcebeb","#791F1F"],["CMAP 소실","#fcebeb","#791F1F"],["완전 무반응","#f2f1ee","#444441"]],
+    note:"감각·운동 모두 무반응. 수술 후에도 완전 회복이 어려울 수 있음을 사전에 환자에게 설명 필요.",
+    tbl_snap:"소실", tbl_dsl:"소실", tbl_scv:"소실", tbl_dml:"소실", tbl_cmap:"소실",
+    sc_t:"absent-cell", dc_t:"absent-cell", cc_t:"absent-cell",
+    pillbg:"#4a1a1a", pilltx:"#f7c1c1"
+  }
+];
+
+let active = null;
+
+function renderGrid() {
+  document.getElementById('gg').innerHTML = grades.map((g,i) => `
+    <div class="gc ${active===i?'active':''}" onclick="sel(${i})"
+         style="${active===i?'border-color:'+g.color:''}">
+      <div class="gnum" style="color:${g.color}">${g.num}</div>
+      <div class="glabel">${g.label}</div>
+      <div class="gbar-bg"><div class="gbar" style="background:${g.bar};width:${Math.round((i+1)/6*100)}%"></div></div>
+      <div class="gmini">${g.summary}</div>
+    </div>
+  `).join('');
+}
+
+function renderTable() {
+  document.getElementById('tbl').innerHTML = grades.map((g,i) => `
+    <tr onclick="sel(${i})" style="cursor:pointer">
+      <td><span class="gpill" style="background:${g.pillbg};color:${g.pilltx}">${g.num}</span></td>
+      <td style="color:${g.color};font-weight:500">${g.label}</td>
+      <td class="${g.sc_t}">${g.tbl_snap}</td>
+      <td class="${g.sc_t}">${g.tbl_dsl}</td>
+      <td class="${g.sc_t}">${g.tbl_scv}</td>
+      <td class="${g.dc_t}">${g.tbl_dml}</td>
+      <td class="${g.cc_t}">${g.tbl_cmap}</td>
+    </tr>
+  `).join('');
+}
+
+function sel(i) {
+  active = i;
+  renderGrid();
+  const g = grades[i];
+  document.getElementById('dp').innerHTML = `
+    <div class="ptitle" style="color:${g.color}">Grade ${g.num} — ${g.label}</div>
+    <div class="psub">${g.summary}</div>
+    <div class="pgrid">
+      <div class="pbox">
+        <div class="pbox-lbl">DSL (감각 잠복기)</div>
+        <div class="pbox-val ${g.sc}">${g.snap_lat}</div>
+        <div class="pbox-lbl" style="margin-top:10px">SNAP 진폭</div>
+        <div class="pbox-val ${g.sc}">${g.snap_amp}</div>
+        <div class="pbox-lbl" style="margin-top:10px">SCV (감각 전도속도)</div>
+        <div class="pbox-val ${g.sc}">${g.snap_scv}</div>
+      </div>
+      <div class="pbox">
+        <div class="pbox-lbl">DML (운동 잠복기)</div>
+        <div class="pbox-val ${g.dc}">${g.dml}</div>
+        <div class="pbox-lbl" style="margin-top:10px">CMAP 진폭</div>
+        <div class="pbox-val ${g.cc}">${g.cmap}</div>
+        <div class="pbox-lbl" style="margin-top:10px">비교검사</div>
+        <div class="pbox-val" style="font-size:12px">${g.compare}</div>
+      </div>
+    </div>
+    <div class="ptx">권장 치료: ${g.tx}</div>
+    <div class="badge-row">${g.badges.map(b=>`<span class="badge" style="background:${b[1]};color:${b[2]}">${b[0]}</span>`).join('')}</div>
+    <div class="pnote">${g.note}</div>
+  `;
+}
+
+renderGrid();
+renderTable();
+</script>
+</body>
+</html>
