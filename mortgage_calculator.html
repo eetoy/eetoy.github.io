@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주택담보대출 상환방식 비교 계산기</title>
+    <style>
+        :root {
+            --color-background-primary: #ffffff;
+            --color-background-secondary: #f5f5f5;
+            --color-text-primary: #1a1a1a;
+            --color-text-secondary: #6b6b6b;
+            --color-border-tertiary: rgba(0, 0, 0, 0.15);
+            --color-border-secondary: rgba(0, 0, 0, 0.3);
+            --color-background-info: #e6f1fb;
+            --color-text-info: #0c447c;
+            --color-border-info: #378ADD;
+            --border-radius-md: 8px;
+            --border-radius-lg: 12px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-background-primary: #1a1a1a;
+                --color-background-secondary: #2a2a2a;
+                --color-text-primary: #e5e5e5;
+                --color-text-secondary: #a0a0a0;
+                --color-border-tertiary: rgba(255, 255, 255, 0.15);
+                --color-border-secondary: rgba(255, 255, 255, 0.3);
+                --color-background-info: #0c447c;
+                --color-text-info: #b5d4f4;
+                --color-border-info: #378ADD;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--color-background-secondary);
+            color: var(--color-text-primary);
+            padding: 2rem;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--color-text-primary);
+        }
+
+        .inflation-guide {
+            background: var(--color-background-info);
+            border-left: 3px solid var(--color-border-info);
+            padding: 1rem;
+            border-radius: var(--border-radius-md);
+            margin-bottom: 2rem;
+        }
+
+        .inflation-guide h3 {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--color-text-info);
+        }
+
+        .inflation-guide p {
+            font-size: 14px;
+            color: var(--color-text-info);
+            margin-bottom: 0.5rem;
+        }
+
+        .inflation-guide ul {
+            list-style: none;
+            font-size: 14px;
+            color: var(--color-text-info);
+        }
+
+        .inflation-guide li {
+            padding-left: 1rem;
+            position: relative;
+            margin-bottom: 0.25rem;
+        }
+
+        .inflation-guide li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 0.5px solid var(--color-border-tertiary);
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .tab.active {
+            color: var(--color-text-primary);
+            border-bottom-color: var(--color-border-info);
+        }
+
+        .tab:hover {
+            color: var(--color-text-primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .calculator {
+            background: var(--color-background-primary);
+            border: 0.5px solid var(--color-border-tertiary);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .control-group label {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            min-width: 100px;
+        }
+
+        .control-group input[type="range"] {
+            flex: 1;
+            height: 4px;
+            border-radius: 2px;
+            background: var(--color-border-tertiary);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .control-group input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--color-text-primary);
+            cursor: pointer;
+        }
+
+        .control-group input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--color-text-primary);
+            cursor: pointer;
+            border: none;
+        }
+
+        .control-group .value {
+            font-size: 14px;
+            font-weight: 500;
+            min-width: 100px;
+            text-align: right;
+        }
+
+        .highlight {
+            background: var(--color-background-info);
+            padding: 1rem;
+            border-radius: var(--border-radius-md);
+            margin-bottom: 1.5rem;
+            border-left: 3px solid var(--color-border-info);
+        }
+
+        .highlight-title {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--color-text-info);
+        }
+
+        .highlight-text {
+            font-size: 13px;
+            color: var(--color-text-info);
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .metric-card {
+            background: var(--color-background-secondary);
+            border-radius: var(--border-radius-md);
+            padding: 1rem;
+        }
+
+        .metric-label {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .metric-value {
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        .metric-sub {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            margin-top: 4px;
+        }
+
+        .equal-principal-interest {
+            color: #378ADD;
+        }
+
+        .equal-principal {
+            color: #1D9E75;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            margin-bottom: 2rem;
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 1rem;
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .legend-color {
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-bottom: 1.5rem;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: right;
+        }
+
+        th {
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            border-bottom: 0.5px solid var(--color-border-tertiary);
+        }
+
+        td {
+            border-bottom: 0.5px solid var(--color-border-tertiary);
+        }
+
+        td:first-child {
+            text-align: left;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .calculator {
+                padding: 1rem;
+            }
+
+            .metric-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .control-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .control-group label,
+            .control-group .value {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>주택담보대출 상환방식 비교 계산기</h1>
+        
+        <div class="inflation-guide">
+            <h3>📊 한국 인플레이션율 가이드라인</h3>
+            <p><strong>최근 추세 (2024-2026):</strong></p>
+            <ul>
+                <li>2024년: 연평균 약 2.3-2.5%</li>
+                <li>2025년: 약 2.0-2.4% (한국은행 목표치 2% 근처)</li>
+                <li>2026년 전망: 약 2.1% (KDI 경제전망 기준)</li>
+                <li>중장기 평균: 2.0-2.5% 범위를 권장합니다</li>
+            </ul>
+            <p style="margin-top: 0.5rem;"><strong>참고:</strong> 인플레이션율은 경제 상황에 따라 변동하며, 보수적으로 계산하려면 2.0-2.5% 범위를 사용하세요.</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('basic')">기본 비교</button>
+            <button class="tab" onclick="switchTab('inflation')">인플레이션 고려</button>
+        </div>
+
+        <div id="basic-tab" class="tab-content active">
+            <div class="calculator">
+                <div class="control-group">
+                    <label>대출금액</label>
+                    <input type="range" min="10000" max="100000" step="1000" value="60000" id="principal1" />
+                    <span class="value" id="principal1-out">6억원</span>
+                </div>
+
+                <div class="control-group">
+                    <label>금리</label>
+                    <input type="range" min="1" max="10" step="0.1" value="4.5" id="rate1" />
+                    <span class="value" id="rate1-out">4.5%</span>
+                </div>
+
+                <div class="control-group">
+                    <label>대출기간</label>
+                    <input type="range" min="5" max="50" step="1" value="30" id="years1" />
+                    <span class="value" id="years1-out">30년</span>
+                </div>
+
+                <div class="metric-grid" id="summary1"></div>
+
+                <div class="chart-container">
+                    <canvas id="chart1"></canvas>
+                </div>
+
+                <div class="legend">
+                    <span class="legend-item">
+                        <span class="legend-color" style="background: #378ADD;"></span>
+                        원리금균등상환
+                    </span>
+                    <span class="legend-item">
+                        <span class="legend-color" style="background: #1D9E75;"></span>
+                        원금균등상환
+                    </span>
+                </div>
+
+                <table id="table1"></table>
+            </div>
+        </div>
+
+        <div id="inflation-tab" class="tab-content">
+            <div class="calculator">
+                <div class="control-group">
+                    <label>대출금액</label>
+                    <input type="range" min="10000" max="100000" step="1000" value="60000" id="principal2" />
+                    <span class="value" id="principal2-out">6억원</span>
+                </div>
+
+                <div class="control-group">
+                    <label>금리</label>
+                    <input type="range" min="1" max="10" step="0.1" value="4.5" id="rate2" />
+                    <span class="value" id="rate2-out">4.5%</span>
+                </div>
+
+                <div class="control-group">
+                    <label>대출기간</label>
+                    <input type="range" min="5" max="50" step="1" value="30" id="years2" />
+                    <span class="value" id="years2-out">30년</span>
+                </div>
+
+                <div class="control-group">
+                    <label>인플레이션율</label>
+                    <input type="range" min="0" max="5" step="0.1" value="2.0" id="inflation2" />
+                    <span class="value" id="inflation2-out">2.0%</span>
+                </div>
+
+                <div class="highlight">
+                    <div class="highlight-title">💡 인플레이션 효과</div>
+                    <div class="highlight-text" id="insight2"></div>
+                </div>
+
+                <div class="metric-grid" id="summary2"></div>
+
+                <div class="chart-container">
+                    <canvas id="chart2"></canvas>
+                </div>
+
+                <div class="legend">
+                    <span class="legend-item">
+                        <span class="legend-color" style="background: #378ADD;"></span>
+                        원리금균등 (실질가치)
+                    </span>
+                    <span class="legend-item">
+                        <span class="legend-color" style="background: #1D9E75;"></span>
+                        원금균등 (실질가치)
+                    </span>
+                    <span class="legend-item">
+                        <span class="legend-color" style="background: rgba(55, 138, 221, 0.3); border: 1px dashed #378ADD;"></span>
+                        원리금균등 (명목가치)
+                    </span>
+                    <span class="legend-item">
+                        <span class="legend-color" style="background: rgba(29, 158, 117, 0.3); border: 1px dashed #1D9E75;"></span>
+                        원금균등 (명목가치)
+                    </span>
+                </div>
+
+                <table id="table2"></table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+    <script>
+        function formatNumber(num) {
+            return Math.round(num).toLocaleString('ko-KR');
+        }
+
+        function formatWon(num) {
+            const man = Math.round(num / 10000);
+            if (man >= 10000) {
+                const eok = Math.floor(man / 10000);
+                const remainder = man % 10000;
+                return remainder > 0 ? `${eok}억 ${formatNumber(remainder)}만원` : `${eok}억원`;
+            }
+            return `${formatNumber(man)}만원`;
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+            
+            if (tab === 'basic') {
+                // 인플레이션 탭에서 기본 탭으로 전환 시 값 복사
+                document.getElementById('principal1').value = document.getElementById('principal2').value;
+                document.getElementById('rate1').value = document.getElementById('rate2').value;
+                document.getElementById('years1').value = document.getElementById('years2').value;
+                
+                document.querySelector('.tab:nth-child(1)').classList.add('active');
+                document.getElementById('basic-tab').classList.add('active');
+                updateBasic();
+            } else {
+                // 기본 탭에서 인플레이션 탭으로 전환 시 값 복사
+                document.getElementById('principal2').value = document.getElementById('principal1').value;
+                document.getElementById('rate2').value = document.getElementById('rate1').value;
+                document.getElementById('years2').value = document.getElementById('years1').value;
+                
+                document.querySelector('.tab:nth-child(2)').classList.add('active');
+                document.getElementById('inflation-tab').classList.add('active');
+                updateInflation();
+            }
+        }
+
+        // ===== 기본 비교 계산기 =====
+        let chart1Instance = null;
+
+        function calculateEqualPayment(P, r, n) {
+            const monthlyRate = r / 12 / 100;
+            const months = n * 12;
+            const monthlyPayment = P * monthlyRate * Math.pow(1 + monthlyRate, months) / (Math.pow(1 + monthlyRate, months) - 1);
+            
+            let balance = P;
+            let totalInterest = 0;
+            
+            for (let i = 0; i < months; i++) {
+                const interest = balance * monthlyRate;
+                const principal = monthlyPayment - interest;
+                balance -= principal;
+                totalInterest += interest;
+            }
+            
+            return {
+                monthlyPayment: monthlyPayment,
+                totalPayment: monthlyPayment * months,
+                totalInterest: totalInterest
+            };
+        }
+
+        function calculateEqualPrincipal(P, r, n) {
+            const monthlyRate = r / 12 / 100;
+            const months = n * 12;
+            const principalPayment = P / months;
+            
+            let balance = P;
+            let totalInterest = 0;
+            let totalPayment = 0;
+            
+            for (let i = 0; i < months; i++) {
+                const interest = balance * monthlyRate;
+                const payment = principalPayment + interest;
+                balance -= principalPayment;
+                totalInterest += interest;
+                totalPayment += payment;
+            }
+            
+            return {
+                firstPayment: principalPayment + (P * monthlyRate),
+                lastPayment: principalPayment + (principalPayment * monthlyRate),
+                totalPayment: totalPayment,
+                totalInterest: totalInterest
+            };
+        }
+
+        function updateChart1(P, r, n) {
+            const monthlyRate = r / 12 / 100;
+            const months = n * 12;
+            
+            const equalPaymentMonthly = P * monthlyRate * Math.pow(1 + monthlyRate, months) / (Math.pow(1 + monthlyRate, months) - 1);
+            const principalPayment = P / months;
+            
+            const labels = [];
+            const equalPaymentData = [];
+            const equalPrincipalData = [];
+            
+            let balance2 = P;
+            
+            for (let i = 0; i < months; i++) {
+                if (i % 12 === 0 || i === months - 1) {
+                    labels.push(`${Math.floor(i / 12) + 1}년`);
+                    equalPaymentData.push(Math.round(equalPaymentMonthly / 10000));
+                    
+                    const interest2 = balance2 * monthlyRate;
+                    const payment2 = principalPayment + interest2;
+                    equalPrincipalData.push(Math.round(payment2 / 10000));
+                }
+                
+                const interest2 = balance2 * monthlyRate;
+                balance2 -= principalPayment;
+            }
+            
+            if (chart1Instance) {
+                chart1Instance.destroy();
+            }
+            
+            chart1Instance = new Chart(document.getElementById('chart1'), {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: '원리금균등상환',
+                            data: equalPaymentData,
+                            borderColor: '#378ADD',
+                            backgroundColor: 'rgba(55, 138, 221, 0.1)',
+                            tension: 0.4,
+                            fill: false
+                        },
+                        {
+                            label: '원금균등상환',
+                            data: equalPrincipalData,
+                            borderColor: '#1D9E75',
+                            backgroundColor: 'rgba(29, 158, 117, 0.1)',
+                            tension: 0.4,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + formatNumber(context.parsed.y) + '만원';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return formatNumber(value) + '만원';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateBasic() {
+            const P = parseInt(document.getElementById('principal1').value) * 10000;
+            const r = parseFloat(document.getElementById('rate1').value);
+            const n = parseInt(document.getElementById('years1').value);
+            
+            document.getElementById('principal1-out').textContent = formatWon(P);
+            document.getElementById('rate1-out').textContent = r.toFixed(1) + '%';
+            document.getElementById('years1-out').textContent = n + '년';
+            
+            const equalPayment = calculateEqualPayment(P, r, n);
+            const equalPrincipal = calculateEqualPrincipal(P, r, n);
+            
+            const interestSavings = equalPayment.totalInterest - equalPrincipal.totalInterest;
+            
+            document.getElementById('summary1').innerHTML = `
+                <div class="metric-card">
+                    <div class="metric-label">원리금균등 월상환액</div>
+                    <div class="metric-value equal-principal-interest">${formatNumber(Math.round(equalPayment.monthlyPayment / 10000))}만원</div>
+                    <div class="metric-sub">매월 동일</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">원금균등 첫달</div>
+                    <div class="metric-value equal-principal">${formatNumber(Math.round(equalPrincipal.firstPayment / 10000))}만원</div>
+                    <div class="metric-sub">매월 감소</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">원리금균등 총이자</div>
+                    <div class="metric-value equal-principal-interest">${formatWon(equalPayment.totalInterest)}</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">원금균등 총이자</div>
+                    <div class="metric-value equal-principal">${formatWon(equalPrincipal.totalInterest)}</div>
+                    <div class="metric-sub">절감: ${formatWon(interestSavings)}</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">총 이자 차이</div>
+                    <div class="metric-value" style="color: #1D9E75;">${formatWon(interestSavings)}</div>
+                    <div class="metric-sub">원금균등이 절감</div>
+                </div>
+            `;
+            
+            const interestDiff = equalPayment.totalInterest - equalPrincipal.totalInterest;
+            const firstPaymentDiff = equalPrincipal.firstPayment - equalPayment.monthlyPayment;
+            
+            document.getElementById('table1').innerHTML = `
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>원리금균등상환</th>
+                        <th>원금균등상환</th>
+                        <th>차이</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>첫달 상환액</td>
+                        <td class="equal-principal-interest">${formatNumber(Math.round(equalPayment.monthlyPayment / 10000))}만원</td>
+                        <td class="equal-principal">${formatNumber(Math.round(equalPrincipal.firstPayment / 10000))}만원</td>
+                        <td>${firstPaymentDiff > 0 ? '+' : ''}${formatNumber(Math.round(firstPaymentDiff / 10000))}만원</td>
+                    </tr>
+                    <tr>
+                        <td>마지막달 상환액</td>
+                        <td class="equal-principal-interest">${formatNumber(Math.round(equalPayment.monthlyPayment / 10000))}만원</td>
+                        <td class="equal-principal">${formatNumber(Math.round(equalPrincipal.lastPayment / 10000))}만원</td>
+                        <td>${formatNumber(Math.round((equalPrincipal.lastPayment - equalPayment.monthlyPayment) / 10000))}만원</td>
+                    </tr>
+                    <tr>
+                        <td>총 상환액</td>
+                        <td class="equal-principal-interest">${formatWon(equalPayment.totalPayment)}</td>
+                        <td class="equal-principal">${formatWon(equalPrincipal.totalPayment)}</td>
+                        <td>${formatWon(equalPayment.totalPayment - equalPrincipal.totalPayment)}</td>
+                    </tr>
+                    <tr>
+                        <td>총 이자</td>
+                        <td class="equal-principal-interest">${formatWon(equalPayment.totalInterest)}</td>
+                        <td class="equal-principal">${formatWon(equalPrincipal.totalInterest)}</td>
+                        <td>${formatWon(interestDiff)}</td>
+                    </tr>
+                </tbody>
+            `;
+            
+            updateChart1(P, r, n);
+        }
+
+        document.getElementById('principal1').addEventListener('input', updateBasic);
+        document.getElementById('rate1').addEventListener('input', updateBasic);
+        document.getElementById('years1').addEventListener('input', updateBasic);
+
+        // ===== 인플레이션 고려 계산기 =====
+        let chart2Instance = null;
+
+        function presentValue(futureValue, inflationRate, years) {
+            return futureValue / Math.pow(1 + inflationRate / 100, years);
+        }
+
+        function calculateWithInflation(P, r, n, inflation) {
+            const monthlyRate = r / 12 / 100;
+            const months = n * 12;
+            
+            const equalPaymentMonthly = P * monthlyRate * Math.pow(1 + monthlyRate, months) / (Math.pow(1 + monthlyRate, months) - 1);
+            const principalPayment = P / months;
+            
+            let balance1 = P;
+            let balance2 = P;
+            let totalNominal1 = 0;
+            let totalNominal2 = 0;
+            let totalPV1 = 0;
+            let totalPV2 = 0;
+            
+            const schedule1 = [];
+            const schedule2 = [];
+            
+            for (let i = 0; i < months; i++) {
+                const yearsPassed = i / 12;
+                
+                const interest1 = balance1 * monthlyRate;
+                const principal1 = equalPaymentMonthly - interest1;
+                balance1 -= principal1;
+                
+                const pv1 = presentValue(equalPaymentMonthly, inflation, yearsPassed);
+                totalNominal1 += equalPaymentMonthly;
+                totalPV1 += pv1;
+                
+                const interest2 = balance2 * monthlyRate;
+                const payment2 = principalPayment + interest2;
+                balance2 -= principalPayment;
+                
+                const pv2 = presentValue(payment2, inflation, yearsPassed);
+                totalNominal2 += payment2;
+                totalPV2 += pv2;
+                
+                if (i % 12 === 0 || i === months - 1) {
+                    schedule1.push({
+                        year: Math.floor(i / 12) + 1,
+                        nominal: totalNominal1,
+                        pv: totalPV1
+                    });
+                    schedule2.push({
+                        year: Math.floor(i / 12) + 1,
+                        nominal: totalNominal2,
+                        pv: totalPV2
+                    });
+                }
+            }
+            
+            return {
+                equalPayment: {
+                    monthlyPayment: equalPaymentMonthly,
+                    totalNominal: totalNominal1,
+                    totalPV: totalPV1,
+                    schedule: schedule1
+                },
+                equalPrincipal: {
+                    firstPayment: principalPayment + (P * monthlyRate),
+                    lastPayment: principalPayment + (principalPayment * monthlyRate),
+                    totalNominal: totalNominal2,
+                    totalPV: totalPV2,
+                    schedule: schedule2
+                }
+            };
+        }
+
+        function updateChart2(P, r, n, inflation) {
+            const result = calculateWithInflation(P, r, n, inflation);
+            
+            const labels = result.equalPayment.schedule.map(s => s.year + '년');
+            const nominalData1 = result.equalPayment.schedule.map(s => Math.round(s.nominal / 10000));
+            const pvData1 = result.equalPayment.schedule.map(s => Math.round(s.pv / 10000));
+            const nominalData2 = result.equalPrincipal.schedule.map(s => Math.round(s.nominal / 10000));
+            const pvData2 = result.equalPrincipal.schedule.map(s => Math.round(s.pv / 10000));
+            
+            if (chart2Instance) {
+                chart2Instance.destroy();
+            }
+            
+            chart2Instance = new Chart(document.getElementById('chart2'), {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: '원리금균등 (실질가치)',
+                            data: pvData1,
+                            borderColor: '#378ADD',
+                            backgroundColor: 'rgba(55, 138, 221, 0.1)',
+                            borderWidth: 2,
+                            tension: 0.4,
+                            fill: false
+                        },
+                        {
+                            label: '원금균등 (실질가치)',
+                            data: pvData2,
+                            borderColor: '#1D9E75',
+                            backgroundColor: 'rgba(29, 158, 117, 0.1)',
+                            borderWidth: 2,
+                            tension: 0.4,
+                            fill: false
+                        },
+                        {
+                            label: '원리금균등 (명목가치)',
+                            data: nominalData1,
+                            borderColor: 'rgba(55, 138, 221, 0.3)',
+                            backgroundColor: 'transparent',
+                            borderWidth: 1,
+                            borderDash: [5, 5],
+                            tension: 0.4,
+                            fill: false
+                        },
+                        {
+                            label: '원금균등 (명목가치)',
+                            data: nominalData2,
+                            borderColor: 'rgba(29, 158, 117, 0.3)',
+                            backgroundColor: 'transparent',
+                            borderWidth: 1,
+                            borderDash: [5, 5],
+                            tension: 0.4,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + formatNumber(context.parsed.y) + '만원';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return formatNumber(value) + '만원';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateInflation() {
+            const P = parseInt(document.getElementById('principal2').value) * 10000;
+            const r = parseFloat(document.getElementById('rate2').value);
+            const n = parseInt(document.getElementById('years2').value);
+            const inflation = parseFloat(document.getElementById('inflation2').value);
+            
+            document.getElementById('principal2-out').textContent = formatWon(P);
+            document.getElementById('rate2-out').textContent = r.toFixed(1) + '%';
+            document.getElementById('years2-out').textContent = n + '년';
+            document.getElementById('inflation2-out').textContent = inflation.toFixed(1) + '%';
+            
+            const result = calculateWithInflation(P, r, n, inflation);
+            
+            const pvDiff = result.equalPayment.totalPV - result.equalPrincipal.totalPV;
+            const nominalDiff = result.equalPayment.totalNominal - result.equalPrincipal.totalNominal;
+            const realRate = r - inflation;
+            
+            let betterChoice = '';
+            if (Math.abs(pvDiff) < P * 0.001) {
+                betterChoice = '두 방식의 실질비용이 거의 동일합니다.';
+            } else if (pvDiff > 0) {
+                betterChoice = `<strong>원금균등상환이 ${formatWon(Math.abs(pvDiff))} 유리</strong>합니다. 초기에 더 많이 갚아 이자 부담을 줄이는 효과가 인플레이션 이득보다 큽니다.`;
+            } else {
+                betterChoice = `<strong>원리금균등상환이 ${formatWon(Math.abs(pvDiff))} 유리</strong>합니다. 후반 상환액의 실질가치가 크게 떨어져 인플레이션 헷지 효과가 나타납니다.`;
+            }
+            
+            document.getElementById('insight2').innerHTML = `${inflation.toFixed(1)}% 인플레이션 가정 시, 실질금리는 ${realRate.toFixed(1)}%입니다. ` + betterChoice;
+            
+            document.getElementById('summary2').innerHTML = `
+                <div class="metric-card">
+                    <div class="metric-label">원리금균등 명목 총액</div>
+                    <div class="metric-value equal-principal-interest">${formatWon(result.equalPayment.totalNominal)}</div>
+                    <div class="metric-sub">실질가치 ${formatWon(result.equalPayment.totalPV)}</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">원금균등 명목 총액</div>
+                    <div class="metric-value equal-principal">${formatWon(result.equalPrincipal.totalNominal)}</div>
+                    <div class="metric-sub">실질가치 ${formatWon(result.equalPrincipal.totalPV)}</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">명목가치 차이</div>
+                    <div class="metric-value">${formatWon(Math.abs(nominalDiff))}</div>
+                    <div class="metric-sub">${nominalDiff > 0 ? '원금균등이 저렴' : '원리금균등이 저렴'}</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">실질가치 차이</div>
+                    <div class="metric-value" style="color: ${pvDiff > 0 ? '#1D9E75' : '#378ADD'};">${formatWon(Math.abs(pvDiff))}</div>
+                    <div class="metric-sub">${pvDiff > 0 ? '원금균등이 유리' : '원리금균등이 유리'}</div>
+                </div>
+            `;
+            
+            const inflationImpact1 = result.equalPayment.totalNominal - result.equalPayment.totalPV;
+            const inflationImpact2 = result.equalPrincipal.totalNominal - result.equalPrincipal.totalPV;
+            
+            document.getElementById('table2').innerHTML = `
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>원리금균등</th>
+                        <th>원금균등</th>
+                        <th>차이</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>총 상환액 (명목)</td>
+                        <td class="equal-principal-interest">${formatWon(result.equalPayment.totalNominal)}</td>
+                        <td class="equal-principal">${formatWon(result.equalPrincipal.totalNominal)}</td>
+                        <td>${formatWon(Math.abs(nominalDiff))}</td>
+                    </tr>
+                    <tr>
+                        <td>총 상환액 (현재가치)</td>
+                        <td class="equal-principal-interest">${formatWon(result.equalPayment.totalPV)}</td>
+                        <td class="equal-principal">${formatWon(result.equalPrincipal.totalPV)}</td>
+                        <td>${formatWon(Math.abs(pvDiff))}</td>
+                    </tr>
+                    <tr>
+                        <td>인플레이션 이득</td>
+                        <td class="equal-principal-interest">${formatWon(inflationImpact1)}</td>
+                        <td class="equal-principal">${formatWon(inflationImpact2)}</td>
+                        <td>${formatWon(Math.abs(inflationImpact1 - inflationImpact2))}</td>
+                    </tr>
+                    <tr>
+                        <td>실질 할인율</td>
+                        <td class="equal-principal-interest">${((inflationImpact1 / result.equalPayment.totalNominal) * 100).toFixed(1)}%</td>
+                        <td class="equal-principal">${((inflationImpact2 / result.equalPrincipal.totalNominal) * 100).toFixed(1)}%</td>
+                        <td>${(Math.abs((inflationImpact1 - inflationImpact2) / nominalDiff) * 100).toFixed(1)}%p</td>
+                    </tr>
+                </tbody>
+            `;
+            
+            updateChart2(P, r, n, inflation);
+        }
+
+        document.getElementById('principal2').addEventListener('input', updateInflation);
+        document.getElementById('rate2').addEventListener('input', updateInflation);
+        document.getElementById('years2').addEventListener('input', updateInflation);
+        document.getElementById('inflation2').addEventListener('input', updateInflation);
+
+        // 초기 실행
+        updateBasic();
+        updateInflation();
+    </script>
+</body>
+</html>
