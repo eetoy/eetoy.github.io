@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upper Extremity Tumor Reconstruction - Tendon Transfer Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+        }
+        
+        header h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        
+        header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        
+        .tab-bar {
+            display: flex;
+            gap: 8px;
+            margin-top: 20px;
+        }
+        
+        .tab-button {
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            border-radius: 6px 6px 0 0;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .tab-button:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .tab-button.active {
+            background: white;
+            color: #667eea;
+        }
+        
+        .database-browser {
+            padding: 30px;
+            overflow-y: auto;
+            max-height: calc(100vh - 200px);
+        }
+        
+        .database-header {
+            margin-bottom: 30px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .database-header h2 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .database-header p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .combo-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: all 0.2s;
+        }
+        
+        .combo-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+        
+        .combo-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 16px;
+        }
+        
+        .combo-muscles {
+            flex: 1;
+        }
+        
+        .combo-muscles h3 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .muscle-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        
+        .muscle-tag {
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .combo-meta {
+            text-align: right;
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .strategy-count {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+        
+        .combo-losses {
+            background: #fff3cd;
+            border-left: 3px solid #ffc107;
+            padding: 12px;
+            margin: 16px 0;
+            border-radius: 4px;
+        }
+        
+        .combo-losses h4 {
+            font-size: 13px;
+            color: #856404;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .combo-losses ul {
+            margin-left: 20px;
+            color: #856404;
+            font-size: 13px;
+        }
+        
+        .combo-losses li {
+            margin: 4px 0;
+        }
+        
+        .combo-strategies {
+            margin-top: 16px;
+        }
+        
+        .mini-strategy {
+            background: #f8f9fa;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            border-left: 3px solid #667eea;
+        }
+        
+        .mini-strategy-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .mini-strategy-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .mini-priority-badge {
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .mini-transfers {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .combo-clinical {
+            margin-top: 16px;
+            padding: 12px;
+            background: #e7f3ff;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #0d47a1;
+        }
+        
+        .combo-clinical strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 0;
+            min-height: 600px;
+        }
+        
+        .input-panel {
+            background: #fafafa;
+            padding: 30px;
+            border-right: 1px solid #e0e0e0;
+            overflow-y: auto;
+            max-height: calc(100vh - 200px);
+        }
+        
+        .output-panel {
+            padding: 30px;
+            overflow-y: auto;
+            max-height: calc(100vh - 200px);
+        }
+        
+        .muscle-group {
+            margin-bottom: 24px;
+        }
+        
+        .muscle-group h3 {
+            font-size: 13px;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .muscle-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .muscle-item:hover {
+            background: #f0f0f0;
+            margin: 0 -8px;
+            padding-left: 8px;
+            padding-right: 8px;
+            border-radius: 4px;
+        }
+        
+        .muscle-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        
+        .muscle-item label {
+            cursor: pointer;
+            font-size: 14px;
+            flex: 1;
+        }
+        
+        .muscle-code {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #888;
+            margin-left: 8px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+            flex: 1;
+        }
+        
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+        
+        .result-section {
+            margin-bottom: 32px;
+        }
+        
+        .result-section h2 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+        
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.3;
+        }
+        
+        .loss-summary {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 16px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        
+        .loss-summary h3 {
+            color: #856404;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .loss-list {
+            color: #856404;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+        
+        .strategy-card {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        
+        .strategy-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 12px;
+        }
+        
+        .strategy-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .priority-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .priority-critical {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .priority-important {
+            background: #ffc107;
+            color: #333;
+        }
+        
+        .priority-optional {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .transfer-detail {
+            margin: 12px 0;
+            padding: 12px;
+            background: white;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        
+        .transfer-arrow {
+            display: inline-block;
+            margin: 0 8px;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .donor-muscle {
+            color: #28a745;
+            font-weight: 600;
+        }
+        
+        .recipient-muscle {
+            color: #dc3545;
+            font-weight: 600;
+        }
+        
+        .function-restored {
+            color: #667eea;
+            font-weight: 500;
+        }
+        
+        .notes {
+            margin-top: 12px;
+            padding: 12px;
+            background: #e7f3ff;
+            border-left: 3px solid #2196f3;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #0d47a1;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border-left: 3px solid #ffc107;
+            color: #856404;
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        
+        .alternative-options {
+            margin-top: 20px;
+            padding: 16px;
+            background: #f1f3f5;
+            border-radius: 6px;
+        }
+        
+        .alternative-options h4 {
+            font-size: 14px;
+            color: #495057;
+            margin-bottom: 8px;
+        }
+        
+        .alternative-options ul {
+            margin-left: 20px;
+            font-size: 13px;
+            color: #6c757d;
+        }
+        
+        .alternative-options li {
+            margin: 4px 0;
+        }
+        
+        .no-match {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 6px;
+            padding: 20px;
+            color: #721c24;
+        }
+        
+        .no-match h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .no-match p {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+        
+        .selected-count {
+            font-size: 12px;
+            color: #667eea;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+        
+        .reference-info {
+            margin-top: 16px;
+            padding: 12px;
+            background: #e8f5e9;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #2e7d32;
+        }
+        
+        .reference-info strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+        
+        @media (max-width: 1024px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .input-panel {
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+                max-height: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔧 상지 종양 재건 - Tendon Transfer 의사결정 도구</h1>
+            <p>절제된 근육을 선택하면 가능한 재건 전략을 제시합니다 (v1.5 - Hong Wan Kee, SNUBH)</p>
+            <div class="tab-bar">
+                <button class="tab-button active" onclick="switchTab('selector')">근육 선택</button>
+                <button class="tab-button" onclick="switchTab('database')">데이터베이스 (13개)</button>
+            </div>
+        </header>
+        
+        <div class="content" id="selectorTab">
+            <div class="input-panel">
+                <div class="muscle-group">
+                    <h3>견관절 / 상완</h3>
+                    <div class="muscle-item" onclick="toggleCheckbox('deltoid')">
+                        <input type="checkbox" id="deltoid" value="deltoid">
+                        <label for="deltoid">Deltoid</label>
+                        <span class="muscle-code">DEL</span>
+                    </div>
+                    <div class="muscle-item" onclick="toggleCheckbox('pec_major')">
+                        <input type="checkbox" id="pec_major" value="pec_major">
+                        <label for="pec_major">Pectoralis major</label>
+                        <span class="muscle-code">PEC</span>
+                    </div>
+                    <div class="muscle-item" onclick="toggleCheckbox('lat_dorsi')">
+                        <input type="checkbox" id="lat_dorsi" value="lat_dorsi">
+                        <label for="lat_dorsi">Latissimus dorsi</label>
+                        <span class="muscle-code">LAT</span>
+                    </div>
+                    <div class="muscle-item" onclick="toggleCheckbox('biceps')">
+                        <input type="checkbox" id="biceps" value="biceps">
+                        <label for="biceps">Biceps brachii</label>
+                        <span class="muscle-code">BIC</span>
+                    </div>
+                    <div class="muscle-item" onclick="toggleCheckbox('brachialis')">
+                        <input type="checkbox" id="brachialis" value="brachialis">
+                        <label for="brachialis">Brachialis</label>
+                        <span class="muscle-code">BRA</span>
+                    </div>
+                    <div class="muscle-item" onclick="toggleCheckbox('triceps')">
+                        <input type="checkbox" id="triceps" value="triceps">
+                        <label for="triceps">Triceps</label>
+                        <span class="muscle-code">TRI</span>
+                    </div>
+                </div>
+                
+                <div class="muscle-group">
+                    <h3>전완 - 회외/요측</h3>
+                    <div class="muscle-item" onclick="toggleCheckbox('supinator')">
+                        <input type="checkbox" id="supinator" value="supinator">
+                        <label for="supinator">Supinator</label>
+                        <span class="muscle-code">SUP</span>
+                    </div>
+                    <div class="muscle-item" onclick="toggleCheckbox('pt')">
+                        <input type="checkbox" id="pt" value="pt">
+                        <label for="pt">Pronator teres</label>
+                        <span class="muscle-code">PT</span>
+                    </div>
+                    <div class="muscle-item" onclick="toggleCheckbox('br')">
+                        <input type="checkbox" id="br" value="br">
+                        <label for="br">Brachioradialis</label>
+                        <span class="muscle-code">BR</span>
+                    </div>
+                    <div class="muscle-item" onclick="toggleCheckbox('ecrl')">
+                        <input type="checkbox" id="ecrl" value="ecrl">
+                        <label for="ecrl">ECRL</label>
+                        <span class="muscle-code">ECRL</span>
+                    </div>
+                    <div class="muscle-item" onclick="toggleCheckbox('ecrb')">
+                        <input type="checkbox" id="ecrb" value="ecrb">
+                        <label for="ecrb">ECRB</label>
+                        <span class="muscle-code">ECRB</span>
+                    </div>
+                </div>
+                
+                <div class="muscle-group">
+                    <h3>전완 - 굴곡/회내</h3>
+                    <div class="muscle-item" onclick="toggleCheckbox('fcr')">
+                        <input type="checkbox" id="fcr" value="fcr">
+                        <label for="fcr">FCR</label>
+                        <span class="muscle-code">FCR</span>
+                    </div>
+                    <div class="muscle-item" onclick="toggleCheckbox('pl')">
+                        <input type="checkbox" id="pl" value="pl">
+                        <label for="pl">Palmaris longus</label>
+                        <span class="muscle-code">PL</span>
+                    </div>
+                    <div class="muscle-item" onclick="toggleCheckbox('fcu')">
+                        <input type="checkbox" id="fcu" value="fcu">
+                        <label for="fcu">FCU</label>
+                        <span class="muscle-code">FCU</span>
+                    </div>
+                    <div class="muscle-item" onclick="toggleCheckbox('fds')">
+                        <input type="checkbox" id="fds" value="fds">
+                        <label for="fds">FDS</label>
+                        <span class="muscle-code">FDS</span>
+                    </div>
+                    <div class="muscle-item" onclick="toggleCheckbox('fdp')">
+                        <input type="checkbox" id="fdp" value="fdp">
+                        <label for="fdp">FDP</label>
+                        <span class="muscle-code">FDP</span>
+                    </div>
+                    <div class="muscle-item" onclick="toggleCheckbox('fpl')">
+                        <input type="checkbox" id="fpl" value="fpl">
+                        <label for="fpl">FPL</label>
+                        <span class="muscle-code">FPL</span>
+                    </div>
+                    <div class="muscle-item" onclick="toggleCheckbox('pq')">
+                        <input type="checkbox" id="pq" value="pq">
+                        <label for="pq">Pronator quadratus</label>
+                        <span class="muscle-code">PQ</span>
+                    </div>
+                </div>
+                
+                <div class="muscle-group">
+                    <h3>전완 - 신전/척측</h3>
+                    <div class="muscle-item" onclick="toggleCheckbox('ecu')">
+                        <input type="checkbox" id="ecu" value="ecu">
+                        <label for="ecu">ECU</label>
+                        <span class="muscle-code">ECU</span>
+                    </div>
+                    <div class="muscle-item" onclick="toggleCheckbox('edc')">
+                        <input type="checkbox" id="edc" value="edc">
+                        <label for="edc">EDC</label>
+                        <span class="muscle-code">EDC</span>
+                    </div>
+                    <div class="muscle-item" onclick="toggleCheckbox('edm')">
+                        <input type="checkbox" id="edm" value="edm">
+                        <label for="edm">EDM</label>
+                        <span class="muscle-code">EDM</span>
+                    </div>
+                    <div class="muscle-item" onclick="toggleCheckbox('eip')">
+                        <input type="checkbox" id="eip" value="eip">
+                        <label for="eip">EIP</label>
+                        <span class="muscle-code">EIP</span>
+                    </div>
+                    <div class="muscle-item" onclick="toggleCheckbox('epl')">
+                        <input type="checkbox" id="epl" value="epl">
+                        <label for="epl">EPL</label>
+                        <span class="muscle-code">EPL</span>
+                    </div>
+                    <div class="muscle-item" onclick="toggleCheckbox('epb')">
+                        <input type="checkbox" id="epb" value="epb">
+                        <label for="epb">EPB</label>
+                        <span class="muscle-code">EPB</span>
+                    </div>
+                    <div class="muscle-item" onclick="toggleCheckbox('apl')">
+                        <input type="checkbox" id="apl" value="apl">
+                        <label for="apl">APL</label>
+                        <span class="muscle-code">APL</span>
+                    </div>
+                </div>
+                
+                <div class="muscle-group">
+                    <h3>수부 내재근</h3>
+                    <div class="muscle-item" onclick="toggleCheckbox('thenar')">
+                        <input type="checkbox" id="thenar" value="thenar">
+                        <label for="thenar">Thenar muscles</label>
+                        <span class="muscle-code">THE</span>
+                    </div>
+                    <div class="muscle-item" onclick="toggleCheckbox('hypothenar')">
+                        <input type="checkbox" id="hypothenar" value="hypothenar">
+                        <label for="hypothenar">Hypothenar muscles</label>
+                        <span class="muscle-code">HYP</span>
+                    </div>
+                    <div class="muscle-item" onclick="toggleCheckbox('interossei')">
+                        <input type="checkbox" id="interossei" value="interossei">
+                        <label for="interossei">Interossei</label>
+                        <span class="muscle-code">INT</span>
+                    </div>
+                    <div class="muscle-item" onclick="toggleCheckbox('lumbricals')">
+                        <input type="checkbox" id="lumbricals" value="lumbricals">
+                        <label for="lumbricals">Lumbricals</label>
+                        <span class="muscle-code">LUM</span>
+                    </div>
+                </div>
+                
+                <div class="selected-count" id="selectedCount">선택된 근육: 0개</div>
+                
+                <div class="action-buttons">
+                    <button class="btn-primary" onclick="analyzeTransfer()">분석하기</button>
+                    <button class="btn-secondary" onclick="resetAll()">초기화</button>
+                </div>
+            </div>
+            
+            <div class="output-panel" id="outputPanel">
+                <div class="empty-state">
+                    <div class="empty-state-icon">📋</div>
+                    <p>손실된 근육을 선택하고 '분석하기'를 클릭하세요</p>
+                    <p style="font-size: 12px; margin-top: 12px; color: #aaa;">현재 13개 조합 등록됨</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content" id="databaseTab" style="display: none;">
+            <div class="database-browser">
+                <div class="database-header">
+                    <h2>등록된 조합 목록</h2>
+                    <p>총 <strong id="totalCombos">13</strong>개 조합 등록됨</p>
+                </div>
+                <div id="databaseList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Embedded database
+        const transferDatabase = {"combinations":[{"lost_muscles":["pt","fcr","ecrl"],"functional_losses":["전완 회외 감소 (PT 손실)","완관절 요측 굴곡 불가 (FCR 손실)","완관절 신전 약화 (ECRL 손실)"],"strategies":[{"title":"완관절 안정성 우선 확보","priority":"critical","transfers":[{"donor":"ECRB (보존 확인 필수)","recipient":"FCR stump","function":"완관절 요측 안정성"},{"donor":"BR","recipient":"ECRL stump or ECRB side-to-side","function":"완관절 신전 보강"}],"notes":"ECRB가 온전한지 반드시 확인. ECRB도 손상되었다면 ECU to ECRB 고려","warnings":"회외 기능은 포기하거나 biceps rerouting 고려 (단, 주관절 굴곡력 감소 감수)"}],"alternatives":["완관절 arthrodesis (공여근 부족 시)","Wrist extension splint 장기 사용"],"clinical_notes":"이 조합은 proximal forearm sarcoma에서 흔함. Radial artery도 함께 손상되었는지 확인 필요.","references":["Brand PW. Clinical Mechanics of the Hand. 4th ed. 2003","Green's Operative Hand Surgery. 8th ed. Ch. 32"]},{"lost_muscles":["edc","epl","eip"],"functional_losses":["수지 신전 완전 마비","엄지 신전 불가","시지 독립 신전 불가"],"strategies":[{"title":"표준 요골신경 마비 재건","priority":"critical","transfers":[{"donor":"FCR","recipient":"EDC","function":"수지 신전"},{"donor":"PL (or FCU if PL absent)","recipient":"EPL","function":"엄지 신전"}],"notes":"PT to ECRB는 손실 근육에 포함되지 않았으므로 생략 가능. 완관절 신전근이 온전하다면 이것만으로 충분","warnings":"FCR을 쓰면 완관절 요측 안정성 감소. ECRL/ECRB 온전성 필수 확인"},{"title":"대안: FDS 사용 (FCR 보존)","priority":"important","transfers":[{"donor":"FDS (중지 or 환지)","recipient":"EDC","function":"수지 신전"},{"donor":"PL","recipient":"EPL","function":"엄지 신전"}],"notes":"FCR을 보존하여 완관절 요측 안정성 유지. FDS 희생은 수지 굴곡에 영향 적음","warnings":"FDS routing 시 Guyon's canal 통과 확인. Bowstringing 주의"}],"alternatives":["EIP 대신 EDM을 공여근으로 사용 (만약 EDM이 온전하다면)","Free functioning muscle transfer (gracilis) - 광범위 손실 시"],"clinical_notes":"후방 전완 구획 sarcoma의 전형적 패턴. PIN 동반 손상 여부 확인 필요.","references":["Boyes JH. Tendon transfers for radial palsy. Bull Hosp Joint Dis. 1960;21:97-105","Brand PW. Tendon transfers in the forearm. In: Flynn's Hand Surgery. 1982"]},{"lost_muscles":["biceps","brachialis"],"functional_losses":["주관절 굴곡 완전 마비","전완 회외 약화 (biceps 손실)"],"strategies":[{"title":"Pectoralis major transfer (Clark pedicled transfer)","priority":"critical","transfers":[{"donor":"Pectoralis major (sternal head)","recipient":"Biceps tendon stump or radial tuberosity","function":"주관절 굴곡"}],"notes":"Thoracoacromial pedicle 보존. 전완 회내 위치에서 최대 근력. Rerouting으로 회외 가능하나 근력 감소","warnings":"견관절 내전력 약화. 광범위 흉벽 dissection 필요. Vascular injury 주의"},{"title":"Latissimus dorsi free flap","priority":"important","transfers":[{"donor":"Latissimus dorsi (free flap)","recipient":"Distal biceps insertion","function":"주관절 굴곡"}],"notes":"Thoracodorsal nerve/vessel anastomosis. Brachial artery/vein or radial recurrent vessels 사용. 더 생리적인 회외 기능","warnings":"Microsurgical expertise 필수. Flap failure risk. 배부 공여부 흉터"},{"title":"Steindler flexorplasty (salvage)","priority":"optional","transfers":[{"donor":"Common flexor origin (FCR, PL, FDS)","recipient":"Anterior distal humerus","function":"주관절 굴곡 (약함)"}],"notes":"Medial epicondyle에서 근위부로 2-3 finger-breadths 전진. 굴곡력 제한적 (Grade 3-4). 회외 불가","warnings":"전완 굴근 모두 희생. 수지/완관절 굴곡력 감소. 보조기 필요할 수 있음"}],"alternatives":["Triceps-to-biceps transfer (posterior approach, 논란 많음)","External powered orthosis","활동 수정 및 보상 전략"],"clinical_notes":"Distal humeral sarcoma에서 발생 가능. Musculocutaneous nerve 상태 확인 필수. 방사선 치료 계획 고려.","references":["Clark JMP. Reconstruction of biceps brachii by pectoral muscle transplantation. Br J Surg. 1946;34:180-181","Doi K et al. Free muscle transfers for elbow flexion. Plast Reconstr Surg. 2007;120:1783-1792","Steindler A. Orthopaedic operations on the upper extremity. JAMA. 1918;71:1288"]},{"lost_muscles":["thenar"],"functional_losses":["엄지 대립 불가 (APB, OP 손실)","엄지 굴곡 약화 (FPB 손실)"],"strategies":[{"title":"EIP to APB (Burkhalter)","priority":"critical","transfers":[{"donor":"EIP","recipient":"APB","function":"엄지 대립"}],"notes":"EIP를 EDC에서 분리하여 interosseous membrane 위로 volar routing. Ulnar pulse 보존 확인","warnings":"시지 독립 신전 상실. EDC로 대체 가능하므로 기능적 문제 적음"},{"title":"FDS (ring) to APB (Camitz)","priority":"important","transfers":[{"donor":"FDS (환지)","recipient":"APB","function":"엄지 대립"}],"notes":"PL이 있으면 PL을 strip으로 사용하여 length 확보. TCL volar에서 routing","warnings":"환지 PIP 굴곡 약화. DIP joint는 FDP로 유지"},{"title":"ECRL을 이용한 opposition (Royle-Thompson)","priority":"optional","transfers":[{"donor":"ECRL","recipient":"APB via pulley","function":"엄지 대립"}],"notes":"FCU를 pulley로 사용. Free tendon graft로 length 확보. 더 강력하지만 복잡","warnings":"완관절 신전 약화 가능. ECRB 온전성 필수"}],"alternatives":["Opponensplasty with ADM (Huber transfer - 선천성에 주로 사용)","Static post (Littler) - 대립은 포기하고 stable pinch만 확보"],"clinical_notes":"정중신경 마비의 classic finding. CTS 수술 후나 thenar compartment tumor에서 발생. Motor branch 회복 가능성 먼저 평가","references":["Burkhalter WE. Early tendon transfer in upper extremity peripheral nerve injury. Clin Orthop. 1974;104:68-79","Camitz H. Uber die Behandlung der Oppositionslahmung. Acta Chir Scand. 1929;65:77"]},{"lost_muscles":["fdp","fpl"],"functional_losses":["수지 DIP 굴곡 완전 마비","엄지 IP 굴곡 불가","강력한 grip 불가"],"strategies":[{"title":"FDS side-to-side to FDP","priority":"critical","transfers":[{"donor":"FDS (all 4 tendons)","recipient":"FDP (side-to-side)","function":"수지 굴곡 (PIP level로 제한)"}],"notes":"각 FDS를 corresponding FDP에 side-to-side suture. PIP 굴곡은 유지되나 DIP independent flexion은 상실","warnings":"Grip strength 50-60% 수준으로 감소. DIP flexion 불가능"},{"title":"ECRL to FPL (엄지 우선)","priority":"important","transfers":[{"donor":"ECRL","recipient":"FPL","function":"엄지 IP 굴곡"},{"donor":"BR","recipient":"FDP (ring/small)","function":"척측 수지 굴곡"}],"notes":"Pinch 기능 우선 복원. Free tendon graft로 length 확보 필요","warnings":"완관절 신전 약화. ECRB 단독으로 충분한지 확인 필요"}],"alternatives":["Arthrodesis DIP joints (안정적 tip pinch 확보)","Tenodesis effect 이용 (wrist extension 시 passive finger flexion)","Free functioning muscle transfer (광범위 전완 손상 시)"],"clinical_notes":"Volar forearm sarcoma (deep flexor compartment)에서 발생. AIN 동반 손상 흔함. FDS 보존 여부가 재건 가능성 결정","references":["Brand PW. Tendon grafting illustrated by a new operation for intrinsic paralysis. J Bone Joint Surg Br. 1961;43:444-453"]},{"lost_muscles":["interossei","lumbricals"],"functional_losses":["수지 MCP 굴곡 불가","IP 신전 불가 (intrinsic minus hand)","Precision grip 소실"],"strategies":[{"title":"FDS to lumbrical insertion (Zancolli lasso)","priority":"critical","transfers":[{"donor":"FDS (각 손가락)","recipient":"A1 pulley volar에 lasso 형성","function":"MCP flexion, IP extension"}],"notes":"FDS를 자른 후 A1 pulley 아래로 통과시켜 자기 자신에게 봉합. MCP 굴곡 시 IP 신전되는 intrinsic 효과","warnings":"PIP 굴곡 완전 상실. FDP로 전체 굴곡은 가능하나 independent PIP flexion 불가"},{"title":"ECRL/ECRB split to lateral bands (Fowler)","priority":"important","transfers":[{"donor":"ECRL or ECRB (4개로 분할)","recipient":"Lateral bands (각 손가락)","function":"IP extension"}],"notes":"Free tendon graft 필요. Routing은 lumbrical canal 통과. MCP flexion은 회복 안 됨","warnings":"완관절 신전 약화. 4-strand graft 필요하여 복잡"},{"title":"Static procedures (Capsulodesis)","priority":"optional","transfers":[{"donor":"None (static)","recipient":"MCP volar plate advancement","function":"MCP flexion posture 고정"}],"notes":"MCP를 30-40° flexion에 고정하여 tenodesis로 IP extension 유도. Dynamic transfer 없음","warnings":"MCP extension ROM 감소. Stiffness 위험"}],"alternatives":["Swan-neck splinting (PIP hyperextension 방지)","활동 수정 및 적응 전략"],"clinical_notes":"척골신경 complete palsy의 전형적 패턴. Ulnar claw hand. Intrinsic compartment tumor 절제 시 발생. Bouvier test로 재건 필요성 평가","references":["Zancolli EA. Claw-hand caused by paralysis of the intrinsic muscles. J Bone Joint Surg Am. 1957;39:1076-1080","Stiles HJ, Forrester-Brown MF. Treatment of Injuries of Peripheral Spinal Nerves. 1922"]},{"lost_muscles":["triceps"],"functional_losses":["주관절 신전 불가","Pushing, weight-bearing 불가"],"strategies":[{"title":"Latissimus dorsi transfer (pedicled)","priority":"critical","transfers":[{"donor":"Latissimus dorsi","recipient":"Triceps insertion (olecranon)","function":"주관절 신전"}],"notes":"Thoracodorsal pedicle 보존. Posterior approach로 routing. 견관절 신전-내전이 주관절 신전으로 전환","warnings":"견관절 내전-신전력 감소. 넓은 dissection 필요"},{"title":"Biceps-to-triceps transfer (posterior routing)","priority":"important","transfers":[{"donor":"Biceps (long head)","recipient":"Triceps insertion","function":"주관절 신전"}],"notes":"Posterior routing via lateral intermuscular septum. Paradoxical function (굴근이 신전 기능). 재학습 필요","warnings":"주관절 굴곡력 50% 감소. Short head로는 충분한 굴곡 유지"}],"alternatives":["Deltoid-to-triceps transfer (광범위 손상 시)","Extension splint 사용","활동 수정 (weight-bearing 제한)"],"clinical_notes":"Posterior arm sarcoma 절제 시 발생. Radial nerve palsy에서는 brachioradialis를 ECRB로 먼저 쓰므로 triceps 재건은 우선순위 낮음","references":["Moberg E. Surgical treatment for absent single-hand grip and elbow extension in quadriplegia. J Bone Joint Surg Am. 1975;57:196-206"]},{"lost_muscles":["deltoid"],"functional_losses":["견관절 외전 불가","Overhead reach 불가"],"strategies":[{"title":"Trapezius transfer (Saha)","priority":"critical","transfers":[{"donor":"Trapezius (lower fibers)","recipient":"Greater tuberosity via bone tunnel","function":"견관절 외전"}],"notes":"Scapular spine을 osteotomy하여 trapezius를 lateral rotation. Acromion으로 fulcrum 형성","warnings":"복잡한 수술. 외전 각도 제한적 (60-90°). Scapular winging 위험"},{"title":"Latissimus/Teres major transfer","priority":"important","transfers":[{"donor":"Latissimus dorsi + Teres major","recipient":"Greater tuberosity","function":"견관절 외전 보조"}],"notes":"Combined transfer로 leverage 증가. Subscapularis와 함께 anterior routing","warnings":"주로 anterior elevation에 효과적. Pure abduction은 제한적"}],"alternatives":["Reverse total shoulder arthroplasty (노인, 낮은 기능 요구)","Arthrodesis (fusion at functional position)","활동 수정"],"clinical_notes":"Proximal humerus sarcoma 절제 시 axillary nerve도 함께 손상되는 경우 흔함. 견관절 안정성 우선 확인 (rotator cuff)","references":["Saha AK. Surgery of the paralysed and flail shoulder. Acta Orthop Scand Suppl. 1967;97:1-90"]},{"lost_muscles":["ecrl","ecrb"],"functional_losses":["완관절 신전 완전 마비","Grip 불가 (wrist stability 상실)"],"strategies":[{"title":"FCU to ECRB (standard)","priority":"critical","transfers":[{"donor":"FCU","recipient":"ECRB","function":"완관절 신전"}],"notes":"FCU를 pisiform에서 절단, subcutaneous routing으로 ECRB에 연결. Straight line of pull","warnings":"완관절 척측 안정성 감소. Ulnar deviation tendency"},{"title":"FCR to ECRB (요측 안정성 유지)","priority":"important","transfers":[{"donor":"FCR","recipient":"ECRB","function":"완관절 신전"}],"notes":"FCR 희생으로 요측 안정성은 감소하나 척측보다 나음. PT는 회외 기능으로 보존","warnings":"요측 안정성 일부 감소. PT로 일부 보상"},{"title":"BR to ECRB + ECU (combined)","priority":"optional","transfers":[{"donor":"BR","recipient":"ECRB","function":"완관절 신전"},{"donor":"PT","recipient":"ECRB (side-to-side)","function":"신전력 보강"}],"notes":"ECU가 보존되었다면 BR만으로 충분할 수 있음. PT 추가로 더 강력한 신전","warnings":"회외력 상실. BR의 elbow flexion 보조 기능 상실"}],"alternatives":["Wrist arthrodesis (공여근 부족 시 realistic choice)","ECU 단독 사용 (if preserved and strong)"],"clinical_notes":"요골신경 high palsy or radial forearm compartment tumor. PIN vs high radial palsy 감별 중요","references":["Jones R. Tendon transplantation in cases of musculospiral injuries not amenable to suture. Am J Surg. 1921;35:333"]},{"lost_muscles":["biceps","supinator"],"functional_losses":["주관절 굴곡 약화 (Biceps 손실)","전완 회외 완전 마비"],"strategies":[{"title":"주관절 굴곡 재건 우선","priority":"critical","transfers":[{"donor":"Pectoralis major or Latissimus dorsi","recipient":"Biceps insertion","function":"주관절 굴곡"}],"notes":"Brachialis가 온전하면 Grade 4 굴곡 가능하므로 transfer 불필요할 수도. EMG로 brachialis 확인","warnings":"회외 기능 재건은 매우 어려움. 대부분 포기"},{"title":"회외 기능 부분 재건 (experimental)","priority":"optional","transfers":[{"donor":"BR","recipient":"Biceps tendon (lateral routing)","function":"회외 보조"}],"notes":"BR을 biceps tendon에 연결하여 supination moment arm 생성. 효과 제한적","warnings":"주관절 굴곡 보조 기능 상실. 회외 각도 30-45° 정도만 가능"}],"alternatives":["Pronation-supination splint","활동 수정 (compensatory trunk rotation)","Forearm position in neutral for arthrodesis"],"clinical_notes":"Proximal radius sarcoma 절제. Posterior interosseous nerve 손상 동반 가능. 회외 재건은 현실적으로 매우 제한적","references":["Spinner M. Injuries to the Major Branches of Peripheral Nerves of the Forearm. 2nd ed. 1978"]},{"lost_muscles":["edc","edm","eip","epl"],"functional_losses":["수지 신전 완전 마비 (MCP level)","엄지 신전 불가"],"strategies":[{"title":"Complete posterior compartment reconstruction","priority":"critical","transfers":[{"donor":"FCR","recipient":"EDC (all 4)","function":"수지 신전"},{"donor":"PL or FCU","recipient":"EPL","function":"엄지 신전"},{"donor":"FDS (middle or ring)","recipient":"EIP stump (if needed)","function":"시지 독립 신전"}],"notes":"요골신경 마비의 complete form. PT to ECRB 추가하여 완관절 신전도 재건 (ECRL/B 손상 시)","warnings":"공여근 3-4개 필요. Staged surgery 고려"}],"alternatives":["Free functioning muscle transfer (gracilis to posterior interosseous nerve)","Nerve transfer (if nerve injury < 6 months)"],"clinical_notes":"Complete PIN palsy or posterior forearm compartment tumor. 광범위 절제로 ECRL/ECRB까지 손상 시 FCU to ECRB 추가 필요","references":["Omer GE. Tendon transfers in combined nerve lesions. Orthop Clin North Am. 1974;5:377-387"]},{"lost_muscles":["fpl","thenar"],"functional_losses":["엄지 IP 굴곡 불가","엄지 대립 불가","Precision pinch 완전 상실"],"strategies":[{"title":"엄지 기능 완전 재건","priority":"critical","transfers":[{"donor":"FDS (ring)","recipient":"FPL","function":"엄지 IP 굴곡"},{"donor":"EIP or ECRL","recipient":"APB","function":"엄지 대립"}],"notes":"Thumb reconstruction의 두 기둥. FPL과 opposition 모두 필요. AIN + median nerve combined injury 패턴","warnings":"공여근 2개 필요. EIP 사용 시 시지 독립 신전 상실"},{"title":"IP arthrodesis + opposition (simplified)","priority":"important","transfers":[{"donor":"None (IP fusion)","recipient":"IP joint at 10-15° flexion","function":"안정적 tip"},{"donor":"EIP or FDS","recipient":"APB","function":"대립"}],"notes":"IP fusion으로 FPL 재건 불필요. Opposition만 복원하여 lateral pinch 가능","warnings":"IP ROM 완전 상실. 정교한 작업 제한"}],"alternatives":["Pollicization (complete thumb loss 시)","Two-stage reconstruction with nerve grafting first"],"clinical_notes":"Thenar compartment tumor with deep invasion. AIN도 손상 시 index FDP도 확인. Median nerve high palsy 패턴과 유사","references":["Hastings H. Tendon transfers for combined nerve palsies. Hand Clin. 1988;4:187-200"]},{"lost_muscles":["br","ecrl","ecrb","pt"],"functional_losses":["완관절 신전 완전 마비","전완 회외 마비","주관절 굴곡 보조근 상실"],"strategies":[{"title":"Salvage wrist reconstruction","priority":"critical","transfers":[{"donor":"FCU","recipient":"EDC or ECU stump","function":"완관절 신전"},{"donor":"FCR","recipient":"Side-to-side with FCU transfer","function":"신전력 보강"}],"notes":"공여근이 매우 부족한 상황. ECU가 보존되었다면 그것을 사용. 아니면 EDC 사용","warnings":"완관절 굴곡근 모두 희생. Grip strength 심각하게 약화"},{"title":"Wrist arthrodesis (realistic option)","priority":"important","transfers":[{"donor":"None (fusion)","recipient":"Radiocarpal joint at 10-20° extension","function":"안정적 wrist platform"}],"notes":"광범위 radial forearm tumor 절제 시 현실적 선택. Tendon transfer보다 안정적 결과","warnings":"ROM 완전 상실. 그러나 grip strength는 더 나을 수 있음"}],"alternatives":["Free functioning muscle transfer (very extensive reconstruction)","Prosthetic wrist orthosis"],"clinical_notes":"Extensive radial compartment sarcoma. Radial artery/nerve도 함께 손상 흔함. Vascular reconstruction 우선 고려","references":["Jupiter JB et al. Reconstruction of the upper extremity after tumor resection. J Hand Surg Am. 1987;12:1007-1014"]}],"default_strategies":{"general_principles":["One donor, one critical function - 한 공여근은 하나의 핵심 기능에만 배정","Proximal stability first - 견관절/주관절 안정성을 원위부보다 우선","Preserve powerhouse - Biceps, FPL, FDP는 최대한 보존","Consider adjuvant therapy - 방사선/항암 치료 후 조직 viability 재평가","Salvage strategy ready - 실패 시 구제술(arthrodesis, orthosis) 가능하도록 설계"],"priority_hierarchy":{"tier1_critical":["주관절 굴곡 (Feeding)","수지 신전 (Hand opening)","엄지 대립 (Pinch)"],"tier2_important":["견관절 외전 (Overhead reach)","완관절 신전 (Wrist stability)","전완 회외 (Key turning)"],"tier3_optional":["수지 내재근 (Precision grip)","전완 회내","손가락 독립 운동"]},"common_donors":{"expendable":["PT","PL","FCR","BR","FDS (individual slips)"],"conditional":["FCU","ECU","ECRL","FDP (partial)"],"preserve":["Biceps","FPL","ECRB","Triceps (if possible)"]},"technical_notes":{"pulvertaft_weave":"최소 3회 교직, nonabsorbable suture (3-0 Ethibond), 부동화 6주","tension_setting":{"finger_extension":"Wrist neutral, slight finger flexion에서 setting","elbow_flexion":"Elbow 90°, forearm neutral","thumb_opposition":"IP joint slight flexion, thumb to small finger"},"routing":"직선 경로 우선, pulley 필요 시 retinacular flap 사용","rehabilitation":"3주 immobilization → 6주 passive ROM → 12주 active ROM → 3개월 resistance"}},"metadata":{"version":"1.5","last_updated":"2025-01-26","author":"Hong Wan Kee","institution":"SNUBH Orthopedic Surgery","total_combinations":13,"coverage":["Nerve palsy patterns: 요골신경 (완전/불완전), 정중신경, 척골신경, AIN","Tumor resection patterns: Proximal/distal forearm, thenar compartment, posterior compartment","Specific muscle loss: Biceps, Triceps, Deltoid, wrist extensors, finger flexors/extensors","Combined injuries: Multiple compartment involvement"],"notes":"총 13개 조합 추가 완료. 교과서적 tendon transfer 및 종양 재건 주요 패턴 포함. 실제 증례 경험으로 지속 업데이트 필요."}};
+        
+        // Toggle checkbox when clicking anywhere in the row
+        function toggleCheckbox(id) {
+            const checkbox = document.getElementById(id);
+            if (event.target.tagName !== 'INPUT') {
+                checkbox.checked = !checkbox.checked;
+            }
+            updateSelectedCount();
+        }
+        
+        function updateSelectedCount() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            document.getElementById('selectedCount').textContent = `선택된 근육: ${checkboxes.length}개`;
+        }
+        
+        function resetAll() {
+            document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+            updateSelectedCount();
+            document.getElementById('outputPanel').innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-state-icon">📋</div>
+                    <p>손실된 근육을 선택하고 '분석하기'를 클릭하세요</p>
+                    <p style="font-size: 12px; margin-top: 12px; color: #aaa;">현재 13개 조합 등록됨</p>
+                </div>
+            `;
+        }
+        
+        function getSelectedMuscles() {
+            const selected = [];
+            document.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
+                selected.push(cb.value);
+            });
+            return selected.sort();
+        }
+        
+        function findMatchingStrategy(selectedMuscles) {
+            if (!transferDatabase.combinations) return null;
+            
+            // Exact match first
+            for (const combo of transferDatabase.combinations) {
+                const comboMuscles = combo.lost_muscles.sort();
+                if (JSON.stringify(comboMuscles) === JSON.stringify(selectedMuscles)) {
+                    return combo;
+                }
+            }
+            
+            // Partial match (all selected muscles are in the combination)
+            for (const combo of transferDatabase.combinations) {
+                if (selectedMuscles.every(m => combo.lost_muscles.includes(m))) {
+                    return {...combo, partial_match: true};
+                }
+            }
+            
+            return null;
+        }
+        
+        function analyzeTransfer() {
+            const selected = getSelectedMuscles();
+            
+            if (selected.length === 0) {
+                alert('최소 1개 이상의 근육을 선택해주세요.');
+                return;
+            }
+            
+            const strategy = findMatchingStrategy(selected);
+            const output = document.getElementById('outputPanel');
+            
+            if (strategy) {
+                output.innerHTML = renderStrategy(selected, strategy);
+            } else {
+                output.innerHTML = renderNoMatch(selected);
+            }
+        }
+        
+        function renderStrategy(selected, strategy) {
+            let html = '';
+            
+            // Loss summary
+            html += `
+                <div class="loss-summary">
+                    <h3>절제된 근육 (${selected.length}개)</h3>
+                    <div class="loss-list">${selected.map(m => muscleNameMap[m] || m).join(', ')}</div>
+                </div>
+            `;
+            
+            if (strategy.partial_match) {
+                html += `
+                    <div class="warning">
+                        ⚠️ 부분 일치: 선택한 조합의 완전 일치 전략은 없지만, 유사한 패턴의 권장사항을 표시합니다.
+                    </div>
+                `;
+            }
+            
+            // Functional losses
+            if (strategy.functional_losses && strategy.functional_losses.length > 0) {
+                html += `
+                    <div class="result-section">
+                        <h2>손실된 기능</h2>
+                `;
+                strategy.functional_losses.forEach(loss => {
+                    html += `<div class="transfer-detail">❌ ${loss}</div>`;
+                });
+                html += `</div>`;
+            }
+            
+            // Reconstruction strategies
+            if (strategy.strategies && strategy.strategies.length > 0) {
+                html += `<div class="result-section"><h2>재건 전략</h2>`;
+                
+                strategy.strategies.forEach((strat, idx) => {
+                    const priorityClass = strat.priority === 'critical' ? 'priority-critical' : 
+                                         strat.priority === 'important' ? 'priority-important' : 
+                                         'priority-optional';
+                    const priorityText = strat.priority === 'critical' ? 'Tier 1' : 
+                                        strat.priority === 'important' ? 'Tier 2' : 
+                                        'Tier 3';
+                    
+                    html += `
+                        <div class="strategy-card">
+                            <div class="strategy-header">
+                                <div class="strategy-title">${idx + 1}. ${strat.title || '재건 옵션'}</div>
+                                <div class="priority-badge ${priorityClass}">${priorityText}</div>
+                            </div>
+                    `;
+                    
+                    if (strat.transfers && strat.transfers.length > 0) {
+                        strat.transfers.forEach(transfer => {
+                            html += `
+                                <div class="transfer-detail">
+                                    <span class="donor-muscle">${transfer.donor}</span>
+                                    <span class="transfer-arrow">→</span>
+                                    <span class="recipient-muscle">${transfer.recipient}</span>
+                                    <br>
+                                    <span style="color: #666; font-size: 12px;">목적: </span>
+                                    <span class="function-restored">${transfer.function}</span>
+                                </div>
+                            `;
+                        });
+                    }
+                    
+                    if (strat.notes) {
+                        html += `<div class="notes">💡 ${strat.notes}</div>`;
+                    }
+                    
+                    if (strat.warnings) {
+                        html += `<div class="warning">⚠️ ${strat.warnings}</div>`;
+                    }
+                    
+                    html += `</div>`;
+                });
+                
+                html += `</div>`;
+            }
+            
+            // Alternative options
+            if (strategy.alternatives && strategy.alternatives.length > 0) {
+                html += `
+                    <div class="alternative-options">
+                        <h4>대체 옵션</h4>
+                        <ul>
+                            ${strategy.alternatives.map(alt => `<li>${alt}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+            
+            // Clinical notes
+            if (strategy.clinical_notes) {
+                html += `
+                    <div class="notes" style="margin-top: 20px;">
+                        <strong>임상 참고사항</strong><br>
+                        ${strategy.clinical_notes}
+                    </div>
+                `;
+            }
+            
+            // References
+            if (strategy.references && strategy.references.length > 0) {
+                html += `
+                    <div class="reference-info">
+                        <strong>참고문헌</strong>
+                        ${strategy.references.map(ref => `<div>• ${ref}</div>`).join('')}
+                    </div>
+                `;
+            }
+            
+            return html;
+        }
+        
+        function renderNoMatch(selected) {
+            return `
+                <div class="no-match">
+                    <h3>⚠️ 등록된 전략이 없습니다</h3>
+                    <p><strong>선택된 조합:</strong> ${selected.map(m => muscleNameMap[m] || m).join(', ')}</p>
+                    <p>이 조합에 대한 재건 전략이 데이터베이스에 없습니다.</p>
+                    <p>HTML 파일 내부의 transferDatabase 객체를 편집하여 이 조합의 전략을 추가할 수 있습니다.</p>
+                </div>
+            `;
+        }
+        
+        const muscleNameMap = {
+            'deltoid': 'Deltoid',
+            'pec_major': 'Pectoralis major',
+            'lat_dorsi': 'Latissimus dorsi',
+            'biceps': 'Biceps',
+            'brachialis': 'Brachialis',
+            'triceps': 'Triceps',
+            'supinator': 'Supinator',
+            'pt': 'PT',
+            'br': 'BR',
+            'ecrl': 'ECRL',
+            'ecrb': 'ECRB',
+            'fcr': 'FCR',
+            'pl': 'PL',
+            'fcu': 'FCU',
+            'fds': 'FDS',
+            'fdp': 'FDP',
+            'fpl': 'FPL',
+            'pq': 'PQ',
+            'ecu': 'ECU',
+            'edc': 'EDC',
+            'edm': 'EDM',
+            'eip': 'EIP',
+            'epl': 'EPL',
+            'epb': 'EPB',
+            'apl': 'APL',
+            'thenar': 'Thenar',
+            'hypothenar': 'Hypothenar',
+            'interossei': 'Interossei',
+            'lumbricals': 'Lumbricals'
+        };
+        
+        function switchTab(tabName) {
+            const selectorTab = document.getElementById('selectorTab');
+            const databaseTab = document.getElementById('databaseTab');
+            const buttons = document.querySelectorAll('.tab-button');
+            
+            if (tabName === 'selector') {
+                selectorTab.style.display = 'grid';
+                databaseTab.style.display = 'none';
+                buttons[0].classList.add('active');
+                buttons[1].classList.remove('active');
+            } else {
+                selectorTab.style.display = 'none';
+                databaseTab.style.display = 'block';
+                buttons[0].classList.remove('active');
+                buttons[1].classList.add('active');
+                renderDatabase();
+            }
+        }
+        
+        function renderDatabase() {
+            const container = document.getElementById('databaseList');
+            const combos = transferDatabase.combinations || [];
+            
+            document.getElementById('totalCombos').textContent = combos.length;
+            
+            let html = '';
+            
+            combos.forEach((combo, index) => {
+                html += `
+                    <div class="combo-card">
+                        <div class="combo-title">
+                            <div class="combo-muscles">
+                                <h3>${index + 1}. ${combo.lost_muscles.map(m => muscleNameMap[m] || m).join(' + ')}</h3>
+                                <div class="muscle-tags">
+                                    ${combo.lost_muscles.map(m => `<span class="muscle-tag">${m.toUpperCase()}</span>`).join('')}
+                                </div>
+                            </div>
+                            <div class="combo-meta">
+                                <div class="strategy-count">${combo.strategies ? combo.strategies.length : 0}개 전략</div>
+                            </div>
+                        </div>
+                `;
+                
+                if (combo.functional_losses && combo.functional_losses.length > 0) {
+                    html += `
+                        <div class="combo-losses">
+                            <h4>손실 기능</h4>
+                            <ul>
+                                ${combo.functional_losses.map(loss => `<li>${loss}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `;
+                }
+                
+                if (combo.strategies && combo.strategies.length > 0) {
+                    html += `<div class="combo-strategies">`;
+                    combo.strategies.forEach((strat, idx) => {
+                        const priorityClass = strat.priority === 'critical' ? 'priority-critical' : 
+                                             strat.priority === 'important' ? 'priority-important' : 
+                                             'priority-optional';
+                        const priorityText = strat.priority === 'critical' ? 'Tier 1' : 
+                                            strat.priority === 'important' ? 'Tier 2' : 
+                                            'Tier 3';
+                        
+                        html += `
+                            <div class="mini-strategy">
+                                <div class="mini-strategy-header">
+                                    <span class="mini-strategy-title">${strat.title || '재건 옵션 ' + (idx + 1)}</span>
+                                    <span class="mini-priority-badge ${priorityClass}">${priorityText}</span>
+                                </div>
+                                <div class="mini-transfers">
+                        `;
+                        
+                        if (strat.transfers && strat.transfers.length > 0) {
+                            strat.transfers.forEach(transfer => {
+                                html += `• ${transfer.donor} → ${transfer.recipient} (${transfer.function})<br>`;
+                            });
+                        }
+                        
+                        html += `</div>`;
+                        
+                        if (strat.notes) {
+                            html += `<div style="margin-top: 8px; font-size: 12px; color: #0d47a1;">💡 ${strat.notes}</div>`;
+                        }
+                        
+                        html += `</div>`;
+                    });
+                    html += `</div>`;
+                }
+                
+                if (combo.clinical_notes) {
+                    html += `
+                        <div class="combo-clinical">
+                            <strong>임상 메모</strong>
+                            ${combo.clinical_notes}
+                        </div>
+                    `;
+                }
+                
+                html += `</div>`;
+            });
+            
+            container.innerHTML = html;
+        }
+    </script>
+</body>
+</html>
