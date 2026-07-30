@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>수도권 전시 현황 — 돌마로 컴퍼니</title>
-<meta name="description" content="수도권 주요 미술관 15곳의 현재 전시를 한 페이지에서. 매주 갱신.">
+<title>미술관 현황 — 돌마로 컴퍼니</title>
+<meta name="description" content="수도권 미술관 17곳의 지금 볼 수 있는 전시. 매주 갱신.">
 <meta name="robots" content="noindex">
 <style>
 *,*::before,*::after{box-sizing:border-box}
 :root{
-  --paper:#edede a;--paper:#ededea;--card:#f7f7f5;--ink:#141416;--ink-soft:#5f5f62;
+  --paper:#ededea;--card:#f7f7f5;--ink:#141416;--ink-soft:#5f5f62;
   --ink-faint:#8e8e90;--rule:#d5d5cf;--rule-soft:#e4e4df;
   --brick:#b0362a;--blue:#39528f;--go:#3d6b4a;
   --sans:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;
@@ -25,7 +25,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
   line-height:1.6;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1180px;margin:0 auto;padding:32px 20px 80px}
 
-header{border-bottom:1px solid var(--ink);padding-bottom:18px;margin-bottom:0}
+header{border-bottom:1px solid var(--ink);padding-bottom:18px}
 .kicker{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
   color:var(--ink-faint);margin:0 0 10px}
 h1{font-size:clamp(26px,4.5vw,42px);font-weight:800;letter-spacing:-.03em;margin:0;text-wrap:balance}
@@ -53,8 +53,16 @@ article{display:flex;flex-direction:column;background:var(--card);
   border:1px solid var(--rule-soft);border-radius:2px;overflow:hidden}
 article.hide{display:none}
 
-.poster{position:relative;aspect-ratio:3/4;background:var(--rule-soft);overflow:hidden}
-.poster img{width:100%;height:100%;object-fit:cover;display:block}
+.poster{position:relative;display:block;aspect-ratio:3/4;background:var(--rule-soft);
+  overflow:hidden;text-decoration:none;color:inherit}
+.poster img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease}
+a.poster:hover img{transform:scale(1.04)}
+a.poster:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+.veil{position:absolute;inset:auto 0 0 0;padding:26px 12px 10px;
+  background:linear-gradient(transparent,rgba(0,0,0,.72));
+  color:#fff;font-size:11.5px;font-weight:650;letter-spacing:.02em;
+  opacity:0;transition:opacity .2s ease;pointer-events:none}
+a.poster:hover .veil,a.poster:focus-visible .veil{opacity:1}
 .fallback{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;
   padding:18px;background:var(--ink);color:var(--paper)}
 .fallback .fm{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;opacity:.7}
@@ -66,8 +74,8 @@ article.hide{display:none}
   color:var(--ink);border:1px solid var(--ink)}
 .pill.soon{background:var(--brick);color:#fff;border-color:var(--brick)}
 .pill.next{background:var(--blue);color:#fff;border-color:var(--blue)}
-.pill.perm{background:transparent;color:var(--ink-faint);border-color:var(--ink-faint)}
-article[data-status="상설"]{opacity:.82}
+.pill.perm{background:var(--paper);color:var(--ink-faint);border-color:var(--ink-faint)}
+article[data-status="상설"]{opacity:.84}
 article[data-status="상설"]:hover{opacity:1}
 
 .body{padding:15px 16px 17px;display:flex;flex-direction:column;gap:8px;flex:1}
@@ -84,11 +92,27 @@ a.go{margin-top:4px;display:inline-block;font-size:12.5px;font-weight:650;color:
   text-decoration:none;border-bottom:1.5px solid var(--ink);padding-bottom:1px;align-self:flex-start}
 a.go:hover{color:var(--brick);border-color:var(--brick)}
 a.go:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
-
 .empty{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--ink-faint);font-size:14px}
-footer{margin-top:54px;padding-top:18px;border-top:1px solid var(--rule);
+
+/* ── 미술관 목록 ───────────────────────── */
+.sources{margin-top:64px;border-top:1px solid var(--ink);padding-top:22px}
+.sources h2{font-size:20px;font-weight:800;letter-spacing:-.02em;margin:0 0 4px}
+.sources .lede{color:var(--ink-soft);font-size:13px;margin:0 0 20px;max-width:62ch}
+.mgroup{margin-bottom:22px}
+.mgroup h3{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-faint);font-weight:500;margin:0 0 8px;padding-bottom:6px;
+  border-bottom:1px solid var(--rule-soft);display:flex;justify-content:space-between}
+.mlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:2px 20px}
+.mrow{display:flex;align-items:baseline;gap:8px;padding:5px 0;font-size:13px}
+.mrow a{color:var(--ink);font-weight:650;text-decoration:none;border-bottom:1px solid var(--rule)}
+.mrow a:hover{color:var(--brick);border-color:var(--brick)}
+.mrow .ma{color:var(--ink-faint);font-size:11.5px}
+.mrow .mc{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--ink-soft);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+.mrow .mc.zero{color:var(--ink-faint);opacity:.55}
+
+footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--rule);
   font-size:12px;color:var(--ink-faint);line-height:1.9}
-footer a{color:var(--ink-soft)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -96,60 +120,28 @@ footer a{color:var(--ink-soft)}
 <div class="wrap">
 <header>
   <p class="kicker">Dolmaro Company · 취미문화팀 × 가족나들이팀</p>
-  <h1>수도권 전시 현황</h1>
-  <p class="sub">분당에서 갈 만한 미술관 15곳의 지금 볼 수 있는 전시입니다. 종료가 임박한 것부터 위에 놓았습니다.</p>
+  <h1>미술관 현황</h1>
+  <p class="sub">분당에서 갈 만한 미술관 17곳의 지금 볼 수 있는 전시입니다. 종료가 임박한 것부터 위에 놓았고, 포스터를 누르면 공식 페이지로 넘어갑니다.</p>
   <div class="stamp">
     <span>갱신 2026-07-30</span>
-    <span>58건</span>
+    <span>미술관 17곳</span>
+    <span>전시 58건</span>
     <span>주 1회 갱신</span>
   </div>
 </header>
 
 <div class="bar">
-  <div class="group"><b>권역</b><button class="f" data-k="region" data-v="전체" aria-pressed="true">전체</button><button class="f" data-k="region" data-v="경기남부" aria-pressed="false">경기남부</button><button class="f" data-k="region" data-v="서울·과천" aria-pressed="false">서울·과천</button><button class="f" data-k="region" data-v="경기서부" aria-pressed="false">경기서부</button></div>
+  <div class="group"><b>권역</b><button class="f" data-k="region" data-v="전체" aria-pressed="true">전체</button><button class="f" data-k="region" data-v="분당" aria-pressed="false">분당</button><button class="f" data-k="region" data-v="경기남부" aria-pressed="false">경기남부</button><button class="f" data-k="region" data-v="과천" aria-pressed="false">과천</button><button class="f" data-k="region" data-v="서울 남부" aria-pressed="false">서울 남부</button><button class="f" data-k="region" data-v="서울 북부" aria-pressed="false">서울 북부</button><button class="f" data-k="region" data-v="경기서부" aria-pressed="false">경기서부</button><button class="f" data-k="region" data-v="고양" aria-pressed="false">고양</button></div>
   <div class="group"><b>상태</b><button class="f" data-k="status" data-v="전체" aria-pressed="true">전체</button><button class="f" data-k="status" data-v="곧종료" aria-pressed="false">곧종료</button><button class="f" data-k="status" data-v="진행중" aria-pressed="false">진행중</button><button class="f" data-k="status" data-v="예정" aria-pressed="false">예정</button><button class="f" data-k="status" data-v="상설" aria-pressed="false">상설</button></div>
   <div class="group"><button class="f" data-k="free" data-v="1" aria-pressed="false">무료만</button></div>
   <span class="count" id="count">58건</span>
 </div>
 
 <div class="grid">
-<article data-region="서울·과천" data-status="곧종료" data-free="1">
-  <div class="poster"><img src="https://image-apma.amorepacific.com/upload/exhibition/w/1774429396655_x0Xx97sKKe_Cropped.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">아모레퍼시픽미술관</span><span class="ft">APMA, CHAPTER FIVE — 소장품전</span><span class="fn">포스터 이미지 없음</span></div><span class="pill soon">곧종료 D-3</span></div>
+<article data-region="경기남부" data-status="곧종료" data-free="1">
+  <a class="poster" href="https://suma.suwon.go.kr/exhi/current_view.do?lang=ko&amp;ge_idx=1264" target="_blank" rel="noreferrer" aria-label="하나 쌓고, 하나 빼-기 공식 페이지 열기"><img src="https://suma.suwon.go.kr/upfilePath/bd/EXHI_202603310706298040.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">수원시립미술관</span><span class="ft">하나 쌓고, 하나 빼-기</span><span class="fn">포스터 이미지 없음</span></div><span class="pill soon">곧종료 D-3</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>아모레퍼시픽미술관</span><span>서울·과천</span></div>
-    <h2>APMA, CHAPTER FIVE — 소장품전</h2>
-    <div class="period">2026-04-01 ~ 2026-08-02</div>
-    <p class="summary">1층 로비와 지하 1층 전시실에 걸쳐 국내외 작가 40여 명의 회화·사진·조각·설치 80여 점을 선보입니다. 데이비드 호크니, 키키 스미스, 백남준, 이불, 이우환, 구본창 등이 포함되고 1970~80년대 단색화와 실험미술도 다룹니다. 백남준 〈KON-TIKI〉는 보존을 위해 10:30~12:30, 13:30~17:40에만 가동됩니다.</p>
-    <div class="facts"><span class="fact free">성인 13,000원 · 만 6세 이하 무료</span><span class="fact">휴관 월요일</span><span class="fact">~50분</span><span class="fact kid">유아 · 만 6세 이하 무료, 1층에서 유모차 무료 대여(수량 한정), 2층 수유실. 온라인 사전 예약 필수</span></div>
-    <a class="go" href="https://apma.amorepacific.com/contents/exhibition/3858007/view.do" target="_blank" rel="noreferrer">공식 페이지 →</a>
-  </div>
-</article>
-<article data-region="서울·과천" data-status="곧종료" data-free="1">
-  <div class="poster"><img src="https://www.mmca.go.kr/upload/exhibition/2026/07/2026071310263892514906.png" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 서울</span><span class="ft">장 클로드 루소 — 서울국제실험영화페스티벌 엑스레트로</span><span class="fn">포스터 이미지 없음</span></div><span class="pill soon">곧종료 D-3</span></div>
-  <div class="body">
-    <div class="museum"><span>국립현대미술관 서울</span><span>서울·과천</span></div>
-    <h2>장 클로드 루소 — 서울국제실험영화페스티벌 엑스레트로</h2>
-    <div class="period">2026-07-24 ~ 2026-08-02</div>
-    <p class="summary">프랑스 실험영화 감독 장 클로드 루소의 국내 최대 규모 회고 상영으로, 지하1층 MMCA영상관에서 무료로 진행됩니다.</p>
-    <div class="facts"><span class="fact free">무료</span><span class="fact">휴관 1월 1일·설·추석 당일</span><span class="fact">~60분</span></div>
-    <a class="go" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202607130002082" target="_blank" rel="noreferrer">공식 페이지 →</a>
-  </div>
-</article>
-<article data-region="서울·과천" data-status="곧종료" data-free="1">
-  <div class="poster"><img src="https://craftmuseum.seoul.go.kr/common/exhibition/filedown?idx=1925" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">서울공예박물관</span><span class="ft">색유만개 — 권순형 기증특별전</span><span class="fn">포스터 이미지 없음</span></div><span class="pill soon">곧종료 D-3</span></div>
-  <div class="body">
-    <div class="museum"><span>서울공예박물관</span><span>서울·과천</span></div>
-    <h2>색유만개 — 권순형 기증특별전</h2>
-    <div class="period">2026-05-12 ~ 2026-08-02</div>
-    <p class="summary">한국 현대 도예 1세대 권순형 유족이 기증한 작품·자료 약 7,703점을 바탕으로 한 기증특별전입니다. 단색 위주의 전통 도자를 벗어나 유약의 색으로 자연 현상과 내면을 표현한 60여 년 작업을 정리했습니다.</p>
-    <div class="facts"><span class="fact free">무료</span><span class="fact">휴관 월요일(공휴일이면 개관)</span><span class="fact">~60분</span><span class="fact kid">유아 · 1층 로비 개방형이라 유모차 접근 쉽고 예약 불필요</span></div>
-    <a class="go" href="https://craftmuseum.seoul.go.kr/exhibit/plan/view/185" target="_blank" rel="noreferrer">공식 페이지 →</a>
-  </div>
-</article>
-<article data-region="경기서부" data-status="곧종료" data-free="1">
-  <div class="poster"><img src="https://suma.suwon.go.kr/upfilePath/bd/EXHI_202603310706298040.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">수원시립미술관</span><span class="ft">하나 쌓고, 하나 빼-기</span><span class="fn">포스터 이미지 없음</span></div><span class="pill soon">곧종료 D-3</span></div>
-  <div class="body">
-    <div class="museum"><span>수원시립미술관</span><span>경기서부</span></div>
+    <div class="museum"><span>수원시립미술관</span><span>경기남부</span></div>
     <h2>하나 쌓고, 하나 빼-기</h2>
     <div class="period">2026-04-07 ~ 2026-08-02</div>
     <p class="summary">수원시립아트스페이스광교의 교육체험전으로, 예술가의 창작 방식을 &#x27;더하기&#x27;와 &#x27;빼기&#x27;라는 놀이 규칙에 빗대 구성했습니다. 노상호·로와정·뭎·박미나·엄정순이 참여하고 마지막은 관람객이 직접 움직이는 공간 설치로 마무리됩니다.</p>
@@ -157,10 +149,43 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://suma.suwon.go.kr/exhi/current_view.do?lang=ko&amp;ge_idx=1264" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="경기남부" data-status="곧종료" data-free="1">
-  <div class="poster"><img src="https://www.snart.or.kr/other/editor/process.file.do?TP=dn&amp;p=ib89rrCBNpRF1i1OmSVdAQ%3D%3D&amp;n=P0OqFGJDbCR%2F87omcBQ0PQdupXqn03I%2FeadnMeHObOvNtCIPKygojt1EHtsV90%2FX" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">성남큐브미술관</span><span class="ft">아트 마켓 in 큐브</span><span class="fn">포스터 이미지 없음</span></div><span class="pill soon">곧종료 D-10</span></div>
+<article data-region="서울 북부" data-status="곧종료" data-free="1">
+  <a class="poster" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202607130002082" target="_blank" rel="noreferrer" aria-label="장 클로드 루소 — 서울국제실험영화페스티벌 엑스레트로 공식 페이지 열기"><img src="https://www.mmca.go.kr/upload/exhibition/2026/07/2026071310263892514906.png" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 서울</span><span class="ft">장 클로드 루소 — 서울국제실험영화페스티벌 엑스레트로</span><span class="fn">포스터 이미지 없음</span></div><span class="pill soon">곧종료 D-3</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>성남큐브미술관</span><span>경기남부</span></div>
+    <div class="museum"><span>국립현대미술관 서울</span><span>서울 북부</span></div>
+    <h2>장 클로드 루소 — 서울국제실험영화페스티벌 엑스레트로</h2>
+    <div class="period">2026-07-24 ~ 2026-08-02</div>
+    <p class="summary">프랑스 실험영화 감독 장 클로드 루소의 국내 최대 규모 회고 상영으로, 지하1층 MMCA영상관에서 무료로 진행됩니다.</p>
+    <div class="facts"><span class="fact free">무료</span><span class="fact">휴관 1월 1일·설·추석 당일</span><span class="fact">~60분</span></div>
+    <a class="go" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202607130002082" target="_blank" rel="noreferrer">공식 페이지 →</a>
+  </div>
+</article>
+<article data-region="서울 북부" data-status="곧종료" data-free="1">
+  <a class="poster" href="https://craftmuseum.seoul.go.kr/exhibit/plan/view/185" target="_blank" rel="noreferrer" aria-label="색유만개 — 권순형 기증특별전 공식 페이지 열기"><img src="https://craftmuseum.seoul.go.kr/common/exhibition/filedown?idx=1925" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">서울공예박물관</span><span class="ft">색유만개 — 권순형 기증특별전</span><span class="fn">포스터 이미지 없음</span></div><span class="pill soon">곧종료 D-3</span><span class="veil">공식 페이지 열기 →</span></a>
+  <div class="body">
+    <div class="museum"><span>서울공예박물관</span><span>서울 북부</span></div>
+    <h2>색유만개 — 권순형 기증특별전</h2>
+    <div class="period">2026-05-12 ~ 2026-08-02</div>
+    <p class="summary">한국 현대 도예 1세대 권순형 유족이 기증한 작품·자료 약 7,703점을 바탕으로 한 기증특별전입니다. 단색 위주의 전통 도자를 벗어나 유약의 색으로 자연 현상과 내면을 표현한 60여 년 작업을 정리했습니다.</p>
+    <div class="facts"><span class="fact free">무료</span><span class="fact">휴관 월요일(공휴일이면 개관)</span><span class="fact">~60분</span><span class="fact kid">유아 · 1층 로비 개방형이라 유모차 접근 쉽고 예약 불필요</span></div>
+    <a class="go" href="https://craftmuseum.seoul.go.kr/exhibit/plan/view/185" target="_blank" rel="noreferrer">공식 페이지 →</a>
+  </div>
+</article>
+<article data-region="서울 북부" data-status="곧종료" data-free="1">
+  <a class="poster" href="https://apma.amorepacific.com/contents/exhibition/3858007/view.do" target="_blank" rel="noreferrer" aria-label="APMA, CHAPTER FIVE — 소장품전 공식 페이지 열기"><img src="https://image-apma.amorepacific.com/upload/exhibition/w/1774429396655_x0Xx97sKKe_Cropped.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">아모레퍼시픽미술관</span><span class="ft">APMA, CHAPTER FIVE — 소장품전</span><span class="fn">포스터 이미지 없음</span></div><span class="pill soon">곧종료 D-3</span><span class="veil">공식 페이지 열기 →</span></a>
+  <div class="body">
+    <div class="museum"><span>아모레퍼시픽미술관</span><span>서울 북부</span></div>
+    <h2>APMA, CHAPTER FIVE — 소장품전</h2>
+    <div class="period">2026-04-01 ~ 2026-08-02</div>
+    <p class="summary">1층 로비와 지하 1층 전시실에 걸쳐 국내외 작가 40여 명의 회화·사진·조각·설치 80여 점을 선보입니다. 데이비드 호크니, 키키 스미스, 백남준, 이불, 이우환, 구본창 등이 포함되고 1970~80년대 단색화와 실험미술도 다룹니다. 백남준 〈KON-TIKI〉는 보존을 위해 10:30~12:30, 13:30~17:40에만 가동됩니다.</p>
+    <div class="facts"><span class="fact free">성인 13,000원 · 만 6세 이하 무료</span><span class="fact">휴관 월요일</span><span class="fact">~50분</span><span class="fact kid">유아 · 만 6세 이하 무료, 1층에서 유모차 무료 대여(수량 한정), 2층 수유실. 온라인 사전 예약 필수</span></div>
+    <a class="go" href="https://apma.amorepacific.com/contents/exhibition/3858007/view.do" target="_blank" rel="noreferrer">공식 페이지 →</a>
+  </div>
+</article>
+<article data-region="분당" data-status="곧종료" data-free="1">
+  <a class="poster" href="https://www.snart.or.kr/main/prex/exhibit/view.do?prfr_exhb_sn=100325" target="_blank" rel="noreferrer" aria-label="아트 마켓 in 큐브 공식 페이지 열기"><img src="https://www.snart.or.kr/other/editor/process.file.do?TP=dn&amp;p=ib89rrCBNpRF1i1OmSVdAQ%3D%3D&amp;n=P0OqFGJDbCR%2F87omcBQ0PQdupXqn03I%2FeadnMeHObOvNtCIPKygojt1EHtsV90%2FX" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">성남큐브미술관</span><span class="ft">아트 마켓 in 큐브</span><span class="fn">포스터 이미지 없음</span></div><span class="pill soon">곧종료 D-10</span><span class="veil">공식 페이지 열기 →</span></a>
+  <div class="body">
+    <div class="museum"><span>성남큐브미술관</span><span>분당</span></div>
     <h2>아트 마켓 in 큐브</h2>
     <div class="period">2026-07-24 ~ 2026-08-09</div>
     <p class="summary">반달갤러리에서 열리는 아트 마켓 형식의 전시로, 작품을 보면서 구매도 할 수 있게 구성됐습니다. 전체관람가이며 무료입니다.</p>
@@ -168,10 +193,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://www.snart.or.kr/main/prex/exhibit/view.do?prfr_exhb_sn=100325" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="곧종료" data-free="1">
-  <div class="poster"><img src="https://www.museum.go.kr/afile/previewThumbnail/fileMng_MUSEUM26072004505KfqVs?siteCode=MUSEUM" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립중앙박물관</span><span class="ft">단원 김홍도, 시대를 그리다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill soon">곧종료 D-10</span></div>
+<article data-region="서울 북부" data-status="곧종료" data-free="1">
+  <a class="poster" href="https://www.museum.go.kr/MUSEUM/contents/M0202010000.do?menuId=current&amp;schM=view&amp;act=current&amp;exhiSpThemId=3515965&amp;listType=list" target="_blank" rel="noreferrer" aria-label="단원 김홍도, 시대를 그리다 공식 페이지 열기"><img src="https://www.museum.go.kr/afile/previewThumbnail/fileMng_MUSEUM26072004505KfqVs?siteCode=MUSEUM" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립중앙박물관</span><span class="ft">단원 김홍도, 시대를 그리다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill soon">곧종료 D-10</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>국립중앙박물관</span><span>서울·과천</span></div>
+    <div class="museum"><span>국립중앙박물관</span><span>서울 북부</span></div>
     <h2>단원 김홍도, 시대를 그리다</h2>
     <div class="period">2026-05-04 ~ 2026-08-09</div>
     <p class="summary">김홍도의 작품 세계를 정리한 테마전으로 《단원풍속도첩》과 함께 〈기로세련계도〉·〈총석정도〉·〈노매도〉 등 후기작을 선보입니다. 산수·화조·초상에 걸친 화역과 서양 화법 수용까지의 변화를 확인할 수 있습니다.</p>
@@ -179,10 +204,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://www.museum.go.kr/MUSEUM/contents/M0202010000.do?menuId=current&amp;schM=view&amp;act=current&amp;exhiSpThemId=3515965&amp;listType=list" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="진행중" data-free="1">
-  <div class="poster"><img src="https://www.leeumhoam.org/upload/banner/1775548471823_o_thumb.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">리움미술관</span><span class="ft">가브리엘 오로즈코 정원</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+<article data-region="서울 북부" data-status="진행중" data-free="1">
+  <a class="poster" href="https://www.leeumhoam.org/leeum/exhibition/97" target="_blank" rel="noreferrer" aria-label="가브리엘 오로즈코 정원 공식 페이지 열기"><img src="https://www.leeumhoam.org/upload/banner/1775548471823_o_thumb.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">리움미술관</span><span class="ft">가브리엘 오로즈코 정원</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>리움미술관</span><span>서울·과천</span></div>
+    <div class="museum"><span>리움미술관</span><span>서울 북부</span></div>
     <h2>가브리엘 오로즈코 정원</h2>
     <div class="period">2026-04-03 ~ 미확인</div>
     <p class="summary">멕시코 작가 가브리엘 오로즈코가 리움 야외 데크를 위해 구상한 장소특정적 정원입니다. 약 500평 데크에 &#x27;원의 배열&#x27; 기하 패턴이 열 개의 연속 공간을 이루고, 바닥은 충남 보령석을 맞춤 가공했습니다. 소나무 17주·매화 11주·대나무 약 1,500주가 심겼습니다.</p>
@@ -190,10 +215,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://www.leeumhoam.org/leeum/exhibition/97" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="진행중" data-free="0">
-  <div class="poster"><img src="https://www.sac.or.kr/site/main/file/thumbnail/uu/39c659b3cfcb4afa897fca9e8f454f72" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">예술의전당 한가람미술관</span><span class="ft">페르난도 보테로: 형태의 미학</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+<article data-region="서울 남부" data-status="진행중" data-free="0">
+  <a class="poster" href="https://www.sac.or.kr/site/main/show/show_view?SN=76470" target="_blank" rel="noreferrer" aria-label="페르난도 보테로: 형태의 미학 공식 페이지 열기"><img src="https://www.sac.or.kr/site/main/file/thumbnail/uu/39c659b3cfcb4afa897fca9e8f454f72" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">예술의전당 한가람미술관</span><span class="ft">페르난도 보테로: 형태의 미학</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>예술의전당 한가람미술관</span><span>서울·과천</span></div>
+    <div class="museum"><span>예술의전당 한가람미술관</span><span>서울 남부</span></div>
     <h2>페르난도 보테로: 형태의 미학</h2>
     <div class="period">2026-04-24 ~ 2026-08-30</div>
     <p class="summary">콜롬비아 작가 페르난도 보테로를 소개하는 전시로 한가람디자인미술관 1층 제1~3전시실에서 열립니다. 부피감과 충만함을 강조한 보테로 특유의 형태 언어가 중심입니다.</p>
@@ -201,10 +226,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://www.sac.or.kr/site/main/show/show_view?SN=76470" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="진행중" data-free="1">
-  <div class="poster"><img src="https://www.mmca.go.kr/upload/exhibition/2026/04/2026041708544348811937.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 서울</span><span class="ft">그래도 해보던 날들</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+<article data-region="서울 북부" data-status="진행중" data-free="1">
+  <a class="poster" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202603300002070" target="_blank" rel="noreferrer" aria-label="그래도 해보던 날들 공식 페이지 열기"><img src="https://www.mmca.go.kr/upload/exhibition/2026/04/2026041708544348811937.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 서울</span><span class="ft">그래도 해보던 날들</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>국립현대미술관 서울</span><span>서울·과천</span></div>
+    <div class="museum"><span>국립현대미술관 서울</span><span>서울 북부</span></div>
     <h2>그래도 해보던 날들</h2>
     <div class="period">2026-04-17 ~ 2026-08-30</div>
     <p class="summary">MMCA 아이공간에서 열리는 무료 교육 전시. 만들고 실패하고 다시 시도하는 창작 과정 자체를 주제로 삼았고, 관람과 함께 상시 워크숍에 직접 참여할 수 있습니다.</p>
@@ -212,10 +237,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202603300002070" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="진행중" data-free="1">
-  <div class="poster"><img src="https://craftmuseum.seoul.go.kr/common/exhibition/filedown?idx=1971" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">서울공예박물관</span><span class="ft">공예동행@쇼윈도 #4 — 몸에 베인 기억을 묻다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+<article data-region="서울 북부" data-status="진행중" data-free="1">
+  <a class="poster" href="https://craftmuseum.seoul.go.kr/exhibit/plan/view/191" target="_blank" rel="noreferrer" aria-label="공예동행@쇼윈도 #4 — 몸에 베인 기억을 묻다 공식 페이지 열기"><img src="https://craftmuseum.seoul.go.kr/common/exhibition/filedown?idx=1971" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">서울공예박물관</span><span class="ft">공예동행@쇼윈도 #4 — 몸에 베인 기억을 묻다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>서울공예박물관</span><span>서울·과천</span></div>
+    <div class="museum"><span>서울공예박물관</span><span>서울 북부</span></div>
     <h2>공예동행@쇼윈도 #4 — 몸에 베인 기억을 묻다</h2>
     <div class="period">2026-07-22 ~ 2026-08-30</div>
     <p class="summary">전시3동 1층 쇼윈도 갤러리에서 열리는 소규모 연속 기획의 네 번째 전시입니다. 유리 너머로 보는 형태라 전시실 입장 없이 관람할 수 있습니다.</p>
@@ -223,10 +248,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://craftmuseum.seoul.go.kr/exhibit/plan/view/191" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="경기남부" data-status="진행중" data-free="1">
-  <div class="poster"><img src="https://www.snart.or.kr/other/editor/process.file.do?TP=dn&amp;p=MrkHicmkla2ofpkWa3%2FLSA%3D%3D&amp;n=4hV9%2BXndb1Ca7qQW9CJl08CbdV2lwwegfDKcb%2B5BnVbEMF3MUXDa8wBL%2F9JPONxo" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">성남큐브미술관</span><span class="ft">캐서린 번하드 특별전</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+<article data-region="분당" data-status="진행중" data-free="1">
+  <a class="poster" href="https://www.snart.or.kr/main/prex/exhibit/view.do?prfr_exhb_sn=100033" target="_blank" rel="noreferrer" aria-label="캐서린 번하드 특별전 공식 페이지 열기"><img src="https://www.snart.or.kr/other/editor/process.file.do?TP=dn&amp;p=MrkHicmkla2ofpkWa3%2FLSA%3D%3D&amp;n=4hV9%2BXndb1Ca7qQW9CJl08CbdV2lwwegfDKcb%2B5BnVbEMF3MUXDa8wBL%2F9JPONxo" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">성남큐브미술관</span><span class="ft">캐서린 번하드 특별전</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>성남큐브미술관</span><span>경기남부</span></div>
+    <div class="museum"><span>성남큐브미술관</span><span>분당</span></div>
     <h2>캐서린 번하드 특별전</h2>
     <div class="period">2026-07-03 ~ 2026-09-06</div>
     <p class="summary">미국 작가 캐서린 번하드의 국내 특별전. 만화 캐릭터와 일상 사물, 열대 모티프를 대형 캔버스에 빠른 붓질과 강한 색면으로 그려낸 회화를 기획전시실 전관에서 볼 수 있습니다. 성남큐브미술관 전시로는 드물게 유료입니다.</p>
@@ -234,10 +259,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://www.snart.or.kr/main/prex/exhibit/view.do?prfr_exhb_sn=100033" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="진행중" data-free="1">
-  <div class="poster"><img src="https://www.museum.go.kr/afile/previewThumbnail/fileMng_MUSEUM26060145592f8iim?siteCode=MUSEUM" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립중앙박물관</span><span class="ft">어메이징 타일랜드: 태국미술명품전</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+<article data-region="서울 북부" data-status="진행중" data-free="1">
+  <a class="poster" href="https://www.museum.go.kr/MUSEUM/contents/M0202010000.do?menuId=current&amp;schM=view&amp;act=current&amp;exhiSpThemId=3529711&amp;listType=list" target="_blank" rel="noreferrer" aria-label="어메이징 타일랜드: 태국미술명품전 공식 페이지 열기"><img src="https://www.museum.go.kr/afile/previewThumbnail/fileMng_MUSEUM26060145592f8iim?siteCode=MUSEUM" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립중앙박물관</span><span class="ft">어메이징 타일랜드: 태국미술명품전</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>국립중앙박물관</span><span>서울·과천</span></div>
+    <div class="museum"><span>국립중앙박물관</span><span>서울 북부</span></div>
     <h2>어메이징 타일랜드: 태국미술명품전</h2>
     <div class="period">2026-06-23 ~ 2026-09-06</div>
     <p class="summary">국내에서 처음 본격적으로 태국 문화와 미술을 소개하는 특별전으로 태국 국립기관 21곳에서 온 214건 239점을 선보입니다. 선사시대부터 20세기 중반까지의 조각·회화·공예를 다루며 수코타이 시대 &#x27;걷는 부처&#x27; 상이 대표작입니다.</p>
@@ -245,10 +270,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://www.museum.go.kr/MUSEUM/contents/M0202010000.do?menuId=current&amp;schM=view&amp;act=current&amp;exhiSpThemId=3529711&amp;listType=list" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="진행중" data-free="1">
-  <div class="poster"><img src="https://cdn.daelimmuseum.org/Program/Exhibition/List/A/202602/20260206095935668001.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">디뮤지엄</span><span class="ft">취향가옥 2 — Art in Life, Life in Art</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+<article data-region="서울 북부" data-status="진행중" data-free="1">
+  <a class="poster" href="https://www.daelimmuseum.org/exhibition/current/PRG202506050001" target="_blank" rel="noreferrer" aria-label="취향가옥 2 — Art in Life, Life in Art 공식 페이지 열기"><img src="https://cdn.daelimmuseum.org/Program/Exhibition/List/A/202602/20260206095935668001.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">디뮤지엄</span><span class="ft">취향가옥 2 — Art in Life, Life in Art</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>디뮤지엄</span><span>서울·과천</span></div>
+    <div class="museum"><span>디뮤지엄</span><span>서울 북부</span></div>
     <h2>취향가옥 2 — Art in Life, Life in Art</h2>
     <div class="period">2025-06-28 ~ 2026-09-20</div>
     <p class="summary">대림문화재단 소장품과 개인 컬렉션 약 800점을 &#x27;집&#x27;이라는 일상 공간에 배치한 전시입니다. 김창열 〈물방울〉·이우환 〈조응〉, 하종현 〈접합〉, 백남준 〈사과나무〉, 로이 리히텐슈타인 등이 층별 주택 콘셉트로 놓이고, 카우스·무라카미 다카시 수집품과 빈티지 오브제 600여 점도 공개됩니다.</p>
@@ -256,10 +281,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://www.daelimmuseum.org/exhibition/current/PRG202506050001" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="진행중" data-free="0">
-  <div class="poster"><img src="https://www.mmca.go.kr/upload/exhibition/2026/04/2026042309510917416252.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 과천</span><span class="ft">로드 무비: 1945년 이후 한·일 미술</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+<article data-region="과천" data-status="진행중" data-free="0">
+  <a class="poster" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202408210001821" target="_blank" rel="noreferrer" aria-label="로드 무비: 1945년 이후 한·일 미술 공식 페이지 열기"><img src="https://www.mmca.go.kr/upload/exhibition/2026/04/2026042309510917416252.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 과천</span><span class="ft">로드 무비: 1945년 이후 한·일 미술</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>국립현대미술관 과천</span><span>서울·과천</span></div>
+    <div class="museum"><span>국립현대미술관 과천</span><span>과천</span></div>
     <h2>로드 무비: 1945년 이후 한·일 미술</h2>
     <div class="period">2026-05-14 ~ 2026-09-27</div>
     <p class="summary">한일 국교정상화 60주년을 계기로 1945년부터 동시대까지 80년간의 한·일 미술 교류사를 조망하는 대규모 기획전입니다. 1층 전시실과 중앙홀, 조각공원까지 이어집니다.</p>
@@ -268,7 +293,7 @@ footer a{color:var(--ink-soft)}
   </div>
 </article>
 <article data-region="경기서부" data-status="진행중" data-free="1">
-  <div class="poster"><img src="https://gmoma.ggcf.kr/storage/upload/2026/06/12/c1n5k0zdtomiBke55yLovy39QmKVE3HltHxyr8mP.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">경기도미술관</span><span class="ft">우리의 여름에게</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+  <a class="poster" href="https://gmoma.ggcf.kr/exhibitions/206" target="_blank" rel="noreferrer" aria-label="우리의 여름에게 공식 페이지 열기"><img src="https://gmoma.ggcf.kr/storage/upload/2026/06/12/c1n5k0zdtomiBke55yLovy39QmKVE3HltHxyr8mP.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">경기도미술관</span><span class="ft">우리의 여름에게</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
     <div class="museum"><span>경기도미술관</span><span>경기서부</span></div>
     <h2>우리의 여름에게</h2>
@@ -278,10 +303,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://gmoma.ggcf.kr/exhibitions/206" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="진행중" data-free="1">
-  <div class="poster"><img src="https://www.sac.or.kr/site/main/file/thumbnail/uu/5ac34dee571c4aba9ee2820ad0a6dbfc" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">예술의전당 한가람미술관</span><span class="ft">스페인의 거장 고야: 이성이 잠들 때, 괴물이 깨어난다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+<article data-region="서울 남부" data-status="진행중" data-free="1">
+  <a class="poster" href="https://www.sac.or.kr/site/main/show/show_view?SN=78392" target="_blank" rel="noreferrer" aria-label="스페인의 거장 고야: 이성이 잠들 때, 괴물이 깨어난다 공식 페이지 열기"><img src="https://www.sac.or.kr/site/main/file/thumbnail/uu/5ac34dee571c4aba9ee2820ad0a6dbfc" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">예술의전당 한가람미술관</span><span class="ft">스페인의 거장 고야: 이성이 잠들 때, 괴물이 깨어난다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>예술의전당 한가람미술관</span><span>서울·과천</span></div>
+    <div class="museum"><span>예술의전당 한가람미술관</span><span>서울 남부</span></div>
     <h2>스페인의 거장 고야: 이성이 잠들 때, 괴물이 깨어난다</h2>
     <div class="period">2026-06-26 ~ 2026-09-30</div>
     <p class="summary">고야의 생애를 단독으로 조망하는 국내 최초 전시로 제7전시실(비타민스테이션)에서 열립니다. 판화 연작 &#x27;변덕&#x27;을 중심으로 궁정화가에서 어둠의 화가로 변모한 궤적을 따라갑니다. 원화가 아닌 복제 전시물 비중이 높다는 관람객 지적이 있습니다.</p>
@@ -290,7 +315,7 @@ footer a{color:var(--ink-soft)}
   </div>
 </article>
 <article data-region="경기남부" data-status="진행중" data-free="1">
-  <div class="poster"><img src="https://njp.ggcf.kr/storage/upload/2026/06/17/QEcodBQHL9l0isbM7KBwaBsIwGHcCX2IUBEExMEG.png" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">백남준아트센터</span><span class="ft">달들</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+  <a class="poster" href="https://njp.ggcf.kr/exhibitions/243" target="_blank" rel="noreferrer" aria-label="달들 공식 페이지 열기"><img src="https://njp.ggcf.kr/storage/upload/2026/06/17/QEcodBQHL9l0isbM7KBwaBsIwGHcCX2IUBEExMEG.png" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">백남준아트센터</span><span class="ft">달들</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
     <div class="museum"><span>백남준아트센터</span><span>경기남부</span></div>
     <h2>달들</h2>
@@ -300,10 +325,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://njp.ggcf.kr/exhibitions/243" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="진행중" data-free="0">
-  <div class="poster"><img src="https://www.mmca.go.kr/upload/exhibition/2026/06/2026061909003976511983.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 서울</span><span class="ft">이것은 개념미술이 (아니)다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+<article data-region="서울 북부" data-status="진행중" data-free="0">
+  <a class="poster" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202601060002027" target="_blank" rel="noreferrer" aria-label="이것은 개념미술이 (아니)다 공식 페이지 열기"><img src="https://www.mmca.go.kr/upload/exhibition/2026/06/2026061909003976511983.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 서울</span><span class="ft">이것은 개념미술이 (아니)다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>국립현대미술관 서울</span><span>서울·과천</span></div>
+    <div class="museum"><span>국립현대미술관 서울</span><span>서울 북부</span></div>
     <h2>이것은 개념미술이 (아니)다</h2>
     <div class="period">2026-06-19 ~ 2026-10-11</div>
     <p class="summary">1990년대 이후 한국 현대미술에서 개념과 언어, 과정과 맥락에 주목해온 흐름을 조명하는 연구 기반 기획전입니다. 지하1층 6·7전시실과 1층 미술관마당 야외까지 사용합니다.</p>
@@ -311,21 +336,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202601060002027" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="진행중" data-free="1">
-  <div class="poster"><img src="https://www.museum.go.kr/afile/previewThumbnail/fileMng_MUSEUM26060243693Pg9rM?siteCode=MUSEUM" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립중앙박물관</span><span class="ft">우리들의 밥상</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+<article data-region="서울 북부" data-status="진행중" data-free="1">
+  <a class="poster" href="https://sema.seoul.go.kr/kr/whatson/exhibition/detail?exNo=1529410" target="_blank" rel="noreferrer" aria-label="유영국: 산은 내 안에 있다 공식 페이지 열기"><img src="https://sema.seoul.go.kr/common/imgFileView?FILE_ID=1007678" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">서울시립미술관</span><span class="ft">유영국: 산은 내 안에 있다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>국립중앙박물관</span><span>서울·과천</span></div>
-    <h2>우리들의 밥상</h2>
-    <div class="period">2026-07-01 ~ 2026-10-25</div>
-    <p class="summary">한국인의 밥상과 음식 문화를 주제로 한 특별전으로 무령왕릉 출토 식기를 포함해 약 420점을 선보입니다. 자연에서 얻은 재료가 상차림이 되는 과정과 시대별 식생활의 변화를 다룹니다.</p>
-    <div class="facts"><span class="fact free">성인 5,000원 · 6세 이하 무료</span><span class="fact">휴관 1월 1일·설·추석 당일·9월 7일</span><span class="fact">~50분</span><span class="fact kid">유아 · 음식·식기 소재라 아이가 흥미를 갖기 쉬움</span></div>
-    <a class="go" href="https://www.museum.go.kr/MUSEUM/contents/M0202010000.do?menuId=current&amp;schM=view&amp;act=current&amp;exhiSpThemId=3529713&amp;listType=list" target="_blank" rel="noreferrer">공식 페이지 →</a>
-  </div>
-</article>
-<article data-region="서울·과천" data-status="진행중" data-free="1">
-  <div class="poster"><img src="https://sema.seoul.go.kr/common/imgFileView?FILE_ID=1007678" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">서울시립미술관</span><span class="ft">유영국: 산은 내 안에 있다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
-  <div class="body">
-    <div class="museum"><span>서울시립미술관</span><span>서울·과천</span></div>
+    <div class="museum"><span>서울시립미술관</span><span>서울 북부</span></div>
     <h2>유영국: 산은 내 안에 있다</h2>
     <div class="period">2026-05-19 ~ 2026-10-25</div>
     <p class="summary">한국 추상미술 1세대 유영국 탄생 110주년 회고전으로 미공개작을 포함한 회화·부조·사진·드로잉 약 170점을 선보입니다. 1935년 초기 추상 실험부터 만년의 산 연작까지 약 60년 화업을 다루며 서소문본관 1층 전관을 씁니다.</p>
@@ -333,8 +347,19 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://sema.seoul.go.kr/kr/whatson/exhibition/detail?exNo=1529410" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
+<article data-region="서울 북부" data-status="진행중" data-free="1">
+  <a class="poster" href="https://www.museum.go.kr/MUSEUM/contents/M0202010000.do?menuId=current&amp;schM=view&amp;act=current&amp;exhiSpThemId=3529713&amp;listType=list" target="_blank" rel="noreferrer" aria-label="우리들의 밥상 공식 페이지 열기"><img src="https://www.museum.go.kr/afile/previewThumbnail/fileMng_MUSEUM26060243693Pg9rM?siteCode=MUSEUM" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립중앙박물관</span><span class="ft">우리들의 밥상</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
+  <div class="body">
+    <div class="museum"><span>국립중앙박물관</span><span>서울 북부</span></div>
+    <h2>우리들의 밥상</h2>
+    <div class="period">2026-07-01 ~ 2026-10-25</div>
+    <p class="summary">한국인의 밥상과 음식 문화를 주제로 한 특별전으로 무령왕릉 출토 식기를 포함해 약 420점을 선보입니다. 자연에서 얻은 재료가 상차림이 되는 과정과 시대별 식생활의 변화를 다룹니다.</p>
+    <div class="facts"><span class="fact free">성인 5,000원 · 6세 이하 무료</span><span class="fact">휴관 1월 1일·설·추석 당일·9월 7일</span><span class="fact">~50분</span><span class="fact kid">유아 · 음식·식기 소재라 아이가 흥미를 갖기 쉬움</span></div>
+    <a class="go" href="https://www.museum.go.kr/MUSEUM/contents/M0202010000.do?menuId=current&amp;schM=view&amp;act=current&amp;exhiSpThemId=3529713&amp;listType=list" target="_blank" rel="noreferrer">공식 페이지 →</a>
+  </div>
+</article>
 <article data-region="경기남부" data-status="진행중" data-free="0">
-  <div class="poster"><img src="https://njp.ggcf.kr/storage/upload/2026/05/19/Svg2gUonKYyF91MrFtyEq335rjlBUsd6wSvOafT6.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">백남준아트센터</span><span class="ft">백남준의 도시: 태양에 녹아드는 바다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+  <a class="poster" href="https://njp.ggcf.kr/exhibitions/241" target="_blank" rel="noreferrer" aria-label="백남준의 도시: 태양에 녹아드는 바다 공식 페이지 열기"><img src="https://njp.ggcf.kr/storage/upload/2026/05/19/Svg2gUonKYyF91MrFtyEq335rjlBUsd6wSvOafT6.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">백남준아트센터</span><span class="ft">백남준의 도시: 태양에 녹아드는 바다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
     <div class="museum"><span>백남준아트센터</span><span>경기남부</span></div>
     <h2>백남준의 도시: 태양에 녹아드는 바다</h2>
@@ -344,10 +369,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://njp.ggcf.kr/exhibitions/241" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="경기서부" data-status="진행중" data-free="1">
-  <div class="poster"><img src="https://suma.suwon.go.kr/upfilePath/bd/EXHI_202607020717164740.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">수원시립미술관</span><span class="ft">패트리샤 피치니니: 킨쉽</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+<article data-region="경기남부" data-status="진행중" data-free="1">
+  <a class="poster" href="https://suma.suwon.go.kr/exhi/current_view.do?lang=ko&amp;ge_idx=1266" target="_blank" rel="noreferrer" aria-label="패트리샤 피치니니: 킨쉽 공식 페이지 열기"><img src="https://suma.suwon.go.kr/upfilePath/bd/EXHI_202607020717164740.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">수원시립미술관</span><span class="ft">패트리샤 피치니니: 킨쉽</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>수원시립미술관</span><span>경기서부</span></div>
+    <div class="museum"><span>수원시립미술관</span><span>경기남부</span></div>
     <h2>패트리샤 피치니니: 킨쉽</h2>
     <div class="period">2026-07-23 ~ 2026-11-01</div>
     <p class="summary">호주 현대미술가 패트리샤 피치니니의 국내 미술관 첫 개인전이자 최대 규모 전시입니다. 실리콘·섬유유리·인모로 만든 극사실 조각을 비롯해 2002년부터 2025년까지의 작업 56점을 4개 섹션으로 선보입니다.</p>
@@ -356,7 +381,7 @@ footer a{color:var(--ink-soft)}
   </div>
 </article>
 <article data-region="경기서부" data-status="진행중" data-free="1">
-  <div class="poster"><img src="https://gmoma.ggcf.kr/storage/upload/2026/04/23/CAfVHwEG7Y4OA8X5MbgW2bFD8Utx6W8vSbOo140g.gif" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">경기도미술관</span><span class="ft">눈-길</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+  <a class="poster" href="https://gmoma.ggcf.kr/exhibitions/203" target="_blank" rel="noreferrer" aria-label="눈-길 공식 페이지 열기"><img src="https://gmoma.ggcf.kr/storage/upload/2026/04/23/CAfVHwEG7Y4OA8X5MbgW2bFD8Utx6W8vSbOo140g.gif" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">경기도미술관</span><span class="ft">눈-길</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
     <div class="museum"><span>경기도미술관</span><span>경기서부</span></div>
     <h2>눈-길</h2>
@@ -366,10 +391,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://gmoma.ggcf.kr/exhibitions/203" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="진행중" data-free="1">
-  <div class="poster"><img src="https://cdn.daelimmuseum.org/Program/Exhibition/List/A/202607/20260728132150416001.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">디뮤지엄</span><span class="ft">PUBLIC ART SPACE: 김기린</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+<article data-region="서울 북부" data-status="진행중" data-free="1">
+  <a class="poster" href="https://www.daelimmuseum.org/exhibition/current/PRG202607280001" target="_blank" rel="noreferrer" aria-label="PUBLIC ART SPACE: 김기린 공식 페이지 열기"><img src="https://cdn.daelimmuseum.org/Program/Exhibition/List/A/202607/20260728132150416001.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">디뮤지엄</span><span class="ft">PUBLIC ART SPACE: 김기린</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>디뮤지엄</span><span>서울·과천</span></div>
+    <div class="museum"><span>디뮤지엄</span><span>서울 북부</span></div>
     <h2>PUBLIC ART SPACE: 김기린</h2>
     <div class="period">2026-07-27 ~ 2026-11-09</div>
     <p class="summary">대림문화재단 공공예술 프로젝트의 네 번째 전시로 한국 단색화의 선구자 김기린(1936~2021)을 소개합니다. 서울숲 디뮤지엄 M1 오픈 스페이스 벽면에 적·녹·청 색면 회화 연작이 일렬로 설치돼 빛에 따라 달라지는 색과 표면의 깊이를 보여줍니다.</p>
@@ -378,7 +403,7 @@ footer a{color:var(--ink-soft)}
   </div>
 </article>
 <article data-region="경기남부" data-status="진행중" data-free="1">
-  <div class="poster"><img src="https://njp.ggcf.kr/storage/upload/2026/07/14/52w4TlkxK3LSK0OgR2wB0zgJDYeI1jcnZVHXJkFp.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">백남준아트센터</span><span class="ft">NJP 라운지 2 — 장윤영</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+  <a class="poster" href="https://njp.ggcf.kr/exhibitions/245" target="_blank" rel="noreferrer" aria-label="NJP 라운지 2 — 장윤영 공식 페이지 열기"><img src="https://njp.ggcf.kr/storage/upload/2026/07/14/52w4TlkxK3LSK0OgR2wB0zgJDYeI1jcnZVHXJkFp.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">백남준아트센터</span><span class="ft">NJP 라운지 2 — 장윤영</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
     <div class="museum"><span>백남준아트센터</span><span>경기남부</span></div>
     <h2>NJP 라운지 2 — 장윤영</h2>
@@ -388,10 +413,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://njp.ggcf.kr/exhibitions/245" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="진행중" data-free="1">
-  <div class="poster"><img src="https://www.leeumhoam.org/upload/exhibition/1776665641522_2_IOS_%EC%A0%84%EC%8B%9C%ED%8E%98%EC%9D%B4%EC%A7%80_%EC%9B%B9%EB%B0%B0%EB%84%88_1920x1080_A.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">리움미술관</span><span class="ft">다른 공간 안으로 — 여성 작가들의 공감각적 환경 1956–1976</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+<article data-region="서울 북부" data-status="진행중" data-free="1">
+  <a class="poster" href="https://www.leeumhoam.org/leeum/exhibition/93" target="_blank" rel="noreferrer" aria-label="다른 공간 안으로 — 여성 작가들의 공감각적 환경 1956–1976 공식 페이지 열기"><img src="https://www.leeumhoam.org/upload/exhibition/1776665641522_2_IOS_%EC%A0%84%EC%8B%9C%ED%8E%98%EC%9D%B4%EC%A7%80_%EC%9B%B9%EB%B0%B0%EB%84%88_1920x1080_A.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">리움미술관</span><span class="ft">다른 공간 안으로 — 여성 작가들의 공감각적 환경 1956–1976</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>리움미술관</span><span>서울·과천</span></div>
+    <div class="museum"><span>리움미술관</span><span>서울 북부</span></div>
     <h2>다른 공간 안으로 — 여성 작가들의 공감각적 환경 1956–1976</h2>
     <div class="period">2026-05-05 ~ 2026-11-29</div>
     <p class="summary">1956~1976년 아시아·유럽·남북미에서 &#x27;환경&#x27; 작업을 선보인 여성 작가 11인(주디 시카고, 리지아 클라크, 정강자, 야마자키 츠루코 등)의 작품 11점을 재제작·복원해 모았습니다. 깃털로 가득 찬 방, 무지갯빛 나일론 터널, 형광 빛의 방처럼 직접 걸어 들어가는 몰입형 설치가 중심입니다.</p>
@@ -399,10 +424,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://www.leeumhoam.org/leeum/exhibition/93" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="진행중" data-free="0">
-  <div class="poster"><img src="https://www.mmca.go.kr/upload/exhibition/2026/05/2026052703455452911945.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 서울</span><span class="ft">올해의 작가상 2026</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+<article data-region="서울 북부" data-status="진행중" data-free="0">
+  <a class="poster" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202512310002018" target="_blank" rel="noreferrer" aria-label="올해의 작가상 2026 공식 페이지 열기"><img src="https://www.mmca.go.kr/upload/exhibition/2026/05/2026052703455452911945.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 서울</span><span class="ft">올해의 작가상 2026</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>국립현대미술관 서울</span><span>서울·과천</span></div>
+    <div class="museum"><span>국립현대미술관 서울</span><span>서울 북부</span></div>
     <h2>올해의 작가상 2026</h2>
     <div class="period">2026-07-24 ~ 2026-12-06</div>
     <p class="summary">국립현대미술관과 SBS문화재단이 공동 주최하는 연례 수상 후보전. 선정 작가 4인의 신작과 대표작을 1층과 지하1층에 나누어, 각 작가별 개인전 형식으로 구성했습니다.</p>
@@ -410,10 +435,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202512310002018" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="진행중" data-free="0">
-  <div class="poster"><img src="https://www.mmca.go.kr/upload/exhibition/2026/02/202602240525316751730.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 서울</span><span class="ft">MMCA 다원예술 2026: 탐정의 시간</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+<article data-region="서울 북부" data-status="진행중" data-free="0">
+  <a class="poster" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202601060002024" target="_blank" rel="noreferrer" aria-label="MMCA 다원예술 2026: 탐정의 시간 공식 페이지 열기"><img src="https://www.mmca.go.kr/upload/exhibition/2026/02/202602240525316751730.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 서울</span><span class="ft">MMCA 다원예술 2026: 탐정의 시간</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>국립현대미술관 서울</span><span>서울·과천</span></div>
+    <div class="museum"><span>국립현대미술관 서울</span><span>서울 북부</span></div>
     <h2>MMCA 다원예술 2026: 탐정의 시간</h2>
     <div class="period">2026-04-01 ~ 2026-12-06</div>
     <p class="summary">지하1층 다원공간에서 연중 이어지는 공연·퍼포먼스 프로젝트입니다. 상설 전시가 아니라 회차별 프로그램이 순차 진행되므로 방문 전 일정 확인이 필요합니다.</p>
@@ -421,10 +446,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202601060002024" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="진행중" data-free="1">
-  <div class="poster"><img src="https://craftmuseum.seoul.go.kr/common/exhibition/filedown?idx=1722" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">서울공예박물관</span><span class="ft">漆 — 옻나무에서 칠기로</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+<article data-region="서울 북부" data-status="진행중" data-free="1">
+  <a class="poster" href="https://craftmuseum.seoul.go.kr/exhibit/plan/view/161" target="_blank" rel="noreferrer" aria-label="漆 — 옻나무에서 칠기로 공식 페이지 열기"><img src="https://craftmuseum.seoul.go.kr/common/exhibition/filedown?idx=1722" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">서울공예박물관</span><span class="ft">漆 — 옻나무에서 칠기로</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>서울공예박물관</span><span>서울·과천</span></div>
+    <div class="museum"><span>서울공예박물관</span><span>서울 북부</span></div>
     <h2>漆 — 옻나무에서 칠기로</h2>
     <div class="period">2025-06-27 ~ 2026-12-31</div>
     <p class="summary">옻칠을 재료와 기술의 관점에서 다루는 공예아카이브실 전시입니다. 옻나무 수액 채취부터 완성된 칠기까지의 과정을 자료와 실물로 보여주고, 전국 옻칠 생산지 조사로 제작한 이동형 전시상자도 함께 전시합니다.</p>
@@ -432,10 +457,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://craftmuseum.seoul.go.kr/exhibit/plan/view/161" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="진행중" data-free="0">
-  <div class="poster"><img src="https://www.mmca.go.kr/upload/exhibition/2025/09/2025091801482535419636.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 과천</span><span class="ft">MMCA 해외 명작: 수련과 샹들리에</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+<article data-region="과천" data-status="진행중" data-free="0">
+  <a class="poster" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202508210001995" target="_blank" rel="noreferrer" aria-label="MMCA 해외 명작: 수련과 샹들리에 공식 페이지 열기"><img src="https://www.mmca.go.kr/upload/exhibition/2025/09/2025091801482535419636.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 과천</span><span class="ft">MMCA 해외 명작: 수련과 샹들리에</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>국립현대미술관 과천</span><span>서울·과천</span></div>
+    <div class="museum"><span>국립현대미술관 과천</span><span>과천</span></div>
     <h2>MMCA 해외 명작: 수련과 샹들리에</h2>
     <div class="period">2025-10-02 ~ 2027-01-03</div>
     <p class="summary">국립현대미술관 소장 해외 명작을 소개하는 상설 성격의 전시로 1층 1원형전시실에서 열립니다. 모네의 수련 연작 등이 중심입니다.</p>
@@ -443,10 +468,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202508210001995" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="진행중" data-free="1">
-  <div class="poster"><img src="https://www.museum.go.kr/afile/previewThumbnail/fileMng_MUSEUM26062339012CK3hw?siteCode=MUSEUM" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립중앙박물관</span><span class="ft">사계절 푸른 대나무, 도자기에 담다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+<article data-region="서울 북부" data-status="진행중" data-free="1">
+  <a class="poster" href="https://www.museum.go.kr/MUSEUM/contents/M0202010000.do?menuId=current&amp;schM=view&amp;act=current&amp;exhiSpThemId=3588283&amp;listType=list" target="_blank" rel="noreferrer" aria-label="사계절 푸른 대나무, 도자기에 담다 공식 페이지 열기"><img src="https://www.museum.go.kr/afile/previewThumbnail/fileMng_MUSEUM26062339012CK3hw?siteCode=MUSEUM" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립중앙박물관</span><span class="ft">사계절 푸른 대나무, 도자기에 담다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>국립중앙박물관</span><span>서울·과천</span></div>
+    <div class="museum"><span>국립중앙박물관</span><span>서울 북부</span></div>
     <h2>사계절 푸른 대나무, 도자기에 담다</h2>
     <div class="period">2026-06-23 ~ 2027-01-31</div>
     <p class="summary">대나무를 소재로 삼은 조선시대 도자기 16점을 모은 소규모 주제전시입니다. 15~19세기에 걸쳐 그림으로 그려지거나 형태로 조형된 대나무 표현을 비교해 볼 수 있습니다.</p>
@@ -455,7 +480,7 @@ footer a{color:var(--ink-soft)}
   </div>
 </article>
 <article data-region="경기남부" data-status="진행중" data-free="1">
-  <div class="poster"><img src="https://njp.ggcf.kr/storage/upload/2026/06/19/8tqXC8gCBCmSgwhAIleMl1IR2aYEN9rdpje7CibI.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">백남준아트센터</span><span class="ft">별, 괘卦</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+  <a class="poster" href="https://njp.ggcf.kr/exhibitions/244" target="_blank" rel="noreferrer" aria-label="별, 괘卦 공식 페이지 열기"><img src="https://njp.ggcf.kr/storage/upload/2026/06/19/8tqXC8gCBCmSgwhAIleMl1IR2aYEN9rdpje7CibI.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">백남준아트센터</span><span class="ft">별, 괘卦</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
     <div class="museum"><span>백남준아트센터</span><span>경기남부</span></div>
     <h2>별, 괘卦</h2>
@@ -465,10 +490,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://njp.ggcf.kr/exhibitions/244" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="진행중" data-free="1">
-  <div class="poster"><img src="https://www.mmca.go.kr/upload/exhibition/2026/03/202603250437045951550.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 과천</span><span class="ft">오~감각미술관</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+<article data-region="과천" data-status="진행중" data-free="1">
+  <a class="poster" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202603240002068" target="_blank" rel="noreferrer" aria-label="오~감각미술관 공식 페이지 열기"><img src="https://www.mmca.go.kr/upload/exhibition/2026/03/202603250437045951550.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 과천</span><span class="ft">오~감각미술관</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>국립현대미술관 과천</span><span>서울·과천</span></div>
+    <div class="museum"><span>국립현대미술관 과천</span><span>과천</span></div>
     <h2>오~감각미술관</h2>
     <div class="period">2026-04-30 ~ 2027-02-21</div>
     <p class="summary">과천 어린이미술관의 가족 참여형 전시로, 눈·코·입·귀·손 다섯 감각을 모두 써서 현대미술을 경험하도록 구성했습니다. 깪·엄정순·함진 작가의 설치·영상·조각 23점이 나옵니다.</p>
@@ -476,10 +501,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202603240002068" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="경기서부" data-status="진행중" data-free="1">
-  <div class="poster"><img src="https://suma.suwon.go.kr/upfilePath/bd/EXHI_202601280836297550.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">수원시립미술관</span><span class="ft">소장품전 «블랑 블랙 파노라마»</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+<article data-region="경기남부" data-status="진행중" data-free="1">
+  <a class="poster" href="https://suma.suwon.go.kr/exhi/current_view.do?lang=ko&amp;ge_idx=1258" target="_blank" rel="noreferrer" aria-label="소장품전 «블랑 블랙 파노라마» 공식 페이지 열기"><img src="https://suma.suwon.go.kr/upfilePath/bd/EXHI_202601280836297550.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">수원시립미술관</span><span class="ft">소장품전 «블랑 블랙 파노라마»</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>수원시립미술관</span><span>경기서부</span></div>
+    <div class="museum"><span>수원시립미술관</span><span>경기남부</span></div>
     <h2>소장품전 «블랑 블랙 파노라마»</h2>
     <div class="period">2026-02-12 ~ 2027-03-01</div>
     <p class="summary">이배·이수경·이순종·최병소 등 18명의 회화·조각·사진·공예·영상 약 20점으로 반복·중첩·필사·지우기 같은 수행적 조형 언어와 흑백의 관계를 다룹니다.</p>
@@ -487,10 +512,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://suma.suwon.go.kr/exhi/current_view.do?lang=ko&amp;ge_idx=1258" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="진행중" data-free="0">
-  <div class="poster"><img src="https://www.mmca.go.kr/upload/exhibition/2026/04/2026042010552919611148.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 과천</span><span class="ft">상설전 «한국근현대미술 I»</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+<article data-region="과천" data-status="진행중" data-free="0">
+  <a class="poster" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202501060001884" target="_blank" rel="noreferrer" aria-label="상설전 «한국근현대미술 I» 공식 페이지 열기"><img src="https://www.mmca.go.kr/upload/exhibition/2026/04/2026042010552919611148.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 과천</span><span class="ft">상설전 «한국근현대미술 I»</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>국립현대미술관 과천</span><span>서울·과천</span></div>
+    <div class="museum"><span>국립현대미술관 과천</span><span>과천</span></div>
     <h2>상설전 «한국근현대미술 I»</h2>
     <div class="period">2026-04-22 ~ 2027-06-27</div>
     <p class="summary">1900년대부터 1960년대까지 한국 근대미술의 주요 흐름과 대표 작가를 정리한 상설전입니다. 3층 5·6전시실.</p>
@@ -498,10 +523,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202501060001884" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="진행중" data-free="0">
-  <div class="poster"><img src="https://www.mmca.go.kr/upload/exhibition/2026/04/2026042010563458711615.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 과천</span><span class="ft">상설전 «한국근현대미술 II»</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+<article data-region="과천" data-status="진행중" data-free="0">
+  <a class="poster" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202501060001885" target="_blank" rel="noreferrer" aria-label="상설전 «한국근현대미술 II» 공식 페이지 열기"><img src="https://www.mmca.go.kr/upload/exhibition/2026/04/2026042010563458711615.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 과천</span><span class="ft">상설전 «한국근현대미술 II»</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>국립현대미술관 과천</span><span>서울·과천</span></div>
+    <div class="museum"><span>국립현대미술관 과천</span><span>과천</span></div>
     <h2>상설전 «한국근현대미술 II»</h2>
     <div class="period">2026-04-22 ~ 2027-06-27</div>
     <p class="summary">1950년대 후반부터 1990년대까지 한국 현대미술의 전개를 다룹니다. 2층 3·4전시실. 상설전 I과 이어 보면 20세기 한국미술 전체를 통시적으로 볼 수 있습니다.</p>
@@ -509,10 +534,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202501060001885" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="진행중" data-free="1">
-  <div class="poster"><img src="https://craftmuseum.seoul.go.kr/common/exhibition/filedown?idx=1900" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">서울공예박물관</span><span class="ft">안동별궁, 시간의 겹</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+<article data-region="서울 북부" data-status="진행중" data-free="1">
+  <a class="poster" href="https://craftmuseum.seoul.go.kr/exhibit/plan/view/184" target="_blank" rel="noreferrer" aria-label="안동별궁, 시간의 겹 공식 페이지 열기"><img src="https://craftmuseum.seoul.go.kr/common/exhibition/filedown?idx=1900" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">서울공예박물관</span><span class="ft">안동별궁, 시간의 겹</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>서울공예박물관</span><span>서울·과천</span></div>
+    <div class="museum"><span>서울공예박물관</span><span>서울 북부</span></div>
     <h2>안동별궁, 시간의 겹</h2>
     <div class="period">2026-04-28 ~ 2027-08-29</div>
     <p class="summary">오륜대 한국순교자박물관과의 협력 전시로, 박물관 부지에서 열렸던 순종·순정효황후 가례 120주년을 계기로 기획됐습니다. 조선 말기부터 대한제국기의 직물 공예를 중심으로 섬유·종이 유물을 선보입니다.</p>
@@ -520,10 +545,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://craftmuseum.seoul.go.kr/exhibit/plan/view/184" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="진행중" data-free="0">
-  <div class="poster"><img src="https://www.mmca.go.kr/upload/exhibition/2026/07/2026070309414020316780.png" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 과천</span><span class="ft">과천관 40주년 프로젝트: 빛의 상상들</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span></div>
+<article data-region="과천" data-status="진행중" data-free="0">
+  <a class="poster" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202601060002026" target="_blank" rel="noreferrer" aria-label="과천관 40주년 프로젝트: 빛의 상상들 공식 페이지 열기"><img src="https://www.mmca.go.kr/upload/exhibition/2026/07/2026070309414020316780.png" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 과천</span><span class="ft">과천관 40주년 프로젝트: 빛의 상상들</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>국립현대미술관 과천</span><span>서울·과천</span></div>
+    <div class="museum"><span>국립현대미술관 과천</span><span>과천</span></div>
     <h2>과천관 40주년 프로젝트: 빛의 상상들</h2>
     <div class="period">2026-07-10 ~ 2027-10-31</div>
     <p class="summary">과천관 개관 40주년을 기념해 &#x27;빛&#x27;을 주제로 한 장소특정적 설치 프로젝트입니다. 2원형전시실과 3층 회랑, 로비, 대강당은 물론 야외 조각공원까지 내·외부 전역을 무대로 삼습니다.</p>
@@ -531,10 +556,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202601060002026" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="경기남부" data-status="예정" data-free="1">
-  <div class="poster"><img src="https://www.snart.or.kr/other/editor/process.file.do?TP=dn&amp;p=ib89rrCBNpRF1i1OmSVdAQ%3D%3D&amp;n=7OKZYLTgOAa%2FvRqcBNKFsPZmRdKACsuTrp%2FEYRsvscTgj5xmg4f1JBI3TfupvsYx" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">성남큐브미술관</span><span class="ft">성남작가조명전 III — 유지민: 잔류하는 움직임</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span></div>
+<article data-region="분당" data-status="예정" data-free="1">
+  <a class="poster" href="https://www.snart.or.kr/main/prex/exhibit/view.do?prfr_exhb_sn=100031" target="_blank" rel="noreferrer" aria-label="성남작가조명전 III — 유지민: 잔류하는 움직임 공식 페이지 열기"><img src="https://www.snart.or.kr/other/editor/process.file.do?TP=dn&amp;p=ib89rrCBNpRF1i1OmSVdAQ%3D%3D&amp;n=7OKZYLTgOAa%2FvRqcBNKFsPZmRdKACsuTrp%2FEYRsvscTgj5xmg4f1JBI3TfupvsYx" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">성남큐브미술관</span><span class="ft">성남작가조명전 III — 유지민: 잔류하는 움직임</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>성남큐브미술관</span><span>경기남부</span></div>
+    <div class="museum"><span>성남큐브미술관</span><span>분당</span></div>
     <h2>성남작가조명전 III — 유지민: 잔류하는 움직임</h2>
     <div class="period">2026-07-31 ~ 2026-09-27</div>
     <p class="summary">성남 지역 작가를 조명하는 기획의 세 번째 전시. 청년 작가 유지민이 오랜 요가 수련에서 축적된 신체의 움직임을 회화와 조형으로 옮긴 작업을 상설전시실에서 선보입니다.</p>
@@ -542,10 +567,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://www.snart.or.kr/main/prex/exhibit/view.do?prfr_exhb_sn=100031" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="예정" data-free="0">
-  <div class="poster"><img src="https://www.mmca.go.kr/upload/exhibition/2026/07/2026072810471588319025.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 덕수궁</span><span class="ft">이대원: 당신을 슬프게 하는 것은 하나도 없다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span></div>
+<article data-region="서울 북부" data-status="예정" data-free="0">
+  <a class="poster" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=2&amp;exhId=202601120002029" target="_blank" rel="noreferrer" aria-label="이대원: 당신을 슬프게 하는 것은 하나도 없다 공식 페이지 열기"><img src="https://www.mmca.go.kr/upload/exhibition/2026/07/2026072810471588319025.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 덕수궁</span><span class="ft">이대원: 당신을 슬프게 하는 것은 하나도 없다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>국립현대미술관 덕수궁</span><span>서울·과천</span></div>
+    <div class="museum"><span>국립현대미술관 덕수궁</span><span>서울 북부</span></div>
     <h2>이대원: 당신을 슬프게 하는 것은 하나도 없다</h2>
     <div class="period">2026-08-06 ~ 2026-11-08</div>
     <p class="summary">국립현대미술관에서 처음 열리는 이대원 회고전으로 덕수궁관 1~4전시실 전체를 사용합니다.</p>
@@ -553,10 +578,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=2&amp;exhId=202601120002029" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="예정" data-free="0">
-  <div class="poster"><img src="https://www.mmca.go.kr/upload/exhibition/2026/06/2026061002041170512166.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 서울</span><span class="ft">MMCA×LG OLED 시리즈 2026</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span></div>
+<article data-region="서울 북부" data-status="예정" data-free="0">
+  <a class="poster" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=2&amp;exhId=202601060002028" target="_blank" rel="noreferrer" aria-label="MMCA×LG OLED 시리즈 2026 공식 페이지 열기"><img src="https://www.mmca.go.kr/upload/exhibition/2026/06/2026061002041170512166.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 서울</span><span class="ft">MMCA×LG OLED 시리즈 2026</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>국립현대미술관 서울</span><span>서울·과천</span></div>
+    <div class="museum"><span>국립현대미술관 서울</span><span>서울 북부</span></div>
     <h2>MMCA×LG OLED 시리즈 2026</h2>
     <div class="period">2026-07-31 ~ 2026-11-29</div>
     <p class="summary">서울관 상징 공간인 지하1층 서울박스에 대형 미디어 설치 신작을 선보입니다. 55형 OLED 72대를 이어 붙인 곡면 스크린 구조물이 설치되며, 언어의 공간화와 양극화 시대의 소통을 다룹니다.</p>
@@ -564,10 +589,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=2&amp;exhId=202601060002028" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="경기서부" data-status="예정" data-free="1">
-  <div class="poster"><img src="https://suma.suwon.go.kr/upfilePath/bd/EXHI_202607201100203480.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">수원시립미술관</span><span class="ft">그린그린 뮤지엄: 감각 노트</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span></div>
+<article data-region="경기남부" data-status="예정" data-free="1">
+  <a class="poster" href="https://suma.suwon.go.kr/exhi/current_view.do?lang=ko&amp;ge_idx=1267" target="_blank" rel="noreferrer" aria-label="그린그린 뮤지엄: 감각 노트 공식 페이지 열기"><img src="https://suma.suwon.go.kr/upfilePath/bd/EXHI_202607201100203480.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">수원시립미술관</span><span class="ft">그린그린 뮤지엄: 감각 노트</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>수원시립미술관</span><span>경기서부</span></div>
+    <div class="museum"><span>수원시립미술관</span><span>경기남부</span></div>
     <h2>그린그린 뮤지엄: 감각 노트</h2>
     <div class="period">2026-08-11 ~ 2026-12-04</div>
     <p class="summary">수원시립만석전시관의 어린이 감각 체험 전시로 양지윤·임현경이 참여합니다. 무당벌레·달팽이 같은 작은 생물과 싹트는 식물을 소재로 천천히 관찰하고 소리를 듣고 기록해보게 구성했습니다.</p>
@@ -576,7 +601,7 @@ footer a{color:var(--ink-soft)}
   </div>
 </article>
 <article data-region="경기남부" data-status="예정" data-free="0">
-  <div class="poster"><div class="fallback"><span class="fm">호암미술관</span><span class="ft">아트스펙트럼 2026 — 방이있고모든라디오가각기다른주파수를향하고있다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span></div>
+  <a class="poster" href="https://www.leeumhoam.org/hoam/exhibition" target="_blank" rel="noreferrer" aria-label="아트스펙트럼 2026 — 방이있고모든라디오가각기다른주파수를향하고있다 공식 페이지 열기"><div class="fallback"><span class="fm">호암미술관</span><span class="ft">아트스펙트럼 2026 — 방이있고모든라디오가각기다른주파수를향하고있다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
     <div class="museum"><span>호암미술관</span><span>경기남부</span></div>
     <h2>아트스펙트럼 2026 — 방이있고모든라디오가각기다른주파수를향하고있다</h2>
@@ -586,10 +611,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://www.leeumhoam.org/hoam/exhibition" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="예정" data-free="0">
-  <div class="poster"><img src="https://www.leeumhoam.org/upload/exhibition/1764653962405_ouss.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">리움미술관</span><span class="ft">구정아: 우스모스</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span></div>
+<article data-region="서울 북부" data-status="예정" data-free="0">
+  <a class="poster" href="https://www.leeumhoam.org/leeum/exhibition/94" target="_blank" rel="noreferrer" aria-label="구정아: 우스모스 공식 페이지 열기"><img src="https://www.leeumhoam.org/upload/exhibition/1764653962405_ouss.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">리움미술관</span><span class="ft">구정아: 우스모스</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>리움미술관</span><span>서울·과천</span></div>
+    <div class="museum"><span>리움미술관</span><span>서울 북부</span></div>
     <h2>구정아: 우스모스</h2>
     <div class="period">2026-09-05 ~ 2026-12-27</div>
     <p class="summary">2024년 베네치아 비엔날레 한국관 작가 구정아의 국내 최대 규모 개인전으로 약 30년 작업을 아우릅니다. M2뿐 아니라 로비, 벽 뒤, 고미술 전시장 사이 등 예기치 못한 공간에 작품이 놓여 미술관 전체가 무대가 됩니다.</p>
@@ -597,10 +622,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://www.leeumhoam.org/leeum/exhibition/94" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="예정" data-free="0">
-  <div class="poster"><img src="https://www.mmca.go.kr/upload/exhibition/2026/01/2026012011255343117925.png" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 서울</span><span class="ft">서도호</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span></div>
+<article data-region="서울 북부" data-status="예정" data-free="0">
+  <a class="poster" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=2&amp;exhId=202601200002041" target="_blank" rel="noreferrer" aria-label="서도호 공식 페이지 열기"><img src="https://www.mmca.go.kr/upload/exhibition/2026/01/2026012011255343117925.png" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 서울</span><span class="ft">서도호</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>국립현대미술관 서울</span><span>서울·과천</span></div>
+    <div class="museum"><span>국립현대미술관 서울</span><span>서울 북부</span></div>
     <h2>서도호</h2>
     <div class="period">2026-08-27 ~ 2027-02-09</div>
     <p class="summary">설치미술가 서도호의 사상 최대 규모 개인전으로 초기작부터 대표작, 진행 중인 작업까지 총망라합니다. 세부 전시실 배치는 아직 공개되지 않았습니다.</p>
@@ -608,10 +633,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=2&amp;exhId=202601200002041" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="예정" data-free="0">
-  <div class="poster"><div class="fallback"><span class="fm">서울시립미술관</span><span class="ft">린 허쉬만 리슨: 나의 [나]들</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span></div>
+<article data-region="서울 북부" data-status="예정" data-free="0">
+  <a class="poster" href="https://sema.seoul.go.kr/kr/bbs/611333/getBbsDetail?bbsNo=1478706" target="_blank" rel="noreferrer" aria-label="린 허쉬만 리슨: 나의 [나]들 공식 페이지 열기"><div class="fallback"><span class="fm">서울시립미술관</span><span class="ft">린 허쉬만 리슨: 나의 [나]들</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>서울시립미술관</span><span>서울·과천</span></div>
+    <div class="museum"><span>서울시립미술관</span><span>서울 북부</span></div>
     <h2>린 허쉬만 리슨: 나의 [나]들</h2>
     <div class="period">2026-10-21 ~ 2027-02-21</div>
     <p class="summary">미국 미디어아티스트이자 영화감독인 린 허쉬만 리슨의 아시아 첫 미술관 개인전으로 약 60년 작업을 조망합니다. 인간과 기술의 관계, 정체성, 감시를 다뤄온 영상·설치 작업이 소개될 예정입니다.</p>
@@ -619,10 +644,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://sema.seoul.go.kr/kr/bbs/611333/getBbsDetail?bbsNo=1478706" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="예정" data-free="0">
-  <div class="poster"><img src="https://mma.prnewswire.com/media/2850312/3.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">아모레퍼시픽미술관</span><span class="ft">조나스 우드</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span></div>
+<article data-region="서울 북부" data-status="예정" data-free="0">
+  <a class="poster" href="https://apma.amorepacific.com/contents/exhibition/index.do" target="_blank" rel="noreferrer" aria-label="조나스 우드 공식 페이지 열기"><img src="https://mma.prnewswire.com/media/2850312/3.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">아모레퍼시픽미술관</span><span class="ft">조나스 우드</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>아모레퍼시픽미술관</span><span>서울·과천</span></div>
+    <div class="museum"><span>아모레퍼시픽미술관</span><span>서울 북부</span></div>
     <h2>조나스 우드</h2>
     <div class="period">2026-09-01 ~ 2027-02-28</div>
     <p class="summary">LA 기반 작가 조나스 우드의 아시아 첫 기관 기획전입니다. 20여 년 작업을 아우르는 회화 약 50점과 종이 작업 약 30점 등 80여 점을 선보이며, 선명한 색채와 평면화된 원근법, 촘촘한 패턴이 특징입니다.</p>
@@ -630,10 +655,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://apma.amorepacific.com/contents/exhibition/index.do" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="예정" data-free="0">
-  <div class="poster"><img src="https://www.mmca.go.kr/upload/exhibition/2026/01/2026011605260323416793.png" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 서울</span><span class="ft">읽기의 기술: 종이에서 픽셀로</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span></div>
+<article data-region="서울 북부" data-status="예정" data-free="0">
+  <a class="poster" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=2&amp;exhId=202601160002037" target="_blank" rel="noreferrer" aria-label="읽기의 기술: 종이에서 픽셀로 공식 페이지 열기"><img src="https://www.mmca.go.kr/upload/exhibition/2026/01/2026011605260323416793.png" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 서울</span><span class="ft">읽기의 기술: 종이에서 픽셀로</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>국립현대미술관 서울</span><span>서울·과천</span></div>
+    <div class="museum"><span>국립현대미술관 서울</span><span>서울 북부</span></div>
     <h2>읽기의 기술: 종이에서 픽셀로</h2>
     <div class="period">2026-11-20 ~ 2027-04-04</div>
     <p class="summary">아날로그에서 디지털로 이행한 &#x27;읽기&#x27; 환경의 변화 속에서 텍스트와 이미지의 관계를 다루는 그래픽 디자인 기반 기획전입니다.</p>
@@ -641,10 +666,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=2&amp;exhId=202601160002037" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="예정" data-free="0">
-  <div class="poster"><img src="https://www.mmca.go.kr/upload/exhibition/2026/01/2026011210092055312737.png" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 덕수궁</span><span class="ft">파리의 이방인</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span></div>
+<article data-region="서울 북부" data-status="예정" data-free="0">
+  <a class="poster" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=2&amp;exhId=202601120002030" target="_blank" rel="noreferrer" aria-label="파리의 이방인 공식 페이지 열기"><img src="https://www.mmca.go.kr/upload/exhibition/2026/01/2026011210092055312737.png" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 덕수궁</span><span class="ft">파리의 이방인</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>국립현대미술관 덕수궁</span><span>서울·과천</span></div>
+    <div class="museum"><span>국립현대미술관 덕수궁</span><span>서울 북부</span></div>
     <h2>파리의 이방인</h2>
     <div class="period">2026-12-17 ~ 2027-05-09</div>
     <p class="summary">한·불 수교 140주년 기념 기획전으로 덕수궁관 전관에서 열립니다. 한국전쟁 이후 프랑스로 건너간 한국 작가들을 다룹니다.</p>
@@ -653,7 +678,7 @@ footer a{color:var(--ink-soft)}
   </div>
 </article>
 <article data-region="경기남부" data-status="상설" data-free="0">
-  <div class="poster"><img src="https://www.leeumhoam.org/upload/leeufan/silentium_pic1.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">호암미술관</span><span class="ft">이우환: 실렌티움(묵시암)</span><span class="fn">포스터 이미지 없음</span></div><span class="pill perm">상설</span></div>
+  <a class="poster" href="https://www.leeumhoam.org/hoam/leeufan/silentium" target="_blank" rel="noreferrer" aria-label="이우환: 실렌티움(묵시암) 공식 페이지 열기"><img src="https://www.leeumhoam.org/upload/leeufan/silentium_pic1.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">호암미술관</span><span class="ft">이우환: 실렌티움(묵시암)</span><span class="fn">포스터 이미지 없음</span></div><span class="pill perm">상설</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
     <div class="museum"><span>호암미술관</span><span>경기남부</span></div>
     <h2>이우환: 실렌티움(묵시암)</h2>
@@ -663,21 +688,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://www.leeumhoam.org/hoam/leeufan/silentium" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="상설" data-free="1">
-  <div class="poster"><img src="https://www.leeumhoam.org/upload/exhibition/1695086894913_oldArtMain.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">리움미술관</span><span class="ft">고미술 소장품 상설전</span><span class="fn">포스터 이미지 없음</span></div><span class="pill perm">상설</span></div>
+<article data-region="서울 북부" data-status="상설" data-free="1">
+  <a class="poster" href="https://craftmuseum.seoul.go.kr/exhibit/plan/view/51" target="_blank" rel="noreferrer" aria-label="상설전 — 장인, 세상을 이롭게 하다 공식 페이지 열기"><img src="https://craftmuseum.seoul.go.kr/images/page/img_2_1_7.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">서울공예박물관</span><span class="ft">상설전 — 장인, 세상을 이롭게 하다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill perm">상설</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>리움미술관</span><span>서울·과천</span></div>
-    <h2>고미술 소장품 상설전</h2>
-    <div class="period">상설</div>
-    <p class="summary">M1 1~4층에서 고미술 소장품 약 120점을 층별 주제로 전시합니다. 4층 고려청자, 3층 분청사기·백자, 2층 정선·김홍도·김정희 등 조선 서화, 1층 불교미술·나전칠기로 구성되고 각 층에 현대미술이 함께 배치됩니다.</p>
-    <div class="facts"><span class="fact free">무료</span><span class="fact">휴관 월요일</span><span class="fact">~50분</span><span class="fact kid">유아 · 엘리베이터 층간 이동, 유리 진열장 중심이라 안전한 편</span></div>
-    <a class="go" href="https://www.leeumhoam.org/leeum/exhibition/73" target="_blank" rel="noreferrer">공식 페이지 →</a>
-  </div>
-</article>
-<article data-region="서울·과천" data-status="상설" data-free="1">
-  <div class="poster"><img src="https://craftmuseum.seoul.go.kr/images/page/img_2_1_7.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">서울공예박물관</span><span class="ft">상설전 — 장인, 세상을 이롭게 하다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill perm">상설</span></div>
-  <div class="body">
-    <div class="museum"><span>서울공예박물관</span><span>서울·과천</span></div>
+    <div class="museum"><span>서울공예박물관</span><span>서울 북부</span></div>
     <h2>상설전 — 장인, 세상을 이롭게 하다</h2>
     <div class="period">상설</div>
     <p class="summary">삼국시대부터 조선시대까지 한국 공예의 흐름을 장인의 관점에서 짚는 상설전입니다. 금속·목칠·도자 등 시대별 대표 공예품과 제작 기법 자료를 함께 배치했습니다. 전시1동 2층.</p>
@@ -685,10 +699,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://craftmuseum.seoul.go.kr/exhibit/plan/view/51" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="상설" data-free="1">
-  <div class="poster"><img src="https://craftmuseum.seoul.go.kr/images/page/img_2_1_9.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">서울공예박물관</span><span class="ft">상설전 — 공예, 근대의 문을 열다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill perm">상설</span></div>
+<article data-region="서울 북부" data-status="상설" data-free="1">
+  <a class="poster" href="https://craftmuseum.seoul.go.kr/exhibit/plan/view/52" target="_blank" rel="noreferrer" aria-label="상설전 — 공예, 근대의 문을 열다 공식 페이지 열기"><img src="https://craftmuseum.seoul.go.kr/images/page/img_2_1_9.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">서울공예박물관</span><span class="ft">상설전 — 공예, 근대의 문을 열다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill perm">상설</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>서울공예박물관</span><span>서울·과천</span></div>
+    <div class="museum"><span>서울공예박물관</span><span>서울 북부</span></div>
     <h2>상설전 — 공예, 근대의 문을 열다</h2>
     <div class="period">상설</div>
     <p class="summary">개항 이후 근대기 한국 공예가 겪은 재료·제작 방식·유통의 변화를 다룹니다. 전통 공방 체제에서 근대적 생산으로 옮겨가는 과정을 유물로 보여줍니다. 전시1동 2층.</p>
@@ -696,10 +710,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://craftmuseum.seoul.go.kr/exhibit/plan/view/52" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="상설" data-free="1">
-  <div class="poster"><img src="https://craftmuseum.seoul.go.kr/images/page/img_2_1_8.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">서울공예박물관</span><span class="ft">상설전 — 공예, 시대를 비추다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill perm">상설</span></div>
+<article data-region="서울 북부" data-status="상설" data-free="1">
+  <a class="poster" href="https://craftmuseum.seoul.go.kr/exhibit/plan/view/53" target="_blank" rel="noreferrer" aria-label="상설전 — 공예, 시대를 비추다 공식 페이지 열기"><img src="https://craftmuseum.seoul.go.kr/images/page/img_2_1_8.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">서울공예박물관</span><span class="ft">상설전 — 공예, 시대를 비추다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill perm">상설</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>서울공예박물관</span><span>서울·과천</span></div>
+    <div class="museum"><span>서울공예박물관</span><span>서울 북부</span></div>
     <h2>상설전 — 공예, 시대를 비추다</h2>
     <div class="period">상설</div>
     <p class="summary">광복 이후부터 현대까지 한국 공예의 전개를 다룹니다. 산업화·현대 디자인과 만난 공예 작업과 동시대 작가의 작품을 함께 배치했습니다. 전시1동 2층.</p>
@@ -707,10 +721,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://craftmuseum.seoul.go.kr/exhibit/plan/view/53" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="상설" data-free="1">
-  <div class="poster"><img src="https://craftmuseum.seoul.go.kr/images/page/img_2_1_10.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">서울공예박물관</span><span class="ft">상설전 — 자연에서 공예로</span><span class="fn">포스터 이미지 없음</span></div><span class="pill perm">상설</span></div>
+<article data-region="서울 북부" data-status="상설" data-free="1">
+  <a class="poster" href="https://craftmuseum.seoul.go.kr/exhibit/plan/view/50" target="_blank" rel="noreferrer" aria-label="상설전 — 자연에서 공예로 공식 페이지 열기"><img src="https://craftmuseum.seoul.go.kr/images/page/img_2_1_10.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">서울공예박물관</span><span class="ft">상설전 — 자연에서 공예로</span><span class="fn">포스터 이미지 없음</span></div><span class="pill perm">상설</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>서울공예박물관</span><span>서울·과천</span></div>
+    <div class="museum"><span>서울공예박물관</span><span>서울 북부</span></div>
     <h2>상설전 — 자연에서 공예로</h2>
     <div class="period">상설</div>
     <p class="summary">자연에서 얻은 재료가 공예품이 되기까지의 과정을 재료별로 정리했습니다. 흙·나무·금속·섬유의 성질과 장인의 가공 기술을 실물 자료와 함께 보여줍니다. 전시2동 2층.</p>
@@ -718,10 +732,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://craftmuseum.seoul.go.kr/exhibit/plan/view/50" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="상설" data-free="1">
-  <div class="poster"><img src="https://craftmuseum.seoul.go.kr/images/page/img_2_1_11.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">서울공예박물관</span><span class="ft">상설전 — 자수, 염원을 그리다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill perm">상설</span></div>
+<article data-region="서울 북부" data-status="상설" data-free="1">
+  <a class="poster" href="https://craftmuseum.seoul.go.kr/exhibit/plan/view/31" target="_blank" rel="noreferrer" aria-label="상설전 — 자수, 염원을 그리다 공식 페이지 열기"><img src="https://craftmuseum.seoul.go.kr/images/page/img_2_1_11.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">서울공예박물관</span><span class="ft">상설전 — 자수, 염원을 그리다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill perm">상설</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>서울공예박물관</span><span>서울·과천</span></div>
+    <div class="museum"><span>서울공예박물관</span><span>서울 북부</span></div>
     <h2>상설전 — 자수, 염원을 그리다</h2>
     <div class="period">상설</div>
     <p class="summary">허동화·박영숙 기증품을 중심으로 조선시대 자수 공예를 소개합니다. 병풍·흉배·수보 등을 통해 문양에 담긴 기원과 바느질 기법을 살펴봅니다. 전시3동 2층.</p>
@@ -729,10 +743,10 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://craftmuseum.seoul.go.kr/exhibit/plan/view/31" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="서울·과천" data-status="상설" data-free="1">
-  <div class="poster"><img src="https://craftmuseum.seoul.go.kr/images/page/img_2_1_12.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">서울공예박물관</span><span class="ft">상설전 — 보자기, 일상을 감싸다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill perm">상설</span></div>
+<article data-region="서울 북부" data-status="상설" data-free="1">
+  <a class="poster" href="https://craftmuseum.seoul.go.kr/exhibit/plan/view/32" target="_blank" rel="noreferrer" aria-label="상설전 — 보자기, 일상을 감싸다 공식 페이지 열기"><img src="https://craftmuseum.seoul.go.kr/images/page/img_2_1_12.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">서울공예박물관</span><span class="ft">상설전 — 보자기, 일상을 감싸다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill perm">상설</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
-    <div class="museum"><span>서울공예박물관</span><span>서울·과천</span></div>
+    <div class="museum"><span>서울공예박물관</span><span>서울 북부</span></div>
     <h2>상설전 — 보자기, 일상을 감싸다</h2>
     <div class="period">상설</div>
     <p class="summary">조각보를 비롯한 다양한 보자기를 모아 일상 속 섬유 공예를 보여줍니다. 쓰임에 따른 형태와 색 배치, 조각을 이어 붙이는 기법을 유물로 확인할 수 있습니다. 전시3동 3층.</p>
@@ -740,8 +754,19 @@ footer a{color:var(--ink-soft)}
     <a class="go" href="https://craftmuseum.seoul.go.kr/exhibit/plan/view/32" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
+<article data-region="서울 북부" data-status="상설" data-free="1">
+  <a class="poster" href="https://www.leeumhoam.org/leeum/exhibition/73" target="_blank" rel="noreferrer" aria-label="고미술 소장품 상설전 공식 페이지 열기"><img src="https://www.leeumhoam.org/upload/exhibition/1695086894913_oldArtMain.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">리움미술관</span><span class="ft">고미술 소장품 상설전</span><span class="fn">포스터 이미지 없음</span></div><span class="pill perm">상설</span><span class="veil">공식 페이지 열기 →</span></a>
+  <div class="body">
+    <div class="museum"><span>리움미술관</span><span>서울 북부</span></div>
+    <h2>고미술 소장품 상설전</h2>
+    <div class="period">상설</div>
+    <p class="summary">M1 1~4층에서 고미술 소장품 약 120점을 층별 주제로 전시합니다. 4층 고려청자, 3층 분청사기·백자, 2층 정선·김홍도·김정희 등 조선 서화, 1층 불교미술·나전칠기로 구성되고 각 층에 현대미술이 함께 배치됩니다.</p>
+    <div class="facts"><span class="fact free">무료</span><span class="fact">휴관 월요일</span><span class="fact">~50분</span><span class="fact kid">유아 · 엘리베이터 층간 이동, 유리 진열장 중심이라 안전한 편</span></div>
+    <a class="go" href="https://www.leeumhoam.org/leeum/exhibition/73" target="_blank" rel="noreferrer">공식 페이지 →</a>
+  </div>
+</article>
 <article data-region="경기서부" data-status="상설" data-free="1">
-  <div class="poster"><img src="https://gmoma.ggcf.kr/storage/upload/2024/01/09/1hIPrcQQ2nYZnnPQeJ1FBYwX9vzW4IFKa3qi0AEB.gif" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">경기도미술관</span><span class="ft">상설전 «멈춰서서»</span><span class="fn">포스터 이미지 없음</span></div><span class="pill perm">상설</span></div>
+  <a class="poster" href="https://gmoma.ggcf.kr/exhibitions/49" target="_blank" rel="noreferrer" aria-label="상설전 «멈춰서서» 공식 페이지 열기"><img src="https://gmoma.ggcf.kr/storage/upload/2024/01/09/1hIPrcQQ2nYZnnPQeJ1FBYwX9vzW4IFKa3qi0AEB.gif" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">경기도미술관</span><span class="ft">상설전 «멈춰서서»</span><span class="fn">포스터 이미지 없음</span></div><span class="pill perm">상설</span><span class="veil">공식 페이지 열기 →</span></a>
   <div class="body">
     <div class="museum"><span>경기도미술관</span><span>경기서부</span></div>
     <h2>상설전 «멈춰서서»</h2>
@@ -754,10 +779,15 @@ footer a{color:var(--ink-soft)}
 <p class="empty" id="empty" style="display:none">조건에 맞는 전시가 없습니다.</p>
 </div>
 
+<section class="sources">
+  <h2>정보를 가져온 미술관</h2>
+  <p class="lede">아래 17곳의 공식 페이지에서 수집합니다. 미술관 이름을 누르면 공식 사이트로 넘어갑니다. 권역은 분당 출발 거리순이고, 이동 시간은 자차 기준 개략치입니다.</p>
+  <div class="mgroup"><h3><span>분당 · 1곳</span><span>3건</span></h3><div class="mlist"><div class="mrow"><a href="https://www.snart.or.kr" target="_blank" rel="noreferrer">성남큐브미술관</a><span class="ma">분당 야탑 · ~20분</span><span class="mc">3건</span></div></div></div><div class="mgroup"><h3><span>경기남부 · 3곳</span><span>10건</span></h3><div class="mlist"><div class="mrow"><a href="https://njp.ggcf.kr" target="_blank" rel="noreferrer">백남준아트센터</a><span class="ma">용인 기흥 · ~30분</span><span class="mc">4건</span></div><div class="mrow"><a href="https://www.leeumhoam.org/hoam" target="_blank" rel="noreferrer">호암미술관</a><span class="ma">용인 포곡 · ~40분</span><span class="mc">2건</span></div><div class="mrow"><a href="https://suma.suwon.go.kr" target="_blank" rel="noreferrer">수원시립미술관</a><span class="ma">수원 행궁동 · ~50분</span><span class="mc">4건</span></div></div></div><div class="mgroup"><h3><span>과천 · 1곳</span><span>6건</span></h3><div class="mlist"><div class="mrow"><a href="https://www.mmca.go.kr" target="_blank" rel="noreferrer">국립현대미술관 과천</a><span class="ma">과천 막계동 · ~40분</span><span class="mc">6건</span></div></div></div><div class="mgroup"><h3><span>서울 남부 · 1곳</span><span>2건</span></h3><div class="mlist"><div class="mrow"><a href="https://www.sac.or.kr" target="_blank" rel="noreferrer">예술의전당 한가람미술관</a><span class="ma">서초 서초동 · ~45분</span><span class="mc">2건</span></div></div></div><div class="mgroup"><h3><span>서울 북부 · 8곳</span><span>34건</span></h3><div class="mlist"><div class="mrow"><a href="https://www.museum.go.kr" target="_blank" rel="noreferrer">국립중앙박물관</a><span class="ma">용산 이촌동 · ~50분</span><span class="mc">4건</span></div><div class="mrow"><a href="https://www.leeumhoam.org/leeum" target="_blank" rel="noreferrer">리움미술관</a><span class="ma">용산 한남동 · ~50분</span><span class="mc">4건</span></div><div class="mrow"><a href="https://apma.amorepacific.com" target="_blank" rel="noreferrer">아모레퍼시픽미술관</a><span class="ma">용산 한강대로 · ~50분</span><span class="mc">2건</span></div><div class="mrow"><a href="https://www.mmca.go.kr" target="_blank" rel="noreferrer">국립현대미술관 덕수궁</a><span class="ma">중구 정동 · ~55분</span><span class="mc">2건</span></div><div class="mrow"><a href="https://sema.seoul.go.kr" target="_blank" rel="noreferrer">서울시립미술관</a><span class="ma">중구 서소문 · ~55분</span><span class="mc">2건</span></div><div class="mrow"><a href="https://www.mmca.go.kr" target="_blank" rel="noreferrer">국립현대미술관 서울</a><span class="ma">종로 삼청동 · ~60분</span><span class="mc">8건</span></div><div class="mrow"><a href="https://craftmuseum.seoul.go.kr" target="_blank" rel="noreferrer">서울공예박물관</a><span class="ma">종로 안국동 · ~60분</span><span class="mc">10건</span></div><div class="mrow"><a href="https://www.daelimmuseum.org" target="_blank" rel="noreferrer">디뮤지엄</a><span class="ma">성동 성수동 · ~60분</span><span class="mc">2건</span></div></div></div><div class="mgroup"><h3><span>경기서부 · 1곳</span><span>3건</span></h3><div class="mlist"><div class="mrow"><a href="https://gmoma.ggcf.kr" target="_blank" rel="noreferrer">경기도미술관</a><span class="ma">안산 단원구 · ~80분</span><span class="mc">3건</span></div></div></div><div class="mgroup"><h3><span>고양 · 2곳</span><span>0건</span></h3><div class="mlist"><div class="mrow"><a href="https://www.artgy.or.kr" target="_blank" rel="noreferrer">아람미술관</a><span class="ma">고양 마두동 · ~75분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://www.artgy.or.kr" target="_blank" rel="noreferrer">어울림미술관</a><span class="ma">고양 화정동 · ~80분</span><span class="mc zero">0건</span></div></div></div>
+</section>
+
 <footer>
-  전시 정보는 각 미술관 공식 페이지에서 수집했습니다. 관람 전 <b>공식 페이지에서 기간·휴관일·예약 여부를 다시 확인</b>하세요.<br>
-  포스터 이미지는 각 미술관 서버에서 직접 불러옵니다. 이미지가 안 보이면 원본이 이동·삭제된 것입니다.<br>
-  편도 시간은 분당 출발 자차 기준 개략치입니다. 유아 동반 정보는 확인된 것만 표시했습니다.
+  관람 전 <b>공식 페이지에서 기간 · 휴관일 · 예약 여부를 다시 확인</b>하세요. 포스터 이미지는 각 미술관 서버에서 직접 불러오므로, 안 보이면 원본이 이동·삭제된 것입니다.<br>
+  유아 동반 정보는 확인된 것만 표시했습니다. 확인 안 된 항목은 아예 적지 않았습니다.
 </footer>
 </div>
 <script>
@@ -766,7 +796,6 @@ footer a{color:var(--ink-soft)}
   var cards=[].slice.call(document.querySelectorAll("article"));
   var countEl=document.getElementById("count");
   var emptyEl=document.getElementById("empty");
-
   function apply(){
     var n=0;
     cards.forEach(function(c){
@@ -792,7 +821,6 @@ footer a{color:var(--ink-soft)}
       apply();
     });
   });
-  // 포스터 로드 실패 시 타이포 타일로 대체
   document.querySelectorAll(".poster img").forEach(function(img){
     img.addEventListener("error",function(){
       var fb=img.parentElement.querySelector(".fallback");
