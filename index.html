@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Dr. Dolmaro의 보물상자</title>
+<style>
+:root{
+  --bg:#faf8f3;--card:#ffffff;--ink:#221f1a;--sub:#6f6a5e;--line:#e7e2d6;
+  --gold:#b8860b;--gold-soft:#f4e8c9;--accent:#8a5a2b;--chip:#f3efe4;
+  --shadow:0 2px 10px rgba(90,70,20,.07);
+}
+@media(prefers-color-scheme:dark){
+  :root{--bg:#171511;--card:#211e18;--ink:#ece7db;--sub:#a49d8c;--line:#373227;
+  --gold:#d9a83c;--gold-soft:#3a301a;--accent:#d9a86a;--chip:#2b2720;
+  --shadow:0 2px 10px rgba(0,0,0,.35);}
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Apple SD Gothic Neo","Pretendard",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;padding:32px 18px 72px;max-width:880px;margin:0 auto}
+header{text-align:center;margin-bottom:10px}
+.chest{font-size:2.6rem;line-height:1}
+h1{font-family:Georgia,"Times New Roman",serif;font-size:1.7rem;letter-spacing:.02em;margin:6px 0 2px}
+.tagline{color:var(--sub);font-size:.92rem;margin-bottom:26px;text-align:center}
+.tagline em{font-style:normal;color:var(--gold);font-weight:700}
+.section{margin:26px 0 10px;display:flex;align-items:baseline;gap:8px}
+.section h2{font-size:1.02rem;letter-spacing:.03em}
+.section .rule{flex:1;height:1px;background:var(--line)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+a.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);transition:transform .12s ease,border-color .12s ease}
+a.card:hover{transform:translateY(-2px);border-color:var(--gold)}
+.card .emoji{font-size:1.5rem}
+.card h3{font-size:1rem;margin:6px 0 4px}
+.card p{font-size:.85rem;color:var(--sub)}
+.card .meta{margin-top:10px;font-size:.75rem;color:var(--sub);display:flex;gap:6px;flex-wrap:wrap}
+.tag{background:var(--chip);border-radius:5px;padding:1px 7px;white-space:nowrap}
+.tag.new{background:var(--gold-soft);color:var(--gold);font-weight:700}
+footer{margin-top:40px;text-align:center;color:var(--sub);font-size:.78rem}
+footer .paw{font-size:1rem}
+</style>
+</head>
+<body>
+<header>
+  <div class="chest">🧰</div>
+  <h1>Dr. Dolmaro의 보물상자</h1>
+</header>
+<p class="tagline">손끝에서 바로 꺼내 쓰는 <em>시각화 도구 모음</em> — 진료실에서, 수술장 앞에서, 그리고 일상에서.</p>
+
+<div class="section"><h2>🩺 임상 참고</h2><div class="rule"></div></div>
+<div class="grid">
+  <a class="card" href="tetraplegia_tendon_reconstruction.html">
+    <div class="emoji">🖐️</div>
+    <h3>Tetraplegia 상지 건이전 가이드</h3>
+    <p>ICSHT 분류별 재건 옵션 — elbow extension·key pinch·grasp 재건을 수술 전 한 화면에서.</p>
+    <div class="meta"><span class="tag new">NEW</span><span class="tag">ASSH Handthology 기반</span><span class="tag">2026-08</span></div>
+  </a>
+  <a class="card" href="tendon_transfer_guide_standalone.html">
+    <div class="emoji">💪</div>
+    <h3>종양 재건 Tendon Transfer 가이드</h3>
+    <p>Upper extremity tumor reconstruction — 절제 부위별 건이전 선택.</p>
+    <div class="meta"><span class="tag">2026-04</span></div>
+  </a>
+  <a class="card" href="cts_bland_scale.html">
+    <div class="emoji">⚡</div>
+    <h3>CTS Bland Scale</h3>
+    <p>수근관증후군 신경전도검사(NCS) 중증도 분류 — 판독 기준 빠른 참조.</p>
+    <div class="meta"><span class="tag">2026</span></div>
+  </a>
+</div>
+
+<div class="section"><h2>🗂 업무</h2><div class="rule"></div></div>
+<div class="grid">
+  <a class="card" href="briefing.html">
+    <div class="emoji">📌</div>
+    <h3>일일 브리핑</h3>
+    <p>돌마로 컴퍼니 비서실 — 오늘의 결정·마감·수술·문헌 한 페이지.</p>
+    <div class="meta"><span class="tag">매일 갱신</span></div>
+  </a>
+</div>
+
+<div class="section"><h2>🎨 생활 · 문화</h2><div class="rule"></div></div>
+<div class="grid">
+  <a class="card" href="exhibitions.html">
+    <div class="emoji">🖼️</div>
+    <h3>미술관 현황</h3>
+    <p>지금 열리는 전시 — 종료 임박 순으로 정리한 주말 나들이 지도.</p>
+    <div class="meta"><span class="tag">취미문화팀</span></div>
+  </a>
+  <a class="card" href="mortgage_calculator.html">
+    <div class="emoji">🏠</div>
+    <h3>주택담보대출 상환 계산기</h3>
+    <p>원리금균등 vs 원금균등 vs 체증식 — 상환방식별 총이자 비교.</p>
+    <div class="meta"><span class="tag">계산기</span></div>
+  </a>
+</div>
+
+<footer>🧰 새 보물이 올라오면 이 상자에 자동으로 걸립니다 (주 1회 점검) · Dr. Dolmaro <span class="paw">🐾</span></footer>
+</body>
+</html>
