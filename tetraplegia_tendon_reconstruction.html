@@ -57,14 +57,17 @@ th{color:var(--sub);font-weight:600;white-space:nowrap;background:var(--chip)}
 tr.hl td{background:var(--blue-soft)}
 .matrix td{font-size:.8rem}
 .matrix .gcol{font-weight:800;white-space:nowrap;color:var(--blue)}
-.icbtns{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
-.icbtn{border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:9px;padding:7px 13px;font-size:.92rem;font-weight:700;cursor:pointer;font-family:inherit}
-.icbtn:hover{border-color:var(--blue)}
-.icbtn.on{background:var(--blue);border-color:var(--blue);color:#fff}
-.icpanel{border:1.5px solid var(--blue);border-radius:12px;padding:16px 18px;background:var(--blue-soft);display:none}
-.icpanel.show{display:block}
+.icgrid{display:grid;grid-template-columns:1fr;gap:14px;align-items:start}
+@media(min-width:820px){.icgrid{grid-template-columns:minmax(300px,42%) 1fr}.icpanel{position:sticky;top:12px}}
+#ictable tr[data-g]{cursor:pointer}
+#ictable tr[data-g]:hover td{background:var(--chip)}
+#ictable tr[data-g].on td{background:var(--blue-soft)}
+#ictable tr[data-g].on td:first-child{box-shadow:inset 3px 0 0 var(--blue)}
+#ictable td:first-child{font-weight:800;color:var(--blue);white-space:nowrap}
+.icpanel{border:1.5px solid var(--blue);border-radius:12px;padding:16px 18px;background:var(--blue-soft)}
 .icpanel h3{margin-top:0;color:var(--blue)}
 .icpanel table{background:var(--card);border-radius:8px}
+.icpanel .tap{color:var(--sub);font-size:.85rem}
 .proc{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:10px;background:var(--card)}
 .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px}
 .timeline{display:flex;margin:10px 0;border-left:3px solid var(--blue);flex-direction:column}
@@ -161,23 +164,27 @@ a{color:var(--blue)}
 </section>
 
 <section id="icsht">
-<h2>3. ★ ICSHT 분류 — 전체 표</h2>
+<h2>3. ★ ICSHT 분류 (원문 Table 3) — 그룹을 클릭하면 옆에 설명</h2>
 <p><strong>분류 원리: grade 4 이상인 가장 원위 전완/수부 근육이 그룹을 결정. 그룹 번호 = 쓸 수 있는 잠재적 donor 수.</strong> <span class="muted">(McDowell·Moberg·House 1986 / 1998 Cleveland 개정)</span></p>
-<div class="tablewrap"><table>
-<tr><th>Group</th><th>Grade ≥4로 새로 추가되는 근육</th><th>누적 가용 donor</th><th>의미</th></tr>
-<tr><td><b>0</b></td><td>없음 (BR도 &lt;4)</td><td>—</td><td>건이전 hand 재건 불가 — 강한 deltoid/biceps 있으면 elbow extension만; 그 외 FES·nerve transfer 영역 <span class="muted">(표 밖, 본문 기재)</span></td></tr>
-<tr><td><b>1</b></td><td>BR</td><td>BR</td><td>tenodesis 기반 재건의 영역</td></tr>
-<tr><td><b>2</b></td><td>ECRL</td><td>BR·ECRL</td><td>능동 pinch가 확실해지는 시작점</td></tr>
-<tr><td><b>3</b></td><td>ECRB</td><td>+ECRL이 donor로 해방</td><td>wrist extensor 2개 → grasp 재건 가능</td></tr>
-<tr><td><b>4</b></td><td>PT</td><td>BR·ECRL·PT</td><td>능동 신전 transfer·opponensplasty 옵션</td></tr>
-<tr><td><b>5</b></td><td>FCR</td><td>(FCR은 보존 권장)</td><td>wrist 균형 완성 — alphabet procedure 상한</td></tr>
-<tr><td><b>6</b></td><td>EDC 등 수지 신전근</td><td>—</td><td>신전은 synchronization만으로 해결 → single-stage 가능</td></tr>
-<tr><td><b>7</b></td><td>EPL 등 엄지 신전근</td><td>—</td><td>pinch+grasp 단일 단계; intrinsic 재건 필수 고려</td></tr>
-<tr><td><b>8</b></td><td>수지 굴곡근</td><td>—</td><td>grasp 보존 — pinch 보강만 판단</td></tr>
-<tr><td><b>9</b></td><td>내재근 제외 전부</td><td>—</td><td>intrinsic 재건만 (FDS lasso vs House graft)</td></tr>
-<tr><td><b>X</b></td><td colspan="3">예외 — incomplete SCI의 비전형 조합, 목표·술식 개별화 (회복이 1년+ 지속될 수 있어 안정 확인까지 대기)</td></tr>
-</table></div>
-<p><span class="chip">O = 감각 없음 → "eyes on"(시각 보상) 필요, 양손 동시 조작 불가</span> <span class="chip">Cu = cutaneous, 엄지·검지 2-PD &lt;10 mm</span> <span class="chip">T+ / T− = triceps grade 4 여부</span></p>
+<div class="icgrid">
+<div class="tablewrap"><table id="ictable">
+<tr><th>Group</th><th>Grade 4 강도의 근육</th></tr>
+<tr data-g="0"><td>0</td><td>없음 — BR도 grade &lt;4 <span class="muted">(공식 표 밖 · 본문 기재)</span></td></tr>
+<tr data-g="1"><td>1</td><td>BR (brachioradialis)</td></tr>
+<tr data-g="2"><td>2</td><td>ECRL (extensor carpi radialis longus)</td></tr>
+<tr data-g="3"><td>3</td><td>ECRB (extensor carpi radialis brevis)</td></tr>
+<tr data-g="4"><td>4</td><td>PT (pronator teres)</td></tr>
+<tr data-g="5"><td>5</td><td>FCR (flexor carpi radialis)</td></tr>
+<tr data-g="6"><td>6</td><td>EDC 및 finger extensors</td></tr>
+<tr data-g="7"><td>7</td><td>EPL 및 thumb extensors</td></tr>
+<tr data-g="8"><td>8</td><td>Finger flexors</td></tr>
+<tr data-g="9"><td>9</td><td>All except intrinsics (내재근 제외 전부)</td></tr>
+<tr data-g="X"><td>X</td><td>Exceptions (예외 — incomplete SCI)</td></tr>
+</table>
+<p style="margin-top:8px"><span class="chip">O = 감각 없음 → "eyes on"(시각 보상), 양손 동시 조작 불가</span> <span class="chip">Cu = cutaneous, 엄지·검지 2-PD &lt;10 mm</span> <span class="chip">T+ / T− = triceps grade 4 여부</span></p>
+</div>
+<div class="icpanel" id="icpanel"><p class="tap">← 표에서 그룹을 선택하세요</p></div>
+</div>
 </section>
 
 <section id="matrix">
@@ -196,10 +203,7 @@ a{color:var(--blue)}
 <tr><td class="gcol">9</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td><b>FDS lasso vs House graft만</b></td><td>단일</td></tr>
 <tr><td class="gcol">X</td><td colspan="7" style="color:var(--sub)">개별 평가 — 보유 기능은 생략, 부족분만 조합</td></tr>
 </table></div>
-<p class="muted">횡단 원칙: donor가 늘수록 tenodesis → 능동 transfer → dexterity 옵션(opponensplasty) 순으로 업그레이드 · 우선은 "power"(굴곡 = pinch·grasp), 신전은 필요 시 passive tenodesis · 요측 편위 wrist extension은 <strong>ECU tenodesis</strong>로 중립화 시 grasp 강도 약 2배.</p>
-<h3>그룹을 클릭하면 상세 옵션</h3>
-<div class="icbtns" id="icbtns"></div>
-<div class="icpanel" id="icpanel"></div>
+<p class="muted">횡단 원칙: donor가 늘수록 tenodesis → 능동 transfer → dexterity 옵션(opponensplasty) 순으로 업그레이드 · 우선은 "power"(굴곡 = pinch·grasp), 신전은 필요 시 passive tenodesis · 요측 편위 wrist extension은 <strong>ECU tenodesis</strong>로 중립화 시 grasp 강도 약 2배. 그룹별 술식 구성 상세는 <a href="#icsht">위 ICSHT 표</a>에서 그룹을 클릭.</p>
 </section>
 
 <section id="stage">
@@ -383,18 +387,20 @@ const IC = [
  {g:"X", m:"incomplete — 비전형 조합", rows:[["원칙","보유 기능은 생략, 부족분만 조합 (예: elbow extension 보유 → 생략, 수지 신전 보유 → single-stage pinch+grasp)"],["시기","회복이 1년+ 지속 가능 — 안정 확인까지 대기"]],
   note:"목표·술식 개별화."}
 ];
-const btns=document.getElementById("icbtns"),panel=document.getElementById("icpanel");
-IC.forEach((d,i)=>{
-  const b=document.createElement("button");b.className="icbtn";b.textContent="IC "+d.g;
-  b.onclick=()=>{document.querySelectorAll(".icbtn").forEach(x=>x.classList.remove("on"));b.classList.add("on");
-    panel.className="icpanel show";
-    panel.innerHTML="<h3>IC 그룹 "+d.g+" <span class='chip donor'>"+d.m+"</span></h3>"
-      +"<div class='tablewrap'><table>"+d.rows.map(r=>"<tr><th>"+r[0]+"</th><td>"+r[1]+"</td></tr>").join("")+"</table></div>"
-      +"<p style='margin-top:8px'>"+d.note+"</p>";
-  };
-  btns.appendChild(b);
-  if(i===2){b.click();}
+const panel=document.getElementById("icpanel");
+function showIC(g,row,skipScroll){
+  const d=IC.find(x=>x.g===g); if(!d) return;
+  document.querySelectorAll("#ictable tr[data-g]").forEach(x=>x.classList.remove("on"));
+  row.classList.add("on");
+  panel.innerHTML="<h3>IC 그룹 "+d.g+" <span class='chip donor'>"+d.m+"</span></h3>"
+    +"<div class='tablewrap'><table>"+d.rows.map(r=>"<tr><th>"+r[0]+"</th><td>"+r[1]+"</td></tr>").join("")+"</table></div>"
+    +"<p style='margin-top:8px'>"+d.note+"</p>";
+  if(!skipScroll && window.matchMedia("(max-width: 819px)").matches){panel.scrollIntoView({behavior:"smooth",block:"nearest"});}
+}
+document.querySelectorAll("#ictable tr[data-g]").forEach(row=>{
+  row.addEventListener("click",()=>showIC(row.dataset.g,row));
 });
+const def=document.querySelector('#ictable tr[data-g="3"]'); if(def) showIC("3",def,true);
 </script>
 </body>
 </html>
