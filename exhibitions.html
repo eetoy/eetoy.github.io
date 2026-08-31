@@ -125,6 +125,12 @@ article.saved{border-color:color-mix(in srgb,var(--brick) 45%,var(--rule-soft))}
 .savebar button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 .chip-n{font-family:var(--mono);font-size:10.5px;opacity:.7;margin-left:5px;
   font-variant-numeric:tabular-nums}
+.msel{font-family:var(--sans);font-size:12.5px;color:var(--ink);background:var(--card);
+  border:1px solid var(--rule);border-radius:100px;padding:5px 12px;cursor:pointer;
+  max-width:240px}
+.msel:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.hint{font-family:var(--mono);font-size:10px;color:var(--ink-faint);letter-spacing:.08em;
+  align-self:center}
 
 /* ── 미술관 목록 ───────────────────────── */
 .sources{margin-top:64px;border-top:1px solid var(--ink);padding-top:22px}
@@ -157,19 +163,20 @@ footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--rule);
   <div class="stamp">
     <span>갱신 2026-08-31</span>
     <span>미술관 56곳</span>
-    <span>전시 87건</span>
+    <span>전시 83건</span>
     <span>주 1회 갱신</span>
   </div>
 </header>
 
 <div class="bar">
-  <div class="group"><b>권역</b><button class="f" data-k="region" data-v="전체" aria-pressed="true">전체</button><button class="f" data-k="region" data-v="분당" aria-pressed="false">분당</button><button class="f" data-k="region" data-v="과천" aria-pressed="false">과천</button><button class="f" data-k="region" data-v="경기남부" aria-pressed="false">경기남부</button><button class="f" data-k="region" data-v="강남·청담" aria-pressed="false">강남·청담</button><button class="f" data-k="region" data-v="잠실·서초" aria-pressed="false">잠실·서초</button><button class="f" data-k="region" data-v="여의도" aria-pressed="false">여의도</button><button class="f" data-k="region" data-v="한남·용산" aria-pressed="false">한남·용산</button><button class="f" data-k="region" data-v="광화문·중구" aria-pressed="false">광화문·중구</button><button class="f" data-k="region" data-v="인사동·삼청" aria-pressed="false">인사동·삼청</button><button class="f" data-k="region" data-v="서촌·평창" aria-pressed="false">서촌·평창</button><button class="f" data-k="region" data-v="성수·기타 서울" aria-pressed="false">성수·기타 서울</button><button class="f" data-k="region" data-v="고양" aria-pressed="false">고양</button><button class="f" data-k="region" data-v="경기서부" aria-pressed="false">경기서부</button></div>
+  <div class="group"><b>권역</b><button class="f" data-k="region" data-v="전체" aria-pressed="true">전체</button><button class="f" data-k="region" data-v="분당" aria-pressed="false">분당</button><button class="f" data-k="region" data-v="과천" aria-pressed="false">과천</button><button class="f" data-k="region" data-v="경기남부" aria-pressed="false">경기남부</button><button class="f" data-k="region" data-v="강남·청담" aria-pressed="false">강남·청담</button><button class="f" data-k="region" data-v="잠실·서초" aria-pressed="false">잠실·서초</button><button class="f" data-k="region" data-v="여의도" aria-pressed="false">여의도</button><button class="f" data-k="region" data-v="한남·용산" aria-pressed="false">한남·용산</button><button class="f" data-k="region" data-v="광화문·중구" aria-pressed="false">광화문·중구</button><button class="f" data-k="region" data-v="인사동·삼청" aria-pressed="false">인사동·삼청</button><button class="f" data-k="region" data-v="서촌·평창" aria-pressed="false">서촌·평창</button><button class="f" data-k="region" data-v="성수·기타 서울" aria-pressed="false">성수·기타 서울</button><button class="f" data-k="region" data-v="고양" aria-pressed="false">고양</button><button class="f" data-k="region" data-v="경기서부" aria-pressed="false">경기서부</button><span class="hint">복수 선택</span></div>
+  <div class="group"><b>미술관</b><select class="msel" id="museum-select" aria-label="미술관 선택"><option value="전체">전체 미술관</option><option value="성남큐브미술관">성남큐브미술관 · 2건</option><option value="국립현대미술관 과천">국립현대미술관 과천 · 6건</option><option value="백남준아트센터">백남준아트센터 · 4건</option><option value="수원시립미술관">수원시립미술관 · 3건</option><option value="호암미술관">호암미술관 · 2건</option><option value="송은">송은 · 1건</option><option value="소마미술관">소마미술관 · 3건</option><option value="예술의전당 한가람미술관">예술의전당 한가람미술관 · 1건</option><option value="퐁피두센터 한화">퐁피두센터 한화 · 1건</option><option value="국립중앙박물관">국립중앙박물관 · 5건</option><option value="리움미술관">리움미술관 · 4건</option><option value="그라운드시소 용산">그라운드시소 용산 · 1건</option><option value="그라운드시소 한남">그라운드시소 한남 · 1건</option><option value="아모레퍼시픽미술관">아모레퍼시픽미술관 · 1건</option><option value="타데우스 로팍 서울">타데우스 로팍 서울 · 1건</option><option value="국립현대미술관 덕수궁">국립현대미술관 덕수궁 · 2건</option><option value="서울시립미술관">서울시립미술관 · 2건</option><option value="그라운드시소 명동">그라운드시소 명동 · 1건</option><option value="성곡미술관">성곡미술관 · 1건</option><option value="서울공예박물관">서울공예박물관 · 9건</option><option value="국립현대미술관 서울">국립현대미술관 서울 · 6건</option><option value="국제갤러리">국제갤러리 · 2건</option><option value="아트선재센터">아트선재센터 · 2건</option><option value="금호미술관">금호미술관 · 1건</option><option value="뮤지엄한미 삼청">뮤지엄한미 삼청 · 1건</option><option value="환기미술관">환기미술관 · 3건</option><option value="김종영미술관">김종영미술관 · 1건</option><option value="서울시립 북서울미술관">서울시립 북서울미술관 · 5건</option><option value="디뮤지엄">디뮤지엄 · 2건</option><option value="서울시립 남서울미술관">서울시립 남서울미술관 · 2건</option><option value="박서보미술관 서울">박서보미술관 서울 · 1건</option><option value="서울시립 서서울미술관">서울시립 서서울미술관 · 1건</option><option value="아르코미술관">아르코미술관 · 1건</option><option value="어울림미술관">어울림미술관 · 1건</option><option value="경기도미술관">경기도미술관 · 3건</option></select></div>
   <div class="group"><b>상태</b><button class="f" data-k="status" data-v="전체" aria-pressed="true">전체</button><button class="f" data-k="status" data-v="곧종료" aria-pressed="false">곧종료</button><button class="f" data-k="status" data-v="진행중" aria-pressed="false">진행중</button><button class="f" data-k="status" data-v="예정" aria-pressed="false">예정</button><button class="f" data-k="status" data-v="상설" aria-pressed="false">상설</button></div>
   <div class="group">
     <button class="f" data-k="free" data-v="1" aria-pressed="false">무료만</button>
     <button class="f" data-k="saved" data-v="1" aria-pressed="false" id="btn-saved">🔖 갈무리<span class="chip-n" id="saved-n"></span></button>
   </div>
-  <span class="count" id="count">87건</span>
+  <span class="count" id="count">83건</span>
 </div>
 
 <div class="savebar" id="savebar">
@@ -232,84 +239,6 @@ footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--rule);
     <p class="summary">국내에서 처음 본격적으로 태국 문화와 미술을 소개하는 특별전으로 태국 국립기관 21곳에서 온 214건 239점을 선보입니다. 선사시대부터 20세기 중반까지의 조각·회화·공예를 다루며 수코타이 시대 &#x27;걷는 부처&#x27; 상이 대표작입니다.</p>
     <div class="facts"><span class="fact free">성인 8,000원 · 6세 이하 무료</span><span class="fact">휴관 1월 1일·설·추석 당일·9월 7일</span><span class="fact">~50분</span><span class="fact kid">유아 · 어린이박물관에서 유모차 무료 대여(사전예약), 야외 정원 07:00~22:00 개방</span></div>
     <a class="go" href="https://www.museum.go.kr/MUSEUM/contents/M0202010000.do?menuId=current&amp;schM=view&amp;act=current&amp;exhiSpThemId=3529711&amp;listType=list" target="_blank" rel="noreferrer">공식 페이지 →</a>
-  </div>
-</article>
-<article data-region="한남·용산" data-status="진행중" data-free="1"
-  data-id="fb04929516" data-museum="리움미술관" data-title="가브리엘 오로즈코 정원"
-  data-period="2026-04-03 ~ 미확인" data-link="https://www.leeumhoam.org/leeum/exhibition/97">
-  <div class="pshell"><a class="poster" href="https://www.leeumhoam.org/leeum/exhibition/97" target="_blank" rel="noreferrer" aria-label="가브리엘 오로즈코 정원 공식 페이지 열기"><img src="https://www.leeumhoam.org/upload/banner/1775548471823_o_thumb.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">리움미술관</span><span class="ft">가브리엘 오로즈코 정원</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a><button class="bm" data-id="fb04929516" aria-pressed="false" aria-label="가브리엘 오로즈코 정원 갈무리" title="갈무리"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12a1 1 0 0 1 1 1V21l-7-4.2L5 21V4.5a1 1 0 0 1 1-1z"/></svg></button></div>
-  <div class="body">
-    <div class="museum"><span>리움미술관</span><span>한남·용산</span></div>
-    <h2>가브리엘 오로즈코 정원</h2>
-    <div class="period">2026-04-03 ~ 미확인</div>
-    <p class="summary">멕시코 작가 가브리엘 오로즈코가 리움 야외 데크를 위해 구상한 장소특정적 정원입니다. 약 500평 데크에 &#x27;원의 배열&#x27; 기하 패턴이 열 개의 연속 공간을 이루고, 바닥은 충남 보령석을 맞춤 가공했습니다. 소나무 17주·매화 11주·대나무 약 1,500주가 심겼습니다.</p>
-    <div class="facts"><span class="fact free">무료</span><span class="fact">휴관 월요일</span><span class="fact">~50분</span><span class="fact kid">유아 · 야외 평지 데크라 유모차 접근이 가장 쉽고 플라자마다 벤치 있음</span></div>
-    <a class="go" href="https://www.leeumhoam.org/leeum/exhibition/97" target="_blank" rel="noreferrer">공식 페이지 →</a>
-  </div>
-</article>
-<article data-region="성수·기타 서울" data-status="진행중" data-free="0"
-  data-id="66019c79cb" data-museum="박서보미술관 서울" data-title="박서보와 흐엉 도딘: 비움 그 충만 (개관전)"
-  data-period="2026-08-21 ~ 미확인" data-link="https://parkseobofoundation.org">
-  <div class="pshell"><a class="poster" href="https://parkseobofoundation.org" target="_blank" rel="noreferrer" aria-label="박서보와 흐엉 도딘: 비움 그 충만 (개관전) 공식 페이지 열기"><div class="fallback"><span class="fm">박서보미술관 서울</span><span class="ft">박서보와 흐엉 도딘: 비움 그 충만 (개관전)</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a><button class="bm" data-id="66019c79cb" aria-pressed="false" aria-label="박서보와 흐엉 도딘: 비움 그 충만 (개관전) 갈무리" title="갈무리"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12a1 1 0 0 1 1 1V21l-7-4.2L5 21V4.5a1 1 0 0 1 1-1z"/></svg></button></div>
-  <div class="body">
-    <div class="museum"><span>박서보미술관 서울</span><span>성수·기타 서울</span></div>
-    <h2>박서보와 흐엉 도딘: 비움 그 충만 (개관전)</h2>
-    <div class="period">2026-08-21 ~ 미확인</div>
-    <p class="summary">2026년 8월 21일 서대문구 연희동 박서보 작업실 옆에 개관한 박서보미술관 서울의 개관전. 한국 단색화 거장 박서보와 베트남 출신 프랑스 작가 흐엉 도딘의 2인전으로, 지하 2층부터 지상 3층까지 605평 규모. 운영시간·예약제 여부는 공식 채널에서 확인 필요.</p>
-    <div class="facts"><span class="fact">미확인</span></div>
-    <a class="go" href="https://parkseobofoundation.org" target="_blank" rel="noreferrer">공식 페이지 →</a>
-  </div>
-</article>
-<article data-region="잠실·서초" data-status="진행중" data-free="0"
-  data-id="94cb7052c4" data-museum="예술의전당 한가람디자인미술관" data-title="페르난도 보테로: 형태의 미학"
-  data-period="2026-04-24 ~ 2026-08-30" data-link="https://www.sac.or.kr/site/main/show/show_view?SN=76470">
-  <div class="pshell"><a class="poster" href="https://www.sac.or.kr/site/main/show/show_view?SN=76470" target="_blank" rel="noreferrer" aria-label="페르난도 보테로: 형태의 미학 공식 페이지 열기"><img src="https://www.sac.or.kr/site/main/file/thumbnail/uu/39c659b3cfcb4afa897fca9e8f454f72" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">예술의전당 한가람디자인미술관</span><span class="ft">페르난도 보테로: 형태의 미학</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a><button class="bm" data-id="94cb7052c4" aria-pressed="false" aria-label="페르난도 보테로: 형태의 미학 갈무리" title="갈무리"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12a1 1 0 0 1 1 1V21l-7-4.2L5 21V4.5a1 1 0 0 1 1-1z"/></svg></button></div>
-  <div class="body">
-    <div class="museum"><span>예술의전당 한가람디자인미술관</span><span>잠실·서초</span></div>
-    <h2>페르난도 보테로: 형태의 미학</h2>
-    <div class="period">2026-04-24 ~ 2026-08-30</div>
-    <p class="summary">콜롬비아 작가 페르난도 보테로를 소개하는 전시로 한가람디자인미술관 1층 제1~3전시실에서 열립니다. 부피감과 충만함을 강조한 보테로 특유의 형태 언어가 중심입니다.</p>
-    <div class="facts"><span class="fact">성인 23,000원 · 유아(4~6세) 12,000원</span><span class="fact">휴관 월요일</span><span class="fact">~45분</span><span class="fact kid">유아 · 4~6세도 유료. 1층 전시실이라 유모차 접근 수월</span></div>
-    <a class="go" href="https://www.sac.or.kr/site/main/show/show_view?SN=76470" target="_blank" rel="noreferrer">공식 페이지 →</a>
-  </div>
-</article>
-<article data-region="광화문·중구" data-status="진행중" data-free="0"
-  data-id="9f4278d455" data-museum="그라운드시소 센트럴" data-title="맥스 시덴토프 개인전"
-  data-period="2026-03-27 ~ 2026-08-30" data-link="https://groundseesaw.co.kr">
-  <div class="pshell"><a class="poster" href="https://groundseesaw.co.kr" target="_blank" rel="noreferrer" aria-label="맥스 시덴토프 개인전 공식 페이지 열기"><div class="fallback"><span class="fm">그라운드시소 센트럴</span><span class="ft">맥스 시덴토프 개인전</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a><button class="bm" data-id="9f4278d455" aria-pressed="false" aria-label="맥스 시덴토프 개인전 갈무리" title="갈무리"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12a1 1 0 0 1 1 1V21l-7-4.2L5 21V4.5a1 1 0 0 1 1-1z"/></svg></button></div>
-  <div class="body">
-    <div class="museum"><span>그라운드시소 센트럴</span><span>광화문·중구</span></div>
-    <h2>맥스 시덴토프 개인전</h2>
-    <div class="period">2026-03-27 ~ 2026-08-30</div>
-    <p class="summary">해외 작가 개인전. 관람료 미확인.</p>
-    <div class="facts"><span class="fact">미확인 (공식 사이트 예매)</span><span class="fact">~55분</span></div>
-    <a class="go" href="https://groundseesaw.co.kr" target="_blank" rel="noreferrer">공식 페이지 →</a>
-  </div>
-</article>
-<article data-region="인사동·삼청" data-status="진행중" data-free="1"
-  data-id="85b1fb505c" data-museum="국립현대미술관 서울" data-title="그래도 해보던 날들"
-  data-period="2026-04-17 ~ 2026-08-30" data-link="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202603300002070">
-  <div class="pshell"><a class="poster" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202603300002070" target="_blank" rel="noreferrer" aria-label="그래도 해보던 날들 공식 페이지 열기"><img src="https://www.mmca.go.kr/upload/exhibition/2026/04/2026041708544348811937.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">국립현대미술관 서울</span><span class="ft">그래도 해보던 날들</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a><button class="bm" data-id="85b1fb505c" aria-pressed="false" aria-label="그래도 해보던 날들 갈무리" title="갈무리"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12a1 1 0 0 1 1 1V21l-7-4.2L5 21V4.5a1 1 0 0 1 1-1z"/></svg></button></div>
-  <div class="body">
-    <div class="museum"><span>국립현대미술관 서울</span><span>인사동·삼청</span></div>
-    <h2>그래도 해보던 날들</h2>
-    <div class="period">2026-04-17 ~ 2026-08-30</div>
-    <p class="summary">MMCA 아이공간에서 열리는 무료 교육 전시. 만들고 실패하고 다시 시도하는 창작 과정 자체를 주제로 삼았고, 관람과 함께 상시 워크숍에 직접 참여할 수 있습니다.</p>
-    <div class="facts"><span class="fact free">무료</span><span class="fact">휴관 1월 1일·설·추석 당일</span><span class="fact">~60분</span><span class="fact kid">유아 · 어린이 대상 체험형, 유아 동반에 적합</span></div>
-    <a class="go" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202603300002070" target="_blank" rel="noreferrer">공식 페이지 →</a>
-  </div>
-</article>
-<article data-region="인사동·삼청" data-status="진행중" data-free="1"
-  data-id="2e31c555b4" data-museum="서울공예박물관" data-title="공예동행@쇼윈도 #4 — 몸에 베인 기억을 묻다"
-  data-period="2026-07-22 ~ 2026-08-30" data-link="https://craftmuseum.seoul.go.kr/exhibit/plan/view/191">
-  <div class="pshell"><a class="poster" href="https://craftmuseum.seoul.go.kr/exhibit/plan/view/191" target="_blank" rel="noreferrer" aria-label="공예동행@쇼윈도 #4 — 몸에 베인 기억을 묻다 공식 페이지 열기"><img src="https://craftmuseum.seoul.go.kr/common/exhibition/filedown?idx=1971" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">서울공예박물관</span><span class="ft">공예동행@쇼윈도 #4 — 몸에 베인 기억을 묻다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a><button class="bm" data-id="2e31c555b4" aria-pressed="false" aria-label="공예동행@쇼윈도 #4 — 몸에 베인 기억을 묻다 갈무리" title="갈무리"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12a1 1 0 0 1 1 1V21l-7-4.2L5 21V4.5a1 1 0 0 1 1-1z"/></svg></button></div>
-  <div class="body">
-    <div class="museum"><span>서울공예박물관</span><span>인사동·삼청</span></div>
-    <h2>공예동행@쇼윈도 #4 — 몸에 베인 기억을 묻다</h2>
-    <div class="period">2026-07-22 ~ 2026-08-30</div>
-    <p class="summary">전시3동 1층 쇼윈도 갤러리에서 열리는 소규모 연속 기획의 네 번째 전시입니다. 유리 너머로 보는 형태라 전시실 입장 없이 관람할 수 있습니다.</p>
-    <div class="facts"><span class="fact free">무료</span><span class="fact">휴관 월요일(공휴일이면 개관)</span><span class="fact">~60분</span><span class="fact kid">유아 · 쇼윈도 형식이라 유모차로 짧게 보고 지나가기 좋음</span></div>
-    <a class="go" href="https://craftmuseum.seoul.go.kr/exhibit/plan/view/191" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
 <article data-region="성수·기타 서울" data-status="진행중" data-free="1"
@@ -1040,6 +969,71 @@ footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--rule);
     <a class="go" href="https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202601060002026" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
+<article data-region="한남·용산" data-status="진행중" data-free="1"
+  data-id="fb04929516" data-museum="리움미술관" data-title="가브리엘 오로즈코 정원"
+  data-period="2026-04-03 ~ 미확인" data-link="https://www.leeumhoam.org/leeum/exhibition/97">
+  <div class="pshell"><a class="poster" href="https://www.leeumhoam.org/leeum/exhibition/97" target="_blank" rel="noreferrer" aria-label="가브리엘 오로즈코 정원 공식 페이지 열기"><img src="https://www.leeumhoam.org/upload/banner/1775548471823_o_thumb.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">리움미술관</span><span class="ft">가브리엘 오로즈코 정원</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a><button class="bm" data-id="fb04929516" aria-pressed="false" aria-label="가브리엘 오로즈코 정원 갈무리" title="갈무리"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12a1 1 0 0 1 1 1V21l-7-4.2L5 21V4.5a1 1 0 0 1 1-1z"/></svg></button></div>
+  <div class="body">
+    <div class="museum"><span>리움미술관</span><span>한남·용산</span></div>
+    <h2>가브리엘 오로즈코 정원</h2>
+    <div class="period">2026-04-03 ~ 미확인</div>
+    <p class="summary">멕시코 작가 가브리엘 오로즈코가 리움 야외 데크를 위해 구상한 장소특정적 정원입니다. 약 500평 데크에 &#x27;원의 배열&#x27; 기하 패턴이 열 개의 연속 공간을 이루고, 바닥은 충남 보령석을 맞춤 가공했습니다. 소나무 17주·매화 11주·대나무 약 1,500주가 심겼습니다.</p>
+    <div class="facts"><span class="fact free">무료</span><span class="fact">휴관 월요일</span><span class="fact">~50분</span><span class="fact kid">유아 · 야외 평지 데크라 유모차 접근이 가장 쉽고 플라자마다 벤치 있음</span></div>
+    <a class="go" href="https://www.leeumhoam.org/leeum/exhibition/97" target="_blank" rel="noreferrer">공식 페이지 →</a>
+  </div>
+</article>
+<article data-region="성수·기타 서울" data-status="진행중" data-free="0"
+  data-id="66019c79cb" data-museum="박서보미술관 서울" data-title="박서보와 흐엉 도딘: 비움 그 충만 (개관전)"
+  data-period="2026-08-21 ~ 미확인" data-link="https://parkseobofoundation.org">
+  <div class="pshell"><a class="poster" href="https://parkseobofoundation.org" target="_blank" rel="noreferrer" aria-label="박서보와 흐엉 도딘: 비움 그 충만 (개관전) 공식 페이지 열기"><div class="fallback"><span class="fm">박서보미술관 서울</span><span class="ft">박서보와 흐엉 도딘: 비움 그 충만 (개관전)</span><span class="fn">포스터 이미지 없음</span></div><span class="pill ">진행중</span><span class="veil">공식 페이지 열기 →</span></a><button class="bm" data-id="66019c79cb" aria-pressed="false" aria-label="박서보와 흐엉 도딘: 비움 그 충만 (개관전) 갈무리" title="갈무리"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12a1 1 0 0 1 1 1V21l-7-4.2L5 21V4.5a1 1 0 0 1 1-1z"/></svg></button></div>
+  <div class="body">
+    <div class="museum"><span>박서보미술관 서울</span><span>성수·기타 서울</span></div>
+    <h2>박서보와 흐엉 도딘: 비움 그 충만 (개관전)</h2>
+    <div class="period">2026-08-21 ~ 미확인</div>
+    <p class="summary">2026년 8월 21일 서대문구 연희동 박서보 작업실 옆에 개관한 박서보미술관 서울의 개관전. 한국 단색화 거장 박서보와 베트남 출신 프랑스 작가 흐엉 도딘의 2인전으로, 지하 2층부터 지상 3층까지 605평 규모. 운영시간·예약제 여부는 공식 채널에서 확인 필요.</p>
+    <div class="facts"><span class="fact">미확인</span></div>
+    <a class="go" href="https://parkseobofoundation.org" target="_blank" rel="noreferrer">공식 페이지 →</a>
+  </div>
+</article>
+<article data-region="경기남부" data-status="예정" data-free="0"
+  data-id="cd6e851a73" data-museum="호암미술관" data-title="아트스펙트럼 2026 — 방이있고모든라디오가각기다른주파수를향하고있다"
+  data-period="2026-09-01 ~ 2026-12-27" data-link="https://www.leeumhoam.org/hoam/exhibition">
+  <div class="pshell"><a class="poster" href="https://www.leeumhoam.org/hoam/exhibition" target="_blank" rel="noreferrer" aria-label="아트스펙트럼 2026 — 방이있고모든라디오가각기다른주파수를향하고있다 공식 페이지 열기"><div class="fallback"><span class="fm">호암미술관</span><span class="ft">아트스펙트럼 2026 — 방이있고모든라디오가각기다른주파수를향하고있다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span><span class="veil">공식 페이지 열기 →</span></a><button class="bm" data-id="cd6e851a73" aria-pressed="false" aria-label="아트스펙트럼 2026 — 방이있고모든라디오가각기다른주파수를향하고있다 갈무리" title="갈무리"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12a1 1 0 0 1 1 1V21l-7-4.2L5 21V4.5a1 1 0 0 1 1-1z"/></svg></button></div>
+  <div class="body">
+    <div class="museum"><span>호암미술관</span><span>경기남부</span></div>
+    <h2>아트스펙트럼 2026 — 방이있고모든라디오가각기다른주파수를향하고있다</h2>
+    <div class="period">2026-09-01 ~ 2026-12-27</div>
+    <p class="summary">파리 팔레 드 도쿄와 공동기획한 전시로, 2001년 시작된 아트스펙트럼이 처음 호암미술관에서 열립니다. 10개국 23명(팀)이 시각예술·건축·영화·디자인·음악을 넘나드는 장소특정적 작업을 실내외 전역에 선보입니다.</p>
+    <div class="facts"><span class="fact">휴관 월요일</span><span class="fact">~40분</span><span class="fact kid">유아 · 야외를 폭넓게 써서 정원 산책과 병행 가능</span></div>
+    <a class="go" href="https://www.leeumhoam.org/hoam/exhibition" target="_blank" rel="noreferrer">공식 페이지 →</a>
+  </div>
+</article>
+<article data-region="한남·용산" data-status="예정" data-free="0"
+  data-id="d3586dc4c4" data-museum="아모레퍼시픽미술관" data-title="조나스 우드"
+  data-period="2026-09-01 ~ 2027-02-28" data-link="https://apma.amorepacific.com/contents/exhibition/index.do">
+  <div class="pshell"><a class="poster" href="https://apma.amorepacific.com/contents/exhibition/index.do" target="_blank" rel="noreferrer" aria-label="조나스 우드 공식 페이지 열기"><img src="https://mma.prnewswire.com/media/2850312/3.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">아모레퍼시픽미술관</span><span class="ft">조나스 우드</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span><span class="veil">공식 페이지 열기 →</span></a><button class="bm" data-id="d3586dc4c4" aria-pressed="false" aria-label="조나스 우드 갈무리" title="갈무리"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12a1 1 0 0 1 1 1V21l-7-4.2L5 21V4.5a1 1 0 0 1 1-1z"/></svg></button></div>
+  <div class="body">
+    <div class="museum"><span>아모레퍼시픽미술관</span><span>한남·용산</span></div>
+    <h2>조나스 우드</h2>
+    <div class="period">2026-09-01 ~ 2027-02-28</div>
+    <p class="summary">LA 기반 작가 조나스 우드의 아시아 첫 기관 기획전입니다. 20여 년 작업을 아우르는 회화 약 50점과 종이 작업 약 30점 등 80여 점을 선보이며, 선명한 색채와 평면화된 원근법, 촘촘한 패턴이 특징입니다.</p>
+    <div class="facts"><span class="fact">휴관 월요일</span><span class="fact">~50분</span></div>
+    <a class="go" href="https://apma.amorepacific.com/contents/exhibition/index.do" target="_blank" rel="noreferrer">공식 페이지 →</a>
+  </div>
+</article>
+<article data-region="한남·용산" data-status="예정" data-free="1"
+  data-id="aa9dcb2340" data-museum="타데우스 로팍 서울" data-title="게오르그 바젤리츠: Per Mano"
+  data-period="2026-09-01 ~ 2026-11-14" data-link="https://ropac.net/exhibitions/799-georg-baselitz-per-mano/">
+  <div class="pshell"><a class="poster" href="https://ropac.net/exhibitions/799-georg-baselitz-per-mano/" target="_blank" rel="noreferrer" aria-label="게오르그 바젤리츠: Per Mano 공식 페이지 열기"><img src="https://static-assets.artlogic.net/w_1200,h_630,c_fill,f_auto,fl_lossy,q_auto:good/ws-ropac/usr/images/exhibitions/main_image_override/items/1f/1f5a4402badc4bfe977c34d6a1e95256/gb_3108_300dpi.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">타데우스 로팍 서울</span><span class="ft">게오르그 바젤리츠: Per Mano</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span><span class="veil">공식 페이지 열기 →</span></a><button class="bm" data-id="aa9dcb2340" aria-pressed="false" aria-label="게오르그 바젤리츠: Per Mano 갈무리" title="갈무리"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12a1 1 0 0 1 1 1V21l-7-4.2L5 21V4.5a1 1 0 0 1 1-1z"/></svg></button></div>
+  <div class="body">
+    <div class="museum"><span>타데우스 로팍 서울</span><span>한남·용산</span></div>
+    <h2>게오르그 바젤리츠: Per Mano</h2>
+    <div class="period">2026-09-01 ~ 2026-11-14</div>
+    <p class="summary">2026년 4월 타계한 게오르그 바젤리츠가 생전에 갤러리와 함께 구상한 전시로, 말년 10년의 모노타이프 회화 두 연작을 선보입니다. 티치아노 초상을 뒤집어 재해석한 &#x27;Schatten&#x27;(2020), 칠흑 바탕에서 금빛 손이 떠오르는 &#x27;Darkness Goldness&#x27;(2019)가 중심입니다.</p>
+    <div class="facts"><span class="fact free">무료</span><span class="fact">휴관 일·월요일</span><span class="fact">~50분</span><span class="fact kid">유아 · 어둡고 큰 화면에 해골 모티프가 있어 어린 유아에겐 무거울 수 있음</span></div>
+    <a class="go" href="https://ropac.net/exhibitions/799-georg-baselitz-per-mano/" target="_blank" rel="noreferrer">공식 페이지 →</a>
+  </div>
+</article>
 <article data-region="인사동·삼청" data-status="예정" data-free="0"
   data-id="c1975c0f93" data-museum="서울공예박물관" data-title="제2회 서울시 유리지공예상 기념전"
   data-period="2026-09-01 ~ 2026-10-11" data-link="https://news.seoul.go.kr/culture/archives/533847">
@@ -1066,32 +1060,6 @@ footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--rule);
     <a class="go" href="http://kimchongyung.com/archives/exhibition_type/upcoming" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="한남·용산" data-status="예정" data-free="1"
-  data-id="aa9dcb2340" data-museum="타데우스 로팍 서울" data-title="게오르그 바젤리츠: Per Mano"
-  data-period="2026-09-01 ~ 2026-11-14" data-link="https://ropac.net/exhibitions/799-georg-baselitz-per-mano/">
-  <div class="pshell"><a class="poster" href="https://ropac.net/exhibitions/799-georg-baselitz-per-mano/" target="_blank" rel="noreferrer" aria-label="게오르그 바젤리츠: Per Mano 공식 페이지 열기"><img src="https://static-assets.artlogic.net/w_1200,h_630,c_fill,f_auto,fl_lossy,q_auto:good/ws-ropac/usr/images/exhibitions/main_image_override/items/1f/1f5a4402badc4bfe977c34d6a1e95256/gb_3108_300dpi.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">타데우스 로팍 서울</span><span class="ft">게오르그 바젤리츠: Per Mano</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span><span class="veil">공식 페이지 열기 →</span></a><button class="bm" data-id="aa9dcb2340" aria-pressed="false" aria-label="게오르그 바젤리츠: Per Mano 갈무리" title="갈무리"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12a1 1 0 0 1 1 1V21l-7-4.2L5 21V4.5a1 1 0 0 1 1-1z"/></svg></button></div>
-  <div class="body">
-    <div class="museum"><span>타데우스 로팍 서울</span><span>한남·용산</span></div>
-    <h2>게오르그 바젤리츠: Per Mano</h2>
-    <div class="period">2026-09-01 ~ 2026-11-14</div>
-    <p class="summary">2026년 4월 타계한 게오르그 바젤리츠가 생전에 갤러리와 함께 구상한 전시로, 말년 10년의 모노타이프 회화 두 연작을 선보입니다. 티치아노 초상을 뒤집어 재해석한 &#x27;Schatten&#x27;(2020), 칠흑 바탕에서 금빛 손이 떠오르는 &#x27;Darkness Goldness&#x27;(2019)가 중심입니다.</p>
-    <div class="facts"><span class="fact free">무료</span><span class="fact">휴관 일·월요일</span><span class="fact">~50분</span><span class="fact kid">유아 · 어둡고 큰 화면에 해골 모티프가 있어 어린 유아에겐 무거울 수 있음</span></div>
-    <a class="go" href="https://ropac.net/exhibitions/799-georg-baselitz-per-mano/" target="_blank" rel="noreferrer">공식 페이지 →</a>
-  </div>
-</article>
-<article data-region="경기남부" data-status="예정" data-free="0"
-  data-id="cd6e851a73" data-museum="호암미술관" data-title="아트스펙트럼 2026 — 방이있고모든라디오가각기다른주파수를향하고있다"
-  data-period="2026-09-01 ~ 2026-12-27" data-link="https://www.leeumhoam.org/hoam/exhibition">
-  <div class="pshell"><a class="poster" href="https://www.leeumhoam.org/hoam/exhibition" target="_blank" rel="noreferrer" aria-label="아트스펙트럼 2026 — 방이있고모든라디오가각기다른주파수를향하고있다 공식 페이지 열기"><div class="fallback"><span class="fm">호암미술관</span><span class="ft">아트스펙트럼 2026 — 방이있고모든라디오가각기다른주파수를향하고있다</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span><span class="veil">공식 페이지 열기 →</span></a><button class="bm" data-id="cd6e851a73" aria-pressed="false" aria-label="아트스펙트럼 2026 — 방이있고모든라디오가각기다른주파수를향하고있다 갈무리" title="갈무리"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12a1 1 0 0 1 1 1V21l-7-4.2L5 21V4.5a1 1 0 0 1 1-1z"/></svg></button></div>
-  <div class="body">
-    <div class="museum"><span>호암미술관</span><span>경기남부</span></div>
-    <h2>아트스펙트럼 2026 — 방이있고모든라디오가각기다른주파수를향하고있다</h2>
-    <div class="period">2026-09-01 ~ 2026-12-27</div>
-    <p class="summary">파리 팔레 드 도쿄와 공동기획한 전시로, 2001년 시작된 아트스펙트럼이 처음 호암미술관에서 열립니다. 10개국 23명(팀)이 시각예술·건축·영화·디자인·음악을 넘나드는 장소특정적 작업을 실내외 전역에 선보입니다.</p>
-    <div class="facts"><span class="fact">휴관 월요일</span><span class="fact">~40분</span><span class="fact kid">유아 · 야외를 폭넓게 써서 정원 산책과 병행 가능</span></div>
-    <a class="go" href="https://www.leeumhoam.org/hoam/exhibition" target="_blank" rel="noreferrer">공식 페이지 →</a>
-  </div>
-</article>
 <article data-region="한남·용산" data-status="예정" data-free="0"
   data-id="25a3fd89b2" data-museum="리움미술관" data-title="구정아: 우스모스"
   data-period="2026-09-05 ~ 2026-12-27" data-link="https://www.leeumhoam.org/leeum/exhibition/94">
@@ -1105,32 +1073,6 @@ footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--rule);
     <a class="go" href="https://www.leeumhoam.org/leeum/exhibition/94" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
-<article data-region="광화문·중구" data-status="예정" data-free="0"
-  data-id="08b612bd78" data-museum="서울시립미술관" data-title="린 허쉬만 리슨: 나의 [나]들"
-  data-period="2026-10-21 ~ 2027-02-21" data-link="https://sema.seoul.go.kr/kr/bbs/611333/getBbsDetail?bbsNo=1478706">
-  <div class="pshell"><a class="poster" href="https://sema.seoul.go.kr/kr/bbs/611333/getBbsDetail?bbsNo=1478706" target="_blank" rel="noreferrer" aria-label="린 허쉬만 리슨: 나의 [나]들 공식 페이지 열기"><div class="fallback"><span class="fm">서울시립미술관</span><span class="ft">린 허쉬만 리슨: 나의 [나]들</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span><span class="veil">공식 페이지 열기 →</span></a><button class="bm" data-id="08b612bd78" aria-pressed="false" aria-label="린 허쉬만 리슨: 나의 [나]들 갈무리" title="갈무리"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12a1 1 0 0 1 1 1V21l-7-4.2L5 21V4.5a1 1 0 0 1 1-1z"/></svg></button></div>
-  <div class="body">
-    <div class="museum"><span>서울시립미술관</span><span>광화문·중구</span></div>
-    <h2>린 허쉬만 리슨: 나의 [나]들</h2>
-    <div class="period">2026-10-21 ~ 2027-02-21</div>
-    <p class="summary">미국 미디어아티스트이자 영화감독인 린 허쉬만 리슨의 아시아 첫 미술관 개인전으로 약 60년 작업을 조망합니다. 인간과 기술의 관계, 정체성, 감시를 다뤄온 영상·설치 작업이 소개될 예정입니다.</p>
-    <div class="facts"><span class="fact">휴관 월요일(공휴일이면 개관)</span><span class="fact">~55분</span><span class="fact kid">유아 · 유모차 대여·엘리베이터·1층 수유실 이용 가능</span></div>
-    <a class="go" href="https://sema.seoul.go.kr/kr/bbs/611333/getBbsDetail?bbsNo=1478706" target="_blank" rel="noreferrer">공식 페이지 →</a>
-  </div>
-</article>
-<article data-region="한남·용산" data-status="예정" data-free="0"
-  data-id="d3586dc4c4" data-museum="아모레퍼시픽미술관" data-title="조나스 우드"
-  data-period="2026-09-01 ~ 2027-02-28" data-link="https://apma.amorepacific.com/contents/exhibition/index.do">
-  <div class="pshell"><a class="poster" href="https://apma.amorepacific.com/contents/exhibition/index.do" target="_blank" rel="noreferrer" aria-label="조나스 우드 공식 페이지 열기"><img src="https://mma.prnewswire.com/media/2850312/3.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="fallback" style="display:none"><span class="fm">아모레퍼시픽미술관</span><span class="ft">조나스 우드</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span><span class="veil">공식 페이지 열기 →</span></a><button class="bm" data-id="d3586dc4c4" aria-pressed="false" aria-label="조나스 우드 갈무리" title="갈무리"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12a1 1 0 0 1 1 1V21l-7-4.2L5 21V4.5a1 1 0 0 1 1-1z"/></svg></button></div>
-  <div class="body">
-    <div class="museum"><span>아모레퍼시픽미술관</span><span>한남·용산</span></div>
-    <h2>조나스 우드</h2>
-    <div class="period">2026-09-01 ~ 2027-02-28</div>
-    <p class="summary">LA 기반 작가 조나스 우드의 아시아 첫 기관 기획전입니다. 20여 년 작업을 아우르는 회화 약 50점과 종이 작업 약 30점 등 80여 점을 선보이며, 선명한 색채와 평면화된 원근법, 촘촘한 패턴이 특징입니다.</p>
-    <div class="facts"><span class="fact">휴관 월요일</span><span class="fact">~50분</span></div>
-    <a class="go" href="https://apma.amorepacific.com/contents/exhibition/index.do" target="_blank" rel="noreferrer">공식 페이지 →</a>
-  </div>
-</article>
 <article data-region="한남·용산" data-status="예정" data-free="0"
   data-id="fa47d6af84" data-museum="그라운드시소 용산" data-title="브래드 월스 사진전"
   data-period="2026-09-11 ~ 2027-03-01" data-link="https://groundseesaw.co.kr">
@@ -1142,6 +1084,19 @@ footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--rule);
     <p class="summary">항공 사진 작가 브래드 월스 사진전. 얼리버드 판매 중.</p>
     <div class="facts"><span class="fact">미확인 (얼리버드 판매 중)</span><span class="fact">~55분</span></div>
     <a class="go" href="https://groundseesaw.co.kr" target="_blank" rel="noreferrer">공식 페이지 →</a>
+  </div>
+</article>
+<article data-region="광화문·중구" data-status="예정" data-free="0"
+  data-id="08b612bd78" data-museum="서울시립미술관" data-title="린 허쉬만 리슨: 나의 [나]들"
+  data-period="2026-10-21 ~ 2027-02-21" data-link="https://sema.seoul.go.kr/kr/bbs/611333/getBbsDetail?bbsNo=1478706">
+  <div class="pshell"><a class="poster" href="https://sema.seoul.go.kr/kr/bbs/611333/getBbsDetail?bbsNo=1478706" target="_blank" rel="noreferrer" aria-label="린 허쉬만 리슨: 나의 [나]들 공식 페이지 열기"><div class="fallback"><span class="fm">서울시립미술관</span><span class="ft">린 허쉬만 리슨: 나의 [나]들</span><span class="fn">포스터 이미지 없음</span></div><span class="pill next">예정</span><span class="veil">공식 페이지 열기 →</span></a><button class="bm" data-id="08b612bd78" aria-pressed="false" aria-label="린 허쉬만 리슨: 나의 [나]들 갈무리" title="갈무리"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12a1 1 0 0 1 1 1V21l-7-4.2L5 21V4.5a1 1 0 0 1 1-1z"/></svg></button></div>
+  <div class="body">
+    <div class="museum"><span>서울시립미술관</span><span>광화문·중구</span></div>
+    <h2>린 허쉬만 리슨: 나의 [나]들</h2>
+    <div class="period">2026-10-21 ~ 2027-02-21</div>
+    <p class="summary">미국 미디어아티스트이자 영화감독인 린 허쉬만 리슨의 아시아 첫 미술관 개인전으로 약 60년 작업을 조망합니다. 인간과 기술의 관계, 정체성, 감시를 다뤄온 영상·설치 작업이 소개될 예정입니다.</p>
+    <div class="facts"><span class="fact">휴관 월요일(공휴일이면 개관)</span><span class="fact">~55분</span><span class="fact kid">유아 · 유모차 대여·엘리베이터·1층 수유실 이용 가능</span></div>
+    <a class="go" href="https://sema.seoul.go.kr/kr/bbs/611333/getBbsDetail?bbsNo=1478706" target="_blank" rel="noreferrer">공식 페이지 →</a>
   </div>
 </article>
 <article data-region="인사동·삼청" data-status="예정" data-free="0"
@@ -1319,7 +1274,7 @@ footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--rule);
 <section class="sources">
   <h2>정보를 가져온 미술관</h2>
   <p class="lede">아래 56곳의 공식 페이지에서 수집합니다. 미술관 이름을 누르면 공식 사이트로 넘어갑니다. 권역은 분당 출발 거리순이고, 이동 시간은 자차 기준 개략치입니다.</p>
-  <div class="mgroup"><h3><span>분당 · 1곳</span><span>2건</span></h3><div class="mlist"><div class="mrow"><a href="https://www.snart.or.kr" target="_blank" rel="noreferrer">성남큐브미술관</a><span class="ma">분당 야탑 · ~20분</span><span class="mc">2건</span></div></div></div><div class="mgroup"><h3><span>과천 · 1곳</span><span>6건</span></h3><div class="mlist"><div class="mrow"><a href="https://www.mmca.go.kr" target="_blank" rel="noreferrer">국립현대미술관 과천</a><span class="ma">과천 막계동 · ~40분</span><span class="mc">6건</span></div></div></div><div class="mgroup"><h3><span>경기남부 · 3곳</span><span>9건</span></h3><div class="mlist"><div class="mrow"><a href="https://njp.ggcf.kr" target="_blank" rel="noreferrer">백남준아트센터</a><span class="ma">용인 기흥 · ~30분</span><span class="mc">4건</span></div><div class="mrow"><a href="https://www.leeumhoam.org/hoam" target="_blank" rel="noreferrer">호암미술관</a><span class="ma">용인 포곡 · ~40분</span><span class="mc">2건</span></div><div class="mrow"><a href="https://suma.suwon.go.kr" target="_blank" rel="noreferrer">수원시립미술관</a><span class="ma">수원 행궁동 · ~50분</span><span class="mc">3건</span></div></div></div><div class="mgroup"><h3><span>강남·청담 · 2곳</span><span>1건</span></h3><div class="mlist"><div class="mrow"><a href="https://songeun.or.kr" target="_blank" rel="noreferrer">송은</a><span class="ma">강남 청담동 · ~40분</span><span class="mc">1건</span></div><div class="mrow"><a href="https://www.spacec.co.kr" target="_blank" rel="noreferrer">코리아나미술관 스페이스씨</a><span class="ma">강남 신사동 · ~40분</span><span class="mc zero">0건</span></div></div></div><div class="mgroup"><h3><span>잠실·서초 · 4곳</span><span>5건</span></h3><div class="mlist"><div class="mrow"><a href="https://soma.kspo.or.kr" target="_blank" rel="noreferrer">소마미술관</a><span class="ma">송파 올림픽공원 · ~40분</span><span class="mc">3건</span></div><div class="mrow"><a href="https://www.sac.or.kr" target="_blank" rel="noreferrer">예술의전당 한가람미술관</a><span class="ma">서초 서초동 · ~45분</span><span class="mc">1건</span></div><div class="mrow"><a href="https://www.sac.or.kr" target="_blank" rel="noreferrer">예술의전당 한가람디자인미술관</a><span class="ma">서초 서초동 · ~45분</span><span class="mc">1건</span></div><div class="mrow"><a href="https://www.snumoa.org" target="_blank" rel="noreferrer">서울대미술관</a><span class="ma">관악 신림동 · ~50분</span><span class="mc zero">0건</span></div></div></div><div class="mgroup"><h3><span>여의도 · 1곳</span><span>1건</span></h3><div class="mlist"><div class="mrow"><a href="https://www.centrepompidou-hanwha.kr" target="_blank" rel="noreferrer">퐁피두센터 한화</a><span class="ma">영등포 여의도 63빌딩 · ~55분</span><span class="mc">1건</span></div></div></div><div class="mgroup"><h3><span>한남·용산 · 11곳</span><span>13건</span></h3><div class="mlist"><div class="mrow"><a href="https://www.whitestone-gallery.com" target="_blank" rel="noreferrer">화이트스톤갤러리 서울</a><span class="ma">용산 소월로(남산) · ~50분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://www.leeumhoam.org/leeum" target="_blank" rel="noreferrer">리움미술관</a><span class="ma">용산 한남동 · ~50분</span><span class="mc">4건</span></div><div class="mrow"><a href="https://www.museum.go.kr" target="_blank" rel="noreferrer">국립중앙박물관</a><span class="ma">용산 이촌동 · ~50분</span><span class="mc">5건</span></div><div class="mrow"><a href="https://apma.amorepacific.com" target="_blank" rel="noreferrer">아모레퍼시픽미술관</a><span class="ma">용산 한강대로 · ~50분</span><span class="mc">1건</span></div><div class="mrow"><a href="https://www.pacegallery.com" target="_blank" rel="noreferrer">페이스갤러리 서울</a><span class="ma">용산 한남동 · ~50분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://ropac.net" target="_blank" rel="noreferrer">타데우스 로팍 서울</a><span class="ma">용산 한남동 · ~50분</span><span class="mc">1건</span></div><div class="mrow"><a href="https://www.gallerybaton.com" target="_blank" rel="noreferrer">갤러리바톤</a><span class="ma">용산 한남동 · ~50분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://p21.kr" target="_blank" rel="noreferrer">P21</a><span class="ma">용산 한남동 · ~50분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://thisweekendroom.com" target="_blank" rel="noreferrer">디스위켄드룸</a><span class="ma">용산 한남동 · ~50분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://groundseesaw.co.kr" target="_blank" rel="noreferrer">그라운드시소 한남</a><span class="ma">용산 한남동 · ~50분</span><span class="mc">1건</span></div><div class="mrow"><a href="https://groundseesaw.co.kr" target="_blank" rel="noreferrer">그라운드시소 용산</a><span class="ma">용산 · ~55분</span><span class="mc">1건</span></div></div></div><div class="mgroup"><h3><span>광화문·중구 · 7곳</span><span>7건</span></h3><div class="mlist"><div class="mrow"><a href="https://www.mmca.go.kr" target="_blank" rel="noreferrer">국립현대미술관 덕수궁</a><span class="ma">중구 정동 · ~55분</span><span class="mc">2건</span></div><div class="mrow"><a href="https://sema.seoul.go.kr" target="_blank" rel="noreferrer">서울시립미술관</a><span class="ma">중구 서소문 · ~55분</span><span class="mc">2건</span></div><div class="mrow"><a href="https://ilmin.org" target="_blank" rel="noreferrer">일민미술관</a><span class="ma">종로 세종대로 · ~55분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://www.sungkokmuseum.org" target="_blank" rel="noreferrer">성곡미술관</a><span class="ma">종로 신문로 · ~55분</span><span class="mc">1건</span></div><div class="mrow"><a href="https://www.sejongpac.or.kr" target="_blank" rel="noreferrer">세종문화회관 세종미술관</a><span class="ma">종로 세종대로 · ~55분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://groundseesaw.co.kr" target="_blank" rel="noreferrer">그라운드시소 명동</a><span class="ma">중구 명동 · ~55분</span><span class="mc">1건</span></div><div class="mrow"><a href="https://groundseesaw.co.kr" target="_blank" rel="noreferrer">그라운드시소 센트럴</a><span class="ma">중구 서울역 · ~55분</span><span class="mc">1건</span></div></div></div><div class="mgroup"><h3><span>인사동·삼청 · 10곳</span><span>23건</span></h3><div class="mlist"><div class="mrow"><a href="https://www.mmca.go.kr" target="_blank" rel="noreferrer">국립현대미술관 서울</a><span class="ma">종로 삼청동 · ~60분</span><span class="mc">7건</span></div><div class="mrow"><a href="https://craftmuseum.seoul.go.kr" target="_blank" rel="noreferrer">서울공예박물관</a><span class="ma">종로 안국동 · ~60분</span><span class="mc">10건</span></div><div class="mrow"><a href="https://www.kukjegallery.com" target="_blank" rel="noreferrer">국제갤러리</a><span class="ma">종로 삼청동 · ~60분</span><span class="mc">2건</span></div><div class="mrow"><a href="https://www.galleryhyundai.com" target="_blank" rel="noreferrer">갤러리현대</a><span class="ma">종로 삼청동 · ~60분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://www.hakgojae.com" target="_blank" rel="noreferrer">학고재</a><span class="ma">종로 삼청동 · ~60분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://artsonje.org" target="_blank" rel="noreferrer">아트선재센터</a><span class="ma">종로 소격동 · ~60분</span><span class="mc">2건</span></div><div class="mrow"><a href="https://www.kumhomuseum.com" target="_blank" rel="noreferrer">금호미술관</a><span class="ma">종로 사간동 · ~60분</span><span class="mc">1건</span></div><div class="mrow"><a href="https://www.pkmgallery.com" target="_blank" rel="noreferrer">PKM갤러리</a><span class="ma">종로 삼청동 · ~60분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://museumhanmi.or.kr" target="_blank" rel="noreferrer">뮤지엄한미 삼청</a><span class="ma">종로 삼청동 · ~60분</span><span class="mc">1건</span></div><div class="mrow"><a href="https://www.arariogallery.com" target="_blank" rel="noreferrer">아라리오갤러리 서울</a><span class="ma">종로 원서동 · ~60분</span><span class="mc zero">0건</span></div></div></div><div class="mgroup"><h3><span>서촌·평창 · 6곳</span><span>4건</span></h3><div class="mlist"><div class="mrow"><a href="https://www.daelimmuseum.org" target="_blank" rel="noreferrer">대림미술관</a><span class="ma">종로 통의동 · ~60분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="http://www.zahamuseum.com" target="_blank" rel="noreferrer">자하미술관</a><span class="ma">종로 부암동 · ~65분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://whankimuseum.org" target="_blank" rel="noreferrer">환기미술관</a><span class="ma">종로 부암동 · ~65분</span><span class="mc">3건</span></div><div class="mrow"><a href="https://www.ganaart.com" target="_blank" rel="noreferrer">가나아트센터</a><span class="ma">종로 평창동 · ~70분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://www.kimchongyung.com" target="_blank" rel="noreferrer">김종영미술관</a><span class="ma">종로 평창동 · ~70분</span><span class="mc">1건</span></div><div class="mrow"><a href="https://totalmuseum.org" target="_blank" rel="noreferrer">토탈미술관</a><span class="ma">종로 평창동 · ~70분</span><span class="mc zero">0건</span></div></div></div><div class="mgroup"><h3><span>성수·기타 서울 · 7곳</span><span>12건</span></h3><div class="mlist"><div class="mrow"><a href="https://sema.seoul.go.kr" target="_blank" rel="noreferrer">서울시립 남서울미술관</a><span class="ma">관악 남현동 · ~45분</span><span class="mc">2건</span></div><div class="mrow"><a href="https://sema.seoul.go.kr" target="_blank" rel="noreferrer">서울시립 서서울미술관</a><span class="ma">금천 독산동 · ~50분</span><span class="mc">1건</span></div><div class="mrow"><a href="https://www.daelimmuseum.org" target="_blank" rel="noreferrer">디뮤지엄</a><span class="ma">성동 성수동 · ~60분</span><span class="mc">2건</span></div><div class="mrow"><a href="https://www.arko.or.kr/artcenter" target="_blank" rel="noreferrer">아르코미술관</a><span class="ma">종로 대학로 · ~60분</span><span class="mc">1건</span></div><div class="mrow"><a href="https://sema.seoul.go.kr" target="_blank" rel="noreferrer">서울시립 북서울미술관</a><span class="ma">노원 중계동 · ~70분</span><span class="mc">5건</span></div><div class="mrow"><a href="https://savinamuseum.com" target="_blank" rel="noreferrer">사비나미술관</a><span class="ma">은평 진관동 · ~70분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://parkseobofoundation.org" target="_blank" rel="noreferrer">박서보미술관 서울</a><span class="ma">서대문 연희동 · 미확인</span><span class="mc">1건</span></div></div></div><div class="mgroup"><h3><span>고양 · 2곳</span><span>1건</span></h3><div class="mlist"><div class="mrow"><a href="https://www.artgy.or.kr" target="_blank" rel="noreferrer">아람미술관</a><span class="ma">고양 마두동 · ~75분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://www.artgy.or.kr" target="_blank" rel="noreferrer">어울림미술관</a><span class="ma">고양 화정동 · ~80분</span><span class="mc">1건</span></div></div></div><div class="mgroup"><h3><span>경기서부 · 1곳</span><span>3건</span></h3><div class="mlist"><div class="mrow"><a href="https://gmoma.ggcf.kr" target="_blank" rel="noreferrer">경기도미술관</a><span class="ma">안산 단원구 · ~80분</span><span class="mc">3건</span></div></div></div>
+  <div class="mgroup"><h3><span>분당 · 1곳</span><span>2건</span></h3><div class="mlist"><div class="mrow"><a href="https://www.snart.or.kr" target="_blank" rel="noreferrer">성남큐브미술관</a><span class="ma">분당 야탑 · ~20분</span><span class="mc">2건</span></div></div></div><div class="mgroup"><h3><span>과천 · 1곳</span><span>6건</span></h3><div class="mlist"><div class="mrow"><a href="https://www.mmca.go.kr" target="_blank" rel="noreferrer">국립현대미술관 과천</a><span class="ma">과천 막계동 · ~40분</span><span class="mc">6건</span></div></div></div><div class="mgroup"><h3><span>경기남부 · 3곳</span><span>9건</span></h3><div class="mlist"><div class="mrow"><a href="https://njp.ggcf.kr" target="_blank" rel="noreferrer">백남준아트센터</a><span class="ma">용인 기흥 · ~30분</span><span class="mc">4건</span></div><div class="mrow"><a href="https://www.leeumhoam.org/hoam" target="_blank" rel="noreferrer">호암미술관</a><span class="ma">용인 포곡 · ~40분</span><span class="mc">2건</span></div><div class="mrow"><a href="https://suma.suwon.go.kr" target="_blank" rel="noreferrer">수원시립미술관</a><span class="ma">수원 행궁동 · ~50분</span><span class="mc">3건</span></div></div></div><div class="mgroup"><h3><span>강남·청담 · 2곳</span><span>1건</span></h3><div class="mlist"><div class="mrow"><a href="https://songeun.or.kr" target="_blank" rel="noreferrer">송은</a><span class="ma">강남 청담동 · ~40분</span><span class="mc">1건</span></div><div class="mrow"><a href="https://www.spacec.co.kr" target="_blank" rel="noreferrer">코리아나미술관 스페이스씨</a><span class="ma">강남 신사동 · ~40분</span><span class="mc zero">0건</span></div></div></div><div class="mgroup"><h3><span>잠실·서초 · 4곳</span><span>4건</span></h3><div class="mlist"><div class="mrow"><a href="https://soma.kspo.or.kr" target="_blank" rel="noreferrer">소마미술관</a><span class="ma">송파 올림픽공원 · ~40분</span><span class="mc">3건</span></div><div class="mrow"><a href="https://www.sac.or.kr" target="_blank" rel="noreferrer">예술의전당 한가람미술관</a><span class="ma">서초 서초동 · ~45분</span><span class="mc">1건</span></div><div class="mrow"><a href="https://www.sac.or.kr" target="_blank" rel="noreferrer">예술의전당 한가람디자인미술관</a><span class="ma">서초 서초동 · ~45분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://www.snumoa.org" target="_blank" rel="noreferrer">서울대미술관</a><span class="ma">관악 신림동 · ~50분</span><span class="mc zero">0건</span></div></div></div><div class="mgroup"><h3><span>여의도 · 1곳</span><span>1건</span></h3><div class="mlist"><div class="mrow"><a href="https://www.centrepompidou-hanwha.kr" target="_blank" rel="noreferrer">퐁피두센터 한화</a><span class="ma">영등포 여의도 63빌딩 · ~55분</span><span class="mc">1건</span></div></div></div><div class="mgroup"><h3><span>한남·용산 · 11곳</span><span>13건</span></h3><div class="mlist"><div class="mrow"><a href="https://www.whitestone-gallery.com" target="_blank" rel="noreferrer">화이트스톤갤러리 서울</a><span class="ma">용산 소월로(남산) · ~50분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://www.leeumhoam.org/leeum" target="_blank" rel="noreferrer">리움미술관</a><span class="ma">용산 한남동 · ~50분</span><span class="mc">4건</span></div><div class="mrow"><a href="https://www.museum.go.kr" target="_blank" rel="noreferrer">국립중앙박물관</a><span class="ma">용산 이촌동 · ~50분</span><span class="mc">5건</span></div><div class="mrow"><a href="https://apma.amorepacific.com" target="_blank" rel="noreferrer">아모레퍼시픽미술관</a><span class="ma">용산 한강대로 · ~50분</span><span class="mc">1건</span></div><div class="mrow"><a href="https://www.pacegallery.com" target="_blank" rel="noreferrer">페이스갤러리 서울</a><span class="ma">용산 한남동 · ~50분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://ropac.net" target="_blank" rel="noreferrer">타데우스 로팍 서울</a><span class="ma">용산 한남동 · ~50분</span><span class="mc">1건</span></div><div class="mrow"><a href="https://www.gallerybaton.com" target="_blank" rel="noreferrer">갤러리바톤</a><span class="ma">용산 한남동 · ~50분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://p21.kr" target="_blank" rel="noreferrer">P21</a><span class="ma">용산 한남동 · ~50분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://thisweekendroom.com" target="_blank" rel="noreferrer">디스위켄드룸</a><span class="ma">용산 한남동 · ~50분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://groundseesaw.co.kr" target="_blank" rel="noreferrer">그라운드시소 한남</a><span class="ma">용산 한남동 · ~50분</span><span class="mc">1건</span></div><div class="mrow"><a href="https://groundseesaw.co.kr" target="_blank" rel="noreferrer">그라운드시소 용산</a><span class="ma">용산 · ~55분</span><span class="mc">1건</span></div></div></div><div class="mgroup"><h3><span>광화문·중구 · 7곳</span><span>6건</span></h3><div class="mlist"><div class="mrow"><a href="https://www.mmca.go.kr" target="_blank" rel="noreferrer">국립현대미술관 덕수궁</a><span class="ma">중구 정동 · ~55분</span><span class="mc">2건</span></div><div class="mrow"><a href="https://sema.seoul.go.kr" target="_blank" rel="noreferrer">서울시립미술관</a><span class="ma">중구 서소문 · ~55분</span><span class="mc">2건</span></div><div class="mrow"><a href="https://ilmin.org" target="_blank" rel="noreferrer">일민미술관</a><span class="ma">종로 세종대로 · ~55분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://www.sungkokmuseum.org" target="_blank" rel="noreferrer">성곡미술관</a><span class="ma">종로 신문로 · ~55분</span><span class="mc">1건</span></div><div class="mrow"><a href="https://www.sejongpac.or.kr" target="_blank" rel="noreferrer">세종문화회관 세종미술관</a><span class="ma">종로 세종대로 · ~55분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://groundseesaw.co.kr" target="_blank" rel="noreferrer">그라운드시소 명동</a><span class="ma">중구 명동 · ~55분</span><span class="mc">1건</span></div><div class="mrow"><a href="https://groundseesaw.co.kr" target="_blank" rel="noreferrer">그라운드시소 센트럴</a><span class="ma">중구 서울역 · ~55분</span><span class="mc zero">0건</span></div></div></div><div class="mgroup"><h3><span>인사동·삼청 · 10곳</span><span>21건</span></h3><div class="mlist"><div class="mrow"><a href="https://www.mmca.go.kr" target="_blank" rel="noreferrer">국립현대미술관 서울</a><span class="ma">종로 삼청동 · ~60분</span><span class="mc">6건</span></div><div class="mrow"><a href="https://craftmuseum.seoul.go.kr" target="_blank" rel="noreferrer">서울공예박물관</a><span class="ma">종로 안국동 · ~60분</span><span class="mc">9건</span></div><div class="mrow"><a href="https://www.kukjegallery.com" target="_blank" rel="noreferrer">국제갤러리</a><span class="ma">종로 삼청동 · ~60분</span><span class="mc">2건</span></div><div class="mrow"><a href="https://www.galleryhyundai.com" target="_blank" rel="noreferrer">갤러리현대</a><span class="ma">종로 삼청동 · ~60분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://www.hakgojae.com" target="_blank" rel="noreferrer">학고재</a><span class="ma">종로 삼청동 · ~60분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://artsonje.org" target="_blank" rel="noreferrer">아트선재센터</a><span class="ma">종로 소격동 · ~60분</span><span class="mc">2건</span></div><div class="mrow"><a href="https://www.kumhomuseum.com" target="_blank" rel="noreferrer">금호미술관</a><span class="ma">종로 사간동 · ~60분</span><span class="mc">1건</span></div><div class="mrow"><a href="https://www.pkmgallery.com" target="_blank" rel="noreferrer">PKM갤러리</a><span class="ma">종로 삼청동 · ~60분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://museumhanmi.or.kr" target="_blank" rel="noreferrer">뮤지엄한미 삼청</a><span class="ma">종로 삼청동 · ~60분</span><span class="mc">1건</span></div><div class="mrow"><a href="https://www.arariogallery.com" target="_blank" rel="noreferrer">아라리오갤러리 서울</a><span class="ma">종로 원서동 · ~60분</span><span class="mc zero">0건</span></div></div></div><div class="mgroup"><h3><span>서촌·평창 · 6곳</span><span>4건</span></h3><div class="mlist"><div class="mrow"><a href="https://www.daelimmuseum.org" target="_blank" rel="noreferrer">대림미술관</a><span class="ma">종로 통의동 · ~60분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="http://www.zahamuseum.com" target="_blank" rel="noreferrer">자하미술관</a><span class="ma">종로 부암동 · ~65분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://whankimuseum.org" target="_blank" rel="noreferrer">환기미술관</a><span class="ma">종로 부암동 · ~65분</span><span class="mc">3건</span></div><div class="mrow"><a href="https://www.ganaart.com" target="_blank" rel="noreferrer">가나아트센터</a><span class="ma">종로 평창동 · ~70분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://www.kimchongyung.com" target="_blank" rel="noreferrer">김종영미술관</a><span class="ma">종로 평창동 · ~70분</span><span class="mc">1건</span></div><div class="mrow"><a href="https://totalmuseum.org" target="_blank" rel="noreferrer">토탈미술관</a><span class="ma">종로 평창동 · ~70분</span><span class="mc zero">0건</span></div></div></div><div class="mgroup"><h3><span>성수·기타 서울 · 7곳</span><span>12건</span></h3><div class="mlist"><div class="mrow"><a href="https://sema.seoul.go.kr" target="_blank" rel="noreferrer">서울시립 남서울미술관</a><span class="ma">관악 남현동 · ~45분</span><span class="mc">2건</span></div><div class="mrow"><a href="https://sema.seoul.go.kr" target="_blank" rel="noreferrer">서울시립 서서울미술관</a><span class="ma">금천 독산동 · ~50분</span><span class="mc">1건</span></div><div class="mrow"><a href="https://www.daelimmuseum.org" target="_blank" rel="noreferrer">디뮤지엄</a><span class="ma">성동 성수동 · ~60분</span><span class="mc">2건</span></div><div class="mrow"><a href="https://www.arko.or.kr/artcenter" target="_blank" rel="noreferrer">아르코미술관</a><span class="ma">종로 대학로 · ~60분</span><span class="mc">1건</span></div><div class="mrow"><a href="https://sema.seoul.go.kr" target="_blank" rel="noreferrer">서울시립 북서울미술관</a><span class="ma">노원 중계동 · ~70분</span><span class="mc">5건</span></div><div class="mrow"><a href="https://savinamuseum.com" target="_blank" rel="noreferrer">사비나미술관</a><span class="ma">은평 진관동 · ~70분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://parkseobofoundation.org" target="_blank" rel="noreferrer">박서보미술관 서울</a><span class="ma">서대문 연희동 · 미확인</span><span class="mc">1건</span></div></div></div><div class="mgroup"><h3><span>고양 · 2곳</span><span>1건</span></h3><div class="mlist"><div class="mrow"><a href="https://www.artgy.or.kr" target="_blank" rel="noreferrer">아람미술관</a><span class="ma">고양 마두동 · ~75분</span><span class="mc zero">0건</span></div><div class="mrow"><a href="https://www.artgy.or.kr" target="_blank" rel="noreferrer">어울림미술관</a><span class="ma">고양 화정동 · ~80분</span><span class="mc">1건</span></div></div></div><div class="mgroup"><h3><span>경기서부 · 1곳</span><span>3건</span></h3><div class="mlist"><div class="mrow"><a href="https://gmoma.ggcf.kr" target="_blank" rel="noreferrer">경기도미술관</a><span class="ma">안산 단원구 · ~80분</span><span class="mc">3건</span></div></div></div>
 </section>
 
 <footer>
@@ -1330,8 +1285,35 @@ footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--rule);
 <script>
 (function(){
   var KEY="dolmaro.saved.v1";
-  var state={region:"전체",status:"전체",free:false,saved:false};
+  var state={regions:[],museum:"전체",status:"전체",free:false,saved:false};
   var cards=[].slice.call(document.querySelectorAll("article"));
+
+  // ── 상태·D-day는 접속한 날짜 기준으로 재계산 (빌드 시점 값은 초기 표시용) ──
+  var TODAY=new Date(); TODAY.setHours(0,0,0,0);
+  function pdates(s){
+    var m=(s||"").match(/\d{4}[-.\/]\d{1,2}[-.\/]\d{1,2}/g)||[];
+    return m.map(function(x){var p=x.split(/[-.\/]/);return new Date(+p[0],+p[1]-1,+p[2]);});
+  }
+  cards=cards.filter(function(c){
+    var ds=pdates(c.dataset.period), st=c.dataset.status, label=null;
+    if(ds.length){
+      var start=ds[0], end=ds.length>1?ds[1]:null;
+      if(start>TODAY){ st="예정"; }
+      else if(end){
+        var d=Math.round((end-TODAY)/864e5);
+        if(d<0){ c.remove(); return false; }          // 종료된 전시는 접속일 기준으로 숨김
+        st = d<=14 ? "곧종료" : "진행중";
+        if(st==="곧종료") label = d>0 ? "곧종료 D-"+d : "오늘 종료";
+      } else if(st!=="상설"){ st="진행중"; }          // 종료일 미정
+    }
+    c.dataset.status=st;
+    var pill=c.querySelector(".pill");
+    if(pill){
+      pill.textContent=label||st;
+      pill.className="pill "+({"곧종료":"soon","예정":"next","상설":"perm"}[st]||"");
+    }
+    return true;
+  });
   var countEl=document.getElementById("count");
   var emptyEl=document.getElementById("empty");
   var savedNEl=document.getElementById("saved-n");
@@ -1364,7 +1346,8 @@ footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--rule);
   function apply(){
     var n=0;
     cards.forEach(function(c){
-      var ok=(state.region==="전체"||c.dataset.region===state.region)
+      var ok=(!state.regions.length||state.regions.indexOf(c.dataset.region)>-1)
+           &&(state.museum==="전체"||c.dataset.museum===state.museum)
            &&(state.status==="전체"||c.dataset.status===state.status)
            &&(!state.free||c.dataset.free==="1")
            &&(!state.saved||saved.has(c.dataset.id));
@@ -1393,6 +1376,17 @@ footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--rule);
         state[k]=!state[k];
         b.setAttribute("aria-pressed",String(state[k]));
         if(k==="saved") paint();
+      } else if(k==="region"){                        // 권역은 복수 선택
+        if(v==="전체"){ state.regions=[]; }
+        else {
+          var i=state.regions.indexOf(v);
+          if(i>-1) state.regions.splice(i,1); else state.regions.push(v);
+        }
+        document.querySelectorAll('button.f[data-k="region"]').forEach(function(o){
+          o.setAttribute("aria-pressed", String(
+            o.dataset.v==="전체" ? !state.regions.length
+                                 : state.regions.indexOf(o.dataset.v)>-1));
+        });
       } else {
         state[k]=v;
         document.querySelectorAll('button.f[data-k="'+k+'"]').forEach(function(o){
@@ -1431,6 +1425,9 @@ footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--rule);
       img.remove(); if(fb) fb.style.display="flex";
     });
   });
+
+  var msel=document.getElementById("museum-select");
+  if(msel){ msel.addEventListener("change",function(){ state.museum=msel.value; apply(); }); }
 
   paint(); apply();
 })();
