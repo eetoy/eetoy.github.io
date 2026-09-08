@@ -1,0 +1,890 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>DRUJ 손상재건 노트</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+:root{
+  --ink:#1C2733; --ink-soft:#46586A; --ink-faint:#7A8A99;
+  --ground:#FAFBFC; --panel:#FFFFFF; --line:#DDE5EA;
+  --accent:#0F6E6B; --accent-soft:#E4F0EF; --accent-line:#BDD9D7;
+  --pearl-bg:#FBF6E9; --pearl-line:#E4D6AC; --pearl-ink:#6B5410;
+  --th-bg:#EEF4F3; --code-bg:#F1F4F6;
+}
+:root:not([data-theme="light"]){}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#E3EAEF; --ink-soft:#AEBECB; --ink-faint:#7E8FA0;
+    --ground:#141A20; --panel:#1B232B; --line:#2C3843;
+    --accent:#5FBDB8; --accent-soft:#1C2E2D; --accent-line:#2E4C4A;
+    --pearl-bg:#272215; --pearl-line:#4A3F1E; --pearl-ink:#D9C273;
+    --th-bg:#202A31; --code-bg:#222C34;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#E3EAEF; --ink-soft:#AEBECB; --ink-faint:#7E8FA0;
+  --ground:#141A20; --panel:#1B232B; --line:#2C3843;
+  --accent:#5FBDB8; --accent-soft:#1C2E2D; --accent-line:#2E4C4A;
+  --pearl-bg:#272215; --pearl-line:#4A3F1E; --pearl-ink:#D9C273;
+  --th-bg:#202A31; --code-bg:#222C34;
+}
+*{box-sizing:border-box}
+body{background:var(--ground); color:var(--ink); font:16px/1.85 "Noto Sans KR",-apple-system,"Apple SD Gothic Neo",sans-serif; margin:0; -webkit-font-smoothing:antialiased}
+.wrap{max-width:780px; margin:0 auto; padding:48px 24px 96px}
+header.hero{border-bottom:2px solid var(--accent); padding-bottom:28px; margin-bottom:36px}
+.eyebrow{font-size:12px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); margin:0 0 10px}
+h1{font-family:"Noto Serif KR",serif; font-size:34px; line-height:1.35; margin:0 0 12px; text-wrap:balance}
+.sub{color:var(--ink-soft); font-size:15px; margin:0}
+.sub a{color:var(--accent)}
+.notice{font-size:13px; color:var(--ink-faint); margin-top:14px; padding:10px 14px; background:var(--panel); border:1px solid var(--line); border-radius:6px}
+nav.toc{background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:20px 24px; margin-bottom:44px}
+nav.toc .toc-title{font-size:12px; font-weight:700; letter-spacing:.16em; color:var(--ink-faint); text-transform:uppercase; margin:0 0 10px}
+nav.toc ol{margin:0; padding-left:22px; column-count:2; column-gap:32px; font-size:14px}
+nav.toc li{margin:3px 0; break-inside:avoid}
+nav.toc a{color:var(--ink-soft); text-decoration:none}
+nav.toc a:hover, nav.toc a:focus{color:var(--accent); text-decoration:underline}
+h2{font-family:"Noto Serif KR",serif; font-size:24px; line-height:1.4; margin:64px 0 6px; text-wrap:balance; scroll-margin-top:24px}
+h2 .en{display:block; font-family:"Noto Sans KR",sans-serif; font-size:12.5px; font-weight:500; letter-spacing:.08em; color:var(--accent); margin-top:2px}
+h3{font-size:17.5px; font-weight:700; margin:36px 0 4px; color:var(--ink)}
+h3 .en{font-weight:500; font-size:13px; color:var(--ink-faint); margin-left:6px}
+h4{font-size:15.5px; font-weight:700; margin:26px 0 2px}
+p{margin:12px 0}
+ul,ol{margin:10px 0; padding-left:24px}
+li{margin:5px 0}
+strong{font-weight:700}
+em{font-style:normal; color:var(--accent); font-weight:500}
+.term{color:var(--accent); font-weight:500}
+.pearl{background:var(--pearl-bg); border:1px solid var(--pearl-line); border-radius:8px; padding:14px 18px; margin:20px 0; font-size:14.5px}
+.pearl .label{display:block; font-size:11.5px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--pearl-ink); margin-bottom:6px}
+.keybox{background:var(--accent-soft); border:1px solid var(--accent-line); border-radius:8px; padding:16px 20px; margin:22px 0}
+.keybox .label{display:block; font-size:11.5px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin-bottom:8px}
+.keybox ul{margin:0; padding-left:20px}
+.tbl-wrap{overflow-x:auto; margin:20px 0; border:1px solid var(--line); border-radius:8px}
+table{border-collapse:collapse; width:100%; font-size:14px; background:var(--panel)}
+caption{caption-side:top; text-align:left; font-weight:700; font-size:14px; padding:12px 14px 10px; background:var(--panel); border-bottom:2px solid var(--accent)}
+caption .cap-en{font-weight:500; color:var(--ink-faint); font-size:12.5px}
+th{background:var(--th-bg); text-align:left; font-weight:700; padding:9px 14px; border-bottom:1px solid var(--line); white-space:nowrap}
+td{padding:9px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.num, th.num{font-variant-numeric:tabular-nums; white-space:nowrap}
+.figref{font-size:12.5px; color:var(--ink-faint)}
+.fig{background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:8px; padding:12px 16px 10px; margin:18px 0; font-size:13.5px; color:var(--ink-soft)}
+.fig-head{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:6px}
+.fig-no{font-size:11.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); background:var(--accent-soft); border:1px solid var(--accent-line); border-radius:4px; padding:2px 8px; white-space:nowrap}
+.fig-links{display:flex; gap:6px; flex-wrap:wrap}
+.fig-links a{display:inline-block; min-width:26px; text-align:center; font-size:12px; font-weight:700; color:var(--accent); background:var(--ground); border:1px solid var(--line); border-radius:4px; padding:2px 7px; text-decoration:none}
+.fig-links a:hover, .fig-links a:focus{border-color:var(--accent); background:var(--accent-soft)}
+.fig p{margin:2px 0 4px; line-height:1.7}
+.divider{border:none; border-top:1px solid var(--line); margin:56px 0}
+.step{border-left:3px solid var(--accent-line); padding:2px 0 2px 18px; margin:18px 0}
+.step h4{margin-top:0}
+footer{margin-top:72px; padding-top:20px; border-top:1px solid var(--line); font-size:13px; color:var(--ink-faint)}
+@media (max-width:640px){ nav.toc ol{column-count:1} h1{font-size:27px} h2{font-size:21px} }
+@media (prefers-reduced-motion: no-preference){ html{scroll-behavior:smooth} }
+
+.fig-toggle{margin-top:6px}
+.fig-toggle summary{cursor:pointer; font-size:12.5px; font-weight:700; color:var(--accent); padding:4px 0; user-select:none}
+.fig-toggle summary:hover{text-decoration:underline}
+.fig-imgs{display:flex; flex-wrap:wrap; gap:12px; padding:10px 0 4px; align-items:flex-start}
+.fig-imgs figure{margin:0; text-align:center}
+.fig-imgs img{max-width:280px; height:auto; border:1px solid var(--line); border-radius:6px; background:#fff; display:block}
+.fig-imgs figcaption{font-size:11.5px; font-weight:700; color:var(--ink-faint); margin-top:4px; letter-spacing:.08em}
+</style>
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Handthology · Hand and Wrist: Bone and Joint</p>
+  <h1>DRUJ 손상과 재건</h1>
+  <p class="sub">ASSH Handthology 챕터 <a href="https://handthology.assh.org/chapters/hand-and-wrist-bone-and-joint/druj-injury-and-reconstruction" target="_blank" rel="noopener">“DRUJ Injury and Reconstruction”</a>을 정형외과 전문의 수준으로 재구성한 한글 학습 노트</p>
+  <p class="notice">원문의 문장을 그대로 옮긴 번역본이 아니라, 챕터의 구조와 내용을 따라가며 요약·재구성한 정리본입니다. 그림(Fig. 1–96)은 각 인용 위치의 figure 카드에서 "그림 펼치기"로 그 자리에서 열립니다 — 이미지는 파일에 저장된 것이 아니라 ASSH 서버에서 직접 불러오므로(원본 참조) 인터넷 연결 상태에서만 표시됩니다. 세부 수치·문헌 번호는 원문에서 확인하세요.</p>
+</header>
+
+<nav class="toc" aria-label="목차">
+  <p class="toc-title">목차</p>
+  <ol>
+    <li><a href="#anatomy">해부학과 생체역학</a></li>
+    <li><a href="#injury">손상의 유형과 초기 치료</a></li>
+    <li><a href="#exam">신체검진</a></li>
+    <li><a href="#imaging">영상과 관절경</a></li>
+    <li><a href="#repair">불안정 ①: TFC repair</a></li>
+    <li><a href="#recon">불안정 ②: RUL reconstruction (Adams)</a></li>
+    <li><a href="#resection">관절염 수술 개관: 절제 술식</a></li>
+    <li><a href="#darrach">Darrach와 modified Darrach</a></li>
+    <li><a href="#bowers">Hemiresection Interposition (Bowers)</a></li>
+    <li><a href="#matched">Matched Distal Ulnar Resection</a></li>
+    <li><a href="#sk">Sauvé-Kapandji</a></li>
+    <li><a href="#failed">실패한 원위 척골 절제의 관리</a></li>
+    <li><a href="#uhr">임플란트 ①: Ulnar Head Replacement</a></li>
+    <li><a href="#total">임플란트 ②: Total DRUJ Replacement</a></li>
+  </ol>
+</nav>
+
+<div class="keybox">
+  <span class="label">Key Points</span>
+  <ul>
+    <li>DRUJ 손상은 <strong>불안정성과 관절염</strong>으로 이어져 통증과 장애를 만든다.</li>
+    <li>DRUJ·TFCC 해부학의 정밀한 이해가 진단과 치료의 출발점이다.</li>
+    <li>성공적 치료의 전제는 병리의 <strong>모든 원인(연부조직·골변형·복합)을 빠짐없이 찾아 교정</strong>하는 것.</li>
+    <li>불안정·관절염에 대한 다양한 술식이 개발되어 있으나, <strong>어느 하나가 명백히 우월하다는 근거는 없다.</strong></li>
+    <li>적절한 환자 선택과 술기·함정에 대한 세심한 주의가 있으면 good-to-excellent 결과를 얻을 수 있다.</li>
+    <li>임플란트 관절성형술은 유효한 선택지지만 <strong>장기 성적이 부족하므로 신중히</strong> 적용한다.</li>
+  </ul>
+</div>
+
+<h2 id="anatomy">1. 해부학과 생체역학<span class="en">Anatomy and Biomechanics</span></h2>
+<p>DRUJ는 <strong>diarthrodial, trochoid(차축) 관절이면서 골성 구속이 거의 없는 내재적 불안정 관절</strong>이다. 골성 요소와 인대성 요소가 함께 안정성을 만들며, 이 구조를 정확히 이해하는 것이 모든 평가·치료 판단의 전제다.</p>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 1</span></div>
+  <p>TFCC 전체 구조. A 원위 요골과 TFCC의 분리 모식도. B 관상면 — deep 섬유(ligamentum subcruentum)는 fovea로, superficial 섬유는 ulnar styloid로 부착.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/acc5ea96-cf22-4c04-36e2-7bdcf8097200/gamma=0" alt="Fig 1 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 2</span></div>
+  <p>DRUJ의 주 안정자인 TFC — superficial RUL(초록)과 deep ligamentum subcruentum(파랑). 섬유 주행 방향 때문에 deep 성분이 요골-수근골 단위의 과병진에 대한 더 중요한 견제 역할을 한다.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/34d1f38c-a601-42fe-3641-c456a8302100/gamma=0" alt="Fig 2 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 3</span></div>
+  <p>주변부 TFCC의 3차원 배열 — RUL의 근위 섬유는 fovea로 내려가고 원위 섬유는 styloid를 감싸 깔때기형 prestyloid recess를 만든다.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/d131a1d2-0570-4f07-328b-0a6b25ef9200/gamma=0" alt="Fig 3 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 4</span></div>
+  <p>DRUJ 안정 구조의 총괄 모식도.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/bf0ac7e2-94d6-4df3-4d70-9e935cf13000/gamma=0" alt="Fig 4 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 5</span></div>
+  <p>TFCC 구성 요소 모식도.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/90cecbc2-f133-42e2-024e-9152e86d1000/gamma=0" alt="Fig 5 " loading="lazy"></figure></div></details>
+</div>
+
+<h3>골성 해부</h3>
+<ul>
+  <li><strong>Ulnar head의 seat</strong>(볼록, 곡률 반경 10 mm)와 <strong>sigmoid notch</strong>(오목, 곡률 반경 15 mm)가 관절을 이룬다. 곡률이 서로 맞지 않아(non-concentric) 관절면 접촉만으로는 부분적 안정성밖에 제공하지 못하고, 회전 끝 범위에서 내재적으로 불안정하다.</li>
+  <li><strong>Ulnar fovea</strong>: styloid 기저부의 연골 없는 함몰부로, 전완 회전축의 중심이자 radioulnar ligament(RUL)의 부착부다.</li>
+  <li>관상면상 관절면 경사(Tolat): 평행(I형 55%) · 사면(II형 33%) · 역사면(III형 12%). 축상면상 notch 형태: flat face 42% · C형 30% · S형 14% · ski slope 12%. 평평한 notch 변이나 rim 골절은 불안정의 위험 요인이다. 다만 연골 두께가 골성 경사를 보상하는 경우가 많아 방사선상 경사의 임상적 의미는 제한적일 수 있다.</li>
+  <li>배측 rim은 예각이고, 장측 rim에는 골연골성 융기가 있어 추가 안정성을 준다.</li>
+</ul>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 73</span></div>
+  <p>Ulnar seat와 sigmoid fossa의 곡률 반경 불일치 — 회전 끝 범위에서 관절면 자체가 내재적으로 불안정한 이유.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/23e145a1-510e-4c23-5d3a-696528cb4e00/gamma=0" alt="Fig 73 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 6</span></div>
+  <p>Tolat이 기술한 sigmoid notch의 4가지 형태 변이.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/4a0ce57c-366f-4ae4-452a-073d7f6ae100/gamma=0" alt="Fig 6 " loading="lazy"></figure></div></details>
+</div>
+
+<h3>TFCC — 핵심 연부조직 안정자</h3>
+<ul>
+  <li>구성: <strong>중심 articular disc</strong>, meniscus homologue, <strong>dorsal·volar radioulnar ligament(RUL)</strong>, ulnar collateral ligament, ulnolunate·ulnotriquetral(UL·UT) 인대의 기시부, <strong>ECU subsheath</strong>.</li>
+  <li>혈행: 주변부(척측)는 anterior interosseous artery의 배·장측 분지와 척골동맥 분지로 풍부하게 혈행되지만 <strong>중심부는 무혈관</strong> — 봉합 치유 가능성이 부위에 따라 다른 이유다.</li>
+  <li><strong>안정성의 주역은 RUL</strong>이다. 각 인대는 <em>superficial 성분(ulnar styloid 부착)</em>과 <em>deep 성분(ligamentum subcruentum — fovea 부착)</em>으로 나뉜다. In vivo 연구 기준으로 <strong>회내 시 dorsal superficial + volar deep</strong>, <strong>회외 시 volar superficial + dorsal deep</strong>이 긴장되어 안정성을 유지한다. 한 위치에서 하나의 RUL이 주 견제, 다른 하나가 이차 견제로 작동하므로 <strong>심한 단방향 불안정이 생기려면 두 인대가 모두 손상</strong>되어야 한다.</li>
+  <li>중심 disc는 압박 하중을 받지만 안정성 기여는 미미하다. UL·UT 인대는 DRUJ·ulnocarpal 안정성 모두에 관여하고, ECU sheath는 배측 관절낭을 보강하는 간접 안정자다. 외재성 안정자(ECU 건, pronator quadratus, 골간막 원위부, DRUJ 관절낭)의 기여는 상대적으로 작다. <strong>심한 불안정 = 여러 구조의 동반 파괴</strong>라는 것이 일반적 합의다.</li>
+</ul>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 74</span></div>
+  <p>해부 표본 — A radiocarpal 관절 근위면에서 본 TFC·RUL·ECU, B 관상 절단면에서 본 TFC와 주변 구조.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/d7e41dbf-9a4f-4dbf-ad64-fdddd8e37800/gamma=0" alt="Fig 74 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 75</span></div>
+  <p>TFCC 단면 — ligamentum subcruentum, meniscus homologue, prestyloid recess와 styloid의 관계.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/3158044e-99d8-4746-cc6e-8a2ef470fb00/gamma=0" alt="Fig 75 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 76</span></div>
+  <p>TFCC 혈행 — A 관상 절단의 주변부 혈행대, B Spalteholz 기법: 중심부는 무혈관.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/2892c1c6-e5f6-4489-2615-4a1552543500/gamma=0" alt="Fig 76 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 77</span></div>
+  <p>Superficial RUL(초록)은 styloid로, deep ligamentum subcruentum(파랑)은 fovea로 부착.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/108c452a-5a73-4f90-e54a-d11b79eec200/gamma=0" alt="Fig 77 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 78</span></div>
+  <p>UL·UT 인대는 volar RUL에서 기시해 lunate·triquetrum의 장측연으로 부착 — 이름과 달리 척골에서 직접 기시하지 않는다.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/3f59eecc-675e-4bdb-01fc-670eb8507c00/gamma=0" alt="Fig 78 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 79</span></div>
+  <p>TFCC 구성 총괄 — superficial·deep TFC, disc-carpal 인대, ECU subsheath, meniscal homologue.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/46b7cd37-07a3-4195-7bd6-f23fc0301d00/gamma=0" alt="Fig 79 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 7</span></div>
+  <p>회전 위치에 따른 dorsal·palmar RUL의 길이 변화 실험 그래프.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/0deea9da-49df-433b-b9de-e74b2e285000/gamma=0" alt="Fig 7 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 8</span></div>
+  <p>회내·중립·회외 각 위치에서 RUL 각 성분의 긴장 상태 (in vivo).</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/0ad93f9f-01de-4973-ce27-cf9a2eccfd00/gamma=0" alt="Fig 8 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 9</span></div>
+  <p>A 완전 회외에서는 dorsal deep 섬유(파랑)가, B 완전 회내에서는 palmar deep 섬유가 주된 견제 — superficial 섬유(초록)도 긴장되지만 효과가 덜하다.</p>
+  <details class="fig-toggle"><summary>그림 펼치기 (2패널)</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/2f17424a-ec56-436a-e065-0a831a7e8a00/gamma=0" alt="Fig 9 A" loading="lazy"><figcaption>A</figcaption></figure><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/46e3bb78-95f1-4ecf-718a-fbf2c236b000/gamma=0" alt="Fig 9 B" loading="lazy"><figcaption>B</figcaption></figure></div></details>
+</div>
+
+<h3>운동학과 하중 전달</h3>
+<ul>
+  <li>전완 회전축은 ulnar head 중심 부근을 지나고 회전 arc는 평균 150–170°다. 길이가 고정된 척골 주위를 요골이 도는데, 이때 순수 회전이 아니라 <strong>회전+병진의 복합 운동</strong>이다: ulnar head는 회내에서 배측·원위, 회외에서 장측·근위로 활주한다.</li>
+  <li>관절 접촉면은 중립에서 최대(관절면의 약 60%)이고 회전 극단에서는 10% 미만(약 2 mm)까지 감소한다.</li>
+  <li>축성 하중의 대부분은 요골이 받고, 척골 전달분은 연구·ulnar variance에 따라 <strong>3–34%</strong>. RUL이 파괴되면 DRUJ를 지나는 하중이 증가하며, 재건하면 정상 전달 패턴이 회복된다. <strong>Ulnar head를 절제하면 척골의 하중 전달이 사라지고 인접 관절·근육의 부하가 변한다</strong> — 절제 술식의 근본적 한계다.</li>
+</ul>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 95</span></div>
+  <p>회내(A)·중립(B)·회외(C)의 DRUJ 접촉면 — 중립에서 최대, 양 극단에서 최소.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/e71ce1ee-3770-4936-c8a0-6e789b69b800/gamma=0" alt="Fig 95 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 96</span></div>
+  <p>Ulnar head 절제 후 strain gauge — 척골을 통한 하중 전달이 소실되어 정상 힘 곡선이 사라진다.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/348a9c07-b2a4-4d8a-ec75-c82865f58400/gamma=0" alt="Fig 96 " loading="lazy"></figure></div></details>
+</div>
+
+
+<h2 id="injury">2. 손상의 유형과 초기 치료<span class="en">DRUJ Injury Evaluation and Management</span></h2>
+<h3>고립성 탈구 (드묾)</h3>
+<ul>
+  <li><strong>배측 탈구</strong>(대부분): 과회내 + 손목 신전 기전. 정복 후 <strong>회외에서 안정</strong>.</li>
+  <li><strong>장측 탈구</strong>: 과회외 또는 전완 척측 직접 타격. 정복 후 <strong>회내에서 안정</strong>.</li>
+  <li>급성 고립 탈구는 대개 쉽게 도수 정복된다. 정복 후 전 가동범위에서 안정성을 검사하고 최적 위치로 <strong>above-elbow 보조기/석고 4–6주</strong>. 정복이 안 되면 연부조직 개재(배측 탈구에서는 흔히 ECU, 때로 EDQ·EDC; 그 외 notch 골편·관절낭)를 의심하고 개방 정복한다.</li>
+</ul>
+<h3>골절 동반 손상 (대부분)</h3>
+<ul>
+  <li><strong>원위 요골 골절</strong>이 가장 흔한 원인. 골절의 해부학적 정복·고정 후 반드시 DRUJ 안정성을 확인한다. 연부 안정자가 온전하고 관절 정합이 좋으면 대개 안정적이다.</li>
+  <li><strong>척골 경상돌기 골절</strong>: 원위 요골 골절의 60%에서 동반. 존재 여부·위치·골성/섬유성 유합 여부는 최종 결과에 영향이 없다는 것이 중론이다. 다만 <strong>tip 골절은 양성</strong>(TFCC는 더 근위에 부착)인 반면, <strong>base 골절 + 2 mm 이상 전위·fovea 침범·TFCC 동반 손상</strong>은 불안정을 만들 수 있다.</li>
+  <li><strong>Galeazzi 골절</strong>: 요골 원위 1/3 간부 골절 + DRUJ 탈구. 초기 평가에서 DRUJ 손상이 과소평가되기 쉬우므로 요골 고정 후 반드시 안정성 검사. 관절면에서 <strong>7.5 cm 이내 골절은 55%</strong>, 그보다 근위는 6%에서 불안정 발생. (최근 사체 연구는 골절 위치보다 연부조직 손상 자체가 불안정을 결정한다고 본다.) 불안정 시 골절부 신연으로 요골을 상대적으로 길게 만들어 DOB 등 안정 구조에 긴장을 거는 방법이 기술되어 있다.</li>
+  <li><strong>Essex-Lopresti 손상</strong>: radial head 골절 + 골간막 파열 + DRUJ 파괴. 급성기엔 손목 통증이 미미해 놓치기 쉽다 — <strong>전위된 radial head 골절에서는 항상 의심</strong>. 양측 손목 2면 촬영에서 요골 근위 이동 1.9 mm 이상이면 의심하고, MRI로 골간막·TFCC를 확인한다. 방치되면 요골 근위 이동, ulnocarpal abutment, 회전 제한이 온다.</li>
+</ul>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 10</span></div>
+  <p>골간막(IOM)의 구조 — central band·accessory band와 원위 막성부의 DOB(distal oblique bundle), 배측 표본 사진.</p>
+  <details class="fig-toggle"><summary>그림 펼치기 (2패널)</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/ae960c46-b3ae-4e5e-f85e-26c6974c3c00/gamma=0" alt="Fig 10 A" loading="lazy"><figcaption>A</figcaption></figure><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/0ba4016a-cfa3-4c51-b2c1-d952f93fd000/gamma=0" alt="Fig 10 B" loading="lazy"><figcaption>B</figcaption></figure></div></details>
+</div>
+
+<h3>외상성 TFCC 손상 — Palmer 분류</h3>
+<div class="tbl-wrap">
+<table>
+<caption>Table 1. Palmer 분류 <span class="cap-en">Palmer Classification of TFCC Lesions</span></caption>
+<thead><tr><th>Class</th><th class="num">아형</th><th>병변</th><th>임상적 의미</th></tr></thead>
+<tbody>
+<tr><td rowspan="4"><strong>1 외상성</strong></td><td class="num">A</td><td>중심부 천공</td><td>무혈관부 — DRUJ 안정성에 영향 없음</td></tr>
+<tr><td class="num">B</td><td>척측 박리 (styloid/fovea)</td><td>전층 파열·완전 foveal 박리 시 <strong>불안정 유발</strong></td></tr>
+<tr><td class="num">C</td><td>원위 박리 (척측 외재인대)</td><td>단독 또는 1B 동반 — 불안정 흔함</td></tr>
+<tr><td class="num">D</td><td>요측 박리 (± notch 골절)</td><td>원위 요골 골절 동반 흔함 — 골절 정복이 적절하면 대개 안정</td></tr>
+<tr><td rowspan="5"><strong>2 만성</strong></td><td class="num">A</td><td>TFCC 마모</td><td rowspan="5">Ulnar impaction의 연속 스펙트럼</td></tr>
+<tr><td class="num">B</td><td>마모 + lunate/ulnar head 연골연화</td></tr>
+<tr><td class="num">C</td><td>천공 + 연골연화</td></tr>
+<tr><td class="num">D</td><td>2C + LT 인대 천공</td></tr>
+<tr><td class="num">E</td><td>2D + ulnocarpal 관절염</td></tr>
+</tbody>
+</table>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 11</span></div>
+  <p>Palmer 1형 외상성 TFC 손상의 위치 분포. 1B에서 superficial 파열과 deep foveal 박리를 구분하지 못하는 것이 이 분류의 한계다.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/93166b9f-9b2d-47f0-c797-ddd2709ea700/gamma=0" alt="Fig 11 " loading="lazy"></figure></div></details>
+</div>
+
+<div class="pearl"><span class="label">임상 포인트</span>Palmer 분류의 한계: <strong>1B에서 "superficial 주변부 파열(아프지만 안정)"과 "deep ligamentum subcruentum의 foveal 박리(아프고 불안정)"를 구분하지 못한다.</strong> 치료 방침을 가르는 것은 이 구분이므로 검진(ballottement)·영상·관절경으로 반드시 가려낸다.</div>
+<h3>손상 기전별 핵심 고려사항</h3>
+<div class="tbl-wrap">
+<table>
+<caption>Table 2. 손상 기전별 워크업·치료 요점 <span class="cap-en">Workup & Treatment by TFCC Injury Mechanism (재구성 요약)</span></caption>
+<thead><tr><th>기전</th><th>요점</th></tr></thead>
+<tbody>
+<tr><td><strong>고립성 주변부 TFCC 손상</strong><br>(파지 중 비틀림)</td><td>회전·파지 통증 + <strong>DRUJ 안정성 정상</strong>(ballottement 정상, 단 통증은 유발) + 영상 정상 → 보존 치료(보조기·NSAIDs·주사) 실패 시 주변부 봉합</td></tr>
+<tr><td><strong>고립성 foveal 손상</strong><br>(비틀림·낙상)</td><td>같은 증상이지만 <strong>ballottement에서 안정성 이상</strong> — 위와의 감별점. 방사선상 DRUJ 벌어짐, MRI/MR 관절조영상 foveal 박리 → foveal 봉합</td></tr>
+<tr><td><strong>장측/배측 탈구</strong></td><td>도수 정복 → 실패 시 개방 정복(개재 조직 제거). 고정(±핀, ±TFCC 봉합). 장측 탈구는 회내에서, 배측 탈구는 회외에서 안정</td></tr>
+<tr><td><strong>원위 요골 골절 동반</strong></td><td>골절 정복·고정 먼저 → 반대측과 비교한 술중 ballottement/shuck·squeeze·ulnar traction 검사 → TFCC 손상 시 안정 위치 고정, 봉합 또는 핀 고정</td></tr>
+<tr><td><strong>Essex-Lopresti</strong></td><td>주관절·전완 검진과 상하 관절 포함 영상이 필수. TFCC 손상 + radial head/간부 골절 조합이면 골간막 손상을 강력히 의심. Radial head를 정확한 길이로 치환/고정 + DRUJ 고정·TFCC 봉합, 필요시 central band 보강(suture button, pronator strip)·재건까지 고려</td></tr>
+</tbody>
+</table>
+</div>
+<h3>원위 요골 부정유합</h3>
+<p><strong>만성 증상성 DRUJ 기능장애와 외상후 관절염의 가장 흔한 원인</strong>이다. 배측 각형성 20–30° 초과 + 요골 단축 3–5 mm 초과가 되면 radio-ulnar 관계가 무너지고 TFCC가 뒤틀려 육안적 불안정(ulnar head 돌출, 척측 통증, 회전 제한)이 온다. 반면 <strong>단축 단독</strong>은 척골 하중 증가에 의한 <strong>ulnar impaction 증상</strong>을 주로 만들고 불안정은 드물다. 봉합·재건을 고려한다면 <strong>골변형 교정이 선행 또는 동반</strong>되어야 한다.</p>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 92</span></div>
+  <p>Radial translation ratio — 원위 요골 골절에서 DRUJ gap(B)과 근위 골절부 폭(A)으로 요골 병진을 정량화.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/5642265b-01d9-4893-799b-ebdd46442200/gamma=0" alt="Fig 92 " loading="lazy"></figure></div></details>
+</div>
+
+
+<h2 id="exam">3. 신체검진<span class="en">Physical Examination</span></h2>
+<p>양측 비교가 원칙이다(환자를 마주 앉히고 양측 주관절 90° 굴곡, 손을 천장으로). 시진(부종, ulnar head 배측 돌출, 변형) → 촉진(DRUJ, ulnar head, foveal soft spot, ECU, LT·pisotriquetral 관절) → ROM(감소, 염발음, 회전 시 clunk) → 안정성·유발 검사 순으로 진행한다. 감별해야 할 것: <strong>ulnar impaction, ECU 병변(건염·아탈구), LT 인대 손상, pisotriquetral 관절염</strong>.</p>
+<div class="tbl-wrap">
+<table>
+<caption>Table 3. 척측 손목의 신체검진 <span class="cap-en">Physical Examination of the Ulnar Wrist</span></caption>
+<thead><tr><th>검사</th><th>방법</th><th>의미</th></tr></thead>
+<tbody>
+<tr><td><strong>Ballottement / shuck</strong></td><td>주관절 90° 굴곡·전완 중립에서 요골·수근골을 고정하고 척골을 장·배측으로 병진. 회내·회외에서도 반복해 배·장측 인대를 각각 분리 평가</td><td>척골두가 요골 연을 넘거나, firm endpoint가 없거나, 반대측보다 뚜렷이 크면 불안정</td></tr>
+<tr><td><strong>Piano key</strong></td><td>회내로 테이블에 얹으면 불안정 시 척골이 돌출. 손으로 테이블을 누르게 하면 척골이 피아노 건반처럼 내려감</td><td>반대측 대비 병진·돌출 증가 + 통증 = TFCC 손상·증상성 불안정 (이완성 체질 감안해 반드시 양측 비교)</td></tr>
+<tr><td><strong>Table-top / press test</strong></td><td>앉은 자세에서 회내된 손으로 짚고 일어나게 함</td><td>척골두 함몰(dimple sign) = 불안정. 통증만 있으면 비탈안정성 TFCC 손상 가능</td></tr>
+<tr><td><strong>DRUJ compression</strong></td><td>DRUJ 근위 전완을 잡고 압박하며 회전</td><td>통증·염발음 = DRUJ 관절증 또는 불안정</td></tr>
+<tr><td><strong>ECU synergy</strong></td><td>회외위에서 무지·중지의 저항성 외전 — ECU 동시수축 촉지</td><td>ECU 부위 통증 = ECU 건염</td></tr>
+<tr><td><strong>ECU instability</strong></td><td>손목 굴곡·척측 편위 상태로 회내↔회외</td><td>아탈구/탈구·통증 확인</td></tr>
+<tr><td><strong>Pisotriquetral shear</strong></td><td>손목 경도 굴곡(FCU 이완) 후 pisiform을 눌러 triquetrum에 전단</td><td>통증 = PT 관절증</td></tr>
+<tr><td><strong>Kleinman LT shear</strong></td><td>한 손 무지로 lunate 배측 고정, 다른 손으로 pisiform을 밀어 LT 간격에 전단력</td><td>통증 = LT 인대 손상</td></tr>
+<tr><td><strong>Foveal sign</strong></td><td>FCU–ECU–triquetrum–ulnar head 사이 soft spot 압박</td><td>통증 = TFCC(UC 인대 포함) 병변 — <strong>TFC 병변에서 가장 흔한 소견</strong></td></tr>
+</tbody>
+</table>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 12</span></div>
+  <p>DRUJ ballottement 검사.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/6838d6c9-9adc-41b1-56ab-fa1ad7a66900/gamma=0" alt="Fig 12 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 13</span></div>
+  <p>DRUJ compression 검사 — 전완을 잡고 압박하며 회전, 통증이면 양성.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/3eb0af4a-ec81-4202-efaf-c669adde0c00/gamma=0" alt="Fig 13 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 14</span></div>
+  <p>ECU synergy 검사 — 회외위에서 저항성 무지 외전 시 ECU 동시수축을 촉지, ECU 부위 통증이면 건염.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/a993c0c8-e280-404c-1448-c2ba4a3eea00/gamma=0" alt="Fig 14 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 15</span></div>
+  <p>ECU 불안정 — 손목 굴곡·척측 편위에서 아탈구되는 임상·수술 사진 (TFCC 중심부 debridement + subsheath 봉합 시행 예).</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/7e11262a-afda-4173-e52c-37c252fbc800/gamma=0" alt="Fig 15 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 16</span></div>
+  <p>Pisotriquetral 검사 — 손목 경도 굴곡 후 pisiform을 triquetrum에 압박·전단.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/048da1af-f964-459f-f342-e031fc9d0800/gamma=0" alt="Fig 16 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 17</span></div>
+  <p>Kleinman LT shear 검사 — lunate를 배측에서 고정하고 pisiform을 장측에서 밀어 LT 관절에 전단력 집중.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/553e8d71-0a7c-441c-c2f5-3371b571de00/gamma=0" alt="Fig 17 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 18</span></div>
+  <p>Ulnar fovea sign — ECU·FCU·triquetrum·ulnar head 사이 soft spot 압박 시 통증이면 TFCC 병변.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/bb752c02-993f-45fd-1e2f-b1ec622b8000/gamma=0" alt="Fig 18 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 83</span></div>
+  <p>Ulnar fovea sign — soft spot 압박으로 TFCC 병변 선별.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/0e6c5f7a-f95b-4125-b0b3-d09ff13a9f00/gamma=0" alt="Fig 83 " loading="lazy"></figure></div></details>
+</div>
+
+<p>보조 검사: <strong>ulnocarpal stress test</strong>(최대 척측 편위+회내에서 수동 굴신 — impaction·disc 파열), 술중 <strong>squeeze test·ulnar pull test</strong>(투시상 DRUJ gap의 객관적 평가).</p>
+
+<h2 id="imaging">4. 영상과 관절경<span class="en">Imaging & Arthroscopy</span></h2>
+<h3>단순 방사선</h3>
+<ul>
+  <li><strong>표준 PA</strong>: 어깨 90° 외전, 주관절 90° 굴곡, 전완 중립·손바닥 밀착. 확인할 것 — DRUJ 정렬 이상/벌어짐, 관절염, ulnar variance/요골 단축, 골절(요골, styloid, sigmoid notch rim). Styloid 기저부·fovea 골절과 DRUJ 벌어짐은 불안정을 시사한다.</li>
+  <li><strong>True lateral</strong>: pisoscaphocapitate 관계로 판정(pisiform 장측면이 scaphoid 원위극과 capitate 장측면 사이 중앙). 정상은 척골이 요골보다 약 2 mm 배측; <strong>6 mm 이상이면 불안정 진단적</strong>. 단, 10° 회전 오차만으로도 판정이 흔들리므로 lateral만으로 아탈구를 진단하지 않는다.</li>
+  <li>동적/스트레스 촬영: <strong>pronated grip view</strong>(동적 ulnar plus, DRUJ 관절염), 하중 lateral(불안정 확인), 실패한 절제술에서는 <strong>grip weight-bearing view</strong>로 요-척골 impingement를 드러낸다. Semisupinated/semipronated view로 ulnar head·notch rim을 평가한다(초기 관절염은 ulnar head 근위부에서 시작, notch는 흔히 보존).</li>
+  <li>전완·주관절 촬영을 포함해 간부 골절·Essex-Lopresti·synostosis·radial head 탈구 등을 배제한다.</li>
+</ul>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 19</span></div>
+  <p>True lateral 판정 기준 — pisiform 장측 피질(화살표)의 위치로 중립/회외/과회외를 구분.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/d759a7a8-374d-4d1b-8385-616f7f44dc00/gamma=0" alt="Fig 19 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 20</span></div>
+  <p>DRUJ 퇴행성 관절염 — A PA와 B pronated grip view.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/ac59aead-9e02-4a70-2fbb-716629c14900/gamma=0" alt="Fig 20 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 21</span></div>
+  <p>실패한 Darrach의 grip 체중부하 촬영 — 절제단과 요골의 impingement.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/939c605e-f06c-4bd6-559c-9c93d5bd0e00/gamma=0" alt="Fig 21 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 86</span></div>
+  <p>Dorsal tangential view — 배측 탈구·아탈구·정상 DRUJ의 비교.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/ff432aa0-18db-4fa3-af3f-3864e8ebad00/gamma=0" alt="Fig 86 " loading="lazy"></figure></div></details>
+</div>
+
+<h3>CT · MRI</h3>
+<ul>
+  <li><strong>CT가 불안정 평가의 gold standard</strong>: <strong>양측 손목을 동일 자세(중립·회내·회외)로</strong> 촬영해 비교한다. 판정법 — Mino의 배·장측 radioulnar line, epicenter법, congruency법, radioulnar ratio. 미묘한 경우 스트레스 CT와 복수 판정법을 조합하되 <strong>최종 결론은 반드시 진찰 소견과 상관</strong>시킨다. 미세 골절·notch 변형·관절염 평가에도 유용.</li>
+  <li><strong>MRI/MR 관절조영</strong>: TFCC의 foveal 부착부와 RUL·ulnocarpal 인대 평가. 외상성 파열은 coronal T2에서 TFCC 섬유-척골 사이 액체 저류로 보인다. 비용효과에 대한 의문 제기가 있으며, <strong>우연 소견의 과잉 해석을 경계</strong>하고 임상과 반드시 대조한다. UT split tear 등 감별에도 도움.</li>
+</ul>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 22</span></div>
+  <p>Galeazzi 골절 병력의 16세 — CT상 회내에서는 congruent(A), 회외에서 장측 아탈구(B). 양측·다자세 CT의 가치.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/234723dd-588c-4e54-8a33-829d91cd6300/gamma=0" alt="Fig 22 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 87</span></div>
+  <p>손목 관절조영술 AP — midcarpal 주입 조영제가 LT 인대 파열부를 통해 유출.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/5bca9dff-55c3-4091-0d4d-cbad4364d100/gamma=0" alt="Fig 87 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 88</span></div>
+  <p>같은 손목의 조영 MRI coronal — midcarpal·radiocarpal·DRUJ 구획 간 조영제 이동.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/d4e914cf-ae6d-48bf-caa6-b6f7e7330300/gamma=0" alt="Fig 88 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 89</span></div>
+  <p>7T MRI — 정상 UT 인대와 foveal 부착 (축상 A·시상 B T2 지방억제).</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/43bb999c-b6e6-4fc3-bcc6-d9f438814500/gamma=0" alt="Fig 89 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 90</span></div>
+  <p>급성 손상 4개월 후 — 척측 부착부에서 박리된 고도 불안정 파열의 T1·T2 coronal.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/c6969ae6-2dfb-4c00-97b5-fcab0b576900/gamma=0" alt="Fig 90 " loading="lazy"></figure></div></details>
+</div>
+
+<h3>관절경</h3>
+<ul>
+  <li><strong>Radiocarpal 관절경</strong>: 중심부·주변부 파열을 직접 확인. 소견 — <strong>trampoline test</strong>(disc 주변부 긴장 소실), <strong>suction test</strong>(흡인 시 과도한 이동), <strong>hook test</strong>(6R 포털 probe로 척측연을 당겨 중심부로 딸려오면 deep foveal 박리). 단, 천층 섬유가 온전하면 radiocarpal 쪽에서는 deep foveal 파열이 안 보인다.</li>
+  <li><strong>DRUJ 관절경</strong>(1.9 mm 관절경, 4-5 포털 근위 보조 포털): ulnar head·notch 관절면과 <strong>deep TFCC의 foveal 부착부를 직접 시야에</strong> 넣는다. 소견 스펙트럼 — 완전 foveal 박리 / 부분 박리(중등도 불안정) / 치유 후 이완(경도 불안정).</li>
+  <li>UT split tear(disc-lunate·disc-triquetral 인대 병변)와 lunate 연골 결손(impaction) 정량화에도 유용하다.</li>
+</ul>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 23</span></div>
+  <p>좌: trampoline test(disc의 탄성 확인). 우: hook test — superficial 1B 파열에서는 deep foveal 부착이 유지되어 disc가 딸려 올라오지 않는다.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/3992e61f-dd32-4854-3232-a9db2ae50400/gamma=0" alt="Fig 23 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 24</span></div>
+  <p>Hook test — 6R 포털의 probe로 TFCC 척측연을 견인(A), 파열 시 중심부로 딸려 올라오면 양성(B).</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/2396edc6-740b-4728-959b-db7e91d5b400/gamma=0" alt="Fig 24 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 25</span></div>
+  <p>DRUJ 관절경으로 본 foveal 부착부 — A 정상 부착, B 박리 시 관절이 넓어지고 fovea에 육아조직.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/cc61ebe7-bb57-4eda-ac6a-d43eba361300/gamma=0" alt="Fig 25 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 26</span></div>
+  <p>DRUJ 관절경 — shaver로 활막·육아조직 debridement(A), curette로 anchor 삽입용 출혈면 준비(B).</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/f9c02b2a-802b-4cff-9f9f-17ee8da73e00/gamma=0" alt="Fig 26 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 84</span></div>
+  <p>Radiocarpal 관절에서 본 주변부 TFCC의 관절경 소견 — 3-4 포털 관절경 + 6R probe.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/e38134c7-283a-4b53-f152-68789536b000/gamma=0" alt="Fig 84 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 85</span></div>
+  <p>주변부 TFCC 근위 성분(RUL)의 해부 표본 — 척측에서 본 radiocarpal 관절.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/c7707295-3387-4e74-e0c9-260f4df2bb00/gamma=0" alt="Fig 85 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 80</span></div>
+  <p>6R 포털에서 본 LT 인대와 UL·UT 인대.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/c00f0833-70a9-40ea-909b-a96dcbf64b00/gamma=0" alt="Fig 80 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 81</span></div>
+  <p>UT 인대의 종주 split tear — 활막 융모 debridement 후 3-4 포털 시야.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/8739d68a-6e38-411a-0bc1-93cb3a907500/gamma=0" alt="Fig 81 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 82</span></div>
+  <p>UT split tear의 관절경적 봉합 — 2-0 PDS.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/55851417-4f4d-4661-0b99-e7eae83d7e00/gamma=0" alt="Fig 82 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 91</span></div>
+  <p>Palmer IIB의 lunate 전층 연골 손상 — 3-4 포털 시야, microfracture용 awl 위치.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/a66d8e1b-36ce-40e5-da45-063ae69da700/gamma=0" alt="Fig 91 " loading="lazy"></figure></div></details>
+</div>
+
+
+<h2 id="repair">5. 불안정 DRUJ의 수술 ①: TFC Repair<span class="en">Peripheral & Foveal Repair</span></h2>
+<p>외상후 불안정 수술의 목표는 <strong>안정성 회복 + 무통 운동</strong>이며, 인대 손상·골변형·복합 등 <strong>모든 원인을 찾아 교정</strong>해야 한다. 급성기 장상지 보조기 고정을 포함한 보존 치료가 흔히 먼저 시도되고, 아급성·만성에는 손목 밴드와 FCU·ECU 강화 운동을 시도한다.</p>
+<ul>
+  <li><strong>적응</strong>: 보존 치료에 반응하지 않는 척측 통증 ± 불안정. <strong>금기</strong>: DRUJ 관절염, ulnar impaction, 골변형(→ 교정이 먼저).</li>
+  <li><strong>관절경적 봉합</strong>: 활막 debridement로 파열 범위 확인 → deep foveal 부착(ligamentum subcruentum) 검사 → <em>온전하면</em> 주변부 봉합(outside-in, 2-0 PDS를 관절낭·TFC로 셔틀) / <em>박리면</em> foveal repair(저자 선호: 관절경 보조 골터널 봉합; suture anchor 기법도 가능).</li>
+  <li><strong>개방적 foveal repair</strong>: hockey stick 절개(배측 척골 감각분지 보호) → 요측 기반 retinaculum 판 거상, 5·6구획 노출 → 척골극 4 mm 원위에서 횡형 ulnocarpal capsulotomy(± DRUJ capsulotomy) → 반흔·육아조직 제거 후 <strong>fovea에 anchor 삽입</strong>, 봉합사 보강으로 4가닥 고정까지 가능.</li>
+  <li><strong>합병증</strong>: 전완 강직, ECU 불안정·통증, 신경 손상, 봉합 실패, 잔존 통증. <strong>성적</strong>: 관절경 vs 개방 — 대등하며 대부분에서 잔존 불안정·ROM·악력·DASH 개선.</li>
+</ul>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 93</span></div>
+  <p>개방 봉합의 긴장 확인 — 주변부 봉합사를 여러 개 건 뒤 주관절 90°·전완 중립에서 결찰.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/1145cf87-73d6-4bff-f256-3d5cbfa89a00/gamma=0" alt="Fig 93 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 94</span></div>
+  <p>Outside-in 주변부 봉합 술기 — 견인탑 세팅과 debridement 전후의 3-4 포털 시야.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/6a685c6c-5343-431a-727e-e95711f7f900/gamma=0" alt="Fig 94 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 28</span></div>
+  <p>주변부 TFCC 봉합 완료 — A 긴장 전, B 긴장 후.</p>
+  <details class="fig-toggle"><summary>그림 펼치기 (2패널)</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/d19c5785-c77b-488b-eb4d-23697c0ec200/gamma=0" alt="Fig 28 A" loading="lazy"><figcaption>A</figcaption></figure><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/dc52eac1-bae0-430c-d5bd-55a87d422d00/gamma=0" alt="Fig 28 B" loading="lazy"><figcaption>B</figcaption></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 27</span></div>
+  <p>관절경적 foveal 재부착 — DF 포털로 suture anchor를 fovea에 삽입, 4가닥이 나온 상태.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/dd3bf3f5-4071-4051-180b-7e30dd339500/gamma=0" alt="Fig 27 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 29</span></div>
+  <p>개방적 foveal repair — fovea 준비, anchor 삽입, 봉합사 보강으로 deep 섬유의 4가닥 골 고정.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/5afa9087-6f3e-4ddd-053e-8b2331d22800/gamma=0" alt="Fig 29 " loading="lazy"></figure></div></details>
+</div>
+
+
+<h2 id="recon">6. 불안정 DRUJ의 수술 ②: RUL 재건 (Adams)<span class="en">DRUJ Ligament Reconstruction</span></h2>
+<ul>
+  <li><strong>적응</strong>: TFCC가 봉합 불가능한 만성 불안정. <strong>금기</strong>: 관절염·impaction·골변형이 있으면 인대 재건 단독으로는 안 된다.</li>
+  <li><strong>술기(개방, Adams-Berger)</strong>: 5–6구획 사이 배측 5 cm 절개, EDQ 견인, L형 capsulotomy(ECU subsheath 보존) → TFCC 상태 확인, fovea의 반흔 제거(±styloid 불유합 골편 절제) → <strong>PL 이식건</strong>(대안: FCU/FCR 스트립) → <strong>요골 터널</strong>: lunate fossa 몇 mm 근위·notch 관절면 요측에 배→장측 3.5 mm 터널(장측 출구 확인용 3 cm 장측 절개: 척측 신경혈관다발-굴곡건 사이) → <strong>척골 터널</strong>: fovea → 척골 경부 외측(ECU 바로 장측) → 이식건 한 끝은 요골 터널, 다른 끝은 장측 관절낭 통과 → 두 끝을 fovea에서 척골 경부로 빼서 <strong>서로 반대 방향으로 목을 감아</strong>(하나는 ECU sheath 심부, 하나는 장측) 전완 중립·DRUJ 압박 상태에서 <strong>고긴장 결찰</strong>. 짧으면 anchor/interference screw.</li>
+  <li>Sigmoid notch osteoplasty나 교정절골 병행 시 <strong>터널을 먼저 만들고, 이식건 긴장은 골교정 완료 후</strong>.</li>
+  <li><strong>술후</strong>: 중립 회전 장상지 보조기→석고 4주 → 단상지 석고 2주 → 탈착 보조기로 가동·근력. 4개월에 대부분 활동, 중부하·충격은 6개월까지 금지.</li>
+  <li><strong>관절경적 재건</strong>(Atzei, Mak/Ho): 동일 원리를 관절경으로 — fovea 조준 가이드로 척골 터널, UL-UT 간격으로 장측 가닥 진입, 4-5 포털로 배측 가닥, interference screw 또는 제3 횡터널 shoelace 결찰.</li>
+  <li><strong>합병증</strong>: 신경 손상, notch 결손 미교정 시 재발성 불안정, 잔존 통증·강직. <strong>성적</strong>: 원전 14명 중 12 성공(평균 2.2년: 악력 +24%, 회내 72°·회외 70°; 실패 2례는 notch 결핍), 후속 연구 9명 중 7 안정 회복.</li>
+</ul>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 30</span></div>
+  <p>Adams 재건의 접근 — A 5구획 중심 배측 절개, B DRUJ 관절낭의 L형 절개.</p>
+  <details class="fig-toggle"><summary>그림 펼치기 (2패널)</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/19c4429a-a296-4b00-5982-399372d2b200/gamma=0" alt="Fig 30 A" loading="lazy"><figcaption>A</figcaption></figure><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/93af5256-2bae-4a19-49c6-5f8c89209700/gamma=0" alt="Fig 30 B" loading="lazy"><figcaption>B</figcaption></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 31</span></div>
+  <p>요골·척골의 골터널 배치.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/cb96ccce-4f4c-41f2-a019-8c3543f1e100/gamma=0" alt="Fig 31 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 32</span></div>
+  <p>장측 절개 — 척측 신경혈관다발과 굴곡건 사이로 요골 터널의 장측 출구 확인.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/53e4cc96-0814-4c02-5993-6f2e4e4ccf00/gamma=0" alt="Fig 32 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 33</span></div>
+  <p>척골 터널 — 이식건 두 가닥이 통과하도록 확장.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/791ebf9b-70c5-4259-403b-3205252a1e00/gamma=0" alt="Fig 33 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 34</span></div>
+  <p>Sigmoid notch osteoplasty — 터널을 먼저 만들고 절골을 척측으로 이동, 골편은 이식골로 지지.</p>
+  <details class="fig-toggle"><summary>그림 펼치기 (2패널)</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/a2210220-bd8d-4c1e-ac52-95a42056ee00/gamma=0" alt="Fig 34 A" loading="lazy"><figcaption>A</figcaption></figure><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/3d8072a1-7853-4c7b-fb9c-1efbeba6f400/gamma=0" alt="Fig 34 B" loading="lazy"><figcaption>B</figcaption></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 35</span></div>
+  <p>완성된 재건 — 이식건이 요골 터널과 장측 DRUJ 관절낭을 통과해 fovea로 수렴 (Adams-Berger 원전 모식도).</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/1c120814-bf92-4964-af1c-d762bb8db400/gamma=0" alt="Fig 35 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 36</span></div>
+  <p>관절경적 TFCC 재건의 포털과 피부 절개 배치.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/c9bae284-abf0-4820-d57b-5aac29f53600/gamma=0" alt="Fig 36 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 37</span></div>
+  <p>요골 터널 유도핀 위치의 술중 투시 확인.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/bc8eb219-8d5c-43ab-33d3-0432cc56df00/gamma=0" alt="Fig 37 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 38</span></div>
+  <p>조준 가이드로 fovea를 겨냥해 척골 터널 제작 — 유도핀 후 3.2 mm cannulated drill, 필요시 확장.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/4afa00b4-8b82-4912-d4af-407d4d45da00/gamma=0" alt="Fig 38 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 39</span></div>
+  <p>UL-UT 인대 사이 통로 생성 — 3-4 포털 시야에서 6R 포털의 blunt trocar가 간격을 통과.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/7f54ba08-539f-4641-e680-42a4505eb200/gamma=0" alt="Fig 39 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 40</span></div>
+  <p>장측 이식건 끝을 UL-UT 간격으로 관절 내에 진입시켜 척골 터널로 빼내는 단계.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/340cd871-4474-4aec-7ecc-4db0ee43ea00/gamma=0" alt="Fig 40 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 41</span></div>
+  <p>배측 이식건 끝 — A 4-5 포털로 셔틀 봉합사 진입, B 척골 터널에서 grasper로 회수.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/6b75b928-97a2-4669-13eb-2120b64b4b00/gamma=0" alt="Fig 41 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 42</span></div>
+  <p>재건 완성 — 장·배측 가닥이 관절을 가로질러 fovea로 수렴.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/25b49ff3-b7ef-44b8-3dd5-e7c93063ae00/gamma=0" alt="Fig 42 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 43</span></div>
+  <p>흡수성 interference screw로 척골 터널 내 이식건 고정.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/c430de57-ad31-4860-bb61-4331c1198200/gamma=0" alt="Fig 43 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 44</span></div>
+  <p>관절경적 재건의 전체 단계 A–H — 요골 터널, fovea 터널, UL-UT 간격 통과, 제3 횡터널에서 shoelace 결찰까지.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/12e5bc98-29a9-4bed-8307-bcb6a18eef00/gamma=0" alt="Fig 44 " loading="lazy"></figure></div></details>
+</div>
+
+<div class="pearl"><span class="label">임상 포인트</span>생체역학 연구에서 Adams 재건은 안정성을 개선하지만 <strong>골간막(DOB·central band) 동반 손상이 있으면 정상 안정성을 회복하지 못한다</strong>. 아래 소견이 있으면 골간막 손상 동반을 의심하고 추가 재건을 고려하라.</div>
+<div class="tbl-wrap">
+<table>
+<caption>Table 4. 골간막(IOM) 동반 손상을 시사하는 소견 <span class="cap-en">Findings Concerning for Additional IOM Injury</span></caption>
+<thead><tr><th>소견</th><th>해설</th></tr></thead>
+<tbody>
+<tr><td>유의한 ulnar positive variance</td><td>요골이 온전해도 central band 이완 시 전완이 상대적 내반으로 이동하며 척골이 상대적으로 길어진다(<strong>parallelogram effect</strong>, Orbay)</td></tr>
+<tr><td>주관절 손상 동반</td><td>요골 견인 시 variance 변화 3 mm = IOM 손상, ≥6 mm = TFCC 동반 손상. TFCC 손상 + 주관절 손상 조합이면 IOM을 타고 힘이 전달된 것</td></tr>
+<tr><td>Ballottement 병진·영상상 DRUJ gap의 뚜렷한 증가</td><td>사체 연구에서 관상면 gap·시상면 병진 증가는 TFCC+DOB에 <strong>central band까지 절제된 후에야</strong> 나타났다</td></tr>
+</tbody>
+</table>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 45</span></div>
+  <p>Parallelogram effect — central band 이완 시 전완이 내반으로 이동하며 ulnar variance가 증가한다 (Orbay).</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/665e6232-1c3b-473c-712d-391e6de23e00/gamma=0" alt="Fig 45 " loading="lazy"></figure></div></details>
+</div>
+
+
+<h2 id="resection">7. 관절염 DRUJ 수술 개관: 절제 술식<span class="en">Surgical Management of the Arthritic DRUJ</span></h2>
+<p>선택지: <strong>Darrach(±변형)</strong>, <strong>hemiresection interposition(HIT, Bowers)</strong>, <strong>matched resection(Watson)</strong>, <strong>Sauvé-Kapandji</strong>, <strong>임플란트 관절성형술</strong>. 각 술식의 장단점을 알고 환자별로 고른다.</p>
+<div class="tbl-wrap">
+<table>
+<caption>Table 5. 절제 술식 비교 <span class="cap-en">Resection Techniques for DRUJ Arthritis</span></caption>
+<thead><tr><th>술식</th><th>개념·고려사항</th><th>합병증</th></tr></thead>
+<tbody>
+<tr><td><strong>Darrach</strong></td><td>원위 척골 전체 절제. 변형술식: ECU/FCU 안정화, PQ 이전(winging 예방·교정)</td><td><strong>Winging</strong>(시상면 stump 불안정 → 신전건 자극·파열), <strong>convergence</strong>(관상면 불안정 → 요-척골 impingement), 수근골 척측 전위</td></tr>
+<tr><td><strong>HIT (Bowers)</strong></td><td>Ulnar seat만 절제, foveal TFC 부착·styloid·superficial RUL·UC 인대 보존 + 관절낭/유리건 개재 — DRUJ·TFCC 안정 복합체 유지</td><td>Convergence·impingement는 여전히 보고됨, 과도 절제 시 척골 골절</td></tr>
+<tr><td><strong>Matched (Watson)</strong></td><td>요골 곡면에 맞춘 볼록 곡면 절제로 일정한 간격 유지 — HIT와 유사 + 근위 윤곽 성형</td><td>HIT와 유사</td></tr>
+<tr><td><strong>Sauvé-Kapandji</strong></td><td>DRUJ 유합 + 근위 척골 분절 절제(가관절). 염증성 관절염에 주 적응 — <strong>수근골 척측 전위에 대한 척측 buttress 제공</strong></td><td>Darrach와 유사 + 유합부 불유합·hardware 증상</td></tr>
+</tbody>
+</table>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 46</span></div>
+  <p>임플란트 없는 DRUJ 관절성형술의 스펙트럼 — A Darrach, B Baldwin, C Sauvé-Kapandji, D Bowers 개재, E matched resection, F Feldon wafer.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/3c11b639-1113-4939-30af-f4d9776c2800/gamma=0" alt="Fig 46 " loading="lazy"></figure></div></details>
+</div>
+
+
+<h2 id="darrach">8. Darrach와 Modified Darrach<span class="en">Darrach Procedure ± ECU Stabilization</span></h2>
+<ul>
+  <li><strong>적응</strong>: 통증성 부정합·관절염(염증성·외상후·퇴행성). <strong>저요구도 상지, 하중 부하가 필요 없는 환자가 이상적 후보</strong>. <strong>금기</strong>: 염증성 관절염 + 수근골 척측 전위에서 radiocarpal 안정화 없는 단독 시행(전위 악화), 불안정 DRUJ는 상대적 금기(절제단 과가동 우려).</li>
+  <li><strong>고전 술기</strong>: 5구획 배측 절개(배측 척골 감각분지 보호) → 척측 기반 retinaculum 판 → 5구획 바닥 종형 capsulotomy·골막 슬리브 거상 → sigmoid notch 직근위(또는 metaphyseal flare)에서 횡절골, <strong>ulnar head + styloid 전부 제거</strong> → 절제연 다듬기 → 골막·관절낭·retinaculum 층별 봉합. 장상지 보조기 3–4주 → 6–8주 근력운동 → 3개월 전 활동.</li>
+  <li><strong>Modified Darrach(ECU 안정화, Sotereanos)</strong>: 횡절골에 더해 <strong>절제단 요측면의 사면(oblique) 절골</strong>로 충돌 면적을 줄이고 → 절제단 5 cm 근위에서 ECU를 종분할해 <strong>요측 절반 스트립을 절제단의 배→장측 1/8인치 골터널로 통과, 손목 경도 척측 편위에서 당겨 자가 봉합</strong>(±PQ를 절제단에 부착해 winging 억제) → 회내·회외로 impingement 없는 부드러운 arc 확인. 6주 후 가동 시작.</li>
+  <li><strong>합병증</strong>: radioulnar convergence + 불안정, 수근골 척측 전위, 절제단에 의한 신전건 마모 파열(특히 중증 RA), 배측 척골 감각분지 손상.</li>
+  <li><strong>성적</strong>: RA에서 60–80% 양호-우수, <strong>고요구도 환자일수록 결과가 나쁘고, 절제량이 클수록 불안정·impingement 증가</strong>. Modified: 평균 37개월에서 14/15 통증 현저 완화, 술후 impingement 0.</li>
+</ul>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 47</span></div>
+  <p>Modified Darrach — A 모식도, B 수술 사진: 원위 척골 횡절골 + 절제단 요측의 사면 절골.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/4b4d1084-2c94-4912-4aff-b4e6585e7200/gamma=0" alt="Fig 47 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 48</span></div>
+  <p>ECU 안정화 — 요측 절반 스트립을 절제단의 골터널로 장→배측 통과시켜 자가 봉합(A,B 모식도·C 수술 사진), PQ를 절제단에 부착하기도 한다.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/ac47577d-7009-4508-c416-d827fe2c1300/gamma=0" alt="Fig 48 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 49</span></div>
+  <p>RA 환자의 modified Darrach + ECU 안정화 3년 추시 PA.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/2b9bdac8-b051-48c0-8729-958d52daa200/gamma=0" alt="Fig 49 " loading="lazy"></figure></div></details>
+</div>
+
+
+<h2 id="bowers">9. Hemiresection Interposition (Bowers)<span class="en">HIT Arthroplasty</span></h2>
+<ul>
+  <li>개념: Darrach의 불안정 문제를 줄이기 위해 <strong>관절면(ulnar seat)만 절제하고 TFCC의 척측 부착·척골 간부·styloid를 보존</strong>, 절제 부위에 연부조직을 개재.</li>
+  <li><strong>적응</strong>: 퇴행성·외상후 관절염, 초기 RA. <strong>전제 조건 = 온전하거나 재건 가능한 TFCC</strong>(복구 불가한 TFCC는 상대적 금기). 불안정 동반 시 안정화 술식 병행(아니면 악화). <strong>Ulnar positive/abutment는 단축술 동반 없이는 부적합</strong>.</li>
+  <li><strong>술기</strong>: 접근은 Darrach와 동일 → rongeur·burr로 관절면만 절제(TFCC 부착 보존, 비관절부와 styloid는 연속 보존) → 회전 방해 골극 제거, abutment 있으면 단축술 추가 → <strong>척측 기반 관절낭 판 또는 유리건(PL "anchovy") 또는 ECU sheath 요측연의 retinacular flap을 개재</strong>해 장측 DRUJ에 봉합. 중립 장상지 3주.</li>
+  <li><strong>합병증</strong>: 미치료 ulnar plus의 stylocarpal impingement, 기존 불안정 악화(통증은 대개 개선), 과도 절제 시 골절, 감각분지 신경종, ECU 건염, convergence.</li>
+  <li><strong>성적</strong>: 약 75%에서 양호. 실패의 흔한 원인은 잔존 ulnocarpal impaction.</li>
+</ul>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 50</span></div>
+  <p>Hemiresection interposition(Bowers) 2년 추시 PA.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/6326eab6-4411-489e-9910-cb243f2b1d00/gamma=0" alt="Fig 50 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 51</span></div>
+  <p>RA에서의 HIT 모식도 (Mayo Clinic).</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/df44966e-86be-4fc4-1564-99c92e60ab00/gamma=0" alt="Fig 51 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 52</span></div>
+  <p>HIT의 절제 범위 — 골표본으로 본 관절면만의 절제.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/10876db3-7059-43fd-99dc-db7f1cc6bf00/gamma=0" alt="Fig 52 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 53</span></div>
+  <p>Bowers 개재의 두 옵션 — 배측 관절낭 판 또는 건/근으로 만든 anchovy.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/b132d59a-7a35-4203-aec8-e70b3e94a700/gamma=0" alt="Fig 53 " loading="lazy"></figure></div></details>
+</div>
+
+
+<h2 id="matched">10. Matched Distal Ulnar Resection<span class="en">Watson Procedure</span></h2>
+<ul>
+  <li>개념: 원위 척골을 <strong>요골의 오목면과 "맞물리는" 긴 볼록 곡면(270° arc)으로 절제</strong>해, 회전 전 구간에서 요-척골 간격이 일정하게 유지 — 개재물이 필요 없다는 것이 고안 취지. 길이와 styloid는 보존(필요시 styloidectomy로 편위 확보).</li>
+  <li><strong>적응</strong>: 만성 아탈구·탈구, 부정합·관절염. <strong>부적합</strong>: 동반 손목 병변, ulnar positive variance.</li>
+  <li><strong>주의</strong>: notch의 근위 융기부를 남기면 impingement — 절제하라. 절제된 척골이 인접 요골 끝보다 길면 ulnocarpal abutment.</li>
+  <li><strong>성적</strong>: Watson 97 wrists/21년에서 우수 — <strong>고립성 DRUJ 문제 + radiocarpal 보존 + 다른 불안정 없음</strong>일 때 최상.</li>
+</ul>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 54</span></div>
+  <p>Matched resection — 요골의 오목한 metaphysis에 맞춘 볼록 곡면으로 절제, 길이와 styloid는 보존.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/21fb223f-b983-4a60-bf9c-6e3694fdd200/gamma=0" alt="Fig 54 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 55</span></div>
+  <p>절제 후 형태 — 완전 회내부터 완전 회외까지 요-척골 간격이 일정한 경사 원통이 남는다.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/641eb3bb-c3a5-4975-2bdf-537f0ed3be00/gamma=0" alt="Fig 55 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 56</span></div>
+  <p>Matched resection 6.5년 추시 — 회전 전 구간에서 간격 유지, 무증상.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/05551258-fbea-4861-1209-33f15dc54900/gamma=0" alt="Fig 56 " loading="lazy"></figure></div></details>
+</div>
+
+
+<h2 id="sk">11. Sauvé-Kapandji<span class="en">DRUJ Arthrodesis with Proximal Pseudarthrosis</span></h2>
+<ul>
+  <li>개념: <strong>DRUJ를 유합</strong>하고 그 근위 척골에 <strong>가관절(pseudarthrosis)</strong>을 만들어 회전을 보존. Ulnar head가 남으므로 <strong>ulnocarpal buttress와 TFCC가 유지</strong>되어 하중 전달이 비교적 생리적이다.</li>
+  <li><strong>적응</strong>: <strong>RA가 주 적응</strong>(척측 buttress로 수근골 척측 전위 위험 감소) + 젊고 활동적인 고요구도 외상후/퇴행성 관절염. <strong>금기</strong>: 활동성 감염, 원위 척골 골량 부족, radial head 없는 불안정 골간막 손상.</li>
+  <li><strong>술기</strong>: 배측 6–8 cm 절개(감각분지 보호) → 5구획 바닥, 척측 기반 retinaculum-관절낭 판 → <strong>ECU sheath는 열지 않는다(중요한 안정자)</strong> → ulnar head flare 직근위 절골 + 근위 평행 절골로 <strong>10–15 mm 분절 제거</strong>(재생 방지 위해 그 부위 골막 절제) → head·notch 유합면 decortication → 전완 중립·<strong>neutral variance</strong>로 head를 notch에 밀착, 유도핀 2개 → cannulated 압박나사 2개(또는 나사 1+핀 1) 고정, 절제골 해면골 이식 → PQ 근막을 절골부에 개재(재유합 방지), 젊은 환자는 ECU/FCU로 근위 절제단 안정화 추가 가능. 장상지 2주 → 석고로 유합 대기 → 6–8주에 보조기 전환, 유합 후 활동 허용.</li>
+  <li><strong>합병증</strong>: 절제단 impingement·통증성 불안정(Darrach보다는 덜 흔하다는 보고와, 흔하지만 무증상이 많다는 보고가 공존), 유합부 불유합/지연유합, 가관절부 섬유성·골성 재유합, 나사머리 자극, 감각분지 손상.</li>
+  <li><strong>성적</strong>: 85% 이상에서 통증 소실·악력·기능 개선. 젊고 활동적인 환자에서 악력·직장 복귀가 Darrach보다 낫다는 보고. 술식 간 비교는 이질적 모집단·RCT 부재로 어렵다.</li>
+</ul>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 57</span></div>
+  <p>Sauvé-Kapandji 전 과정 — 술전 관절염·ulnar plus, DRUJ 노출·연골 마모, burr 준비, 경부 절골, head 정복 후 나사 2개 고정, 술후 neutral variance, 6개월 유합.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/aacee2db-a8d5-4f5f-9a0b-6cb243fdb700/gamma=0" alt="Fig 57 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 58</span></div>
+  <p>척골 metaphysis 1 cm 분절 제거, TFCC 보존, sigmoid notch·ulnar head의 decortication.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/854078a8-6431-4d7c-e7bf-2d9668fba500/gamma=0" alt="Fig 58 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 59</span></div>
+  <p>Neutral variance 위치에서 나사 2개로 head를 notch에 압박 고정 + 보충 골이식.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/14f88a35-2038-4674-ca98-62f053e56a00/gamma=0" alt="Fig 59 " loading="lazy"></figure></div></details>
+</div>
+
+
+<h2 id="failed">12. 실패한 원위 척골 절제의 관리<span class="en">Managing the Failed Distal Ulnar Resection</span></h2>
+<p>수많은 변형에도 Darrach의 실패율은 <strong>7–50%</strong>로 보고된다. 실패의 양대 원인은 <strong>절제단 불안정</strong>과 <strong>radioulnar convergence</strong>. 임상상 — 회전 시 염발음·통증, 악력 저하, 통증성 사용 회피. 진찰은 절제단의 배·장측 ballottement와 척골→요골 직접 압박으로 한다. 구제 선택지: 국소 건을 이용한 절제단 안정화(비치환 구제), 골성형, 연부조직 개재, 원위 척골 치환.</p>
+<div class="tbl-wrap">
+<table>
+<caption>Table 6. 실패한 원위 척골 절제의 구제 <span class="cap-en">Managing Failed Distal Ulna Resection</span></caption>
+<thead><tr><th>술식</th><th>고려사항</th><th>합병증</th></tr></thead>
+<tbody>
+<tr><td><strong>Achilles allograft interposition</strong> (Sotereanos)</td><td>넓은 radioulnar 간격을 유지해 통증성 convergence·impingement를 치료</td><td>절제단 scalloping, 이식물 탈출, 요골 골절, 이식물 크기 부족 시 convergence·통증 재발</td></tr>
+<tr><td><strong>Ulnar head replacement</strong></td><td>Partial(길이 보존 시 seat만 치환) 또는 total(head 전체 — 안정 연부조직 일부 상실). <strong>DRUJ가 안정해야 고려 가능</strong></td><td>해리, 골절, 탈구, 임플란트/DRUJ 불안정, sigmoid notch 미란</td></tr>
+<tr><td><strong>Total DRUJ replacement</strong> (linked)</td><td>연결형이라 ROM·하중 부하·안정성 모두 제공. 적응: 불안정+관절증, 실패 절제 구제</td><td>신전건 자극(retinaculum을 임플란트 위·신전건 밑에 개재 권장), stem 해리</td></tr>
+</tbody>
+</table>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 60</span></div>
+  <p>실패한 Darrach의 비치환 구제 — 건 안정화 재건의 구성 요소 모식도.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/6d6bb563-dbbf-4bea-0772-2ca40e228900/gamma=0" alt="Fig 60 " loading="lazy"></figure></div></details>
+</div>
+
+<h3>Achilles Tendon Allograft Interposition</h3>
+<ul>
+  <li><strong>적응</strong>: 절제 후 convergence로 인한 통증성 impingement — 특히 <strong>임플란트가 부적합한 젊고 활동적인 환자</strong>.</li>
+  <li><strong>술기</strong>: 기존 절개 활용, 감각분지 보호 → 절제단 4–6 cm 근위까지 골막하 노출, 돌출부 다듬기 → 척골을 장측으로 젖혀 <strong>요골 내측 피질에 unicortical suture anchor 3–4개</strong>(notch 근위 impingement 부위, 3–4 cm 구간) + <strong>원위 척골에 내→외측 drill hole 3–4개</strong> → 종골 조각을 제거한 Achilles allograft를 말아 <strong>대형 "pillow"(약 5×3 cm)</strong>로 만들어 요-척골 사이에 개재, anchor 봉합사와 drill hole 봉합사로 고정 → 압박 하 회전에서 <strong>염발음이 완전히 사라질 때까지 이식물 크기를 키운다</strong>. 절제단 안정화용 다른 조직은 쓰지 않음. 장상지 보조기→석고 6주, 보호 가동 12주까지.</li>
+  <li><strong>합병증</strong>: 부피 부족 시 간격 소실(최대 함정), 요골 간부 골절(unicortical micro anchor로 예방), 이식물 탈출, 무증상 척골 scalloping, allograft 일반론(비용·수급·면역) — 감염·면역 반응 보고는 아직 없음.</li>
+  <li><strong>성적</strong>: 원저자(D.G.S.) 개인 시리즈 40명+에서 일관된 양호-우수(통증 완화, 회전·악력 개선, 2–14년 간격 유지). 단 <strong>타 기관 10명 소규모 시리즈에서는 재현 실패</strong>(7/10 통증 지속, 5명 재수술) — 정상 생체역학을 복원하는 술식이 아니라 impingement를 막는 구제술임을 기억할 것.</li>
+</ul>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 61</span></div>
+  <p>Achilles allograft interposition — A 모식도, B 수술 사진: 요골 내측 피질의 anchor(화살표)와 척골 drill hole로 이식물 고정.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/de4faf84-746f-4d74-1429-d26bda703800/gamma=0" alt="Fig 61 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 62</span></div>
+  <p>이식물의 최종 위치 — 요-척골 사이 pillow형 스페이서.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/93486be0-5ec6-4e3b-15ca-2ee2113f7100/gamma=0" alt="Fig 62 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 63</span></div>
+  <p>실패한 Darrach 3년 — 요골과 절제단의 impingement PA.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/6a64bc26-8cfb-4802-0690-83742c11df00/gamma=0" alt="Fig 63 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 64</span></div>
+  <p>Achilles interposition 2년 후 — 두 전완골 사이 impingement 소실.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/0c361231-5280-4c85-6959-5b1781bec400/gamma=0" alt="Fig 64 " loading="lazy"></figure></div></details>
+</div>
+
+
+<h2 id="uhr">13. 임플란트 ①: Ulnar Head Replacement<span class="en">Partial & Total Ulnar Head Arthroplasty</span></h2>
+<ul>
+  <li>실리콘·세라믹·금속 임플란트로 ulnar head만 치환하는 hemiarthroplasty. <strong>온전한 sigmoid notch + 재건 가능한 TFCC가 안정성의 기반</strong>. Partial(척골 길이 보존 시 seat만) vs total(head 전체 — 안정 연부조직 일부 희생).</li>
+  <li><strong>적응</strong>: DRUJ의 OA·RA·외상후 관절염, 절제술(Darrach·S-K·HIT) 후 통증성 convergence 구제. <strong>금기</strong>: 골량 부족, 활동성 감염, 골격 미성숙, 연부조직 부족·심한 인대 이완(임플란트 불안정), <strong>미교정 radius/ulna 부정유합(먼저 교정), Essex-Lopresti 후 축성 불안정 미해결 상태</strong>.</li>
+  <li><strong>술기 요점</strong>: 배척측 절개·감각분지 보호, 5구획 통해 EDM 요측 견인·<strong>6구획(ECU)은 보존</strong> → 배측 capsulotomy로 head 노출 → 임플란트별 가이드로 절골·삽입 → <strong>neutral~negative variance</strong>와 회전 전 구간 안정성 확인 → 가능하면 TFCC를 임플란트 구멍에 봉합 → retinaculum 복원. 6–12주 내 기능 회복 기대.</li>
+  <li><strong>합병증</strong>: 해리·골절·탈구·임플란트 불안정·감염(특히 젊은 고요구도), 재발성 불안정, <strong>sigmoid notch 미란</strong>.</li>
+  <li><strong>성적</strong>: 통증·회전·악력 개선. 생존율 87%(5년)→83%(6년)→82%(10년). 방사선상 해리 8%(대부분 무증상)라는 최근 보고. 단 <strong>35%가 추가 수술, 17%는 임플란트 제거</strong> — 환자 선택이 관건.</li>
+</ul>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 65</span></div>
+  <p>Ulnar head 치환물의 예 — Ascension 임플란트와 uHead trial(+연장 stem).</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/26f0ace4-d839-4f0d-3cf2-bde039eea000/gamma=0" alt="Fig 65 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 66</span></div>
+  <p>Partial ulnar head 임플란트 + 부분 손목 유합.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/81f8a4dc-e953-4037-5ec1-50ca52c16c00/gamma=0" alt="Fig 66 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 67</span></div>
+  <p>임플란트별 가이드로 측정 후 ulnar head 근위 절골, 잔여 연부조직 유리.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/8c0e6762-3cfb-4364-8847-b55e7e61e600/gamma=0" alt="Fig 67 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 68</span></div>
+  <p>관절낭 봉합 — 미리 만든 drill hole에 osteosuture, notch 요측 관절낭 잔여부가 봉합을 돕는다.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/d1206619-2a41-4795-c40c-216f3ab04400/gamma=0" alt="Fig 68 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 69</span></div>
+  <p>53세 남성 — ulnar head 치환 3년 후 해리와 통증.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/c74f65c7-65aa-4ec1-6fcf-4fe13ea28500/gamma=0" alt="Fig 69 " loading="lazy"></figure></div></details>
+</div>
+
+
+<h2 id="total">14. 임플란트 ②: Total DRUJ Replacement<span class="en">Semiconstrained (Linked) Prosthesis</span></h2>
+<ul>
+  <li>개념: <strong>notch 이상과 연부 안정자 부재까지 대체</strong>하는 관절 전치환. Semiconstrained(연결형) 디자인 — 척골 요소는 골수강내 stem + 원위 UHMWPE ball, 요골 요소는 plate + hemisocket + cover plate로 ball을 감싼다. Ulnar head·notch·TFCC의 기능을 모두 대신하며, <strong>ROM·하중 부하·안정성을 동시에</strong> 제공한다.</li>
+  <li><strong>적응</strong>: OA·RA·외상후 관절염, <strong>실패한 절제술·실패한 ulnar head 치환의 구제</strong>. <strong>금기</strong>: 활동성 감염, 골격 미성숙, 금속 알레르기, 중증 골다공증, 연부조직 피복 부족, 잔존 근위 척골 11 cm 미만.</li>
+  <li><strong>술기 요점</strong>: 5–6구획 사이 10 cm hockey stick 절개, EDQ-ECU 간격, 감각분지 보호 → <strong>척측 기반 근막 판을 미리 만들어 두었다가 마지막에 ECU 밑·임플란트 위에 개재</strong>(신전건 자극 예방) → head 절제(있다면)·골극 제거·골간막 8–9 cm 근위까지 거상 → radial plate를 notch 근위 골간막면에 peg+피질나사 5개로 고정, hemisocket이 척측을 향하게 → ulnar stem 삽입, ball 장착, cover 나사 2개로 socket 완성 → 진찰·투시로 운동·위치 확인. <strong>술후 2주부터 전 범위 ROM 허용</strong> — 조기 가동이 가능한 것이 큰 장점.</li>
+  <li><strong>합병증</strong>: 인공관절 일반(불안정, overstuffing, stem 해리), 감염, 삽입물 주위 골절, ECU 활막염·신전건 자극, 기술적 문제.</li>
+  <li><strong>성적</strong>: 통증·회전·악력 개선, 5년 이상 생존율 84–95%. 그러나 최근 시리즈에서 <strong>재수술률 24–29%</strong>의 높은 합병증률 — 장기 성적과 합병증 규명을 위한 연구가 더 필요하다.</li>
+</ul>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 70</span></div>
+  <p>연결형 total DRUJ의 전형적 경과 — A 관절염 → B,C Darrach → 절제단 불안정 발생 → D,E linked DRUJ 치환으로 전환.</p>
+  <details class="fig-toggle"><summary>그림 펼치기 (5패널)</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/85cb83b8-cdf8-482b-4e72-faa9f9e3d800/gamma=0" alt="Fig 70 A" loading="lazy"><figcaption>A</figcaption></figure><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/825358a7-acc4-4116-7e59-39d3c4c61100/gamma=0" alt="Fig 70 B" loading="lazy"><figcaption>B</figcaption></figure><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/37f485fe-c060-4a70-be48-da96672ca500/gamma=0" alt="Fig 70 C" loading="lazy"><figcaption>C</figcaption></figure><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/d6579ac3-b604-4d46-ca48-7dc97b95a700/gamma=0" alt="Fig 70 D" loading="lazy"><figcaption>D</figcaption></figure><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/5632804f-4f51-47b2-4b31-7b14e0607200/gamma=0" alt="Fig 70 E" loading="lazy"><figcaption>E</figcaption></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 71</span></div>
+  <p>제조사 제공 술전 템플릿.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/12e8b0ee-9817-422a-426a-f5e78f94be00/gamma=0" alt="Fig 71 " loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 72</span></div>
+  <p>Total DRUJ 수술 단계 — A 원위 척골 절제 후 요골 척측 피질, B radial plate 고정, C ulnar stem 삽입, D ball 연결로 요-척골 linked, E–F ECU 밑 근막 판 개재 전후.</p>
+  <details class="fig-toggle"><summary>그림 펼치기 (6패널)</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/35cc9df4-f11c-4c7a-56d8-01fe7a9e3500/gamma=0" alt="Fig 72 A" loading="lazy"><figcaption>A</figcaption></figure><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/151faab3-a29a-4537-f02e-b971549a7000/gamma=0" alt="Fig 72 B" loading="lazy"><figcaption>B</figcaption></figure><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/24937b65-3285-4f9f-c520-6da0a3466e00/gamma=0" alt="Fig 72 C" loading="lazy"><figcaption>C</figcaption></figure><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/e258dc7c-8834-4f84-b3dc-fb12bab42b00/gamma=0" alt="Fig 72 D" loading="lazy"><figcaption>D</figcaption></figure><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/a13c8daa-6fdb-4228-4fc3-4a8e5072d200/gamma=0" alt="Fig 72 E" loading="lazy"><figcaption>E</figcaption></figure><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/b8a85f04-c5b6-42bf-3175-07d096b17d00/gamma=0" alt="Fig 72 F" loading="lazy"><figcaption>F</figcaption></figure></div></details>
+</div>
+
+
+<div class="keybox">
+  <span class="label">결론</span>
+  <ul>
+    <li>DRUJ는 전완 회전과 하중 전달의 요체이며, 손상은 불안정 또는 관절염으로 귀결된다.</li>
+    <li>연부조직·골성 술식 모두 만족스러운 결과가 가능하지만 <strong>단일 우월 술식은 없다</strong> — 병리의 전 원인 교정 + 환자 선택 + 술기 디테일이 결과를 좌우한다.</li>
+    <li>불안정: 급성은 정복·고정·봉합으로, 만성은 TFC repair(복구 가능 시) 또는 Adams 재건(불가 시) — 골변형·골간막 손상 동반 여부를 반드시 함께 해결.</li>
+    <li>관절염: 저요구도는 절제 계열, RA·젊은 고요구도는 Sauvé-Kapandji, 실패 절제는 Achilles interposition 또는 치환술로 구제.</li>
+    <li>임플란트는 유망하지만 <strong>장기 근거가 쌓일 때까지 신중하게</strong>.</li>
+  </ul>
+</div>
+
+<footer>
+  <p>출처: Handthology by ASSH — “DRUJ Injury and Reconstruction” (Hand and Wrist: Bone and Joint). 이 페이지는 개인 학습용 요약 정리본이며, 동영상·문헌 목록·세부 수치는 <a href="https://handthology.assh.org/chapters/hand-and-wrist-bone-and-joint/druj-injury-and-reconstruction" target="_blank" rel="noopener" style="color:var(--accent)">원문</a>을 참조하세요.</p>
+</footer>
+
+</div>
+
+</html>
