@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>정중신경 압박 노트</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+:root{
+  --ink:#1C2733; --ink-soft:#46586A; --ink-faint:#7A8A99;
+  --ground:#FAFBFC; --panel:#FFFFFF; --line:#DDE5EA;
+  --accent:#0F6E6B; --accent-soft:#E4F0EF; --accent-line:#BDD9D7;
+  --pearl-bg:#FBF6E9; --pearl-line:#E4D6AC; --pearl-ink:#6B5410;
+  --th-bg:#EEF4F3; --code-bg:#F1F4F6;
+}
+:root:not([data-theme="light"]){}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#E3EAEF; --ink-soft:#AEBECB; --ink-faint:#7E8FA0;
+    --ground:#141A20; --panel:#1B232B; --line:#2C3843;
+    --accent:#5FBDB8; --accent-soft:#1C2E2D; --accent-line:#2E4C4A;
+    --pearl-bg:#272215; --pearl-line:#4A3F1E; --pearl-ink:#D9C273;
+    --th-bg:#202A31; --code-bg:#222C34;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#E3EAEF; --ink-soft:#AEBECB; --ink-faint:#7E8FA0;
+  --ground:#141A20; --panel:#1B232B; --line:#2C3843;
+  --accent:#5FBDB8; --accent-soft:#1C2E2D; --accent-line:#2E4C4A;
+  --pearl-bg:#272215; --pearl-line:#4A3F1E; --pearl-ink:#D9C273;
+  --th-bg:#202A31; --code-bg:#222C34;
+}
+*{box-sizing:border-box}
+body{background:var(--ground); color:var(--ink); font:16px/1.85 "Noto Sans KR",-apple-system,"Apple SD Gothic Neo",sans-serif; margin:0; -webkit-font-smoothing:antialiased}
+.wrap{max-width:780px; margin:0 auto; padding:48px 24px 96px}
+header.hero{border-bottom:2px solid var(--accent); padding-bottom:28px; margin-bottom:36px}
+.eyebrow{font-size:12px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); margin:0 0 10px}
+h1{font-family:"Noto Serif KR",serif; font-size:34px; line-height:1.35; margin:0 0 12px; text-wrap:balance}
+.sub{color:var(--ink-soft); font-size:15px; margin:0}
+.sub a{color:var(--accent)}
+.notice{font-size:13px; color:var(--ink-faint); margin-top:14px; padding:10px 14px; background:var(--panel); border:1px solid var(--line); border-radius:6px}
+nav.toc{background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:20px 24px; margin-bottom:44px}
+nav.toc .toc-title{font-size:12px; font-weight:700; letter-spacing:.16em; color:var(--ink-faint); text-transform:uppercase; margin:0 0 10px}
+nav.toc ol{margin:0; padding-left:22px; column-count:2; column-gap:32px; font-size:14px}
+nav.toc li{margin:3px 0; break-inside:avoid}
+nav.toc a{color:var(--ink-soft); text-decoration:none}
+nav.toc a:hover, nav.toc a:focus{color:var(--accent); text-decoration:underline}
+h2{font-family:"Noto Serif KR",serif; font-size:24px; line-height:1.4; margin:64px 0 6px; text-wrap:balance; scroll-margin-top:24px}
+h2 .en{display:block; font-family:"Noto Sans KR",sans-serif; font-size:12.5px; font-weight:500; letter-spacing:.08em; color:var(--accent); margin-top:2px}
+h3{font-size:17.5px; font-weight:700; margin:36px 0 4px; color:var(--ink)}
+h3 .en{font-weight:500; font-size:13px; color:var(--ink-faint); margin-left:6px}
+h4{font-size:15.5px; font-weight:700; margin:26px 0 2px}
+p{margin:12px 0}
+ul,ol{margin:10px 0; padding-left:24px}
+li{margin:5px 0}
+strong{font-weight:700}
+em{font-style:normal; color:var(--accent); font-weight:500}
+.term{color:var(--accent); font-weight:500}
+.pearl{background:var(--pearl-bg); border:1px solid var(--pearl-line); border-radius:8px; padding:14px 18px; margin:20px 0; font-size:14.5px}
+.pearl .label{display:block; font-size:11.5px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--pearl-ink); margin-bottom:6px}
+.keybox{background:var(--accent-soft); border:1px solid var(--accent-line); border-radius:8px; padding:16px 20px; margin:22px 0}
+.keybox .label{display:block; font-size:11.5px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin-bottom:8px}
+.keybox ul{margin:0; padding-left:20px}
+.tbl-wrap{overflow-x:auto; margin:20px 0; border:1px solid var(--line); border-radius:8px}
+table{border-collapse:collapse; width:100%; font-size:14px; background:var(--panel)}
+caption{caption-side:top; text-align:left; font-weight:700; font-size:14px; padding:12px 14px 10px; background:var(--panel); border-bottom:2px solid var(--accent)}
+caption .cap-en{font-weight:500; color:var(--ink-faint); font-size:12.5px}
+th{background:var(--th-bg); text-align:left; font-weight:700; padding:9px 14px; border-bottom:1px solid var(--line); white-space:nowrap}
+td{padding:9px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.num, th.num{font-variant-numeric:tabular-nums; white-space:nowrap}
+.figref{font-size:12.5px; color:var(--ink-faint)}
+.fig{background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:8px; padding:12px 16px 10px; margin:18px 0; font-size:13.5px; color:var(--ink-soft)}
+.fig-head{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:6px}
+.fig-no{font-size:11.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); background:var(--accent-soft); border:1px solid var(--accent-line); border-radius:4px; padding:2px 8px; white-space:nowrap}
+.fig p{margin:2px 0 4px; line-height:1.7}
+.divider{border:none; border-top:1px solid var(--line); margin:56px 0}
+.step{border-left:3px solid var(--accent-line); padding:2px 0 2px 18px; margin:18px 0}
+.step h4{margin-top:0}
+footer{margin-top:72px; padding-top:20px; border-top:1px solid var(--line); font-size:13px; color:var(--ink-faint)}
+@media (max-width:640px){ nav.toc ol{column-count:1} h1{font-size:27px} h2{font-size:21px} }
+@media (prefers-reduced-motion: no-preference){ html{scroll-behavior:smooth} }
+
+.fig-toggle{margin-top:6px}
+.fig-toggle summary{cursor:pointer; font-size:12.5px; font-weight:700; color:var(--accent); padding:4px 0; user-select:none}
+.fig-toggle summary:hover{text-decoration:underline}
+.fig-imgs{display:flex; flex-wrap:wrap; gap:12px; padding:10px 0 4px; align-items:flex-start}
+.fig-imgs figure{margin:0; text-align:center}
+.fig-imgs img{max-width:280px; height:auto; border:1px solid var(--line); border-radius:6px; background:#fff; display:block}
+.fig-imgs figcaption{font-size:11.5px; font-weight:700; color:var(--ink-faint); margin-top:4px; letter-spacing:.08em}
+</style>
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Handthology · Nerve</p>
+  <h1>정중신경 압박</h1>
+  <p class="sub">ASSH Handthology 챕터 <a href="https://handthology.assh.org/chapters/nerve/median-nerve-compression" target="_blank" rel="noopener">“Median Nerve Compression”</a>을 정형외과 전문의 수준으로 재구성한 한글 학습 노트 — pronator syndrome · AIN syndrome · carpal tunnel syndrome</p>
+  <p class="notice">원문의 문장을 그대로 옮긴 번역본이 아니라, 챕터의 구조와 내용을 따라가며 요약·재구성한 정리본입니다. 그림(Fig. 1–23)은 각 인용 위치의 figure 카드에서 "그림 펼치기"로 그 자리에서 열립니다 — 이미지는 파일에 저장된 것이 아니라 ASSH 서버에서 직접 불러오므로(원본 참조) 인터넷 연결 상태에서만 표시됩니다. 세부 수치·문헌 번호는 원문에서 확인하세요.</p>
+</header>
+
+<nav class="toc" aria-label="목차">
+  <p class="toc-title">목차</p>
+  <ol>
+    <li><a href="#course">정중신경의 주행과 분지</a></li>
+    <li><a href="#sites">압박 부위 총람</a></li>
+    <li><a href="#ps-anatomy">Pronator syndrome ①: 개요와 해부</a></li>
+    <li><a href="#ps-dx">Pronator syndrome ②: 진단</a></li>
+    <li><a href="#ps-tx">Pronator syndrome ③: 치료와 성적</a></li>
+    <li><a href="#ain-anatomy">AIN syndrome ①: 개요와 해부</a></li>
+    <li><a href="#ain-dx">AIN syndrome ②: 진단과 감별</a></li>
+    <li><a href="#ain-tx">AIN syndrome ③: 치료와 성적</a></li>
+    <li><a href="#cts-epi">CTS ①: 역학과 위험인자</a></li>
+    <li><a href="#cts-anatomy">CTS ②: 수근관 해부</a></li>
+    <li><a href="#cts-dx">CTS ③: 진단</a></li>
+    <li><a href="#cts-nonop">CTS ④: 비수술 치료</a></li>
+    <li><a href="#cts-op">CTS ⑤: 수술 술기</a></li>
+    <li><a href="#cts-outcome">CTS ⑥: 성적·합병증·재수술</a></li>
+  </ol>
+</nav>
+
+<div class="keybox">
+  <span class="label">Key Points</span>
+  <ul>
+    <li>근위부의 해부학적 압박이나 전신 요인은 신경을 <strong>원위 포착에 더 취약하게</strong> 만들 수 있다 (double crush).</li>
+    <li>정중신경 압박 부위는 근위에서 원위 순으로 <strong>ligament of Struthers → lacertus fibrosus → PT 두 head 사이 → FDS fibrous arch → transverse carpal ligament</strong>.</li>
+    <li><strong>Pronator syndrome</strong> = 근위 전완의 둔한 통증 + 정중신경 지배 근육 약화 + 손바닥 radial 쪽(thenar 포함) 감각이상.</li>
+    <li><strong>AIN syndrome</strong> = FPL·FDP(index, long) 약화, <strong>감각 이상 없음</strong>.</li>
+    <li><strong>CTS</strong> = 손목 수준 압박, 엄지–약지 radial 반 저림. Palmar cutaneous branch는 수근관을 지나지 않으므로 <strong>thenar 감각은 보존</strong>.</li>
+  </ul>
+</div>
+
+<h2 id="course">1. 정중신경의 주행과 분지<span class="en">Course and Branches of the Median Nerve</span></h2>
+<p>정중신경은 상완신경총 다섯 뿌리(C5–T1) 전부의 기여를 받아 <strong>lateral cord와 medial cord의 종말지</strong>가 합쳐져 만들어진다. 상완에서는 biceps와 brachialis 사이를 brachial artery와 함께 내려가는데, 위쪽에서는 동맥의 lateral, 상완골 중간 높이에서 동맥 앞을 가로질러 주관절 높이에서는 <strong>medial</strong>에 놓인다. 상완에서는 원칙적으로 분지를 내지 않는다(musculocutaneous nerve와의 교통지는 46%까지 보고). 주관절 위 압박은 전체 정중신경 병변의 0.4% 미만이다.</p>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 1</span></div>
+  <p>상완과 전완에서의 정중신경 주행 모식도 (Alder &amp; Wolf, JHS-Am 2020에서 전재된 그림).</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/c0e9fff6-bab6-4c4d-a086-1df206c48800/gamma=0" alt="Fig 1" loading="lazy"></figure></div></details>
+</div>
+
+<h3>전완에서의 순서</h3>
+<ol>
+  <li>Biceps tendon의 medial로 antecubital fossa 진입</li>
+  <li><span class="term">Lacertus fibrosus</span>(bicipital aponeurosis) 밑을 통과</li>
+  <li>PT·FCR·PL·FDS로 가는 운동지를 낸 뒤, <strong>medial epicondyle 원위 5–8 cm, PT 두 head 접합부 높이</strong>에서 <span class="term">AIN</span> 분지</li>
+  <li>PT의 ulnar head(deep)와 humeral head(superficial) 사이 통과 — 26%에서는 PT 깊이로 지나감</li>
+  <li><span class="term">FDS fibrous arch</span> 밑 통과 → 중간 전완에서 FDS·FDP 근복 사이(FDS 하면 epimysium 안)</li>
+  <li>원위 전완에서 표재화, 손목 주름 근위 약 5 cm(3–8 cm)에서 <span class="term">palmar cutaneous branch</span> 분지</li>
+  <li>수근관에서 가장 palmar(표재) 구조로 통과, 원위 가장자리에서 recurrent motor branch와 종말지로 갈라짐</li>
+</ol>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 3</span></div>
+  <p>전완에서 정중신경의 분지 배열 (Tung &amp; Mackinnon, JHS-Am 2001에서 전재).</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/b19e20f2-9672-425c-95ce-65168a1bab00/gamma=0" alt="Fig 3" loading="lazy"></figure></div></details>
+</div>
+
+<div class="tbl-wrap">
+<table>
+  <caption>정중신경의 지배 영역 <span class="cap-en">Median nerve innervation</span></caption>
+  <thead><tr><th>분지</th><th>운동</th><th>감각</th></tr></thead>
+  <tbody>
+    <tr><td>Median nerve proper (전완)</td><td>PT, FCR, PL, FDS</td><td>—</td></tr>
+    <tr><td>AIN</td><td>FDP (index·long), FPL, PQ</td><td>말단은 volar wrist joint 관절낭 감각지</td></tr>
+    <tr><td>Palmar cutaneous branch</td><td>—</td><td>손바닥 radial(thenar) 부위</td></tr>
+    <tr><td>Recurrent motor branch</td><td>APB, opponens pollicis, FPB superficial head</td><td>—</td></tr>
+    <tr><td>종말지 (common·proper digital n.)</td><td>1st·2nd lumbrical</td><td>엄지·검지·중지 + 약지 radial 반</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="sites">2. 압박 부위 총람<span class="en">Sites of Median Nerve Compression</span></h2>
+<div class="tbl-wrap">
+<table>
+  <caption>근위 → 원위 순 압박 부위 <span class="cap-en">Proximal to distal</span></caption>
+  <thead><tr><th>부위</th><th>핵심</th><th>해당 증후군</th></tr></thead>
+  <tbody>
+    <tr><td>Ligament of Struthers</td><td>Supracondylar process(1–4%, medial epicondyle 근위 4–8 cm)와 medial epicondyle을 잇는 섬유띠. 극히 드묾</td><td>Supracondylar process syndrome</td></tr>
+    <tr><td>Lacertus fibrosus</td><td>Biceps tendon에서 전완 medial 근막으로 가는 섬유띠. 정중신경·brachial artery가 그 밑을 지남</td><td rowspan="3">Pronator syndrome</td></tr>
+    <tr><td>PT 두 head 사이</td><td>Ulnar head(deep)·humeral head(superficial). Ulnar head가 더 흔한 압박 원인</td></tr>
+    <tr><td>FDS aponeurotic arch</td><td>기시부 변이가 커서 fibroaponeurotic arch가 2개까지 있을 수 있음</td></tr>
+    <tr><td>Gantzer's muscle</td><td>FPL accessory head, 43–68%(문헌마다 45–68%). 정중신경 깊이 위치. 기시 다양</td><td>Pronator / AIN syndrome</td></tr>
+    <tr><td>Persistent median artery</td><td>사체 4–16%. 보통 AIA에서 기시, FDP·FPL 사이 통과. Bifid median nerve(2.8%)의 79%까지 동반</td><td>CTS · pronator · AIN</td></tr>
+    <tr><td>Transverse carpal ligament</td><td>수근관 천장</td><td>CTS</td></tr>
+  </tbody>
+</table>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 2</span></div>
+  <p>Pronator syndrome에서 가능한 압박 부위들의 모식도.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/1580846a-53fc-439b-e3b1-03d1fbf08300/gamma=0" alt="Fig 2" loading="lazy"></figure></div></details>
+</div>
+
+<h3>Martin-Gruber anastomosis</h3>
+<p>전완에서 정중신경 → 척골신경으로 가는 신경 교통은 22.9%까지 보고되고 18.7%는 양측성이다. 기시는 superficial flexor 운동지(47.3%)가 가장 흔하고, median nerve proper나 AIN에서도 나온다. Leibovic–Hastings 기능 분류:</p>
+<ul>
+  <li><strong>Type I (60%)</strong>: median → ulnar로 가서 "median 근육"을 지배</li>
+  <li><strong>Type II (35%)</strong>: median → ulnar로 가서 "ulnar 근육"을 지배</li>
+  <li>Type III (3%) · IV (1%): ulnar → median으로 가서 median 근육 또는 ulnar 근육을 지배</li>
+</ul>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 4</span></div>
+  <p>Martin-Gruber 교통. A Type I(median에서 ulnar로 건너가 median 근육 지배), B Type II(건너가 ulnar 근육 지배).</p>
+  <details class="fig-toggle"><summary>그림 펼치기 (2패널)</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/c51e20d1-64df-43ca-61b7-cd8ce93bd800/gamma=0" alt="Fig 4 A" loading="lazy"><figcaption>A</figcaption></figure><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/27e91ce2-96a9-4daa-4110-ffbe3640ff00/gamma=0" alt="Fig 4 B" loading="lazy"><figcaption>B</figcaption></figure></div></details>
+</div>
+<div class="pearl"><span class="label">임상 포인트</span>Martin-Gruber가 있으면 AIN 병변에서도 index·long FDP가 부분적으로 보존되거나, 반대로 ulnar 근육 약화가 섞여 보일 수 있다. AIN syndrome의 "variable index/long involvement"는 이 교차 지배 때문이다.</div>
+
+<hr class="divider">
+
+<h2 id="ps-anatomy">3. Pronator syndrome ①: 개요와 해부<span class="en">Pronator Syndrome — Overview and Anatomy</span></h2>
+<p>1951년 Seyffarth가 PT 두 head 사이 압박 17례로 처음 기술했고, 1958년 Kopell과 Thompson이 PT–FDS 사이의 이상 섬유띠를 절제해 10주 만에 호전된 첫 수술례를 보고했다. 지금은 <strong>주관절·근위 전완의 어떤 구조든 정중신경을 눌러 생기는 통증 증후군</strong>으로 넓게 정의한다.</p>
+<ul>
+  <li>증상: 전완 통증 + 엄지–약지 radial 경계의 감각저하/이상감각. <strong>Palmar cutaneous branch 영역(thenar eminence)의 감각 증상</strong>이 CTS와 구별되는 특징.</li>
+  <li>주로 <strong>낮 활동 중</strong>, 특히 전완 회내·회외 동작에 악화. 야간 증상이 주인 CTS와 대조.</li>
+  <li>통증에 이차적인 전완·손 약화를 호소하기도 한다.</li>
+</ul>
+
+<h3>Ligament of Struthers와 supracondylar process</h3>
+<p>1848년 Struthers가 "Arcade VIII"로 기술. Supracondylar process는 상완골 anteromedial, medial epicondyle 근위 4–8 cm에 위치한 2–20 mm 골극으로 인구 1–4%에 있다. 인대와 골극은 서로 없이도 존재할 수 있고, 정중신경(때로 brachial artery)이 그 사이를 지난다. 신경이 인대의 표재 또는 심부를 지나는 변이가 포착을 만든다. PT나 coracobrachialis가 여기서 기시·부착해 추가 압박점이 되기도 한다. <strong>Supracondylar process syndrome</strong>은 체계적 문헌고찰에서 43례에 불과할 만큼 드물며, 주관절 신전·전완 회내에 악화되는 정중신경 증상과 medial elbow 압통, 촉지되는 골극이 특징이다.</p>
+
+<h3>전완 내 압박 구조</h3>
+<ul>
+  <li><strong>PT</strong>: ulnar head가 압박에 더 자주 관여. 정중신경은 대개 두 head 사이를 지나지만 26%는 PT 깊이로 지난다.</li>
+  <li><strong>FDS arch</strong>: Dellon–Mackinnon 연구에서 FDS 기시부 변이가 커서 정중신경이 최대 2개의 fibroaponeurotic arch에 덮인다.</li>
+  <li><strong>혈관 이상</strong>: brachial artery pseudoaneurysm(외상·카테터·중환자실 병력), persistent median artery(태생 8주에 퇴화해야 할 축동맥이 남은 것으로 손의 주 혈류·superficial arch를 만들기도 함).</li>
+  <li><strong>부근육 변이</strong>: Gantzer's muscle(FPL accessory head, 사체 45%까지), FDP accessory head(대개 FDS 심부에서 기시해 손목 근위 FDP 건에 부착), palmaris profundus(TCL 심부를 열 번째 굴곡건처럼 지나며 정중신경과 sheath를 공유해 mass effect).</li>
+</ul>
+
+<h2 id="ps-dx">4. Pronator syndrome ②: 진단<span class="en">Diagnosis and Evaluation</span></h2>
+<p>가장 흔한 주소는 <strong>근위 전완의 막연한 둔통</strong>이다. 손·손가락의 경미한 약화, 엄지·radial 손가락 저림, 손바닥 저림이 섞여 CTS와 구분이 어렵다. 감별의 열쇠는 <strong>palmar cutaneous branch 영역의 감각 증상 + CTS 유발검사 음성</strong>이다. Palmar cutaneous branch는 원위 손목 주름 근위 3–8 cm에서 나와 FCR·PL 사이를 antebrachial fascia 깊이로 지나므로 수근관을 통과하지 않는다. 증상은 주관절 굴곡·전완 회내의 반복 동작에 악화되고, <strong>PT 근위부 압통</strong>이 특징적 소견이다.</p>
+<ul>
+  <li>모든 상지 신경병증 검사는 <strong>경추 평가</strong>부터. Medial epicondyle 근위의 골융기(supracondylar process)는 촉지될 수 있지만, 있다고 해서 Struthers가 압박 부위라는 뜻은 아니고 없다고 배제되지도 않는다.</li>
+  <li>영상: 주관절 AP·lateral·oblique로 supracondylar process 확인. 전완 단순촬영·US·MRI는 공간점유 병변이 아니면 진단 기여가 적다.</li>
+  <li>CTS와의 구분: 순수 pronator syndrome이면 손목 Tinel, Durkan, Phalen이 <strong>음성</strong>이어야 한다. 2PD로 innervation density를, Semmes-Weinstein으로 palmar cutaneous 영역 역치 저하를 정량화한다.</li>
+</ul>
+
+<div class="tbl-wrap">
+<table>
+  <caption>Pronator syndrome 유발검사 4종 <span class="cap-en">Provocative maneuvers (민감도·특이도는 확립되지 않음)</span></caption>
+  <thead><tr><th>검사</th><th>방법</th><th>양성이 시사하는 압박 구조</th></tr></thead>
+  <tbody>
+    <tr><td>Pronator compression test</td><td>Intercondylar line 원위 5 cm, PT 근위 가장자리 직접 압박 → 30초 내 통증/이상감각</td><td>PT (일반)</td></tr>
+    <tr><td>Resisted pronation</td><td>저항 회내 시 재현</td><td>PT</td></tr>
+    <tr><td>Resisted supination / elbow flexion</td><td>저항 회외·주관절 굴곡 시 재현</td><td>Lacertus fibrosus (bicipital aponeurosis)</td></tr>
+    <tr><td>Resisted long finger PIP flexion</td><td>중지 PIP 저항 굴곡 시 재현</td><td>FDS arch (단, CTS에서도 양성 가능)</td></tr>
+    <tr><td>Tinel at PT 근위 가장자리</td><td>타진</td><td>Pronator syndrome 시사</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>전기진단검사</h3>
+<p>Pronator syndrome에서는 대부분 정상이라 가치가 논란이다. 다만 <strong>다른 압박 부위를 배제</strong>하는 데 유용하고, 전완 심부 굴곡근 구획에 sharp wave·fibrillation·잠복기 연장이 보이면 AIN syndrome 평가를 추가한다. 손목 전도속도가 정상이면서 임상이 pronator syndrome이면 근위 압박을 지지하지만, double crush에서는 손목 전도가 함께 느려질 수 있다. 따라서 <strong>CTR 후 증상이 지속되면 pronator syndrome을 감별에 넣어야 한다.</strong></p>
+
+<h2 id="ps-tx">5. Pronator syndrome ③: 치료와 성적<span class="en">Treatment and Outcomes</span></h2>
+<h3>비수술 치료</h3>
+<p>소규모 후향 시리즈뿐이다. Seyffarth는 주사+활동 조절로 호전을, Hartz 시리즈의 비수술 7명 중 2명만 주관적 호전(4명 불변, 1명 악화), Morris–Peters는 PT 근육 내 스테로이드 주사로 7명 중 5명 호전을 보고했다. 저자 권고: <strong>작업치료 + 지도된 nerve glide + 굴곡근 스트레칭 + 활동 조절 ± 단기 고정</strong>으로 시작.</p>
+
+<h3>수술 적응증과 술기 (모든 압박 구조 release)</h3>
+<p>비수술 치료에도 <strong>3개월 이상 증상 지속</strong>이 적응증. 세 구조(lacertus fibrosus, PT, FDS arch) 전부를 풀지, 하나만 풀지에 대한 정설은 없다. 아래는 저자들이 근위 전완의 모든 압박 구조를 푸는 방법이다.</p>
+<div class="step">
+  <h4>① 체위·절개</h4>
+  <p>앙와위, hand table, 상완 tourniquet. <strong>Lazy-S 절개</strong>: medial epicondyle 근위 5 cm의 biceps–triceps intermuscular septum 높이에서 시작, 주관절 굴곡 주름을 지나 원위로 10 cm. Supracondylar process가 술전에 확인됐으면 근위로 5 cm 연장.</p>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 5</span></div>
+  <p>정중신경 탐색을 위한 근위 전완·주관절 절개선.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/9abe10c6-a16f-4025-6c05-0db972047500/gamma=0" alt="Fig 5" loading="lazy"></figure></div></details>
+</div>
+<div class="step">
+  <h4>② 근위 확인과 Struthers</h4>
+  <p>Medial antebrachial cutaneous nerve 분지를 확인·보호하고, 주관절 주름 근위에서 정중신경을 찾아 근위로 추적한다. Supracondylar process가 있으면 ligament of Struthers를 찾아 절제한다. <strong>여기서 압박이 확인돼도 원위 정중신경을 반드시 추가 탐색</strong>한다(다발 압박).</p>
+</div>
+<div class="step">
+  <h4>③ Lacertus fibrosus와 운동지 보호</h4>
+  <p>원위로 박리하며 lacertus fibrosus를 예리하게 절개한다. Flexor-pronator mass로 가는 운동지(PT·FCR·FDS·PL)는 대개 <strong>정중신경의 ulnar 쪽</strong>에서 나오므로 확인·보호한다.</p>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 6</span></div>
+  <p>모기지혈겸자 아래로 확인되는 bicipital aponeurosis(lacertus fibrosus).</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/ac986960-8d8b-4959-d7ac-746213d29d00/gamma=0" alt="Fig 6" loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 7</span></div>
+  <p>Ligament of Struthers에 의한 정중신경 압박 증례. A 근위·원위에서 신경을 분리해 압박 부위 확인, B 인대 확인, C 인대 절개, D 인대 기시부인 supracondylar process 절제.</p>
+  <details class="fig-toggle"><summary>그림 펼치기 (4패널)</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/a63984fc-bd71-47dd-a934-c3e5aac61f00/gamma=0" alt="Fig 7 A" loading="lazy"><figcaption>A</figcaption></figure><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/a0203767-dea8-4259-a5d1-b7d017261f00/gamma=0" alt="Fig 7 B" loading="lazy"><figcaption>B</figcaption></figure><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/39a95a6c-455e-4986-5c95-4d05a3d0a100/gamma=0" alt="Fig 7 C" loading="lazy"><figcaption>C</figcaption></figure><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/e2390f07-ba7a-4f29-e3ef-01b15228b100/gamma=0" alt="Fig 7 D" loading="lazy"><figcaption>D</figcaption></figure></div></details>
+</div>
+<div class="step">
+  <h4>④ 혈관 처리와 PT</h4>
+  <p>Radial artery는 정중신경의 radial 쪽에서 확인·보호한다. 신경 위를 가로지르는 vascular leash나 근육지는 결찰해도 되지만, <strong>persistent median artery는 결찰하지 않는다</strong> — superficial palmar arch가 불완전하면 radial digit의 주 혈류일 수 있다. 대신 external neurolysis로 통로를 넓히고 필요하면 interfascicular dissection으로 mass effect를 줄인다. PT의 <strong>tendinous 부분은 전부 release</strong>하고, 시야가 부족하면 superficial head를 Z-lengthening하거나 절단 후 나중에 봉합해 원위 정중신경·AIN을 완전히 노출한다.</p>
+</div>
+<div class="step">
+  <h4>⑤ FDS arcade와 마무리</h4>
+  <p>FDS arcade의 두꺼운 섬유대를 근육을 보존하며 종으로 release해 정중신경과 AIN을 확인한다. 이때 <strong>AIN의 FPL·FDP 분지를 보호</strong>한다. AIN은 대개 PT 깊이에서 정중신경의 radial 쪽으로 나온다. 모든 압박점을 풀고 tourniquet 해제 → 세심한 지혈 → 봉합. Splint: <strong>주관절 90° 굴곡, 전완 45° 회내, 손목 약간 굴곡</strong>.</p>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 8</span></div>
+  <p>Fig. 7과 같은 환자에서 정중신경을 누르던 매우 단단한 FDS(superficialis) arch.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/1ee61bd5-f302-40a5-09d9-e393c83f0000/gamma=0" alt="Fig 8" loading="lazy"></figure></div></details>
+</div>
+<p><strong>수술 후</strong>: splint 7–10일 후 gentle ROM. PT 건을 절단·봉합했으면 전완 회전을 4–6주 제한. 저항운동·근력강화는 6–8주 회피.</p>
+
+<h3>최소침습 접근</h3>
+<ul>
+  <li><strong>Zancolli</strong>: medial epicondyle 원위 6 cm, flexor-pronator mass 위 3.5 cm 사선 절개. 근막 횡절개 후 PT–FCR septum과 PT superficial head 심부 건막 release. 44명 중 93% 증상 소실.</li>
+  <li><strong>Hagert &amp; Hagert</strong>: 횡절개로 pronator fascia와 lacertus fibrosus release.</li>
+  <li><strong>Lee (endoscopic-assisted)</strong>: cubital crease 원위 3–4 cm, flexor-pronator mass radial 경계에 3 cm 절개(개방 전환 가능한 연장선). 근막면을 둔적 박리하는 특수 팁 내시경으로 근위 Struthers부터 원위 FDS arch까지 박리.</li>
+</ul>
+
+<h3>합병증</h3>
+<p>가장 흔한 것은 <strong>불완전 감압으로 인한 증상 지속(문헌상 최대 55%)</strong>. 그 밖에 antebrachial cutaneous nerve 손상에 의한 neuroma·dysesthesia, 전완 근육 운동지 손상에 의한 회내·손목굴곡·손가락굴곡 약화.</p>
+
+<div class="tbl-wrap">
+<table>
+  <caption>수술 성적 <span class="cap-en">Outcomes of pronator release</span></caption>
+  <thead><tr><th>저자</th><th class="num">례수</th><th>결과</th></tr></thead>
+  <tbody>
+    <tr><td>Hartz</td><td class="num">36례 / 32명</td><td>완전 소실 22%, 감소 63%, 지속 16%, 불변 9%</td></tr>
+    <tr><td>Olehnik</td><td class="num">39례</td><td>30례 완전·부분 호전, 9례 무호전</td></tr>
+    <tr><td>Lee (endoscopic)</td><td class="num">14례</td><td>전원 DASH 개선. 완전/거의 완전 8, 경미 잔존 2, 부분/무호전 3 (평균 22개월)</td></tr>
+    <tr><td>Hagert (lacertus만)</td><td class="num">82명</td><td>감각·근력 완전 회복 76%, 주관절 통증·이상감각 잔존 22%, 무호전 2%</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="figref">요약 탭 기준 전체적으로 70–90%가 최소 부분 호전, 2–10%는 무호전.</p>
+
+<hr class="divider">
+
+<h2 id="ain-anatomy">6. AIN syndrome ①: 개요와 해부<span class="en">Anterior Interosseous Nerve Palsy — Overview and Anatomy</span></h2>
+<p>1951–52년 Kiloh와 Nevin이 FPL·FDP(index·long)의 급성 운동마비 후 1년 뒤부터 불완전하게 회복된 두 환자의 "고립성 AIN 신경염"을 기술했다. 이후 <strong>Kiloh-Nevin syndrome</strong>은 FPL·FDP·PQ의 약화 또는 마비, <strong>감각결손 없음</strong>으로 정의된다. 압박성 원인과 함께 <strong>Parsonage-Turner의 한 형태(비압박성 신경염)</strong>일 가능성이 계속 제기된다.</p>
+
+<h3>AIN 해부</h3>
+<ul>
+  <li>정중신경의 가장 큰 근육지. <strong>medial epicondyle 원위 5–8 cm, PT 두 head 접합부 높이에서 정중신경 dorsoradial면</strong>에서 기시.</li>
+  <li>FDS–FDP 근복 사이 → FPL–FDP 건 사이 → ulnar artery 종말지인 <strong>anterior interosseous artery(AIA)</strong>와 합류해 interosseous membrane volar면을 따라 하행. AIN은 AIA의 <strong>radial 쪽</strong>에 있는 경우가 80%.</li>
+  <li>이 높이에서 FDP(index·long)·FPL로 <strong>2–6개</strong> 근육지. 이후 interosseous membrane과 PQ 사이로 지나며 PQ 첫 분지 직전 평균 직경 1.5 mm, PQ로 1.4 cm 구간에 걸쳐 <strong>2–7개</strong> 분지.</li>
+  <li>마지막 PQ 분지 후 종말 감각지로 volar wrist joint에 도달, 원위 요골 volar lip 높이에서 갈라져 intercarpal·radiocarpal·DRUJ의 구심성 감각을 담당(wrist denervation의 표적).</li>
+</ul>
+
+<h3>압박 후보 부위</h3>
+<p>AIN은 주행 어디서든 눌릴 수 있다: PT deep 또는 superficial head, flexor aponeurosis의 fibrous arch, 부구조(palmaris profundus, FCR brevis, Gantzer's muscle 건), 혈관 이상(ulnar collateral vessels, persistent median artery).</p>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 9</span></div>
+  <p>AIN 압박 후보 부위. A PT deep head, B 중지 FDS 근위 가장자리의 fibrous arcade, C Gantzer's muscle, D FCR brevis, E palmaris profundus (C–E는 AIN 압박과 연관된 이상 근육).</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/a8d74f2c-4498-4c9c-9bb0-ee47e3f1ca00/gamma=0" alt="Fig 9" loading="lazy"></figure></div></details>
+</div>
+<p><strong>Gantzer's muscle</strong>은 최대 68%의 사지에서 발견되므로 변이라기보다 정상 해부의 일부로 봐야 한다. FDS·coronoid process·medial epicondyle에서 기시해 FPL ulnar면에 부착하고, 정중신경과 AIN은 Gantzer's muscle과 FDS 사이를 지난다. <strong>근육 변이가 있다는 것만으로 AIN 마비의 원인이라고 단정할 수 없다.</strong></p>
+
+<h2 id="ain-dx">7. AIN syndrome ②: 진단과 감별<span class="en">Diagnosis and Evaluation</span></h2>
+<h3>임상 양상</h3>
+<ul>
+  <li>안정 시 막연한 전완 통증(활동에 악화)이 선행(prodromal pain)할 수 있고, 외상·특정 원인 없이 FPL, index·long FDP, PQ의 자발적 약화 또는 완전 소실.</li>
+  <li>손재주 저하, 엄지 IP 또는 검지·중지 DIP 굴곡 불능을 구체적으로 호소. Index·long 침범 정도는 척골신경 교차지배 때문에 다양.</li>
+  <li><strong>감각저하는 흔치 않다.</strong></li>
+</ul>
+<p><strong>Kiloh-Nevin sign</strong>: 엄지–검지로 "OK" 모양을 만들지 못한다. 보상으로 정중신경 recurrent branch 지배 FPB와 FDS를 써서 엄지 MP·검지 PIP를 굴곡시키는 형태(pinch 변형)를 보인다.</p>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 10</span></div>
+  <p>AIN 마비의 Kiloh-Nevin sign — OK sign을 만들지 못하고 pinch가 변형된 모습.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/0f917291-fe4e-4e13-b7bd-c1d30ee73400/gamma=0" alt="Fig 10" loading="lazy"></figure></div></details>
+</div>
+
+<h3>감별진단</h3>
+<ul>
+  <li>외상, <strong>FDP·FPL 건 파열</strong>(신체검진과 tenodesis effect로 배제. 염증성 관절염이나 원위 요골·수근골 골절 병력 없는 attritional rupture는 드묾), pronator syndrome, CTS, thoracic outlet syndrome, 상완신경총 손상·압박.</li>
+  <li><strong>Parsonage-Turner syndrome(neuralgic amyotrophy)</strong>: 수 시간–수 주의 갑작스럽고 극심한 통증 후 이완성 마비. Suprascapular·axillary가 가장 흔하지만 AIN도 침범. 임상 진단이지만 전기진단 이상은 97%. 통증은 수일–수 주에 소실되고 운동 기능은 점진 회복하나 30%까지 기능장애가 남는다.</li>
+</ul>
+
+<h3>전기진단검사</h3>
+<p>증상 발생 <strong>3–4주 이내</strong>에 시행하면 AIN 지배근에 국한된 급성 탈신경 양상이 전형적이다. Maldonado 연구(비외상성 "고립성" AIN 마비 16명): AIN 지배근 탈신경 15/16, 그러나 <strong>60%에서 AIN과 무관한 전기진단 이상 동반</strong>(radial·ulnar 27%, 손목 정중신경병증(CTS) 27%). 즉 순수 고립성 병변이 아닌 경우가 많다.</p>
+
+<h3>영상</h3>
+<ul>
+  <li>단순촬영은 대개 정상.</li>
+  <li><strong>MRI</strong>: AIN 지배근의 위축·부종, 신경 부종. Maldonado: AIN 비대 50%, 정중신경 비대 56%, 국소 압박 소견은 0례. Dunn: T2 fat-sat에서 AIN 지배근 부종이 전례에서 보였고 <strong>PQ 부종이 가장 신뢰할 만한 징후</strong>. Sneag: MR neurography에서 22명 전원 <strong>주관절 근위 fascicular constriction</strong>.</li>
+  <li><strong>초음파</strong>: 근위축, 반사도 증가, Doppler 관류 감소, 동적 검사에서 motor unit 수축 소실. 예측치는 미확립.</li>
+</ul>
+<div class="pearl"><span class="label">임상 포인트</span>AIN syndrome의 병변은 전완의 국소 압박점보다 <strong>주관절 근위 정중신경 내 fascicular constriction</strong>에 있다는 근거가 쌓이고 있다. 수술 전 MR neurography에서 constriction 유무를 확인해 두면 탐색 범위(전완 감압 vs 근위 신경 내 박리)를 정하는 데 도움이 된다.</div>
+
+<h2 id="ain-tx">8. AIN syndrome ③: 치료와 성적<span class="en">Treatment and Outcomes</span></h2>
+<h3>비수술 치료 — 자연경과</h3>
+<p>급성기에는 안정·고정과 유발 활동(회내 상태의 체중부하, 강한 파악 등) 회피를 표준화해 적용하고, 엄지·검지·중지의 수동 ROM을 유지한다.</p>
+<div class="tbl-wrap">
+<table>
+  <caption>비수술 치료 자연경과 <span class="cap-en">Nonoperative series</span></caption>
+  <thead><tr><th>저자</th><th class="num">례수</th><th>회복 시작</th><th>결과</th></tr></thead>
+  <tbody>
+    <tr><td>Miller-Breslow</td><td class="num">8</td><td>증상 후 평균 5.9개월 (3–12)</td><td>전원 완전 회복, 평균 9.5개월 (5–18)</td></tr>
+    <tr><td>Seki</td><td class="num">21</td><td>FDP(index) 9개월 (2–18) · FPL 10개월 (1–24)</td><td>BMRC 완전 회복: FDP(index) 66%, FPL 44%. <strong>40세 미만</strong>은 12개월 내 회복과 유의하게 연관, 50세 미만은 전원 grade 4 이상</td></tr>
+  </tbody>
+</table>
+</div>
+<p>요약 탭 기준: 회복은 2–18개월(평균 9–10개월)에 나타나고 완전 회복은 44–66%. 이 결과들은 AIN syndrome을 <strong>일과성 신경염(Parsonage-Turner의 한 형태)</strong>으로 보고 비수술로 관리할 근거가 된다.</p>
+
+<h3>수술 적응증</h3>
+<ul>
+  <li>전기진단으로 확인된 AIN syndrome이면서 다른 신경 분포 병변이 없고, <strong>영상에서 압박 병변·종괴가 확인</strong>된 경우</li>
+  <li>또는 <strong>비수술 치료 최대 6개월(요약 탭: 3–6개월)에도 회복 징후가 없는</strong> 경우</li>
+  <li>MR neurography에서 hourglass constriction이 보이면 → intraneural neurolysis 고려</li>
+</ul>
+
+<h3>술기</h3>
+<p><strong>접근은 pronator syndrome release와 동일</strong>(§5 참조 — lazy-S 절개, lacertus·PT·FDS arch 전부 release, AIN 분지 보호). 영상·술중 탐색에서 뚜렷한 국소 압박이 없을 때 <strong>intrafascicular neural decompression</strong>을 권하는 저자들이 있다. Yasunaga(정중신경 상완 원위 1/3의 fascicular torsion 3례)와 Yongwei(요골신경 다발성 constriction)는 술중 관찰되는 <strong>hourglass-like constriction·신경 분절 torsion</strong>을 마비 원인으로 기술하고, 수술현미경하 <strong>epineurolysis</strong> 또는 경우에 따라 <strong>절제 후 neurorrhaphy</strong>를 권했다. 단, 모두 무작위·대조군 없는 소규모 후향 연구다.</p>
+<div class="pearl"><span class="label">임상 포인트</span>Persistent median artery가 AIN과 함께 FDP–FPL 사이를 지나는 경우가 있다. Pronator release와 마찬가지로 <strong>결찰하지 말고</strong> 신경 주변 통로를 넓히는 방식으로 처리한다.</div>
+
+<h3>합병증과 성적</h3>
+<p>Pronator syndrome과 마찬가지로 가장 흔한 합병증은 <strong>불완전 교정·증상 지속</strong>. 피부신경·정중신경·AIN 손상, 수술부위 감염, 통증성 반흔이 보고된다.</p>
+<div class="tbl-wrap">
+<table>
+  <caption>수술 성적 <span class="cap-en">Operative series</span></caption>
+  <thead><tr><th>저자</th><th class="num">례수</th><th>내용</th></tr></thead>
+  <tbody>
+    <tr><td>Park</td><td class="num">11</td><td>비수술 6개월간 회복 없던 환자, 증상 후 평균 7.8개월에 감압. 4명은 뚜렷한 압박 없음. 1명 제외 전원 12개월 내 grade 4 — Seki의 비수술군과 유사한 성적</td></tr>
+    <tr><td>Schantz &amp; Riegels-Nielsen</td><td class="num">21례 / 20명</td><td>15명 수술 탐색, 60%에서 술중 국소 압박 소견. 만족 결과 수술군 73% vs 비수술군 40%. 수술군 불만족 4명 중 3명 tendon transfer 필요</td></tr>
+  </tbody>
+</table>
+</div>
+
+<hr class="divider">
+
+<h2 id="cts-epi">9. CTS ①: 역학과 위험인자<span class="en">Carpal Tunnel Syndrome — Epidemiology</span></h2>
+<p>상지에서 가장 흔한 포착성 신경병증. 미국 근로 인구 유병률 0.1–10%, 일반 인구 발생률 376/10만 인년 또는 최대 14.4%, 연간 직접 의료비 20억 달러 이상, 연간 50만 건 이상의 CTR. <strong>5번째·8번째 십년의 이봉성 분포</strong>, 여성 3배, 임신·수유와 연관. 직업성 CTS의 40% 이상이 당뇨·갑상선기능저하·손목 골관절염 등 내과 질환을 동반한다.</p>
+<div class="tbl-wrap">
+<table>
+  <caption>Table 1. CTS 병인 요인 <span class="cap-en">Factors in the pathogenesis of CTS (재구성)</span></caption>
+  <thead><tr><th>범주</th><th>요인</th></tr></thead>
+  <tbody>
+    <tr><td rowspan="2"><strong>I. 해부</strong></td><td>수근관 협소: 수근골 이상, 두꺼운 TCL, 말단비대증</td></tr>
+    <tr><td>내용물 증가: neuroma, lipoma, myeloma, 이상 근복, persistent median artery(개통/혈전), 활막 비후, 원위 요골 골절 가골, 외상후 골극, 혈종(혈우병·항응고)</td></tr>
+    <tr><td rowspan="4"><strong>II. 생리</strong></td><td>신경병성: 당뇨, 알코올, 근위 정중신경 병변(double crush)</td></tr>
+    <tr><td>염증성: 건활막염, RA, 감염, 통풍</td></tr>
+    <tr><td>체액 균형: 임신, 자간, 점액수종, 장기 혈액투석, 수평 자세·근이완(수면), Raynaud, 비만</td></tr>
+    <tr><td>선천성: mucopolysaccharidosis, mucolipidosis</td></tr>
+    <tr><td rowspan="3"><strong>III. 손목 자세·사용</strong></td><td>반복적 강한 굴신(육체노동), 공구의 반복 파악·비틀기, 진동 노출</td></tr>
+    <tr><td>손목 신전 상태의 체중부하: 하반신마비, 장거리 자전거</td></tr>
+    <tr><td>굴곡·척측편위 고정: Colles 골절 석고, 불편한 수면 자세</td></tr>
+  </tbody>
+</table>
+</div>
+<p><strong>Double crush syndrome</strong>: 말초신경 주행상 여러 부위 압박에 의한 신경 기능장애로, 축삭 수송 역학의 교란과 신경 구조 파괴가 기전으로 생각된다. 갑상선기능저하·당뇨·알코올·sarcoidosis·mucopolysaccharidosis·말기 신질환·RA·독성 물질 노출 등도 신경을 압박에 취약하게 만든다.</p>
+
+<h2 id="cts-anatomy">10. CTS ②: 수근관 해부<span class="en">Carpal Tunnel Anatomy</span></h2>
+<h3>경계와 크기</h3>
+<ul>
+  <li>배측 수근골 · 척측 hamate hook, pisiform, triquetrum · 요측 trapezium, scaphoid · 장측 <strong>TCL</strong>.</li>
+  <li>폭×깊이 근위 25×12 mm, 원위 26×13 mm. <strong>가장 좁은 곳은 hamate hook 높이(20×10 mm)</strong> — capitate 배측 융기와 TCL 최후부가 만나는 지점.</li>
+  <li>내용물 10개: 정중신경 + 굴곡건 9개(FPL, FDS 4, FDP 4) + 건활막. FPL은 radial bursa, FDS·FDP는 ulnar bursa. 정중신경은 <strong>가장 palmar</strong>에서 index FDS·FDP 바로 위, ulnar bursa에 유착.</li>
+  <li>FCR은 자기 fibro-osseous tunnel과 sheath를 가지며 TCL 심부와 trapezium palmar면으로 수근관과 분리.</li>
+</ul>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 11</span></div>
+  <p>Flexor retinaculum. A 수근관 축상 단면(내용물과 TCL), B 모식도 — ① 근위 분절은 전완 심부 근막과 연속, ② 중앙이 TCL 본체, ③ 원위 분절은 thenar–hypothenar 근막.</p>
+  <details class="fig-toggle"><summary>그림 펼치기 (2패널)</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/248e57da-ca25-4755-1245-5c28008ed700/gamma=0" alt="Fig 11 A" loading="lazy"><figcaption>A</figcaption></figure><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/6c30a66b-8471-4b81-4977-8ad9494a6900/gamma=0" alt="Fig 11 B" loading="lazy"><figcaption>B</figcaption></figure></div></details>
+</div>
+
+<h3>해부학적 변이 (선택적 CTR의 최대 6%)</h3>
+<ul>
+  <li>근건 변이: 중지 accessory FDS, reverse palmaris longus, palmaris profundus, FPL–index FDP 교통, 이상 index lumbrical, thenar 근육 이상 기시.</li>
+  <li>신경혈관 변이: persistent/thrombosed median artery, 정중신경 high bifurcation, recurrent motor branch의 ulnar 기시, 이상 척골신경 분지, 이상 palmar cutaneous branch.</li>
+  <li>종양·유사 병변(드묾): 이상 근육, lipoma, 건활막염, 혈관종양, ganglion, Dupuytren, RA 결절, 칼슘·요산 침착, amyloid, 신경 내 종양(85% 이상 양성, 대부분 schwannoma).</li>
+</ul>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 12</span></div>
+  <p>통상적 CTR 중 발견된 변이 — 정중신경의 가장 radial 분지가 TCL 밑의 별도 인대성 구획 안에 있던 예.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/8d3ac05f-51b6-46d8-e5ab-723f75b2f400/gamma=0" alt="Fig 12" loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 13</span></div>
+  <p>CTR 중 확인된 persistent median artery.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/73af8032-cd37-4a14-470a-4a3d039a7b00/gamma=0" alt="Fig 13" loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 14</span></div>
+  <p>Reverse palmaris longus — 근복 자체가 원위에서 TCL에 부착하는 변이.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/bcded658-d3eb-4779-7162-d03e5e02af00/gamma=0" alt="Fig 14" loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 15</span></div>
+  <p>Palmaris profundus의 예.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/9bb8e0d9-260c-48ad-8645-09a1401b0200/gamma=0" alt="Fig 15" loading="lazy"></figure></div></details>
+</div>
+
+<h3>Transverse carpal ligament</h3>
+<ul>
+  <li>척측 pisiform·hamate, 요측 scaphoid tuberosity·trapezial ridge(때로 radial styloid까지)에 부착. 길이 24–36 mm.</li>
+  <li>두께는 <strong>중간–원위 1/3 접합부가 1.6–3.6 mm로 최후</strong>, 근위 0.6–2.0 mm, 원위 0.6–1.0 mm. CTS에서는 국소적으로 두꺼워지고 뻣뻣해져 6.0 mm에 이르기도 한다. 근위→원위로 배측으로 기울어 손바닥면과 24°.</li>
+  <li>Cobb의 3분절: 근위(얇고 전완 심부 근막과 연속), 중앙(TCL 본체, 섬유가 횡방향이고 antebrachial fascia의 10배 두께), 원위(thenar·hypothenar 건막).</li>
+  <li><strong>TCL 절개는 carpal arch 역학을 거의 바꾸지 않는다</strong>: Garcia-Elias 사체 연구에서 절개 후 arch 강성 7.5% 감소, hamate hook–trapezium 벌어짐 11%. 원위 수근열 intercarpal 인대가 arch 안정의 핵심.</li>
+</ul>
+
+<h3>원위 가장자리의 위험 구조 (숫자로 외우기)</h3>
+<div class="tbl-wrap">
+<table>
+  <caption>TCL 원위 가장자리 기준 거리 <span class="cap-en">Structures at risk</span></caption>
+  <thead><tr><th>구조</th><th>위치</th><th>의미</th></tr></thead>
+  <tbody>
+    <tr><td>Palmar fat pad</td><td>근위 끝이 TCL 원위 가장자리보다 <strong>2 mm 근위</strong></td><td>완전 release를 확인하려면 지방을 원위로 젖혀야 함</td></tr>
+    <tr><td>Superficial palmar arch</td><td>약지 축 4.8 mm, 3rd webspace 축 5.5 mm 원위 (요약: 5 mm)</td><td>원위 과도 절개 시 손상</td></tr>
+    <tr><td>Recurrent motor branch</td><td>약지 축에서 TCL 원위 끝으로부터 <strong>6.5 mm</strong></td><td>Radial 쪽 release 시 위험</td></tr>
+    <tr><td>Palmar cutaneous branch</td><td>TCL 근위 5–6 cm에서 radial면 기시, 손목 주름 근위 2 cm에서 근막 관통</td><td>절개를 interthenar 함몰보다 5 mm 이상 ulnar에</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>정중신경의 수근관 내 변이</h3>
+<p>손목 주름 근위 5 cm에서 FCR·FDS 사이, PL 배측으로 표재화. TCL 높이에서 운동 섬유는 신경의 <strong>palmar-radial</strong>에 배열된다. 수근관 진입 시 타원형이었다가 원위로 갈수록 납작해지고, TCL 원위 가장자리에서 대개 6개 분지(recurrent motor branch, proper digital 3, common digital 2)로 갈라진다. Lanz는 29가지 변이를 4군으로 분류했다: thenar branch 주행 변이, 수근관 원위 끝의 부분지, TCL 근위의 신경 분열, TCL 근위의 부분지. Recurrent motor branch 3형:</p>
+<ul>
+  <li><strong>Extraligamentous (46%)</strong> — TCL 원위에서 분지 (가장 흔함)</li>
+  <li><strong>Subligamentous (31%)</strong> — 수근관 안에서 분지, TCL 원위로 나감</li>
+  <li><strong>Transligamentous (23%)</strong> — 수근관 안에서 분지해 <strong>TCL을 관통</strong>. Radial 쪽 release 시 손상 위험</li>
+</ul>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 16</span></div>
+  <p>Recurrent motor branch 분지 양상. A extraligamentous, B subligamentous, C transligamentous (Lanz, JHS-Am 1977에서 전재).</p>
+  <details class="fig-toggle"><summary>그림 펼치기 (3패널)</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/cdec7ee0-b4b6-4b0c-bca7-34cf969ba900/gamma=0" alt="Fig 16 A" loading="lazy"><figcaption>A</figcaption></figure><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/363e3c6f-38b6-4b84-1d57-d10e5babcb00/gamma=0" alt="Fig 16 B" loading="lazy"><figcaption>B</figcaption></figure><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/1364cabf-b49b-4192-084a-6859a9d0c600/gamma=0" alt="Fig 16 C" loading="lazy"><figcaption>C</figcaption></figure></div></details>
+</div>
+<p>Kozin 분류로는 recurrent motor branch가 TCL 원위의 사선 근막을 관통하는 것이 74%, 근막을 통과하지 않고 TCL 원위로 가는 것이 19%, <strong>TCL을 직접 관통 7%</strong>. Mumford: thenar 주간 하나에서 APB·opponens·FPB 세 종말지가 가장 흔하고, 75%에서 1st common digital n. 또는 엄지 radial digital n.에서 나오는 accessory thenar branch가 FPB를 지배한다. 1st·2nd lumbrical은 각각 index radial digital n.과 2nd webspace common digital n.에서 지배. 손바닥 척측 감각은 변이가 커서 palmar cutaneous branch of ulnar n.(16%), nerve of Henle(40%), transverse palmar branch(44%).</p>
+
+<h3>표면 지표</h3>
+<ul>
+  <li><strong>원위 손목 주름</strong> = TCL 근위 경계.</li>
+  <li><strong>Kaplan's cardinal line</strong>: 외전한 엄지 ulnar 경계에 평행하게 hamate hook 원위 끝까지 그은 선. 약지 축과의 교점 = TCL 원위 끝, 그 5 mm 원위 = superficial arch. 2nd webspace와의 교점 = recurrent motor branch.</li>
+  <li><strong>Middle finger flexion test</strong>(Rodriguez–Strauch): 중지 MP 90° 굴곡·IP 신전 시 손끝이 thenar에 닿는 점이 recurrent motor branch에서 1.9 mm radial, 0.9 mm 원위.</li>
+  <li>"안전 구역": 신전한 약지 축–원위 손목 주름(Steinberg), 또는 약지 MP·PIP 90° 굴곡 시 손끝 위치. 단, 약지 축의 겉보기 변이로 절개가 예상보다 ulnar·radial로 치우칠 수 있다.</li>
+</ul>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 17</span></div>
+  <p>CTR 표면 해부. 초록 Kaplan's cardinal line, 빨강 pisiform과 hamate hook, 분홍 점선 FCR·PL·FCU, 파랑 2nd webspace–Kaplan line 교점(recurrent motor branch), 보라 약지 radial 경계. 절개 3.0 cm, 원위 손목 주름에서 Kaplan line까지.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/299e8201-be1f-401f-14ff-db866ae3eb00/gamma=0" alt="Fig 17" loading="lazy"></figure></div></details>
+</div>
+
+<h2 id="cts-dx">11. CTS ③: 진단<span class="en">Diagnosis and Evaluation</span></h2>
+<h3>병력</h3>
+<ul>
+  <li>정중신경 영역의 간헐적 통증·저림·감각저하. <strong>Thenar 감각은 보존</strong>(palmar cutaneous branch는 수근관 근위에서 나옴). 전완으로 방사되기도.</li>
+  <li>수개월–수년에 걸쳐 진행, <strong>야간 악화</strong>가 특징(수면 중 손목 굴곡). 자다 깨서 손을 털거나 비틀어 완화.</li>
+  <li>낮에는 손목을 굴곡·신전 상태로 오래 두는 활동(운전, 휴대폰)에 악화.</li>
+  <li>만성: thenar 약화 → 손재주·파악력 저하, 물건 떨어뜨림, 단추·글씨·악기 어려움 → thenar 위축·대립 기능 소실.</li>
+</ul>
+
+<h3>감각·운동 검사</h3>
+<ul>
+  <li><strong>Semmes-Weinstein monofilament</strong>(역치 검사): 2.83 정상, 3.61 가벼운 촉각 저하, 4.31 보호감각 저하, 4.56 보호감각 소실, 6.65 심부압각 소실. 값은 filament를 구부리는 힘(mg)×10의 log. 민감도 91%·특이도 80%까지.</li>
+  <li><strong>2PD</strong>(밀도 검사, Moberg 1958): 손끝 radial/ulnar 경계에 종으로 두 점을 대고 3회 중 2회 구분되는 최소 간격. 정상 &lt;6 mm.</li>
+  <li><strong>APB 근력</strong>: 엄지 최대 palmar abduction 상태에서 검사자가 손끝을 아래로 누르는 데 저항, thenar 근복 촉지.</li>
+</ul>
+<div class="tbl-wrap">
+<table>
+  <caption>유발검사의 민감도·특이도 <span class="cap-en">Provocative tests</span></caption>
+  <thead><tr><th>검사</th><th>방법</th><th class="num">민감도</th><th class="num">특이도</th></tr></thead>
+  <tbody>
+    <tr><td>Phalen</td><td>손목 굴곡 유지</td><td class="num">68%</td><td class="num">73%</td></tr>
+    <tr><td>Tinel</td><td>수근관 부위 정중신경 타진</td><td class="num">50%</td><td class="num">77%</td></tr>
+    <tr><td>Durkan (carpal compression)</td><td>수근관 직접 압박, 30초 내 이상감각</td><td class="num">64%</td><td class="num">83%</td></tr>
+    <tr><td><strong>Durkan + Phalen 병합</strong></td><td>손목 굴곡 유지하며 엄지로 수근관 압박</td><td class="num">80%</td><td class="num">92%</td></tr>
+    <tr><td>Scratch collapse</td><td>—</td><td class="num">24%</td><td class="num">60%</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>임상 진단 도구</h3>
+<ul>
+  <li><strong>CTS-6</strong>(Graham): 정중신경 영역 저림, 야간 저림, thenar 약화/위축, Tinel, Phalen, 2PD 소실 — 6항목 유무를 점수화. 12.5점 초과면 CTS 가능성 80% 이상. 임상의 패널 판단과의 일치 71%.</li>
+  <li><strong>Katz hand diagram</strong>: 환자가 직접 표시하는 손 그림.</li>
+</ul>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 23</span></div>
+  <p>Katz 자가 작성 hand diagram에서 CTS로 진단하는 전형적 표시 패턴 (Katz &amp; Stirrat에서 전재).</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/e3502663-d2a1-4c2d-c4a7-3d77726c8900/gamma=0" alt="Fig 23" loading="lazy"></figure></div></details>
+</div>
+
+<h3>전기진단검사</h3>
+<p>핵심은 <strong>손목을 가로지르는 정중신경 감각·운동 전도 지연</strong>(절대 기준 또는 ulnar·radial 동일 분절과 비교). 2016 AANEM 기준치:</p>
+<div class="tbl-wrap">
+<table>
+  <caption>AANEM 2016 기준치 <span class="cap-en">Electrodiagnostic reference values</span></caption>
+  <thead><tr><th>항목</th><th class="num">비정상 기준</th></tr></thead>
+  <tbody>
+    <tr><td>Median sensory peak latency</td><td class="num">손목 &gt;4.0 ms · 손바닥 &gt;2.3 ms</td></tr>
+    <tr><td>Median sensory onset latency</td><td class="num">손목 &gt;3.3 ms · 손바닥 &gt;1.6 ms</td></tr>
+    <tr><td>Median motor distal latency</td><td class="num">&gt;4.5 ms (전 연령)</td></tr>
+    <tr><td>Median–ulnar 차이</td><td class="num">감각 onset &gt;0.5 ms · 운동 &gt;1.5 ms</td></tr>
+  </tbody>
+</table>
+</div>
+<ul>
+  <li>잠복기 연장 = 탈수초, 진폭 감소 = 축삭 소실 또는 전도차단, 속도 감소 = 탈수초.</li>
+  <li>중증도: <strong>mild</strong>(감각 잠복기만 이상) → <strong>moderate</strong>(감각+운동 잠복기 이상) → <strong>severe</strong>(감각 반응 소실 + 운동 잠복기 이상) → <strong>extreme</strong>(감각·운동 모두 소실).</li>
+  <li>EMG: 삽입 활동 증가, fibrillation·positive sharp wave(급성/만성 탈신경), MUP 진폭·기간 증가, complex repetitive discharge(만성 탈신경).</li>
+  <li><strong>AAOS CPG</strong>: 표준 진단 도구에 합의 없음. 설문지·전기진단검사 사용에는 중등도 근거. 초음파는 보조 자료가 늘고 있으나 <strong>일상적 사용은 권고하지 않음</strong>.</li>
+</ul>
+
+<h2 id="cts-nonop">12. CTS ④: 비수술 치료<span class="en">Nonsurgical Treatment</span></h2>
+<p>경도–중등도에 적합. <strong>지속적 저림, thenar 위축, 전기진단상 중증 변화</strong>는 수술 대상이다. CTS 환자는 중립위에서도 수근관 내압이 높고, 완전 굴곡·신전에서 3배로 오른다.</p>
+<ul>
+  <li><strong>야간 중립위 splint</strong>: 20° 신전(cock-up)보다 중립위가 유의하게 더 효과적. 손가락 굴곡은 lumbrical이 수근관으로 들어와 압력을 올리므로 효과 부족 시 metacarpal block 추가 고려.</li>
+  <li>활동 조절, 작업치료, 약물이 다중 요법의 구성.</li>
+  <li><strong>스테로이드</strong>(경구 또는 국소 주사)가 약물 치료의 근간. Cochrane: 국소 주사 효과 최대 6개월, 12개월 시점 수술 필요 약 16% 감소(RCT 1편). Graham(73명 99손): 주사+splint 후 1년 무증상 10%, 증상 3개월 미만·감각 장애 없음이 지속 반응 예측인자. Evers(774손, 중앙 7.4년): 단회 주사 후 32%가 추가 치료 없음. Blazar: 단회 주사 후 증상 완화 6주 79% → 6개월 53% → 1년 31%, 당뇨는 1년 내 재발 2.6배.</li>
+</ul>
+
+<h2 id="cts-op">13. CTS ⑤: 수술 술기<span class="en">Operative Techniques</span></h2>
+<h3>적응증 (저자 권고)</h3>
+<ul>
+  <li>근육 탈신경 없는 경도–중등도: 먼저 비수술 시도, <strong>6주</strong> 후 무반응이면 CTR 제안.</li>
+  <li><strong>조기 수술</strong>: thenar 위축, 지속적 저림, 전기진단상 중증, 증상 1년 초과 등 탈신경·축삭 소실 근거가 있을 때.</li>
+  <li>모든 술식의 공통 목표는 TCL 절개에 의한 수근관 감압. 개방·내시경 간 증상 완화 차이 없음, 95% 이상 good–excellent, 재수술 1–5%(내시경에서 높을 수 있음).</li>
+</ul>
+
+<h3>Open (mini) carpal tunnel release — 저자 선호</h3>
+<div class="step">
+  <h4>절개와 노출</h4>
+  <p>원위 손목 주름에서 <strong>약지 중심축 선상으로 3 cm</strong> 절개. 팔은 hand table에 외전, 상완 또는 전완 tourniquet. 국소마취 ± 진정(전신·부위·Bier block도 가능). 피부·피하를 지나 superficial palmar fascia 노출, TCL 위의 근섬유는 feathering.</p>
+</div>
+<div class="step">
+  <h4>TCL 절개</h4>
+  <p>Superficial palmar fat pad를 원위로 젖혀 <strong>TCL 원위 부분부터 노출하고 원위→근위로 절개</strong>. Freer·St. James elevator·ski retractor·mosquito를 TCL 밑에 넣어 심부 면을 정의하고 기구 ulnar에서 hamate hook을 확인한다. 절개는 수근관 <strong>ulnar 쪽</strong>에서, hamate hook에 <strong>2 mm cuff</strong>를 남겨 radial 기반 TCL flap이 정중신경을 덮게 한다. 원위 전완 근막까지 절개한 뒤 antebrachial fascia와 원위 전완 근막을 직접 보면서 손목 주름 근위 2–3 cm까지 종절개. Radial로 치우치면 palmar cutaneous branch 손상 위험.</p>
+</div>
+<div class="step">
+  <h4>확인과 봉합</h4>
+  <p>정중신경의 압박 흔적·변이·recurrent motor branch 위치를 확인하고 수근관 내 공간점유 병변·근건 변이를 살핀다. <strong>건활막절제·external neurolysis는 일상적으로 하지 않는다.</strong> Tourniquet 해제 후 bipolar 지혈, 무긴장 봉합.</p>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 18</span></div>
+  <p>Open CTR 술중 사진 3장 (A–C).</p>
+  <details class="fig-toggle"><summary>그림 펼치기 (3패널)</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/d76d0344-8e37-4d4a-dfbb-bdb1ca59f600/gamma=0" alt="Fig 18 A" loading="lazy"><figcaption>A</figcaption></figure><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/e62824da-c6cb-4ecc-6748-61d5c8db1b00/gamma=0" alt="Fig 18 B" loading="lazy"><figcaption>B</figcaption></figure><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/92305f3e-bc62-45d0-eacd-8656a3caa900/gamma=0" alt="Fig 18 C" loading="lazy"><figcaption>C</figcaption></figure></div></details>
+</div>
+
+<h3>Single-portal endoscopic CTR (modified Agee)</h3>
+<p>목표는 손바닥 절개를 피하는 것. 국소마취는 시야를 가리고 렌즈 김서림을 늘려 <strong>부위 또는 전신마취</strong>를 선호. 오른손잡이 술자는 우측 수술 시 axilla 쪽, 좌측 수술 시 두측에 앉는다.</p>
+<div class="step">
+  <h4>순서</h4>
+  <ol>
+    <li>근위 손바닥 주름 높이에서 FCR·PL·FCU 표시, Kaplan line을 TCL 원위 끝으로 표시. <strong>PL ulnar 경계에서 ulnar로 1 cm 절개</strong>(PL 없으면 FCR–FCU 중간).</li>
+    <li>PL을 radial로 젖히고 원위 전완 근막까지 박리. TCL과 연속되는 폭 1 cm의 <strong>원위 기반 U자 근막 flap</strong>을 들어 double hook으로 palmar로 견인. 굴곡건 건활막이 flap 밑에 보여야 한다.</li>
+    <li>Synovial elevator를 약지 축으로, 배측 20° 기울여 삽입. Kaplan line 높이의 TCL 원위 끝에서 팁이 촉지되고, TCL 횡섬유 때문에 <strong>washboard 감</strong>이 느껴진다. 비기구 손으로 손목을 굴곡 유지, 엄지로 TCL 위치 촉지.</li>
+    <li>Dilator로 통로를 만든 뒤 손목을 약간 신전한 상태로 <strong>hamate hook을 따라 ulnar 경로</strong>로 blade assembly 삽입. 팁이 TCL 원위에서 TCL 하면에 밀착됐는지 엄지로 확인. 횡섬유와 원위 fat pad를 보고 blade 전개 위치를 정한다.</li>
+    <li>1회 또는 2회에 나눠 절개. 저자는 <strong>원위 절반을 먼저 풀고 원위 끝의 완전 절개를 확인</strong>(탈출한 지방이 시야를 가리기 전에). 남은 원위 횡섬유는 blade를 부분 전개해 짧게 통과하며 절개. 재위치 후 blade를 위로, 엄지는 아래로 누르며 기구를 빼면서 TCL 절개. 갈라진 ulnar·radial 잎 사이로 중앙 지방이 탈출해야 완전 절개.</li>
+    <li>표재 섬유가 남은 <strong>역V자 결손</strong>이 보이면 불완전 절개 → 직시하 추가 통과. 근위 전완 근막은 tenotomy 가위로 개방 술식처럼 절개. Tourniquet 해제, 봉합.</li>
+  </ol>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 19</span></div>
+  <p>Single-portal endoscopic CTR 체위 — 오른손잡이 술자가 우측 수술 시 axilla 쪽에 앉은 모습 (MicroAire 제공).</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/239f016b-7907-4823-88f6-e2332cad4100/gamma=0" alt="Fig 19" loading="lazy"></figure></div></details>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 20</span></div>
+  <p>Single-portal 내시경 시야에서 본 TCL.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/cb647048-5ef9-4680-bb16-0a49abe7d200/gamma=0" alt="Fig 20" loading="lazy"></figure></div></details>
+</div>
+
+<h3>Two-portal endoscopic CTR</h3>
+<p>시야 개선과 pillar pain·반흔 민감도 감소를 목적으로 한다. 근위 portal은 single-portal과 같게 만들고, blunt trocar 또는 elevator를 TCL 밑으로 넣어 손바닥 피하에서 촉지되는 곳에 <strong>두 번째 절개</strong>를 두어 기구 팁을 노출한다. Superficial palmar arch와 common digital nerve를 보면서 보호. 이후 slotted trocar, mini-meniscotome 등 기구로 정중신경·굴곡건을 보호하며 TCL 절개. 원위 portal에서 원위 끝의 완전 절개를 확인하고 근위 전완 근막을 가위로 절개.</p>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 21</span></div>
+  <p>Two-portal endoscopic CTR.</p>
+  <details class="fig-toggle"><summary>그림 펼치기</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/e4acd991-93b1-4147-a459-1a7914fbac00/gamma=0" alt="Fig 21" loading="lazy"></figure></div></details>
+</div>
+
+<h3>수술 후 관리</h3>
+<p>단기 splint를 권하는 술자도, 조기 가동을 권하는 술자도 있으나 <strong>open CTR 후 고정의 이득은 여러 연구에서 확인되지 않았다.</strong> 손목 보조기·운동·다중 요법·전기치료·레이저·초음파·반흔 탈감작 등 재활 프로그램은 저질 근거의 제한적 이득뿐이므로 술자·환자 선호로 정한다.</p>
+
+<h2 id="cts-outcome">14. CTS ⑥: 성적·합병증·재수술<span class="en">Outcomes, Complications, Revision</span></h2>
+<h3>성적</h3>
+<ul>
+  <li>개방·내시경 모두 <strong>95% 이상 good–excellent</strong>.</li>
+  <li>Dunn 체계적 고찰: 직업 관련 vs 비직업 — 복직까지 58.4주 vs 23.9주, 복직률 76.9% vs 93.0%, 일상생활 복귀 6.9주 vs 7.8주.</li>
+  <li>Louie(113명, 평균 13년): 재수술 1.8%, 88% 완전 만족·매우 만족.</li>
+  <li>Kang RCT(양측 CTS, 한쪽 mini-open·반대쪽 내시경): Boston CTQ·DASH 차이 없음, 그러나 <strong>66% vs 25%로 내시경 선호</strong>(반흔·pillar pain 이유).</li>
+  <li>RCT 메타분석: 내시경군 조기 회복·반흔 압통 감소, 신경 손상 위험은 높음(대부분 일과성), pillar pain은 비슷. 전체적으로 내시경이 복귀는 빠르나 신경 손상·재수술은 많을 수 있다.</li>
+</ul>
+
+<h3>합병증</h3>
+<ul>
+  <li>불완전 TCL 절개, 증상 지속·재발, 정중신경 손상(<strong>recurrent motor branch와 3rd webspace common digital n.</strong>이 가장 흔함), 척골신경·동맥 손상, superficial palmar arch 손상, 굴곡건 손상·bowstringing, pillar pain.</li>
+  <li>Benson 체계적 고찰(open 5,669 · endoscopic 22,327례): 신경·동맥·건의 구조적 손상은 두 방법 모두 드묾.</li>
+  <li>Boya(open 55손, 20.2개월): 작열감 18.0%, pillar pain 12.7%, 반흔 압통 7.3%, Tinel 5.5%. <strong>Table test</strong>(책상 가장자리에 손을 짚고 체중을 싣기)가 pillar pain에 더 민감. Pillar pain의 정의·원인은 불명확(인대·근육·carpal arch 변화·신경성·염증성 복합), 기간 1–6개월.</li>
+</ul>
+
+<h3>재수술</h3>
+<ul>
+  <li>재수술률 대체로 1–5%. Carroll 약 1%(내시경 3배), Wessel 보험 DB 1년 4.8%(내시경에서 약간 높음).</li>
+  <li><strong>정의</strong>: <em>Persistent</em> = 수술 후 호전 없음(불완전 release 또는 오진) · <em>Recurrent</em> = 대개 6개월 이상 호전 후 재발 · <em>New</em> = 술전 없던 새 증상(의인성 손상 시사).</li>
+  <li>재수술 후 가장 흔한 합병증도 증상 지속(41–91%). Recurrent motor branch 손상에 의한 thenar 운동 소실은 극히 드물지만 치명적. Zieske(97례): persistent·recurrent·new 모두 통증·근력 개선, recurrent군의 통증 개선이 가장 큼. 손상 신경은 정중신경 본체 &gt; palmar cutaneous branch &gt; 3rd webspace common digital n. 순.</li>
+</ul>
+
+<h3>Revision open CTR과 hypothenar fat pad flap</h3>
+<p>잔존·재발 증상에는 <strong>연장 개방 접근</strong>을 권한다. 치밀한 반흔 속에서 정중신경은 흔히 TCL radial 잎이나 이전 절개부에 유착돼 있으므로, <strong>TCL 근위의 보존된 정상 조직면에서 신경을 먼저 찾아 원위 반흔 쪽으로 박리</strong>한다. External neurolysis가 대개 필요하고, epineurotomy·internal neurolysis의 역할은 불명확하다. 반흔화된 무혈관 신경을 덮기 위한 혈행 좋은 패딩으로 <strong>hypothenar fat pad flap</strong>(Strickland)을 쓴다.</p>
+<div class="step">
+  <h4>Hypothenar fat pad flap 요령</h4>
+  <ul>
+    <li>혈류: 손목 주름 원위에서 1 cm 간격으로 나오는 ulnar artery 분절 천공지(직경 0.7–1.5 mm).</li>
+    <li>피부 flap을 ulnar로 들되 피부 쪽에 얇은 지방층을 남기고, fat pad를 hypothenar 근육에서 들어 올려 <strong>ulnar 신경혈관속이 보일 때까지</strong> 박리.</li>
+    <li>무긴장으로 TCL radial 잎에 닿으면 박리 종료. 길이가 부족하면 ulnar 신경혈관속을 flap에 포함해 그 심부로 hamate hook까지 박리(TCL ulnar 잎 전체 포함 가능).</li>
+    <li>TCL radial 잎에 무긴장 고정.</li>
+  </ul>
+</div>
+<div class="fig">
+  <div class="fig-head"><span class="fig-no">Fig. 22</span></div>
+  <p>Hypothenar fat flap. A revision CTR 절개 표시, B 정중신경 감압(파란 vessel loop), C 거상해 전위 준비된 hypothenar flap.</p>
+  <details class="fig-toggle"><summary>그림 펼치기 (3패널)</summary><div class="fig-imgs"><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/e73e2d61-6c0e-411a-eaf1-6886ad43be00/gamma=0" alt="Fig 22 A" loading="lazy"><figcaption>A</figcaption></figure><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/30202de8-8b7d-4bbc-90a1-89fbcab0fa00/gamma=0" alt="Fig 22 B" loading="lazy"><figcaption>B</figcaption></figure><figure><img src="https://imagedelivery.net/blMWfsmr_4sXzJSy32i8Fg/59c491de-8162-45a7-15bb-04fc7ecafa00/gamma=0" alt="Fig 22 C" loading="lazy"><figcaption>C</figcaption></figure></div></details>
+</div>
+
+<div class="keybox">
+  <span class="label">결론</span>
+  <ul>
+    <li>세 증후군은 <strong>감각 분포</strong>로 나눈다: pronator = thenar 포함 정중신경 전 영역 + 근위 전완 통증, AIN = 감각 정상·순수 운동, CTS = thenar 제외.</li>
+    <li>Pronator syndrome은 임상 진단이며 전기진단은 대개 정상. 3개월 비수술 후 모든 압박 구조를 푸는 개방 감압이 표준이나 <strong>불완전 감압이 가장 흔한 실패 원인</strong>.</li>
+    <li>AIN syndrome은 상당수가 <strong>신경염(Parsonage-Turner 스펙트럼)</strong>으로 자연 회복하므로 6개월까지 기다리는 것이 원칙. 그 후 감압 성적은 비수술군과 비슷하며, 근위 fascicular constriction이 있으면 신경 내 박리를 고려한다.</li>
+    <li>CTS는 탈신경 징후가 있으면 조기 수술. 개방·내시경 모두 95% 이상 성공, 내시경은 회복이 빠르지만 신경 손상·재수술이 다소 많다.</li>
+    <li>재수술은 연장 개방 접근으로 근위 정상면에서 시작하고, 필요하면 hypothenar fat pad flap으로 신경을 덮는다.</li>
+  </ul>
+</div>
+
+<footer>
+  <p>출처: Handthology by ASSH — “Median Nerve Compression” (Nerve). 이 페이지는 개인 학습용 요약 정리본이며, 동영상(Video 1–4)·문헌 목록·세부 수치는 <a href="https://handthology.assh.org/chapters/nerve/median-nerve-compression" target="_blank" rel="noopener" style="color:var(--accent)">원문</a>을 참조하세요.</p>
+</footer>
+
+</div>
+
+</html>
